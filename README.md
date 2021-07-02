@@ -1,6 +1,6 @@
 # OplineSoftware
 
-EN | PL  
+### EN | PL  
 
 A program designed to optimize Windows and thanks to the program you can get the best system performance and even much more check and see for yourself.
 Program stworzony do optymalizacji Windows i dzięki programowi można uzyskać jak najlepszą wydajność systemu a nawet wiele więcej sprawdź i się przekonaj.  
