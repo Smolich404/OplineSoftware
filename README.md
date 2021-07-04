@@ -16,7 +16,7 @@ Wersja LITE jest dla osób którzy używają kafelek oraz i tylko wyłącznie do
 
 The PRO version is for people who do not use tiles and only the default Microsoft Store application, and an add-on to Disable / Enable Windows Update, Defender and Services.
 
-Wersja PRO jest dla osób którzy nie używają kafelek oraz i tylko wyłącznie domyślną aplikacje Microsoft Store, i dodatek do Wyłączenia / Włączania Windows Update, Defender i Usługi.
+Wersja PRO jest dla osób którzy nie używają kafelek oraz i tylko wyłącznie domyślną aplikacje Microsoft Store, i dodatek do Wyłączenia / Włączania Windows Update, Defender oraz Usługi.
 
 ### Instruction | Instrukcja
 
