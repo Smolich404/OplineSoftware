@@ -50,6 +50,12 @@ If you are wondering about the location, such as in the Valorant Settings option
 
 Jeśli się zastanawiasz o co chodzi z lokalizacją jak np w opcji Ustawienia Valoranta to musisz wpisać lokalizację folderu na którym jest zainstalowany Valorant ze ustawieniami grafiki i musisz do tego folderu przejść oprócz tych dziwnych literek i numerków ponieważ np po aktualizacji gry lub Microsoft Edge zmienia sie nazwa folderu tej wersji czyli np przed aktualizacją - 93.1 po aktualizacji 93.2 lub 94.1 i wtedy tą całą lokalizację folderu z dziwnymi numerkami i literami wklejasz do tego programu i wtedy skrypt zapisuje nazwę lokalizacji tego folderu.
 
+#### 6
+
+If you have Microsoft C ++ Redistributable drivers installed, it is enough to close the installer window and the program will proceed.
+
+Jeżeli masz zainstalowane sterowniki Microsoft C++ Redistributable to wystarczy ze zamykasz okienko instalatora a wtedy program przechodzi dalej.
+
 ### Contact and Help | Kontakt i Pomoc  
 
 Discord: Smolich#9211 
