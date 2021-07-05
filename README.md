@@ -54,7 +54,7 @@ Jeśli się zastanawiasz o co chodzi z lokalizacją jak np w opcji Ustawienia Va
 
 From the Timer Resolution Service option, if you have Microsoft C++ Redistributable drivers installed, you just need to close the installer window and the program will continue.
 
-Z opcji Timer Resolution Service jeżeli masz zainstalowane sterowniki Microsoft C++ Redistributable to wystarczy że zamykasz okienko instalatora a wtedy program przechodzi dalej.
+Z opcji Timer Resolution Service jeżeli masz zainstalowane sterowniki Microsoft C++ Redistributable to wystarczy że zamykasz okienko instalatora i wtedy program przechodzi dalej.
 
 ### Contact and Help | Kontakt i Pomoc  
 
