@@ -52,7 +52,7 @@ Jeśli się zastanawiasz o co chodzi z lokalizacją jak np w opcji Ustawienia Va
 
 #### 6
 
-If you have Microsoft C ++ Redistributable drivers installed, it is enough to close the installer window and the program will proceed.
+If you have Microsoft C++ Redistributable drivers installed, it is enough to close the installer window and the program will proceed.
 
 Jeżeli masz zainstalowane sterowniki Microsoft C++ Redistributable to wystarczy ze zamykasz okienko instalatora a wtedy program przechodzi dalej.
 
