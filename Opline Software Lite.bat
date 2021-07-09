@@ -2675,14 +2675,15 @@ echo.
 call :ColorText 1B "###############################################################################################"
 echo.
 echo.
-cmdMenuSel f3B0 "   [+]  Delete Other Plans" "   [+]  Install Opline Plan" "   [+]  Enable TRIM for SSD drives" "   [+]  Optimization Bcdedit" "   [+]  Optimization Powercfg" "   [+]  Reset" "   [+]  Exit" 
+cmdMenuSel f3B0 "   [+]  Delete Other Plans" "   [+]  Install Opline Plan" "   [+]  Enable TRIM for SSD drives" "   [+]  Optimization Bcdedit" "   [+]  Optimization Powercfg" "   [+]  SSD Tune" "   [+]  Reset" "   [+]  Exit" 
 if %ERRORLEVEL% == 1 goto DelOPlans
 if %ERRORLEVEL% == 2 goto OPlan
 if %ERRORLEVEL% == 3 goto TRIM
 if %ERRORLEVEL% == 4 goto Bcdedit
 if %ERRORLEVEL% == 5 goto Powercfg
-if %ERRORLEVEL% == 6 goto RBoostOS
-if %ERRORLEVEL% == 7 goto OplineMenu
+if %ERRORLEVEL% == 6 goto SSDT
+if %ERRORLEVEL% == 7 goto RBoostOS
+if %ERRORLEVEL% == 8 goto OplineMenu
 
 :RBoostOS
 cls
@@ -2712,13 +2713,27 @@ echo.
 call :ColorText 1B "###############################################################################################"
 echo.
 echo.
-cmdMenuSel f3B0 "   [+]  Reset Delete Other Plans" "   [+]  Reset Install Opline Plan" "   [+]  Reset Enable TRIM for SSD drives" "   [+]  Reset Optimization Bcdedit" "   [+]  Reset Optimization Powercfg" "   [+]  Exit" 
+cmdMenuSel f3B0 "   [+]  Reset Delete Other Plans" "   [+]  Reset Install Opline Plan" "   [+]  Reset Enable TRIM for SSD drives" "   [+]  Reset Optimization Bcdedit" "   [+]  Reset Optimization Powercfg" "   [+]  Reset SSD Tune" "   [+]  Exit" 
 if %ERRORLEVEL% == 1 goto RDelOPlans
 if %ERRORLEVEL% == 2 goto ROPlan
 if %ERRORLEVEL% == 3 goto RTRIM
 if %ERRORLEVEL% == 4 goto RBcdedit
 if %ERRORLEVEL% == 5 goto RPowercfg
-if %ERRORLEVEL% == 6 goto BoostOS
+if %ERRORLEVEL% == 6 goto RSSDT
+if %ERRORLEVEL% == 7 goto BoostOS
+
+:RSSDT
+cls
+fsutil behavior set DisableLastAccess 0
+fsutil behavior set EncryptPagingFile 1
+cls
+SET msgboxTitle=Opline Software
+SET msgboxBody=Finished - Skonczone
+SET tmpmsgbox=%temp%~tmpmsgbox.vbs
+IF EXIST "%tmpmsgbox%" DEL /F /Q "%tmpmsgbox%"
+ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
+WSCRIPT "%tmpmsgbox%"
+Goto RBoostOS
 
 :ROPlan
 cls
@@ -2983,6 +2998,19 @@ bcdedit /set bootmenupolicy standard
 bcdedit /set nx optout
 bcdedit /set x2apicpolicy disable
 bcdedit /set uselegacyapicmode yes
+cls
+SET msgboxTitle=Opline Software
+SET msgboxBody=Finished - Skonczone
+SET tmpmsgbox=%temp%~tmpmsgbox.vbs
+IF EXIST "%tmpmsgbox%" DEL /F /Q "%tmpmsgbox%"
+ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
+WSCRIPT "%tmpmsgbox%"
+Goto BoostOS
+
+:SSDT
+cls
+fsutil behavior set DisableLastAccess 1
+fsutil behavior set EncryptPagingFile 0
 cls
 SET msgboxTitle=Opline Software
 SET msgboxBody=Finished - Skonczone
