@@ -4165,7 +4165,7 @@ powercfg -setacvalueindex scheme_current sub_processor 06cadf0e-64ed-448a-8927-c
 powercfg -setactive scheme_current
 powercfg -setacvalueindex scheme_current sub_processor 12a0ab44-fe28-4fa9-b3bd-4b64f44960a6 100
 powercfg -setactive scheme_current
-powercfg -setacvalueindex scheme_current sub_processor 4b92d758-5a24-4851-a470-815d78aee119 30
+powercfg -setacvalueindex scheme_current sub_processor 4b92d758-5a24-4851-a470-815d78aee119 25
 powercfg -setactive scheme_current
 powercfg -setacvalueindex scheme_current sub_processor 7b224883-b3cc-4d79-819f-8374152cbe7c 50
 powercfg -setactive scheme_current
