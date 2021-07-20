@@ -984,6 +984,16 @@ Reg.exe add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\SettingSync\Groups\D
 Reg.exe add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\SettingSync\Groups\Language" /v "Enabled" /t REG_DWORD /d "0" /f
 Reg.exe add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\SettingSync\Groups\PackageState" /v "Enabled" /t REG_DWORD /d "0" /f
 Reg.exe add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\SettingSync\Groups\StartLayout" /v "Enabled" /t REG_DWORD /d "0" /f
+Reg.exe add "HKCU\Software\Policies\Microsoft\Windows\CurrentVersion\PushNotifications" /v "NoToastApplicationNotification" /t REG_DWORD /d "1" /f
+Reg.exe add "HKCU\Software\Policies\Microsoft\Windows\CurrentVersion\PushNotifications" /v "NoToastApplicationNotificationOnLockScreen" /t REG_DWORD /d "1" /f
+Reg.exe add "HKLM\SOFTWARE\Microsoft\WindowsSelfHost\UI\Visibility" /v "DiagnosticErrorText" /t REG_DWORD /d "0" /f
+Reg.exe add "HKLM\SOFTWARE\Microsoft\WindowsSelfHost\UI\Strings" /v "DiagnosticErrorText" /t REG_SZ /d "" /f
+Reg.exe add "HKLM\SOFTWARE\Microsoft\WindowsSelfHost\UI\Strings" /v "DiagnosticLinkText" /t REG_SZ /d "" /f
+Reg.exe add "HKLM\SYSTEM\ControlSet001\Control\WMI\Autologger\AutoLogger-Diagtrack-Listener" /v "Start" /t REG_DWORD /d "0" /f
+Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsStore\WindowsUpdate" /v "AutoDownload" /t REG_DWORD /d "2" /f
+Reg.exe add "HKCU\Software\Microsoft\Siuf\Rules" /v "NumberOfSIUFInPeriod" /t REG_DWORD /d "0" /f
+Reg.exe add "HKCU\Software\Microsoft\Siuf\Rules" /v "PeriodInNanoSeconds" /t REG_DWORD /d "0" /f
+Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SoftLandingEnabled" /t REG_DWORD /d "0" /f
 cls
 SET msgboxTitle=Opline Software
 SET msgboxBody=Finished - Skonczone
@@ -1232,6 +1242,14 @@ Reg.exe add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\SettingSync\Groups\D
 Reg.exe add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\SettingSync\Groups\Language" /v "Enabled" /t REG_DWORD /d "1" /f
 Reg.exe add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\SettingSync\Groups\PackageState" /v "Enabled" /t REG_DWORD /d "1" /f
 Reg.exe add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\SettingSync\Groups\StartLayout" /v "Enabled" /t REG_DWORD /d "1" /f
+Reg.exe delete "HKCU\Software\Policies\Microsoft\Windows\CurrentVersion\PushNotifications" /v "NoToastApplicationNotification" /f
+Reg.exe delete "HKCU\Software\Policies\Microsoft\Windows\CurrentVersion\PushNotifications" /v "NoToastApplicationNotificationOnLockScreen" /f
+Reg.exe add "HKCU\Software\Policies\Microsoft\Windows\CurrentVersion\PushNotifications" /f
+reg delete "HKLM\SOFTWARE\Microsoft\WindowsSelfHost\UI\Visibility" /v "DiagnosticErrorText" /f
+reg delete "HKLM\SOFTWARE\Microsoft\WindowsSelfHost\UI\Strings" /f
+reg delete "HKLM\SYSTEM\ControlSet001\Control\WMI\Autologger\AutoLogger-Diagtrack-Listener" /f
+reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsStore" /f
+reg delete "HKCU\Software\Microsoft\Siuf" /f
 cls
 SET msgboxTitle=Opline Software
 SET msgboxBody=Finished - Skonczone
@@ -5822,19 +5840,14 @@ Reg.exe delete "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender" /v "DisableRo
 Reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender" /f
 Reg.exe delete "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Notifications" /v "DisableNotifications" /f
 Reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Notifications" /f
-Reg.exe delete "HKCU\Software\Policies\Microsoft\Windows\CurrentVersion\PushNotifications" /v "NoToastApplicationNotification" /f
-Reg.exe delete "HKCU\Software\Policies\Microsoft\Windows\CurrentVersion\PushNotifications" /v "NoToastApplicationNotificationOnLockScreen" /f
-Reg.exe add "HKCU\Software\Policies\Microsoft\Windows\CurrentVersion\PushNotifications" /f
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet" /v SpyNetReporting /t REG_DWORD /d 1 /f
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet" /v SubmitSamplesConsent /t REG_DWORD /d 1 /f
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet" /v DontReportInfectionInformation /t REG_DWORD /d 0 /f
-Reg.exe add "HKCU\Software\Policies\Microsoft\Windows\CurrentVersion\PushNotifications" /f
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet" /v SpyNetReporting /t REG_DWORD /d 1 /f
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet" /v SubmitSamplesConsent /t REG_DWORD /d 1 /f
 reg add "HKLM\SOFTWARE\Microsoft\Windows Defender\Spynet" /v SpyNetReporting /t REG_DWORD /d 1 /f
 reg add "HKLM\SOFTWARE\Microsoft\Windows Defender\Spynet" /v SubmitSamplesConsent /t REG_DWORD /d 1 /f
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet" /v DontReportInfectionInformation /t REG_DWORD /d 0 /f
-REG ADD "HKLM\SYSTEM\CurrentControlSet\Services\MpsSvc" /V Start /T REG_DWORD /D 2 /F
 REG ADD "HKLM\SYSTEM\CurrentControlSet\Services\SecurityHealthService" /V Start /T REG_DWORD /D 2 /F
 reg add HKLM\SOFTWARE\Microsoft\Windows Defender\Spynet /v "SpyNetReporting" /t REG_DWORD /d "1" /f
 reg add HKLM\SOFTWARE\Microsoft\Windows Defender\Spynet /v "SubmitSamplesConsent" /t REG_DWORD /d "1" /f
@@ -5851,25 +5864,6 @@ Reg.exe add "HKLM\SOFTWARE\Classes\CLSID\{09A47860-11B0-4DA5-AFA5-26D86198A780}\
 Reg.exe add "HKLM\SOFTWARE\Classes\CLSID\{09A47860-11B0-4DA5-AFA5-26D86198A780}\InprocServer32" /v "ThreadingModel" /t REG_SZ /d "Apartment" /f
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "SecurityHealth" /t REG_EXPAND_SZ /d "%%windir%%\system32\SecurityHealthSystray.exe" /f
 icacls "%systemroot%\System32\smartscreen.exe" /reset
-powershell.exe -command "Remove-MpPreference -ExclusionExtension ".exe""
-powershell.exe -command "Set-MpPreference -EnableControlledFolderAccess Enabled"
-powershell.exe -command "Set-MpPreference -PUAProtection enable"
-powershell.exe -command "Set-MpPreference -DisableRealtimeMonitoring $false"
-powershell.exe -command "Set-MpPreference -DisableBehaviorMonitoring $false"
-powershell.exe -command "Set-MpPreference -DisableBlockAtFirstSeen $false"
-powershell.exe -command "Set-MpPreference -DisableIOAVProtection $false"
-powershell.exe -command "Set-MpPreference -DisablePrivacyMode $false"
-powershell.exe -command "Set-MpPreference -SignatureDisableUpdateOnStartupWithoutEngine $false"
-powershell.exe -command "Set-MpPreference -DisableArchiveScanning $false"
-powershell.exe -command "Set-MpPreference -DisableIntrusionPreventionSystem $false"
-powershell.exe -command "Set-MpPreference -DisableScriptScanning $false"
-powershell.exe -command "Set-MpPreference -SubmitSamplesConsent 1"
-powershell.exe -command "Set-MpPreference -MAPSReporting 2"
-powershell.exe -command "Set-MpPreference -HighThreatDefaultAction 0 -Force"
-powershell.exe -command "Set-MpPreference -ModerateThreatDefaultAction 0"
-powershell.exe -command "Set-MpPreference -LowThreatDefaultAction 0"
-powershell.exe -command "Set-MpPreference -SevereThreatDefaultAction 0"
-powershell.exe -command "Set-MpPreference -ScanScheduleDay 0"
 Reg del "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender" /v DisableAntiSpyware /f
 powershell.exe -command "netsh advfirewall set allprofiles state on"
 cls
@@ -5929,13 +5923,10 @@ Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows Defender\Spynet" /v "DisableBlockAt
 Reg.exe add "HKLM\SOFTWARE\Windows Defender Security Center\Notifications" /v "DisableNotifications" /t REG_DWORD /d "1" /f
 Reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender" /v "DisableRoutinelyTakingAction" /t REG_DWORD /d "1" /f
 Reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Notifications" /v "DisableNotifications" /t REG_DWORD /d "1" /f
-Reg.exe add "HKCU\Software\Policies\Microsoft\Windows\CurrentVersion\PushNotifications" /v "NoToastApplicationNotification" /t REG_DWORD /d "1" /f
-Reg.exe add "HKCU\Software\Policies\Microsoft\Windows\CurrentVersion\PushNotifications" /v "NoToastApplicationNotificationOnLockScreen" /t REG_DWORD /d "1" /f
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet" /v DontReportInfectionInformation /t REG_DWORD /d 1 /f
-REG ADD "HKLM\SYSTEM\CurrentControlSet\Services\MpsSvc" /V Start /T REG_DWORD /D 4 /F
 REG ADD "HKLM\SYSTEM\CurrentControlSet\Services\SecurityHealthService" /V Start /T REG_DWORD /D 4 /F
 reg add HKLM\SOFTWARE\Microsoft\Windows Defender\Spynet /v "SpyNetReporting" /t REG_DWORD /d "0" /f
-reg add HKLM\SOFTWARE\Microsoft\Windows Defender\Spynet /v "SubmitSamplesConsent" /t REG_DWORD /d "0" /f
+reg add HKLM\SOFTWARE\Microsoft\Windows Defender\Spynet /v "SubmitSamplesConsent" /t REG_DWORD /d "2" /f
 reg add HKLM\SOFTWARE\Wow6432Node\Policies\Microsoft\Windows Defender /v "DisableAntiSpyware" /t REG_DWORD /d "1" /f
 reg add HKLM\SOFTWARE\Wow6432Node\Policies\Microsoft\Windows Defender /v "DisableRoutinelyTakingAction" /t REG_DWORD /d "1" /f
 reg add HKLM\SOFTWARE\Wow6432Node\Policies\Microsoft\Windows Defender\Real-Time Protection /v "DisableRealtimeMonitoring" /t REG_DWORD /d "1" /f
@@ -5951,25 +5942,6 @@ takeown /f "%systemroot%\System32\smartscreen.exe" /a
 icacls "%systemroot%\System32\smartscreen.exe" /reset
 taskkill /im smartscreen.exe /f
 icacls "%systemroot%\System32\smartscreen.exe" /inheritance:r /remove *S-1-5-32-544 *S-1-5-11 *S-1-5-32-545 *S-1-5-18
-powershell.exe -command "Add-MpPreference -ExclusionExtension ".exe""
-powershell.exe -command "Set-MpPreference -EnableControlledFolderAccess Disabled"
-powershell.exe -command "Set-MpPreference -PUAProtection disable"
-powershell.exe -command "Set-MpPreference -DisableRealtimeMonitoring $true"
-powershell.exe -command "Set-MpPreference -DisableBehaviorMonitoring $true"
-powershell.exe -command "Set-MpPreference -DisableBlockAtFirstSeen $true"
-powershell.exe -command "Set-MpPreference -DisableIOAVProtection $true"
-powershell.exe -command "Set-MpPreference -DisablePrivacyMode $true"
-powershell.exe -command "Set-MpPreference -SignatureDisableUpdateOnStartupWithoutEngine $true"
-powershell.exe -command "Set-MpPreference -DisableArchiveScanning $true"
-powershell.exe -command "Set-MpPreference -DisableIntrusionPreventionSystem $true"
-powershell.exe -command "Set-MpPreference -DisableScriptScanning $true"
-powershell.exe -command "Set-MpPreference -SubmitSamplesConsent 2"
-powershell.exe -command "Set-MpPreference -MAPSReporting 0"
-powershell.exe -command "Set-MpPreference -HighThreatDefaultAction 6 -Force"
-powershell.exe -command "Set-MpPreference -ModerateThreatDefaultAction 6"
-powershell.exe -command "Set-MpPreference -LowThreatDefaultAction 6"
-powershell.exe -command "Set-MpPreference -SevereThreatDefaultAction 6"
-powershell.exe -command "Set-MpPreference -ScanScheduleDay 8"
 Reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender" /v DisableAntiSpyware /t REG_DWORD /d 1 /f
 powershell.exe -command "netsh advfirewall set allprofiles state off"
 cls
