@@ -7293,6 +7293,8 @@ powershell.exe -command "Set-MpPreference -SevereThreatDefaultAction 6"
 powershell.exe -command "Set-MpPreference -ScanScheduleDay 8"
 Reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender" /v DisableAntiSpyware /t REG_DWORD /d 1 /f
 powershell.exe -command "netsh advfirewall set allprofiles state off"
+Reg.exe delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "WindowsDefender" /f
+Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /f
 cls
 SET msgboxTitle=Opline Software
 SET msgboxBody=Finished - Skonczone
