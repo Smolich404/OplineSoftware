@@ -56,6 +56,12 @@ From the Timer Resolution Service option, if you have Microsoft C++ Redistributa
 
 Z opcji Timer Resolution Service jeżeli masz zainstalowane sterowniki Microsoft C++ Redistributable to wystarczy że zamykasz okienko instalatora i wtedy program przechodzi dalej.
 
+#### 7
+
+If you have problems with recovering default applications from Windows, I recommend that you create a new user account, and if you still have problems creating a user account, run the Command Prompt with Administrator, type 𝗡𝗲𝘁 𝗨𝘀𝗲𝗿 (𝗡𝗔𝗠𝗘) /𝗔𝗱𝗱 and the new user account will be created successfully if you want to delete or there to undo the changes to create a user account, you only need to enter 𝗡𝗲𝘁 𝗨𝘀𝗲𝗿 (𝗡𝗔𝗠𝗘) /𝗗𝗲𝗹 and it will be deleted successfully.
+
+Jeżeli masz problemy z odzyskiwaniem domyślnych aplikacji z systemu Windows zalecam utworzyć nowe konto użytkownika a jeżeli masz jeszcze problemy z utworzeniem konta użytkownika to uruchom Wiersz Polecenia za pomocą Administratora, wpisz 𝗡𝗲𝘁 𝗨𝘀𝗲𝗿 (𝗡𝗔𝗭𝗪𝗔) /𝗔𝗱𝗱 i nowe konto użytkownika się utworzy sukcesem jeżeli chcesz usunąć czy tam cofnąć zmiany utworzenia konta użytkownika wystarczy tylko wpisać 𝗡𝗲𝘁 𝗨𝘀𝗲𝗿 (𝗡𝗔𝗭𝗪𝗔) /𝗗𝗲𝗹 i usunie się ono sukcesem.
+
 ### Contact and Help | Kontakt i Pomoc  
 
 Discord: Smolich#9211 
