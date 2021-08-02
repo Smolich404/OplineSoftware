@@ -4751,19 +4751,16 @@ goto RGPU2
 
 :INVS
 cls
-powershell Invoke-WebRequest "https://cdn.discordapp.com/attachments/838115755957420063/838890667886641152/nvidiaProfileInspector.exe" -OutFile "%temp%\nvidiaProfileInspector.exe"
+powershell Invoke-WebRequest "https://cdn.discordapp.com/attachments/838115755957420063/871832386411839559/nvidiaProfileInspector.exe" -OutFile "%temp%\nvidiaProfileInspector.exe"
 goto nimport
 
 :nimport
 cls
-powershell Invoke-WebRequest "https://cdn.discordapp.com/attachments/728982277874384916/837419746558869564/Opline_-_Nvidia_Settings.nip" -OutFile "%temp%\Opline_-_Nvidia_Settings.nip"
-powershell Invoke-WebRequest "https://cdn.discordapp.com/attachments/838115755957420063/838886162634375168/Opline_Fix.nip" -OutFile "%temp%\Opline_Fix.nip"
+powershell Invoke-WebRequest "https://cdn.discordapp.com/attachments/838115755957420063/871832384029474856/Opline.nip" -OutFile "%temp%\Opline.nip"
 cd %temp%
-nvidiaProfileInspector.exe "Opline_-_Nvidia_Settings.nip"
-nvidiaProfileInspector.exe "Opline_Fix.nip"
+nvidiaProfileInspector.exe "Opline.nip"
 del nvidiaProfileInspector.exe
-del Opline_-_Nvidia_Settings.nip
-del Opline_Fix.nip
+del Opline.nip
 goto ENDGPU
 
 :NGPU
