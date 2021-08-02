@@ -58,9 +58,9 @@ Z opcji Timer Resolution Service jeżeli masz zainstalowane sterowniki Microsoft
 
 #### 7
 
-If you have problems with recovering default applications from Windows, I recommend that you create a new user account, and if you still have problems creating a user account, run the Command Prompt with Administrator, type # Net User (NAME) /Add and the new user account will be created successfully if you want to delete or there to undo the changes to create a user account, you only need to enter # Net User (NAME) /Del and it will be deleted successfully.
+If you have problems with recovering default applications from Windows, I recommend that you create a new user account, and if you still have problems creating a user account, run the Command Prompt with Administrator, type Net User (NAME) /Add and the new user account will be created successfully if you want to delete or there to undo the changes to create a user account, you only need to enter Net User (NAME) /Del and it will be deleted successfully.
 
-Jeżeli masz problemy z odzyskiwaniem domyślnych aplikacji z systemu Windows zalecam utworzyć nowe konto użytkownika a jeżeli masz jeszcze problemy z utworzeniem konta użytkownika to uruchom Wiersz Polecenia za pomocą Administratora, wpisz # Net User (NAZWA) /Add i nowe konto użytkownika się utworzy sukcesem jeżeli chcesz usunąć czy tam cofnąć zmiany utworzenia konta użytkownika wystarczy tylko wpisać # Net User (NAZWA) /Del i usunie się ono sukcesem.
+Jeżeli masz problemy z odzyskiwaniem domyślnych aplikacji z systemu Windows zalecam utworzyć nowe konto użytkownika a jeżeli masz jeszcze problemy z utworzeniem konta użytkownika to uruchom Wiersz Polecenia za pomocą Administratora, wpisz Net User (NAZWA) /Add i nowe konto użytkownika się utworzy sukcesem jeżeli chcesz usunąć czy tam cofnąć zmiany utworzenia konta użytkownika wystarczy tylko wpisać Net User (NAZWA) /Del i usunie się ono sukcesem.
 
 ### Contact and Help | Kontakt i Pomoc  
 
