@@ -3510,6 +3510,17 @@ goto ENDGPU
 
 :IMSI
 cls
+goto install
+
+:install
+TITLE Downloading the installer for MSI Afterburner... - Pobieranie instalatora dla MSI Afterburner...
+powershell Invoke-WebRequest "https://cdn.discordapp.com/attachments/798652558351794196/820583811737714688/MSIAfterburnerSetup463.exe" -OutFile "%temp%\MSIAfterburnerSetup463.exe"
+%temp%\MSIAfterburnerSetup463.exe
+goto skin
+
+:skin
+TITLE Importing the KBoost skin... - Importowanie skorki KBoost...
+cls
 echo.
 echo.
 call :ColorText 1B "###############################################################################################"
@@ -3536,47 +3547,18 @@ echo.
 call :ColorText 1B "###############################################################################################"
 echo.
 echo.
-echo              Enter the Path of the Folder where you want to install MSI Afterburner
+echo                Enter the path of the folder where MSI Afterburner is installed
 echo.
-echo              Wprowadz sciezke folderu, w ktorym chcesz zainstalowac MSI Afterburner
+echo              Wprowadz sciezke folderu w ktorym jest zainstalowany MSI Afterburner
 echo.
 set /p MSI=
-if %MSI%== X goto GPU
-if %MSI%== x goto GPU
 cls
 TIMEOUT /T 5
 cls
-goto existencecheck
-
-:existencecheck
-TITLE Checking if MSI Afterburner is installed in the default location... - Sprawdzanie, czy MSI Afterburner jest zainstalowany w domyslnej lokalizacji...
-if exist "%MSI%\MSIAfterburner.exe" (goto skin) else (goto install)
-
-:install
-TITLE Downloading the installer for MSI Afterburner... - Pobieranie instalatora dla MSI Afterburner...
-SET msgboxTitle=Note - Uwaga
-SET msgboxBody=Please make sure that you make MSI Afterburner install to the default directory! - Upewnij sie, ze instalujesz MSI Afterburner w domyslnym katalogu! (%MSI%\)
-SET tmpmsgbox=%temp%\~tmpmsgbox.vbs
-IF EXIST "%tmpmsgbox%" DEL /F /Q "%tmpmsgbox%"
-ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
-WSCRIPT "%tmpmsgbox%"
-powershell Invoke-WebRequest "https://cdn.discordapp.com/attachments/798652558351794196/820583811737714688/MSIAfterburnerSetup463.exe" -OutFile "%temp%\MSIAfterburnerSetup463.exe"
-%temp%\MSIAfterburnerSetup463.exe
-goto installing
-
-:installing
-TITLE Checking if MSI Afterburner is installed in the default location... - Sprawdzanie, czy MSI Afterburner jest zainstalowany w domyslnej lokalizacji...
-if exist "%MSI%\MSIAfterburner.exe" (goto skin) else (goto installing2)
-
-:installing2
-TITLE Waiting for installation to finish... - Oczekiwanie na zakonczenie instalacji...
-timeout 5
-goto installing
-
-:skin
-TITLE Importing the KBoost skin... - Importowanie skorki KBoost...
 powershell Invoke-WebRequest "https://cdn.discordapp.com/attachments/798652558351794196/798652651906531339/defaultX.uxf" -OutFile "%temp%\defaultX.uxf"
 move "%temp%\defaultX.uxf" "%MSI%\Skins\defaultX.uxf"
+cd %temp%
+del MSIAfterburnerSetup463.exe
 title Opline Software [LITE]
 goto ENDGPU
 
@@ -4310,7 +4292,7 @@ powershell Invoke-WebRequest "https://cdn.discordapp.com/attachments/72898227787
 (echo ofFastMath:true) >> optionsof.txt
 (echo ofFastRender:true) >> optionsof.txt
 (echo ofTranslucentBlocks:1) >> optionsof.txt
-(echo key_Zoom:90) >> optionsof.txt
+(echo key_Zoom:44) >> optionsof.txt
 goto mcend
 
 :1.8.9
@@ -4388,7 +4370,7 @@ powershell Invoke-WebRequest "https://cdn.discordapp.com/attachments/72898227787
 (echo ofFastMath:true) >> optionsof.txt
 (echo ofFastRender:true) >> optionsof.txt
 (echo ofTranslucentBlocks:1) >> optionsof.txt
-(echo key_of.key.zoom:90) >> optionsof.txt
+(echo key_of.key.zoom:44) >> optionsof.txt
 goto mcend
 
 :1.16
@@ -4467,7 +4449,7 @@ powershell Invoke-WebRequest "https://cdn.discordapp.com/attachments/72898227787
 (echo ofTranslucentBlocks:1) >> optionsof.txt
 (echo ofChatBackground:0) >> optionsof.txt
 (echo ofChatShadow:false) >> optionsof.txt
-(echo key_of.key.zoom:key.keyboard.left.control) >> optionsof.txt
+(echo key_of.key.zoom:key.keyboard.z) >> optionsof.txt
 goto mcend
 
 :mcend
