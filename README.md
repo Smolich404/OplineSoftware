@@ -34,9 +34,9 @@ Przed użyciem programu Opline Software zrób Punkt Przywracania Systemu na każ
 
 #### 3
 
-With other options, such as CPU Tweaks, if you clicked by accident, just type x and then the script goes to the main menu, and in the Edge option it is different, just do not enter anything, just click Enter and then nothing will happen or Microsoft Edge will not uninstall, as with the MSI Afterburner install option.
+With other options, such as CPU Tweaks, if you clicked by accident, just type x and then the script goes to the main menu, and in the Edge option it is different, just do not enter anything, just click Enter and then nothing will happen or Microsoft Edge will not uninstall, as with the option to install the KBoost skin.
 
-Przy innych opcjach jak CPU Tweaks jeżeli kliknąłeś przez przypadek to wystarczy że wpisujesz x i wtedy skrypt przechodzi do głównego menu a w opcji Edge jest juz inaczej wystarczy że nic nie wpisujesz tylko klikasz Enter i wtedy nic sie stanie ani Microsoft Edge sie nie odinstaluje, tak jak w przypadku opcji instalowania MSI Afterburner.
+Przy innych opcjach jak CPU Tweaks jeżeli kliknąłeś przez przypadek to wystarczy że wpisujesz x i wtedy skrypt przechodzi do głównego menu a w opcji Edge jest juz inaczej wystarczy że nic nie wpisujesz tylko klikasz Enter i wtedy nic sie stanie ani Microsoft Edge sie nie odinstaluje, tak jak w przypadku opcji instalowania skórki KBoost.
 
 #### 4
 
