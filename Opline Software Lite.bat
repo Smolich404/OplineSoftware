@@ -5015,6 +5015,23 @@ if %ERRORLEVEL% == 6 goto Internet
 
 :RNREG
 cls
+reg delete "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services\Tcpip\Parameters" /v "DisableTaskOffload" /f
+reg delete "HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\LanmanServer\Parameters" /v "DisableTaskOffload" /f
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\ServiceProvider" /v "DnsPriority" /t REG_DWORD /d "00000499" /f
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\ServiceProvider" /v "HostsPriority" /t REG_DWORD /d "00000500" /f
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\ServiceProvider" /v "LocalPriority" /t REG_DWORD /d "00002000" /f
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\ServiceProvider" /v "NetbtPriority" /t REG_DWORD /d "00002001" /f
+reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Internet Settings" /v "MaxConnectionsPerServer" /t REG_DWORD /d "00000002" /f
+reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Internet Settings" /v "MaxConnectionsPer1_0Server" /t REG_DWORD /d "00000004" /f
+reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Psched" /v "NonBestEffortLimit" /f
+reg delete "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip6\Parameters" /v "DisabledComponents" /f
+reg delete "HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\Tcpip\QoS" /v "Do not use NLA" /f
+reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\MSMQ\Parameters" /v "TCPNoDelay" /f
+reg delete "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters" /v "MaxUserPort" /f
+reg delete "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters" /v "TcpTimedWaitDelay" /f
+reg delete "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters" /v "EnableWsd" /f
+reg delete "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters" /v "Tcp1323Opts" /f
+reg delete "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters" /v "TCPCongestionControl" /f
 reg delete "HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\Tcpip\QoS" /v "Do not use NLA" /f
 reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\MSMQ\Parameters" /v "TCPNoDelay" /f
 reg delete "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters" /v "MaxUserPort" /f
@@ -5059,37 +5076,7 @@ Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Paramet
 Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters" /v "MaxCollectionCount" /f
 Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters" /v "KeepConn" /f
 Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters" /v "DisableBandwidthThrottling" /f
-Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters" /v "FileInfoCacheEntriesMax" /f
-Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters" /v "DirectoryCacheEntriesMax" /f
-Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters" /v "FileNotFoundCacheEntriesMax" /f
-Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters" /v "UtilizeNtCaching" /f
-Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters" /v "UseLockReadUnlock" /f
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters" /f
-Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Services\AFD\Parameters" /v "FastCopyReceiveThreshold" /f
-Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Services\AFD\Parameters" /v "FastSendDatagramThreshold" /f
-Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\AFD\Parameters" /f
-Reg.exe delete "HKCU\SOFTWARE\Policies\Microsoft\Windows\Explorer" /f
-Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Services\AFD\Parameters" /v "DefaultReceiveWindow" /f
-Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Services\AFD\Parameters" /v "DefaultSendWindow" /f
-Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Services\AFD\Parameters" /v "EnableDynamicBacklog" /f
-Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Services\AFD\Parameters" /v "MinimumDynamicBacklog" /f
-Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Services\AFD\Parameters" /v "MaximumDynamicBacklog" /f
-Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Services\AFD\Parameters" /v "DynamicBacklogGrowthDelta" /f
-Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Services\AFD\Parameters" /v "KeepAliveInterval" /f
-Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Services\AFD\Parameters" /v "FastSendDatagramThreshold" /f
-Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Services\AFD\Parameters" /v "FastCopyReceiveThreshold" /f
-Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Services\AFD\Parameters" /v "DisableAddressSharing" /f
-Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Services\AFD\Parameters" /v "BufferMultiplier" /f
-Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Services\AFD\Parameters" /v "NonBlockingSendSpecialBuffering" /f
-Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Services\AFD\Parameters" /v "InitialLargeBufferCount" /f
-Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Services\AFD\Parameters" /v "InitialMediumBufferCount" /f
-Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Services\AFD\Parameters" /v "InitialSmallBufferCount" /f
-Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Services\AFD\Parameters" /v "SmallBufferSize" /f
-Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Services\AFD\Parameters" /v "MediumBufferSize" /f
-Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Services\AFD\Parameters" /v "LargeBufferSize" /f
-Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Services\AFD\Parameters" /v "MaxFastTransmit" /f
-Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Services\AFD\Parameters" /v "MaxFastCopyTransmit" /f
-Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\AFD\Parameters" /f
 Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters" /v "Size" /f
 Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters" /v "MaxMpxCt" /f
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters" /f
@@ -5100,7 +5087,7 @@ cls
 )
 for /f "usebackq" %%i in (`reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Class\{4d36e972-e325-11ce-bfc1-08002be10318}`) do (
 Reg.exe delete %%i /v "ScanWhenAssociated" /f
-) >nul 2>&1
+)
 
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e972-e325-11ce-bfc1-08002be10318}\0000" /f
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e972-e325-11ce-bfc1-08002be10318}\0001" /f
@@ -5137,6 +5124,22 @@ goto endrinternet
 
 :RNetsh
 cls
+netsh winsock reset catalog
+netsh int ip reset c:resetlog.txt
+netsh int ip reset C:\tcplog.txt
+netsh int tcp set heuristics default
+netsh int tcp set supplemental Internet congestionprovider=default
+netsh int tcp set global initialRto=3000
+netsh int tcp set global MaxSynRetransmissions=2
+netsh int tcp set global autotuninglevel=default
+netsh int tcp set global rss=default
+netsh int tcp set global rsc=default
+netsh int tcp set global chimney=default
+netsh int tcp set global dca=default
+netsh int tcp set global netdma=default
+netsh int tcp set global ecncapability=default
+netsh int tcp set global timestamps=default
+netsh int tcp set global nonsackrttresiliency=default
 netsh int tcp set global autotuninglevel=normal
 netsh int tcp set global chimney=disabled
 netsh int tcp set global dca=enabled
@@ -5179,7 +5182,6 @@ netsh interface ipv6 set subinterface "Wi-Fi" mtu=1500 store=persistent
 netsh int tcp set global congestionprovider=default
 powershell -command "Set-NetTCPSetting -SettingName InternetCustom -CongestionProvider Default"
 netsh int tcp set supplemental Internet congestionprovider=default
-netsh int tcp set supplemental custom 300 10 default disabled 50
 powershell Set-NetTCPSetting -SettingName InternetCustom -MaxSynRetransmissions 4
 powershell Set-NetTCPSetting -SettingName Internet -MaxSynRetransmissions 4
 powershell Set-NetTCPSetting -SettingName DatacenterCustom -MaxSynRetransmissions 4
@@ -5204,9 +5206,9 @@ powershell Set-NetTCPSetting -SettingName Internet -EcnCapability Disabled
 powershell Set-NetTCPSetting -SettingName InternetCustom -EcnCapability Disabled
 powershell Set-NetTCPSetting -SettingName DatacenterCustom -EcnCapability Disabled
 powershell Set-NetTCPSetting -SettingName Datacenter -EcnCapability Disabled
-powershell Disable-NetAdapterLso -Name *
+powershell Enable-NetAdapterLso -Name *
 powershell Set-NetOffloadGlobalSetting -PacketCoalescingFilter enabled
-powershell Disable-NetAdapterChecksumOffload -Name *
+powershell Enable-NetAdapterChecksumOffload -Name *
 powershell Enable-NetAdapterRss -Name *
 powershell Set-NetOffloadGlobalSetting -ReceiveSideScaling Enabled
 powershell Set-NetTCPSetting -SettingName "InternetCustom" -CongestionProvider default
@@ -5256,6 +5258,23 @@ goto RInternet
 
 :NREG
 cls
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services\Tcpip\Parameters" /v "DisableTaskOffload" /t REG_DWORD /d "00000000" /f
+reg add "HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\LanmanServer\Parameters" /v "DisableTaskOffload" /t REG_DWORD /d "00000000" /f
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\ServiceProvider" /v "DnsPriority" /t REG_DWORD /d "00000006" /f
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\ServiceProvider" /v "HostsPriority" /t REG_DWORD /d "00000005" /f
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\ServiceProvider" /v "LocalPriority" /t REG_DWORD /d "00000004" /f
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\ServiceProvider" /v "NetbtPriority" /t REG_DWORD /d "00000007" /f
+reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Internet Settings" /v "MaxConnectionsPerServer" /t REG_DWORD /d "00000010" /f
+reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Internet Settings" /v "MaxConnectionsPer1_0Server" /t REG_DWORD /d "00000010" /f
+reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Psched" /v "NonBestEffortLimit" /t REG_DWORD /d "00000000" /f
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip6\Parameters" /v "DisabledComponents" /t REG_DWORD /d "4294967295" /f
+reg add "HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\Tcpip\QoS" /v "Do not use NLA" /t REG_DWORD /d "00000001" /f
+reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\MSMQ\Parameters" /v "TCPNoDelay" /t REG_DWORD /d "00000001" /f
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters" /v "MaxUserPort" /t REG_DWORD /d "00065534" /f
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters" /v "TcpTimedWaitDelay" /t REG_DWORD /d "00000030" /f
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters" /v "EnableWsd" /t REG_DWORD /d "00000000" /f
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters" /v "Tcp1323Opts" /t REG_DWORD /d "00000001" /f
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters" /v "TCPCongestionControl" /t REG_DWORD /d "00000001" /f
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\ServiceProvider" /v "DnsPriority" /t REG_DWORD /d "6" /f
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\ServiceProvider" /v "HostsPriority" /t REG_DWORD /d "5" /f
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\ServiceProvider" /v "LocalPriority" /t REG_DWORD /d "4" /f
@@ -5290,44 +5309,16 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters" /v "MaxCollectionCount" /t REG_DWORD /d "32" /f
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters" /v "KeepConn" /t REG_DWORD /d "32000" /f
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters" /v "DisableBandwidthThrottling" /t REG_DWORD /d "1" /f
-Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters" /v "FileInfoCacheEntriesMax" /t REG_DWORD /d "64" /f
-Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters" /v "DirectoryCacheEntriesMax" /t REG_DWORD /d "16" /f
-Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters" /v "FileNotFoundCacheEntriesMax" /t REG_DWORD /d "128" /f
-Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters" /v "UtilizeNtCaching" /t REG_DWORD /d "0" /f
-Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters" /v "UseLockReadUnlock" /t REG_DWORD /d "1" /f
-Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\AFD\Parameters" /v "FastCopyReceiveThreshold" /t REG_DWORD /d "1500" /f
-Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\AFD\Parameters" /v "FastSendDatagramThreshold" /t REG_DWORD /d "1500" /f
-Reg.exe add "HKCU\SOFTWARE\Policies\Microsoft\Windows\Explorer" /v "DisableThumbsDBOnNetworkFolders" /t REG_DWORD /d "1" /f
-Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\AFD\Parameters" /v "DefaultReceiveWindow" /t REG_DWORD /d "75776" /f
-Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\AFD\Parameters" /v "DefaultSendWindow" /t REG_DWORD /d "4736" /f
-Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\AFD\Parameters" /v "EnableDynamicBacklog" /t REG_DWORD /d "1" /f
-Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\AFD\Parameters" /v "MinimumDynamicBacklog" /t REG_DWORD /d "32" /f
-Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\AFD\Parameters" /v "MaximumDynamicBacklog" /t REG_DWORD /d "4096" /f
-Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\AFD\Parameters" /v "DynamicBacklogGrowthDelta" /t REG_DWORD /d "32" /f
-Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\AFD\Parameters" /v "KeepAliveInterval" /t REG_DWORD /d "1" /f
-Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\AFD\Parameters" /v "FastSendDatagramThreshold" /t REG_DWORD /d "1500" /f
-Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\AFD\Parameters" /v "FastCopyReceiveThreshold" /t REG_DWORD /d "1500" /f
-Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\AFD\Parameters" /v "DisableAddressSharing" /t REG_DWORD /d "1" /f
-Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\AFD\Parameters" /v "BufferMultiplier" /t REG_DWORD /d "1024" /f
-Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\AFD\Parameters" /v "NonBlockingSendSpecialBuffering" /t REG_DWORD /d "1" /f
-Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\AFD\Parameters" /v "InitialLargeBufferCount" /t REG_DWORD /d "200" /f
-Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\AFD\Parameters" /v "InitialMediumBufferCount" /t REG_DWORD /d "480" /f
-Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\AFD\Parameters" /v "InitialSmallBufferCount" /t REG_DWORD /d "620" /f
-Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\AFD\Parameters" /v "SmallBufferSize" /t REG_DWORD /d "1024" /f
-Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\AFD\Parameters" /v "MediumBufferSize" /t REG_DWORD /d "4096" /f
-Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\AFD\Parameters" /v "LargeBufferSize" /t REG_DWORD /d "8192" /f
-Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\AFD\Parameters" /v "MaxFastTransmit" /t REG_DWORD /d "64000" /f
-Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\AFD\Parameters" /v "MaxFastCopyTransmit" /t REG_DWORD /d "128" /f
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters" /v "Size" /t REG_DWORD /d "3" /f
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters" /v "MaxMpxCt" /t REG_DWORD /d "125" /f
 goto endinternet
 
 :Ping
 cls
-) >nul 2>&1
+)
 for /f "usebackq" %%i in (`reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Class\{4d36e972-e325-11ce-bfc1-08002be10318}`) do (
 Reg.exe add %%i /v "ScanWhenAssociated" /d "0" /t REG_DWORD /f
-) >nul 2>&1
+)
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e972-e325-11ce-bfc1-08002be10318}\0000" /v "ScanWhenAssociated" /t REG_DWORD /d "0" /f
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e972-e325-11ce-bfc1-08002be10318}\0001" /v "ScanWhenAssociated" /t REG_DWORD /d "0" /f
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e972-e325-11ce-bfc1-08002be10318}\0002" /v "ScanWhenAssociated" /t REG_DWORD /d "0" /f
@@ -5365,22 +5356,38 @@ goto endinternet
 
 :Netsh
 cls
-netsh winsock reset catalog >nul 2>&1
-netsh int ip reset c:resetlog.txt >nul 2>&1
-netsh int ip reset C:\tcplog.txt >nul 2>&1
-netsh int tcp set supplemental Internet congestionprovider=ctcp >nul 2>&1
-netsh int tcp set heuristics disabled >nul 2>&1
-netsh int tcp set global initialRto=2000 >nul 2>&1
-netsh int tcp set global autotuninglevel=normal >nul 2>&1
-netsh int tcp set global rsc=disabled >nul 2>&1
-netsh int tcp set global chimney=disabled >nul 2>&1
-netsh int tcp set global dca=enabled >nul 2>&1
-netsh int tcp set global netdma=disabled >nul 2>&1
-netsh int tcp set global ecncapability=enabled >nul 2>&1
-netsh int tcp set global timestamps=disabled >nul 2>&1
-netsh int tcp set global nonsackrttresiliency=disabled >nul 2>&1
-netsh interface tcp set global rss=enabled >nul 2>&1
-netsh interface tcp set global MaxSynRetransmissions=2 >nul 2>&1
+netsh winsock reset catalog
+netsh int ip reset c:resetlog.txt
+netsh int ip reset C:\tcplog.txt
+netsh int tcp set supplemental Internet congestionprovider=ctcp
+netsh int tcp set heuristics disabled
+netsh int tcp set global initialRto=2000
+netsh int tcp set global autotuninglevel=normal
+netsh int tcp set global rsc=disabled
+netsh int tcp set global chimney=disabled
+netsh int tcp set global dca=enabled
+netsh int tcp set global netdma=disabled
+netsh int tcp set global ecncapability=enabled
+netsh int tcp set global timestamps=disabled
+netsh int tcp set global nonsackrttresiliency=disabled
+netsh int tcp set global rss=enabled
+netsh int tcp set global MaxSynRetransmissions=2
+netsh winsock reset catalog
+netsh int ip reset c:resetlog.txt
+netsh int ip reset C:\tcplog.txt
+netsh int tcp set supplemental Internet congestionprovider=ctcp
+netsh int tcp set heuristics disabled
+netsh int tcp set global initialRto=2000
+netsh int tcp set global autotuninglevel=normal
+netsh int tcp set global rsc=disabled
+netsh int tcp set global chimney=disabled
+netsh int tcp set global dca=enabled
+netsh int tcp set global netdma=disabled
+netsh int tcp set global ecncapability=enabled
+netsh int tcp set global timestamps=disabled
+netsh int tcp set global nonsackrttresiliency=disabled
+netsh interface tcp set global rss=enabled
+netsh interface tcp set global MaxSynRetransmissions=2
 netsh interface tcp set global autotuning=high
 netsh int tcp set heuristics disabled
 netsh int tcp set global initialRto=1000
@@ -5470,7 +5477,6 @@ netsh int tcp set global initialRto=1000
 netsh int tcp set supplemental template=custom icw=10
 powershell -command "Set-NetTCPSetting -SettingName InternetCustom -CongestionProvider CTCP"
 netsh int tcp set supplemental Internet congestionprovider=ctcp
-netsh int tcp set supplemental custom 300 10 ctcp disabled 50
 netsh int tcp set global rsc=disabled
 netsh interface tcp set global autotuning=disabled
 netsh int tcp set global autotuninglevel=normal
@@ -5777,10 +5783,10 @@ cls
 SC CONFIG WinDefend START= AUTO
 SC CONFIG WdNisSvc START= AUTO
 SC CONFIG SecurityHealthService START= AUTO
-REG DELETE "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender" /V DisableAntiSpyware /F >nul 2>&1
-REG DELETE "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender" /V DisableBehaviorMonitoring /F >nul 2>&1
-REG DELETE "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender" /V DisableOnAccessProtection /F >nul 2>&1
-REG DELETE "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender" /V DisableScanOnRealtimeEnable /F >nul 2>&1
+REG DELETE "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender" /V DisableAntiSpyware /F
+REG DELETE "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender" /V DisableBehaviorMonitoring /F
+REG DELETE "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender" /V DisableOnAccessProtection /F
+REG DELETE "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender" /V DisableScanOnRealtimeEnable /F
 SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\Windows Defender\Windows Defender Cache Maintenance"
 SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\Windows Defender\Windows Defender Cleanup"
 SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\Windows Defender\Windows Defender Scheduled Scan"
