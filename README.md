@@ -64,6 +64,6 @@ Jeżeli masz problemy z odzyskiwaniem domyślnych aplikacji z systemu Windows za
 
 ### Contact and Help | Kontakt i Pomoc  
 
-Discord: Smolich#9211 
+Discord: Smolich#0531 
 
 Discord Server: Discord.Link/Opline
