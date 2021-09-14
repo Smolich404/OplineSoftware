@@ -3925,7 +3925,7 @@ call :ColorText 03 "                                         Contact - About"
 echo.
 echo.
 echo.
-echo                                       Discord: Smolich#9211
+echo                                       Discord: Smolich#0531
 echo.
 echo                                Discord Server: Discord.Link/Opline
 echo.
@@ -6439,11 +6439,7 @@ netsh interface ipv4 set subinterface "Internet" mtu=1500 store=persistent
 netsh interface ipv4 set subinterface "Local Area Connection" mtu=1500 store=persistent
 netsh interface ipv6 set subinterface "Internet" mtu=1500 store=persistent
 netsh interface ipv6 set subinterface "Local Area Connection" mtu=1500 store=persistent
-netsh interface ip set global neighborcachelimit=256     
-netsh interface ip show interface level=verbose
-netsh interface ip reset arpcache
 powershell -command "Set-NetOffloadGlobalSetting -PacketCoalescingFilter enabled"
-RUNDLL32.EXE USER32.DLL,UpdatePerUserSystemParameters ,1 ,False
 netsh interface ipv4 set subinterface "Ethernet" mtu=1500 store=persistent
 netsh interface ipv6 set subinterface "Ethernet" mtu=1500 store=persistent
 netsh interface ipv4 set subinterface "Wi-Fi" mtu=1500 store=persistent
@@ -6506,7 +6502,6 @@ powershell Get-NetAdapterbinding -Name "*"
 Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Control\Nsi\{eb004a03-9b1a-11d4-9123-0050047759bc}\0" /v "0200" /f
 Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Control\Nsi\{eb004a03-9b1a-11d4-9123-0050047759bc}\0" /v "1700" /f
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Nsi\{eb004a03-9b1a-11d4-9123-0050047759bc}\0" /f
-reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Psched" /v "NonBestEffortLimit" /f
 reg delete "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Nsi\{eb004a03-9b1a-11d4-9123-0050047759bc}\0" /v "0200" /f
 reg delete "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Nsi\{eb004a03-9b1a-11d4-9123-0050047759bc}\0" /v "1700" /f
 netsh winsock reset
@@ -6721,10 +6716,6 @@ netsh int tcp set global nonsackrttresiliency=disabled
 netsh int tcp set global initialRto=1000
 netsh int tcp set global maxsynretransmissions=2
 netsh int tcp set supplemental template=custom icw=10
-netsh interface ip set global neighborcachelimit=4096   
-netsh interface ip show interface level=verbose
-netsh interface ip delete arpcache
-RUNDLL32.EXE USER32.DLL,UpdatePerUserSystemParameters ,1 ,True
 netsh interface ipv4 set subinterface "Ethernet" mtu=1500 store=persistent
 netsh interface ipv6 set subinterface "Ethernet" mtu=1500 store=persistent
 netsh interface ipv4 set subinterface "Wi-Fi" mtu=1500 store=persistent
