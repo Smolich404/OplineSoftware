@@ -2155,57 +2155,12 @@ if %ERRORLEVEL% == 3 goto Others
 
 :UNI
 cls
-echo.
-echo.
-call :ColorText 1B "###############################################################################################"
-echo.
-echo.
-echo                           лллллл  лллллл  лл      лл ллл    лл ллллллл  
-echo                          лл    лл лл   лл лл      лл лллл   лл лл        
-echo                          лл    лл лллллл  лл      лл лл лл  лл ллллл   
-echo                          лл    лл лл      лл      лл лл  лл лл лл      
-echo                           лллллл  лл      ллллллл лл лл   лллл ллллллл  
-echo.       
-echo.     
-echo               ллллллл  лллллл  ллллллл лллллллл лл     лл  ллллл  лллллл  ллллллл
-echo               лл      лл    лл лл         лл    лл     лл лл   лл лл   лл лл      
-echo               ллллллл лл    лл ллллл      лл    лл  л  лл ллллллл лллллл  ллллл   
-echo                    лл лл    лл лл         лл    лл ллл лл лл   лл лл   лл лл      
-echo               ллллллл  лллллл  лл         лл     ллл ллл  лл   лл лл   лл ллллллл
-echo.
-echo.
-call :ColorText 0A "                                             L I T E"
-echo.
-echo.
-echo.
-call :ColorText 1B "###############################################################################################"
-echo.
-echo.
-echo                   Enter the path of the folder where Edge is installed example:
-echo              C:\Program Files (x86)\Microsoft\Edge\Application\91.0.864.41\Installer
-echo.
-echo            Wpisz sciezke polozenia folderu na ktorym jest zainstalowany Edge przyklad: 
-echo              C:\Program Files (x86)\Microsoft\Edge\Application\91.0.864.41\Installer                   
-echo.
-set /p NAME=
-cls
-cd %NAME%
-setup.exe --uninstall --system-level --verbose-logging --force-uninstall
-goto end3
+start https://www.youtube.com/watch?v=V5So6iMJAD0&ab_channel=HowtoDigital
+goto Edge
 
 :INS
 cls
 start https://www.microsoft.com/en-us/edge
-goto Edge
-
-:end3
-cls
-SET msgboxTitle=Opline Software
-SET msgboxBody=Finished - Skonczone
-SET tmpmsgbox=%temp%~tmpmsgbox.vbs
-IF EXIST "%tmpmsgbox%" DEL /F /Q "%tmpmsgbox%"
-ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
-WSCRIPT "%tmpmsgbox%"
 goto Edge
 
 :UAC
