@@ -34,9 +34,9 @@ Przed użyciem programu Opline Software zrób Punkt Przywracania Systemu na każ
 
 #### 3
 
-With other options, such as CPU Tweaks, if you clicked by accident, just type x and then the script goes to the main menu, and in the Edge option it is different, just do not enter anything, just click Enter and then nothing will happen or Microsoft Edge will not uninstall, as with the option to install the KBoost skin.
+With other options, such as CPU Tweaks, if you clicked by accident, just type x and then the script goes to the main menu and in the KBoost skin installation option it is different, you just do not enter anything, just click Enter and then nothing will happen, sometimes you have to wait a while for the script to start will end successfully.
 
-Przy innych opcjach jak CPU Tweaks jeżeli kliknąłeś przez przypadek to wystarczy że wpisujesz x i wtedy skrypt przechodzi do głównego menu a w opcji Edge jest juz inaczej wystarczy że nic nie wpisujesz tylko klikasz Enter i wtedy nic sie stanie ani Microsoft Edge sie nie odinstaluje, tak jak w przypadku opcji instalowania skórki KBoost.
+Przy innych opcjach jak CPU Tweaks jeżeli kliknąłeś przez przypadek to wystarczy że wpisujesz x i wtedy skrypt przechodzi do głównego menu a w opcji instalowania skórki KBoost jest juz inaczej wystarczy że nic nie wpisujesz tylko klikasz Enter i wtedy nic sie stanie, czasami musisz chwile poczekać jak skrypt się zakończy sukcesem.
 
 #### 4
 
@@ -55,12 +55,6 @@ Jeśli się zastanawiasz o co chodzi z lokalizacją jak np w opcji Ustawienia Va
 From the Timer Resolution Service option, if you have Microsoft C++ Redistributable drivers installed, you just need to close the installer window and the program will continue, as with the MSI Afterburner install option.
 
 Z opcji Timer Resolution Service jeżeli masz zainstalowane sterowniki Microsoft C++ Redistributable to wystarczy że zamykasz okienko instalatora i wtedy program przechodzi dalej, tak jak w przypadku opcji instalowania MSI Afterburner.
-
-#### 7
-
-If you have problems with recovering default applications from Windows, I recommend that you create a new user account, and if you still have problems creating a user account, run the Command Prompt with Administrator, type Net User (NAME) /Add and the new user account will be created successfully if you want to delete or there to undo the changes to create a user account, you only need to enter Net User (NAME) /Del and it will be deleted successfully.
-
-Jeżeli masz problemy z odzyskiwaniem domyślnych aplikacji z systemu Windows zalecam utworzyć nowe konto użytkownika a jeżeli masz jeszcze problemy z utworzeniem konta użytkownika to uruchom Wiersz Polecenia za pomocą Administratora, wpisz Net User (NAZWA) /Add i nowe konto użytkownika się utworzy sukcesem jeżeli chcesz usunąć czy tam cofnąć zmiany utworzenia konta użytkownika wystarczy tylko wpisać Net User (NAZWA) /Del i usunie się ono sukcesem.
 
 ### Contact and Help | Kontakt i Pomoc  
 
