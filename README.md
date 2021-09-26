@@ -34,9 +34,9 @@ Przed użyciem programu Opline Software zrób Punkt Przywracania Systemu na każ
 
 #### 3
 
-With other options, such as CPU Tweaks, if you clicked by accident, just type x and then the script goes to the main menu and in the KBoost skin installation option it is different, you just do not enter anything, just click Enter and then nothing will happen, sometimes you have to wait a while for the script to start will end successfully.
+With other options, such as CPU Tweaks, if you clicked by accident, just type x and then the script goes to the main menu and in the KBoost skin installation option it is different, just do not enter anything, just click Enter and then nothing will happen, sometimes you have to wait for a while for the script to be successful.
 
-Przy innych opcjach jak CPU Tweaks jeżeli kliknąłeś przez przypadek to wystarczy że wpisujesz x i wtedy skrypt przechodzi do głównego menu a w opcji instalowania skórki KBoost jest juz inaczej wystarczy że nic nie wpisujesz tylko klikasz Enter i wtedy nic sie stanie, czasami musisz chwile poczekać jak skrypt się zakończy sukcesem.
+Przy innych opcjach, jak CPU Tweaks, jeżeli kliknąłeś przez przypadek, to wystarczy że wpisujesz x i wtedy skrypt przechodzi do głównego menu a w opcji instalowania skórki KBoost jest juz inaczej, wystarczy że nic nie wpisujesz, tylko klikasz Enter i wtedy nic sie stanie, czasami musisz chwile poczekać żeby skrypt zakończył się sukcesem.
 
 #### 4
 
