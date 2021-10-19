@@ -4019,6 +4019,22 @@ powercfg -attributes SUB_PROCESSOR 4e4450b3-6179-4e91-b8f1-5bb9938f81a1 +ATTRIB_
 powercfg -setactive scheme_current
 powercfg -attributes SUB_PROCESSOR cfeda3d0-7697-4566-a922-a9086cd49dfa +ATTRIB_HIDE
 powercfg -setactive scheme_current
+powercfg -setacvalueindex scheme_current sub_processor 0cc5b647-c1df-4637-891a-dec35c318583 100
+powercfg -setactive scheme_current
+powercfg -setacvalueindex scheme_current sub_processor 06cadf0e-64ed-448a-8927-ce7bf90eb35d 10
+powercfg -setactive scheme_current
+powercfg -setacvalueindex scheme_current sub_processor 12a0ab44-fe28-4fa9-b3bd-4b64f44960a6 5
+powercfg -setactive scheme_current
+powercfg -setacvalueindex scheme_current sub_processor 4b92d758-5a24-4851-a470-815d78aee119 40
+powercfg -setactive scheme_current
+powercfg -setacvalueindex scheme_current sub_processor 7b224883-b3cc-4d79-819f-8374152cbe7c 60
+powercfg -setactive scheme_current
+powercfg -setacvalueindex scheme_current sub_processor 943c8cb6-6f93-4227-ad87-e9a3feec08d1 60
+powercfg -setactive scheme_current
+powercfg -setacvalueindex scheme_current sub_processor 619b7505-003b-4e82-b7a6-4dd29c300971 99
+powercfg -setactive scheme_current
+powercfg -setacvalueindex scheme_current sub_processor 36687f9e-e3a5-4dbf-b1dc-15eb381c6863 50
+powercfg -setactive scheme_current
 cls
 SET msgboxTitle=Opline Software
 SET msgboxBody=Finished - Skonczone
