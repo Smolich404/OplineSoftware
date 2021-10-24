@@ -4232,7 +4232,7 @@ bcdedit /set tscsyncpolicy enhanced
 bcdedit /set hypervisorlaunchtype off
 bcdedit /set quietboot yes
 bcdedit /set linearaddress57 OptOut
-bcdedit /set increaseuserva 1024
+bcdedit /set increaseuserva 49152
 bcdedit /set bootmenupolicy Legacy
 bcdedit /set tpmbootentropy ForceDisable
 bcdedit /set firstmegabytepolicy UseAll
