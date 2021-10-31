@@ -300,23 +300,25 @@ echo.
 call :ColorText 1B "###############################################################################################"
 echo.
 echo.
-call :ColorText 0A "                     Enter the name of the application with .exe"
+call :ColorText 06 "                           Enter the name of the application with .exe"
+echo.
 echo.
 echo                       If you do not know how to do it, just enter your game
-echo                          right-click on it and click open file location 
+echo                           right-click on it and click open file location 
 echo                       and you will see the name of this game and it's ready
 echo                   In the case of the Game via Steam it is different to find it 
 echo           you click on the folder where you have Steam, steamapps and common installed 
-echo             and there you will find the correct name of this game via exe and ready
+echo              and there you will find the correct name of this game via exe and ready
 echo.
-call :ColorText 0A "                            Wpisz nazwe aplikacji z .exe"
+call :ColorText 06 "                                  Wpisz nazwe aplikacji z .exe"
+echo.
 echo.
 echo                      Jesli nie wiesz, jak to zrobic, po prostu wejdz do gry
-echo                 kliknij prawym przyciskiem myszy i kliknij otworz lokalizacje pliku
+echo              kliknij prawym przyciskiem myszy i kliknij otworz lokalizacje pliku
 echo                          a zobaczysz oryginalna nazwe tej gry i gotowe
-echo                       W przypadku Gry przez Steam inaczej jest ja znalezc
-echo             klikniesz na folder, w ktorym masz zainstalowany Steam, steamapps i common
-echo                    i tam znajdziesz poprawna nazwe tej gry przez exe i gotowe
+echo                      W przypadku Gry przez Steam inaczej jest ja znalezc
+echo           klikniesz na folder, w ktorym masz zainstalowany Steam, steamapps i common
+echo                  i tam znajdziesz poprawna nazwe tej gry przez exe i gotowe
 echo.
 set /p REXE=
 if %REXE%== X goto ResetReg
