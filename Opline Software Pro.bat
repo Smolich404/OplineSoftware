@@ -6114,6 +6114,9 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters
 Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters" /v "Size" /f
 Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters" /v "MaxMpxCt" /f
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters" /f
+Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters" /v "EnableICMPRedirect" /f
+Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters" /v "GlobalMaxTcpWindowSize" /f
+Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters" /v "TcpWindowSize" /f
 goto endrinternet
 
 :RPing
@@ -6270,6 +6273,30 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Nsi\{eb004a03-9b1a-11d4-9123-
 reg delete "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Nsi\{eb004a03-9b1a-11d4-9123-0050047759bc}\0" /v "0200" /f
 reg delete "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Nsi\{eb004a03-9b1a-11d4-9123-0050047759bc}\0" /v "1700" /f
 netsh winsock reset
+netsh int tcp set global autotuninglevel=normal
+netsh interface 6to4 set state default
+netsh int isatap set state default
+netsh int tcp set global timestamps=disabled
+netsh int tcp set heuristics disabled
+netsh int tcp set global chimney=disabled
+netsh int tcp set global ecncapability=disabled
+netsh int tcp set global rsc=enabled
+netsh int tcp set global nonsackrttresiliency=disabled
+netsh int tcp set security mpp=default
+netsh int tcp set security profiles=default
+netsh int ip set global icmpredirects=enabled
+netsh int tcp set security mpp=default profiles=default
+netsh int ip set global multicastforwarding=enabled
+netsh int tcp set supplemental internet congestionprovider=default
+netsh interface teredo set state default
+netsh winsock reset
+netsh int isatap set state default
+netsh int ip set global neighborcachelimit=256
+netsh int tcp set global dca=enabled
+netsh int tcp set global netdma=enabled
+PowerShell Enable-NetAdapterLso -Name "*"
+powershell "ForEach($adapter In Get-NetAdapter){Enable-NetAdapterPowerManagement -Name $adapter.Name -ErrorAction SilentlyContinue}"
+powershell "ForEach($adapter In Get-NetAdapter){Enable-NetAdapterLso -Name $adapter.Name -ErrorAction SilentlyContinue}"
 ipconfig /release
 ipconfig /renew
 ipconfig /flushdns
@@ -6287,8 +6314,8 @@ goto RInternet
 
 :NREG
 cls
-reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services\Tcpip\Parameters" /v "DisableTaskOffload" /t REG_DWORD /d "00000000" /f
-reg add "HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\LanmanServer\Parameters" /v "DisableTaskOffload" /t REG_DWORD /d "00000000" /f
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services\Tcpip\Parameters" /v "DisableTaskOffload" /t REG_DWORD /d "1" /f
+reg add "HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\LanmanServer\Parameters" /v "DisableTaskOffload" /t REG_DWORD /d "1" /f
 reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\ServiceProvider" /v "DnsPriority" /t REG_DWORD /d "00000006" /f
 reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\ServiceProvider" /v "HostsPriority" /t REG_DWORD /d "00000005" /f
 reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\ServiceProvider" /v "LocalPriority" /t REG_DWORD /d "00000004" /f
@@ -6340,6 +6367,9 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters" /v "DisableBandwidthThrottling" /t REG_DWORD /d "1" /f
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters" /v "Size" /t REG_DWORD /d "3" /f
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters" /v "MaxMpxCt" /t REG_DWORD /d "125" /f
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters" /v "EnableICMPRedirect" /t REG_DWORD /d "1" /f
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters" /v "GlobalMaxTcpWindowSize" /t REG_DWORD /d "65535" /f
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters" /v "TcpWindowSize" /t REG_DWORD /d "65535" /f
 goto endinternet
 
 :Ping
@@ -6513,6 +6543,30 @@ netsh int tcp set global rsc=disabled
 powershell -command "Set-NetOffloadGlobalSetting -PacketCoalescingFilter enabled"
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Nsi\{eb004a03-9b1a-11d4-9123-0050047759bc}\0" /v "0200" /t REG_BINARY /d "0000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000ff000000000000000000000000000000000000000000ff000000000000000000000000000000" /f
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Nsi\{eb004a03-9b1a-11d4-9123-0050047759bc}\0" /v "1700" /t REG_BINARY /d "0000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000ff000000000000000000000000000000000000000000ff000000000000000000000000000000" /f
+netsh int tcp set global autotuninglevel=normal
+netsh interface 6to4 set state disabled
+netsh int isatap set state disable
+netsh int tcp set global timestamps=disabled
+netsh int tcp set heuristics disabled
+netsh int tcp set global chimney=disabled
+netsh int tcp set global ecncapability=disabled
+netsh int tcp set global rsc=disabled
+netsh int tcp set global nonsackrttresiliency=disabled
+netsh int tcp set security mpp=disabled
+netsh int tcp set security profiles=disabled
+netsh int ip set global icmpredirects=disabled
+netsh int tcp set security mpp=disabled profiles=disabled
+netsh int ip set global multicastforwarding=disabled
+netsh int tcp set supplemental internet congestionprovider=ctcp
+netsh interface teredo set state disabled
+netsh winsock reset
+netsh int isatap set state disable
+netsh int ip set global neighborcachelimit=4096
+netsh int tcp set global dca=enabled
+netsh int tcp set global netdma=disabled
+PowerShell Disable-NetAdapterLso -Name "*"
+powershell "ForEach($adapter In Get-NetAdapter){Disable-NetAdapterPowerManagement -Name $adapter.Name -ErrorAction SilentlyContinue}"
+powershell "ForEach($adapter In Get-NetAdapter){Disable-NetAdapterLso -Name $adapter.Name -ErrorAction SilentlyContinue}"
 ipconfig /release
 ipconfig /renew
 ipconfig /flushdns
