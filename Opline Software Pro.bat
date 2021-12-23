@@ -2060,8 +2060,6 @@ sc start UevAgentService
 sc config UevAgentService start= auto
 sc start WdNisSvc
 sc config WdNisSvc start= auto
-sc start WinDefend
-sc config WinDefend start= auto
 sc start Wecsvc
 sc config Wecsvc start= auto
 sc start LicenseManager
@@ -2649,8 +2647,6 @@ sc stop UevAgentService
 sc config UevAgentService start= disabled
 sc stop WdNisSvc
 sc config WdNisSvc start= disabled
-sc stop WinDefend
-sc config WinDefend start= disabled
 sc stop Wecsvc
 sc config Wecsvc start= disabled
 sc stop LicenseManager
@@ -4039,6 +4035,8 @@ powercfg -setacvalueindex scheme_current sub_processor 619b7505-003b-4e82-b7a6-4
 powercfg -setactive scheme_current
 powercfg -setacvalueindex scheme_current sub_processor 36687f9e-e3a5-4dbf-b1dc-15eb381c6863 50
 powercfg -setactive scheme_current
+powercfg -setacvalueindex scheme_current sub_processor 5d76a2ca-e8c0-402f-a133-2158492d58ad 0
+powercfg -setactive scheme_current
 cls
 SET msgboxTitle=Opline Software
 SET msgboxBody=Finished - Skonczone
@@ -4184,6 +4182,8 @@ powercfg -setactive scheme_current
 powercfg -attributes SUB_PROCESSOR 4e4450b3-6179-4e91-b8f1-5bb9938f81a1 -ATTRIB_HIDE
 powercfg -setactive scheme_current
 powercfg -attributes SUB_PROCESSOR cfeda3d0-7697-4566-a922-a9086cd49dfa -ATTRIB_HIDE
+powercfg -setactive scheme_current
+powercfg -setacvalueindex scheme_current sub_processor 5d76a2ca-e8c0-402f-a133-2158492d58ad 0
 powercfg -setactive scheme_current
 cls
 SET msgboxTitle=Opline Software
@@ -6994,6 +6994,8 @@ powershell.exe -command "Set-MpPreference -SevereThreatDefaultAction 0"
 powershell.exe -command "Set-MpPreference -ScanScheduleDay 0"
 Reg del "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender" /v DisableAntiSpyware /f
 powershell.exe -command "netsh advfirewall set allprofiles state on"
+sc start WinDefend
+sc config WinDefend start= auto
 cls
 SET msgboxTitle=Opline Software
 SET msgboxBody=Finished - Skonczone
@@ -7094,6 +7096,8 @@ Reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender" /v Dis
 powershell.exe -command "netsh advfirewall set allprofiles state off"
 Reg.exe delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "WindowsDefender" /f
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /f
+sc stop WinDefend
+sc config WinDefend start= disabled
 cls
 SET msgboxTitle=Opline Software
 SET msgboxBody=Finished - Skonczone

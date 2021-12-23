@@ -2771,6 +2771,8 @@ powercfg -setacvalueindex scheme_current sub_processor 619b7505-003b-4e82-b7a6-4
 powercfg -setactive scheme_current
 powercfg -setacvalueindex scheme_current sub_processor 36687f9e-e3a5-4dbf-b1dc-15eb381c6863 50
 powercfg -setactive scheme_current
+powercfg -setacvalueindex scheme_current sub_processor 5d76a2ca-e8c0-402f-a133-2158492d58ad 0
+powercfg -setactive scheme_current
 cls
 SET msgboxTitle=Opline Software
 SET msgboxBody=Finished - Skonczone
@@ -2916,6 +2918,8 @@ powercfg -setactive scheme_current
 powercfg -attributes SUB_PROCESSOR 4e4450b3-6179-4e91-b8f1-5bb9938f81a1 -ATTRIB_HIDE
 powercfg -setactive scheme_current
 powercfg -attributes SUB_PROCESSOR cfeda3d0-7697-4566-a922-a9086cd49dfa -ATTRIB_HIDE
+powercfg -setactive scheme_current
+powercfg -setacvalueindex scheme_current sub_processor 5d76a2ca-e8c0-402f-a133-2158492d58ad 0
 powercfg -setactive scheme_current
 cls
 SET msgboxTitle=Opline Software
