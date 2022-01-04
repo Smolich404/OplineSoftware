@@ -2389,7 +2389,7 @@ FOR /f %%I IN (' reg query "HKLM\SYSTEM\CurrentControlSet\Services" /k /f "Unist
 FOR /f %%I IN (' reg query "HKLM\SYSTEM\CurrentControlSet\Services" /k /f "UserDataSvc" ^| FIND /i "UserDataSvc"') DO (reg add "%%I" /v "UserServiceFlags" /t REG_DWORD /d 3 /f )
 FOR /f %%I IN (' reg query "HKLM\SYSTEM\CurrentControlSet\Services" /k /f "MessagingService" ^| FIND /i "MessagingService"') DO (reg add "%%I" /v "UserServiceFlags" /t REG_DWORD /d 3 /f )
 FOR /f %%I IN (' reg query "HKLM\SYSTEM\CurrentControlSet\Services" /k /f "WpnUserService" ^| FIND /i "WpnUserService"') DO (reg add "%%I" /v "UserServiceFlags" /t REG_DWORD /d 3 /f )
-Powershell iex ((New-Object System.Net.WebClient).DownloadString('https://git.io/JSidU'))
+Powershell iex ((New-Object System.Net.WebClient).DownloadString('https://git.io/JSPXn'))
 cls
 SET msgboxTitle=Opline Software
 SET msgboxBody=Finished - Skonczone
@@ -2984,7 +2984,7 @@ FOR /f %%I IN (' reg query "HKLM\SYSTEM\CurrentControlSet\Services" /k /f "Unist
 FOR /f %%I IN (' reg query "HKLM\SYSTEM\CurrentControlSet\Services" /k /f "UserDataSvc" ^| FIND /i "UserDataSvc"') DO (reg add "%%I" /v "UserServiceFlags" /t REG_DWORD /d 0 /f )
 FOR /f %%I IN (' reg query "HKLM\SYSTEM\CurrentControlSet\Services" /k /f "MessagingService" ^| FIND /i "MessagingService"') DO (reg add "%%I" /v "UserServiceFlags" /t REG_DWORD /d 0 /f )
 FOR /f %%I IN (' reg query "HKLM\SYSTEM\CurrentControlSet\Services" /k /f "WpnUserService" ^| FIND /i "WpnUserService"') DO (reg add "%%I" /v "UserServiceFlags" /t REG_DWORD /d 0 /f )
-Powershell iex ((New-Object System.Net.WebClient).DownloadString('https://git.io/JSidL'))
+Powershell iex ((New-Object System.Net.WebClient).DownloadString('https://git.io/JSPXJ'))
 cls
 SET msgboxTitle=Opline Software
 SET msgboxBody=Finished - Skonczone
