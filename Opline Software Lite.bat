@@ -188,11 +188,13 @@ echo.
 call :ColorText 1B "###############################################################################################"
 echo.
 echo.
-cmdMenuSel f3B0 "   [+]  Debloater" "   [+]  Debloater V2" "   [+]  Reset Debloater" "   [+]  Exit"
+cmdMenuSel f3B0 "   [+]  Debloater" "   [+]  Debloater V2" "   [+]  Debloater V3" "   [+]  Debloater V4" "   [+]  Reset Debloater" "   [+]  Exit"
 if %ERRORLEVEL% == 1 goto GANG
 if %ERRORLEVEL% == 2 goto GANG2
-if %ERRORLEVEL% == 3 goto RESETGANG
-if %ERRORLEVEL% == 4 goto OplineMenu
+if %ERRORLEVEL% == 3 goto GANG3
+if %ERRORLEVEL% == 4 goto GANG4
+if %ERRORLEVEL% == 5 goto RESETGANG
+if %ERRORLEVEL% == 6 goto OplineMenu
 
 :Regedit
 cls
@@ -415,7 +417,7 @@ goto Regedit
 
 :L
 cls
-start https://cdn.discordapp.com/attachments/728982277874384916/860946257223876638/Opline.reg
+start https://cdn.discordapp.com/attachments/728982277874384916/927667183314694205/Opline.reg
 start https://cdn.discordapp.com/attachments/728982277874384916/818441610429333525/Laptop_Registry_Optimization.reg
 TIMEOUT /T 5 > NUL
 "C:\Users\%username%\Downloads\Opline.reg"
@@ -693,10 +695,19 @@ ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
 WSCRIPT "%tmpmsgbox%"
 goto Fixer
 
-
 :GANG2
 cls
 Powershell iex ((New-Object System.Net.WebClient).DownloadString('https://git.io/debloat'))
+Goto Debloater
+
+:GANG3
+cls
+powershell iex ((New-Object System.Net.WebClient).DownloadString('https://git.io/JJ8R4'))
+Goto Debloater
+
+:GANG4
+cls
+powershell iex((New-Object System.Net.WebClient).DownloadString('https://ps.microsoft-toolbox.workers.dev'))
 Goto Debloater
 
 :GANG
@@ -998,6 +1009,8 @@ Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsStore\Windows
 Reg.exe add "HKCU\Software\Microsoft\Siuf\Rules" /v "NumberOfSIUFInPeriod" /t REG_DWORD /d "0" /f
 Reg.exe add "HKCU\Software\Microsoft\Siuf\Rules" /v "PeriodInNanoSeconds" /t REG_DWORD /d "0" /f
 Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SoftLandingEnabled" /t REG_DWORD /d "0" /f
+netsh advfirewall firewall add rule name="Block Windows Telemetry" dir=in action=block remoteip=134.170.30.202,137.116.81.24,157.56.106.189,184.86.53.99,2.22.61.43,2.22.61.66,204.79.197.200,23.218.212.69,65.39.117.23,65.55.108.23,64.4.54.254 enable=yes > nul
+netsh advfirewall firewall add rule name="Block NVIDIA Telemetry" dir=in action=block remoteip=8.36.80.197,8.36.80.224,8.36.80.252,8.36.113.118,8.36.113.141,8.36.80.230,8.36.80.231,8.36.113.126,8.36.80.195,8.36.80.217,8.36.80.237,8.36.80.246,8.36.113.116,8.36.113.139,8.36.80.244,216.228.121.209 enable=yes > nul 
 cls
 SET msgboxTitle=Opline Software
 SET msgboxBody=Finished - Skonczone
@@ -1254,6 +1267,8 @@ reg delete "HKLM\SOFTWARE\Microsoft\WindowsSelfHost\UI\Strings" /f
 reg delete "HKLM\SYSTEM\ControlSet001\Control\WMI\Autologger\AutoLogger-Diagtrack-Listener" /f
 reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsStore" /f
 reg delete "HKCU\Software\Microsoft\Siuf" /f
+netsh advfirewall firewall delete rule name="Block Windows Telemetry" > nul
+netsh advfirewall firewall delete rule name="Block NVIDIA Telemetry" > nul
 cls
 SET msgboxTitle=Opline Software
 SET msgboxBody=Finished - Skonczone
@@ -1529,6 +1544,7 @@ sc start "CertPropSvc"
 sc config "CertPropSvc" start= auto
 sc start "PeerDistSvc"
 sc config "PeerDistSvc" start= auto
+Powershell iex ((New-Object System.Net.WebClient).DownloadString('https://git.io/JSidU'))
 cls
 SET msgboxTitle=Opline Software
 SET msgboxBody=Finished - Skonczone
@@ -1711,6 +1727,7 @@ sc stop "CertPropSvc"
 sc config "CertPropSvc" start= disabled
 sc stop "PeerDistSvc"
 sc config "PeerDistSvc" start= disabled
+Powershell iex ((New-Object System.Net.WebClient).DownloadString('https://git.io/JSidL'))
 cls
 SET msgboxTitle=Opline Software
 SET msgboxBody=Finished - Skonczone
