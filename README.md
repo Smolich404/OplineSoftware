@@ -65,7 +65,6 @@ Or Command Powershell / CMD (Run As Administrator) | Lub Komenda Powershell / CM
 cd Desktop
 powershell -command "& { iwr https://bit.ly/OplineDL -OutFile OplineSoftware-X.zip }"
 ```
-
 ## Contact and Help | Kontakt i Pomoc
 
 Discord: Smolich#0531 
