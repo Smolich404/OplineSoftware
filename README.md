@@ -68,6 +68,6 @@ powershell -command "& { iwr https://bit.ly/OplineDL -OutFile OplineSoftware-X.z
 
 ## Contact and Help | Kontakt i Pomoc
 
-Discord: Smolich#0531 
+Discord: Smolich#0531
 
 Discord Server: Discord.Link/Opline
