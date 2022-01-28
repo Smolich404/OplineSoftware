@@ -1,18 +1,18 @@
 # OplineSoftware
 
-## EN | PL  
+### EN | PL  
 
 A Program Batch File designed to optimize Windows and thanks to the program you can get the best system performance and even much more check and see for yourself.
 
 Program Batch File stworzony do optymalizacji Windows i dzięki programowi można uzyskać jak najlepszą wydajność systemu a nawet wiele więcej sprawdź i się przekonaj.  
 
-## LITE
+### LITE
 
 The LITE version is for people who use tiles and only the default Microsoft Store application.
 
 Wersja LITE jest dla osób którzy używają kafelek oraz i tylko wyłącznie domyślną aplikacje Microsoft Store.
 
-## PRO
+### PRO
 
 The PRO version is for people who do not use tiles and only the default Microsoft Store application, the Anti-Tracking add-on and to Disable / Enable Defender, Services and Windows Update.
 
