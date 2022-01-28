@@ -56,7 +56,15 @@ From the Timer Resolution Service option, if you have Microsoft C++ Redistributa
 
 Z opcji Timer Resolution Service jeżeli masz zainstalowane sterowniki Microsoft C++ Redistributable to wystarczy że zamykasz okienko instalatora i wtedy program przechodzi dalej, tak jak w przypadku opcji instalowania MSI Afterburner.
 
-### Contact and Help | Kontakt i Pomoc  
+### Fast Installation | Szybka Instalacja
+
+https://bit.ly/OplineDL
+
+Or Command Powershell / CMD
+
+Start https://bit.ly/OplineDL
+
+### Contact and Help | Kontakt i Pomoc
 
 Discord: Smolich#0531 
 
