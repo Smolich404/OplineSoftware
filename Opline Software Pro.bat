@@ -4068,12 +4068,6 @@ Goto RBoostOS
 
 :RDelOPlans
 cls
-powercfg -duplicatescheme 381b4222-f694-41f0-9685-ff5bb260df2e
-powercfg -duplicatescheme 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c
-powercfg -duplicatescheme a1841308-3541-4fab-bc81-f71556f20b4a
-powercfg -duplicatescheme 77777777-7777-7777-7777-777777777777
-powercfg -duplicatescheme 44444444-4444-4444-4444-444444444444
-powercfg -restoredefaultschemes
 ::Balanced Plan
 powershell Invoke-WebRequest "https://cdn.discordapp.com/attachments/798652558351794196/847122070898212974/Balanced.pow" -OutFile "%temp%\Balanced.pow" >nul 2>&1
 powercfg -import "%temp%\Balanced.pow" 381b4222-f694-41f0-9685-ff5bb260df2e >nul 2>&1
@@ -5628,33 +5622,33 @@ powershell Invoke-WebRequest "https://cdn.discordapp.com/attachments/72898227787
 powershell Invoke-WebRequest "https://cdn.discordapp.com/attachments/728982277874384916/837639634255216640/general.json" -OutFile "C:\Users\%username%\.lunarclient\settings\game\UHC\general.json"
 powershell Invoke-WebRequest "https://cdn.discordapp.com/attachments/728982277874384916/837639635433160754/mods.json" -OutFile "C:\Users\%username%\.lunarclient\settings\game\UHC\mods.json"
 powershell Invoke-WebRequest "https://cdn.discordapp.com/attachments/728982277874384916/837639636457095248/performance.json" -OutFile "C:\Users\%username%\.lunarclient\settings\game\UHC\performance.json"
-powershell Invoke-WebRequest "https://cdn.discordapp.com/attachments/728982277874384916/848705420213223424/optionsLC.txt" -OutFile "C:\Users\%username%\AppData\Roaming\.minecraft\optionsLC.txt"
+powershell Invoke-WebRequest "https://github.com/Smolich404/DownloadFilesToOpline/releases/download/Opline/optionsLC.txt" -OutFile "C:\Users\%username%\AppData\Roaming\.minecraft\optionsLC.txt"
 goto mcend2
 
 
 :BP
 cls
-powershell Invoke-WebRequest "https://cdn.discordapp.com/attachments/728982277874384916/904860803558146099/optionsbp.dat" -OutFile "C:\Users\%username%\AppData\Roaming\.minecraft\optionsbp.dat"
-powershell Invoke-WebRequest "https://cdn.discordapp.com/attachments/728982277874384916/848703914001956864/options_bp.txt" -OutFile "C:\Users\%username%\AppData\Roaming\.minecraft\options_bp.txt"
-powershell Invoke-WebRequest "https://cdn.discordapp.com/attachments/728982277874384916/848703915988877342/optionsofbp.txt" -OutFile "C:\Users\%username%\AppData\Roaming\.minecraft\optionsofbp.txt"
+powershell Invoke-WebRequest "https://github.com/Smolich404/DownloadFilesToOpline/releases/download/Opline/optionsbp.dat" -OutFile "C:\Users\%username%\AppData\Roaming\.minecraft\optionsbp.dat"
+powershell Invoke-WebRequest "https://github.com/Smolich404/DownloadFilesToOpline/releases/download/Opline/options_bp.txt" -OutFile "C:\Users\%username%\AppData\Roaming\.minecraft\options_bp.txt"
+powershell Invoke-WebRequest "https://github.com/Smolich404/DownloadFilesToOpline/releases/download/Opline/optionsofbp.txt" -OutFile "C:\Users\%username%\AppData\Roaming\.minecraft\optionsofbp.txt"
 goto mcend2
 
 :1.7.10
 cls
-powershell Invoke-WebRequest "https://cdn.discordapp.com/attachments/728982277874384916/848704001037041744/options.txt" -OutFile "C:\Users\%username%\AppData\Roaming\.minecraft\options.txt"
-powershell Invoke-WebRequest "https://cdn.discordapp.com/attachments/728982277874384916/903028819844268042/optionsof.txt" -OutFile "C:\Users\%username%\AppData\Roaming\.minecraft\optionsof.txt"
+powershell Invoke-WebRequest "https://github.com/Smolich404/DownloadFilesToOpline/releases/download/MCV17/options.txt" -OutFile "C:\Users\%username%\AppData\Roaming\.minecraft\options.txt"
+powershell Invoke-WebRequest "https://github.com/Smolich404/DownloadFilesToOpline/releases/download/MCV17/optionsof.txt" -OutFile "C:\Users\%username%\AppData\Roaming\.minecraft\optionsof.txt"
 goto mcend
 
 :1.8.9
 cls
-powershell Invoke-WebRequest "https://cdn.discordapp.com/attachments/728982277874384916/848704001037041744/options.txt" -OutFile "C:\Users\%username%\AppData\Roaming\.minecraft\options.txt"
-powershell Invoke-WebRequest "https://cdn.discordapp.com/attachments/728982277874384916/848704002622881812/optionsof.txt" -OutFile "C:\Users\%username%\AppData\Roaming\.minecraft\optionsof.txt"
+powershell Invoke-WebRequest "https://github.com/Smolich404/DownloadFilesToOpline/releases/download/MCV18/options.txt" -OutFile "C:\Users\%username%\AppData\Roaming\.minecraft\options.txt"
+powershell Invoke-WebRequest "https://github.com/Smolich404/DownloadFilesToOpline/releases/download/MCV18/optionsof.txt" -OutFile "C:\Users\%username%\AppData\Roaming\.minecraft\optionsof.txt"
 goto mcend
 
 :1.16
 cls
-powershell Invoke-WebRequest "https://cdn.discordapp.com/attachments/728982277874384916/848704001037041744/options.txt" -OutFile "C:\Users\%username%\AppData\Roaming\.minecraft\options.txt"
-powershell Invoke-WebRequest "https://cdn.discordapp.com/attachments/728982277874384916/903017115651563530/optionsof.txt" -OutFile "C:\Users\%username%\AppData\Roaming\.minecraft\optionsof.txt"
+powershell Invoke-WebRequest "https://github.com/Smolich404/DownloadFilesToOpline/releases/download/MCV116/options.txt" -OutFile "C:\Users\%username%\AppData\Roaming\.minecraft\options.txt"
+powershell Invoke-WebRequest "https://github.com/Smolich404/DownloadFilesToOpline/releases/download/MCV116/optionsof.txt" -OutFile "C:\Users\%username%\AppData\Roaming\.minecraft\optionsof.txt"
 goto mcend
 
 :mcend
