@@ -60,7 +60,7 @@ Z opcji Timer Resolution Service jeżeli masz zainstalowane sterowniki Microsoft
 
 https://bit.ly/OplineDL
 
-Or Command Powershell / CMD (Run As Administrator)
+Or Command Powershell / CMD (Run As Administrator) | Lub Komenda Powershell / CMD (Uruchom Jako Administrator)
 ```
 cd Desktop
 powershell -command "& { iwr https://bit.ly/OplineDL -OutFile OplineSoftware-X.zip }"
