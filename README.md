@@ -58,12 +58,12 @@ Z opcji Timer Resolution Service jeżeli masz zainstalowane sterowniki Microsoft
 
 ## Fast Installation | Szybka Instalacja
 ```
-https://bit.ly/OplineDL
+https://bit.ly/oplinedl
 ```
 Or Command Powershell / CMD (Run As Administrator) | Lub Komenda Powershell / CMD (Uruchom Jako Administrator)
 ```
 cd Desktop
-powershell -command "& { iwr https://bit.ly/OplineDL -OutFile OplineSoftware-X.zip }"
+powershell -command "& { iwr https://bit.ly/oplinedl -OutFile OplineSoftware-X.zip }"
 ```
 
 ## Contact and Help | Kontakt i Pomoc
