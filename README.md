@@ -56,6 +56,12 @@ From the Timer Resolution Service option, if you have Microsoft C++ Redistributa
 
 Z opcji Timer Resolution Service jeżeli masz zainstalowane sterowniki Microsoft C++ Redistributable to wystarczy że zamykasz okienko instalatora i wtedy program przechodzi dalej, tak jak w przypadku opcji instalowania MSI Afterburner.
 
+### 7
+
+The second option to restore the default powercfg settings is to restore the default power plans and delete our current power plan and reinstall our power plan and then you should have a problem.
+
+Drugą opcją na przywrócenie domyślnych ustawień powercfg to przywrócenie domyślnych planów zasilania i usunąć nasz aktualny plan zasilania oraz zainstalować ponownie nasz plan zasilania i wtedy powinno być po problemie.
+
 ## Fast Installation | Szybka Instalacja
 ```
 https://bit.ly/oplinedl
