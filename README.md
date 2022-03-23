@@ -68,7 +68,7 @@ https://bit.ly/oplinedl
 ```
 Or Command Powershell / CMD (Run As Administrator) | Lub Komenda Powershell / CMD (Uruchom Jako Administrator)
 ```
-cd Desktop
+cd C:\Users\%username%\Desktop
 powershell -command "& { iwr https://bit.ly/oplinedl -OutFile OplineSoftware-X.zip }"
 ```
 
