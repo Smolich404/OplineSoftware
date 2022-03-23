@@ -3473,12 +3473,12 @@ echo.
 call :ColorText 1B "###############################################################################################"
 echo.
 echo.
-echo            Enter the address of the folder location where Edge is installed i.e. from
-echo              C:\Program Files (x86)\Microsoft\Edge\Application\91.0.864.41\Installer
+echo           Enter the address of the folder location where Edge is installed i.e. from
+echo            C:\Program Files (x86)\Microsoft\Edge\Application\91.0.864.41\Installer
 echo                               and paste this address 91.0.864.41
 echo.
-echo            Wpisz adres polozenia folderu na ktorym jest zainstalowany Edge czyli z: 
-echo             C:\Program Files (x86)\Microsoft\Edge\Application\91.0.864.41\Installer                   
+echo            Wpisz adres polozenia folderu na ktorym jest zainstalowany Edge czyli z
+echo            C:\Program Files (x86)\Microsoft\Edge\Application\91.0.864.41\Installer
 echo                                i wklejasz ten adres 91.0.864.41
 echo.              
 set /p NAME=
