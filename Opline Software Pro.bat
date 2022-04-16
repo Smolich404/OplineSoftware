@@ -3538,6 +3538,18 @@ if %NAME%== x goto Edge
 cls
 cd C:\Program Files (x86)\Microsoft\Edge\Application\%NAME%\Installer
 setup.exe --uninstall --system-level --verbose-logging --force-uninstall
+cd C:\Users\%username%\Downloads
+mkdir Edge
+cd C:\Users\%username%\Downloads\Edge
+powershell -command "& { iwr https://github.com/Smolich404/UninstallEdge/releases/download/E/install_wim_tweak.exe -OutFile install_wim_tweak.exe }"
+powershell -command "& { iwr https://github.com/Smolich404/UninstallEdge/releases/download/E/Uninstall.Edge.cmd -OutFile Uninstall.Edge.cmd }"
+timeout 2 >nul
+Uninstall.Edge.cmd
+timeout 2 >nul
+del install_wim_tweak.exe
+del Uninstall.Edge.cmd
+cd C:\Users\%username%\Downloads
+rmdir Edge
 goto end3
 
 :end3
