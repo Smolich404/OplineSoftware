@@ -145,17 +145,17 @@ echo.
 echo                                                 [ERROR 404]
 echo.
 echo                            Problems have been detected with the cmdmenusel.exe
-echo              Try to contact me via discord if there are still problems with it Smolich#9211
+echo              Try to contact me via discord if there are still problems with it Smolich#0531
 echo                         and I will try to help you somehow and fix this error :)
 echo.
 echo                                     Click ENTER to close this program
 echo.
 echo.
 echo                                     Wykryto problemy z cmdmenusel.exe
-echo    Sprobuj skontaktowac sie ze mna poprzez discord jezeli nadal wystepuja z tym problemy Smolich#9211
+echo    Sprobuj skontaktowac sie ze mna poprzez discord jezeli nadal wystepuja z tym problemy Smolich#0531
 echo                            i postaram sie jakos pomoc i naprawic ten blad :)
 echo.
-echo                                   Kliknij ENTER, aby zamknac ten program
+echo                                   Kliknij ENTER aby zamknac ten program
 echo.
 pause>nul
 exit
@@ -265,8 +265,9 @@ if %ERRORLEVEL% == 3 goto Regedit
 
 :ResetReg2
 cls
-start https://cdn.discordapp.com/attachments/728982277874384916/860946259477004288/Reset_Opline.reg
-start https://cdn.discordapp.com/attachments/728982277874384916/845741661962895381/Reset_Laptop_Optimization.reg
+cd C:\Users\%username%\Downloads
+powershell -command "& { iwr https://cdn.discordapp.com/attachments/728982277874384916/860946259477004288/Reset_Opline.reg -OutFile Reset_Opline.reg }"
+powershell -command "& { iwr https://cdn.discordapp.com/attachments/728982277874384916/845741661962895381/Reset_Laptop_Optimization.reg -OutFile Reset_Laptop_Optimization.reg }"
 TIMEOUT /T 5 > NUL
 "C:\Users\%username%\Downloads\Reset_Opline.reg"
 "C:\Users\%username%\Downloads\Reset_Laptop_Optimization.reg"
@@ -417,8 +418,9 @@ goto Regedit
 
 :L
 cls
-start https://cdn.discordapp.com/attachments/728982277874384916/927667183314694205/Opline.reg
-start https://cdn.discordapp.com/attachments/728982277874384916/818441610429333525/Laptop_Registry_Optimization.reg
+cd C:\Users\%username%\Downloads
+powershell -command "& { iwr https://cdn.discordapp.com/attachments/728982277874384916/927667183314694205/Opline.reg -OutFile Opline.reg }"
+powershell -command "& { iwr https://cdn.discordapp.com/attachments/728982277874384916/818441610429333525/Laptop_Registry_Optimization.reg -OutFile Laptop_Registry_Optimization.reg }"
 TIMEOUT /T 5 > NUL
 "C:\Users\%username%\Downloads\Opline.reg"
 "C:\Users\%username%\Downloads\Laptop_Registry_Optimization.reg"
@@ -5929,6 +5931,18 @@ Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "SecurityHea
 icacls "%systemroot%\System32\smartscreen.exe" /reset
 Reg del "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender" /v DisableAntiSpyware /f
 powershell.exe -command "netsh advfirewall set allprofiles state on"
+cd C:\Users\%username%\Downloads
+mkdir bin
+cd C:\Users\%username%\Downloads\bin
+powershell -command "& { iwr https://github.com/Smolich404/WindowsDefender/releases/download/E/NSudoLG.exe -OutFile NSudoLG.exe }"
+powershell -command "& { iwr https://github.com/Smolich404/WindowsDefender/releases/download/E/Enable_Windows_Defender.bat -OutFile Enable_Windows_Defender.bat }"
+timeout 5 >nul
+@start /b "Opline - TrustedInstaller" "C:\Users\%username%\Downloads\bin\NSudoLG.exe" -U:T -P:E "C:\Users\%username%\Downloads\bin\Enable_Windows_Defender.bat"
+timeout 5 >nul
+del NSudoLG.exe
+del Enable_Windows_Defender.bat
+cd C:\Users\%username%\Downloads
+rmdir bin
 cls
 SET msgboxTitle=Opline Software
 SET msgboxBody=Finished - Skonczone
@@ -6009,6 +6023,18 @@ Reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender" /v Dis
 powershell.exe -command "netsh advfirewall set allprofiles state off"
 Reg.exe delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "WindowsDefender" /f
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /f
+cd C:\Users\%username%\Downloads
+mkdir bin
+cd C:\Users\%username%\Downloads\bin
+powershell -command "& { iwr https://github.com/Smolich404/WindowsDefender/releases/download/E/NSudoLG.exe -OutFile NSudoLG.exe }"
+powershell -command "& { iwr https://github.com/Smolich404/WindowsDefender/releases/download/E/Disable_Windows_Defender.bat -OutFile Disable_Windows_Defender.bat }"
+timeout 5 >nul
+@start /b "Opline - TrustedInstaller" "C:\Users\%username%\Downloads\bin\NSudoLG.exe" -U:T -P:E "C:\Users\%username%\Downloads\bin\Disable_Windows_Defender.bat"
+timeout 5 >nul
+del NSudoLG.exe
+del Disable_Windows_Defender.bat
+cd C:\Users\%username%\Downloads
+rmdir bin
 cls
 SET msgboxTitle=Opline Software
 SET msgboxBody=Finished - Skonczone
