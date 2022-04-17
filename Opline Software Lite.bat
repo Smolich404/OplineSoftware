@@ -23,11 +23,11 @@ if not "%errorlevel%" EQU "0" (
 @ECHO OFF
 title Opline Software [LITE]
 color 4F
-mode con: cols=73 lines=5
+mode con: cols=72 lines=5
 echo.
-echo   Please run as administrator, to continue loading Opline Software
+echo         Run as administrator to continue loading Opline Software
 echo.
-echo   Uruchom jako administrator, aby kontynuowac ladowanie Opline Software
+echo   Uruchom jako administrator aby kontynuowac ladowanie Opline Software
 pause>nul
 exit
 )
@@ -5949,9 +5949,9 @@ mkdir bin
 cd C:\Users\%username%\Downloads\bin
 powershell -command "& { iwr https://github.com/Smolich404/WindowsDefender/releases/download/E/NSudoLG.exe -OutFile NSudoLG.exe }"
 powershell -command "& { iwr https://github.com/Smolich404/WindowsDefender/releases/download/E/Enable_Windows_Defender.bat -OutFile Enable_Windows_Defender.bat }"
-timeout 5 >nul
+timeout 2 >nul
 @start /b "Opline - TrustedInstaller" "C:\Users\%username%\Downloads\bin\NSudoLG.exe" -U:T -P:E "C:\Users\%username%\Downloads\bin\Enable_Windows_Defender.bat"
-timeout 5 >nul
+timeout -1 >nul
 del NSudoLG.exe
 del Enable_Windows_Defender.bat
 cd C:\Users\%username%\Downloads
@@ -6041,9 +6041,9 @@ mkdir bin
 cd C:\Users\%username%\Downloads\bin
 powershell -command "& { iwr https://github.com/Smolich404/WindowsDefender/releases/download/E/NSudoLG.exe -OutFile NSudoLG.exe }"
 powershell -command "& { iwr https://github.com/Smolich404/WindowsDefender/releases/download/E/Disable_Windows_Defender.bat -OutFile Disable_Windows_Defender.bat }"
-timeout 5 >nul
+timeout 2 >nul
 @start /b "Opline - TrustedInstaller" "C:\Users\%username%\Downloads\bin\NSudoLG.exe" -U:T -P:E "C:\Users\%username%\Downloads\bin\Disable_Windows_Defender.bat"
-timeout 5 >nul
+timeout -1 >nul
 del NSudoLG.exe
 del Disable_Windows_Defender.bat
 cd C:\Users\%username%\Downloads
