@@ -2279,10 +2279,11 @@ cd C:\Users\%username%\Downloads\Edge
 powershell -command "& { iwr https://github.com/Smolich404/UninstallEdge/releases/download/E/install_wim_tweak.exe -OutFile install_wim_tweak.exe }"
 powershell -command "& { iwr https://github.com/Smolich404/UninstallEdge/releases/download/E/Uninstall.Edge.cmd -OutFile Uninstall.Edge.cmd }"
 timeout 2 >nul
-Uninstall.Edge.cmd
-timeout 2 >nul
+start Uninstall.Edge.cmd
+timeout -1 >nul
 del install_wim_tweak.exe
 del Uninstall.Edge.cmd
+del Packages.txt
 cd C:\Users\%username%\Downloads
 rmdir Edge
 goto end3
