@@ -268,7 +268,7 @@ cls
 cd C:\Users\%username%\Downloads
 powershell -command "& { iwr https://cdn.discordapp.com/attachments/728982277874384916/860946259477004288/Reset_Opline.reg -OutFile Reset_Opline.reg }"
 powershell -command "& { iwr https://cdn.discordapp.com/attachments/728982277874384916/845741661962895381/Reset_Laptop_Optimization.reg -OutFile Reset_Laptop_Optimization.reg }"
-TIMEOUT /T 5 > NUL
+timeout /t 2 > NUL
 "C:\Users\%username%\Downloads\Reset_Opline.reg"
 "C:\Users\%username%\Downloads\Reset_Laptop_Optimization.reg"
 del "C:\Users\%username%\Downloads\Reset_Opline.reg"
@@ -421,7 +421,7 @@ cls
 cd C:\Users\%username%\Downloads
 powershell -command "& { iwr https://cdn.discordapp.com/attachments/728982277874384916/927667183314694205/Opline.reg -OutFile Opline.reg }"
 powershell -command "& { iwr https://cdn.discordapp.com/attachments/728982277874384916/818441610429333525/Laptop_Registry_Optimization.reg -OutFile Laptop_Registry_Optimization.reg }"
-TIMEOUT /T 5 > NUL
+timeout /t 2 > NUL
 "C:\Users\%username%\Downloads\Opline.reg"
 "C:\Users\%username%\Downloads\Laptop_Registry_Optimization.reg"
 del "C:\Users\%username%\Downloads\Opline.reg"
@@ -3787,7 +3787,7 @@ echo              Wprowadz sciezke folderu w ktorym jest zainstalowany MSI After
 echo.
 set /p MSI=
 cls
-TIMEOUT /T 5
+timeout /t 2
 cls
 powershell Invoke-WebRequest "https://cdn.discordapp.com/attachments/798652558351794196/798652651906531339/defaultX.uxf" -OutFile "%temp%\defaultX.uxf"
 move "%temp%\defaultX.uxf" "%MSI%\Skins\defaultX.uxf"
