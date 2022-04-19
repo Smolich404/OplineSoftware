@@ -2286,6 +2286,7 @@ del Uninstall.Edge.cmd
 del Packages.txt
 cd C:\Users\%username%\Downloads
 rmdir Edge
+Reg.exe add "HKLM\SOFTWARE\Microsoft\EdgeUpdate" /v "DoNotUpdateToEdgeWithChromium" /t REG_DWORD /d "1" /f
 goto end3
 
 :end3
@@ -2301,6 +2302,7 @@ goto Edge
 :INS
 cls
 start https://www.microsoft.com/en-us/edge
+Reg.exe delete "HKLM\SOFTWARE\Microsoft\EdgeUpdate" /f
 goto Edge
 
 :UAC
