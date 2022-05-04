@@ -1680,6 +1680,14 @@ Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\MapsBroker" /v
 Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\debugregsvc" /v "Start" /t REG_DWORD /d "3" /f  
 Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Ndu" /v "Start" /d "2" /t REG_DWORD /f  
 Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\TimeBrokerSvc" /v "Start" /d "3" /t REG_DWORD /f
+sc config DPS start=auto
+sc config WdiSystemHost start=auto
+sc config WdiServiceHost start=auto
+sc config TrkWks start=demand
+sc start DPS
+sc start WdiSystemHost
+sc start WdiServiceHost
+sc start TrkWks
 cls
 SET msgboxTitle=Opline Software
 SET msgboxBody=Finished - Skonczone
@@ -1938,6 +1946,14 @@ Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Ndu" /v "Start
 Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\TimeBrokerSvc" /v "Start" /d "3" /t REG_DWORD /f 
 Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\VaultSvc" /v "Start" /t REG_DWORD /d "4" /f 
 Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CertPropSvc" /v "Start" /t REG_DWORD /d "4" /f
+sc config DPS start=disabled
+sc config WdiSystemHost start=disabled
+sc config WdiServiceHost start=disabled
+sc config TrkWks start=disabled
+sc stop DPS
+sc stop WdiSystemHost
+sc stop WdiServiceHost
+sc stop TrkWks
 cls
 SET msgboxTitle=Opline Software
 SET msgboxBody=Finished - Skonczone
