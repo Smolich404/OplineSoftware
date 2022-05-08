@@ -1439,7 +1439,7 @@ goto Spooler
 
 :EServices
 cls
-Powershell iex ((New-Object System.Net.WebClient).DownloadString('https://git.io/JcigQ'))
+Powershell iex ((New-Object System.Net.WebClient).DownloadString('https://bit.ly/EServices1'))
 SC CONFIG "TabletInputService" START= AUTO
 NET START "TabletInputService"
 SC CONFIG "dmwappushservice" START= AUTO 
@@ -1603,7 +1603,8 @@ sc start "CertPropSvc"
 sc config "CertPropSvc" start= auto
 sc start "PeerDistSvc"
 sc config "PeerDistSvc" start= auto
-Powershell iex ((New-Object System.Net.WebClient).DownloadString('https://git.io/JSP10'))
+Powershell iex ((New-Object System.Net.WebClient).DownloadString('https://bit.ly/EServices2'))
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CaptureService" /v "Start" /d "3" /t REG_DWORD /f
 Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\AarSvc" /v "Start" /t REG_DWORD /d "2" /f 
 Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WSearch" /v "Start" /t REG_DWORD /d "2" /f 
 Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\tzautoupdate" /v "Start" /t REG_DWORD /d "4" /f 
@@ -1696,7 +1697,7 @@ goto Services
 
 :DServices
 cls
-Powershell iex ((New-Object System.Net.WebClient).DownloadString('https://git.io/JtcFW'))
+Powershell iex ((New-Object System.Net.WebClient).DownloadString('https://bit.ly/DServices1'))
 NET STOP "TabletInputService"
 SC CONFIG "TabletInputService" START= DISABLED
 NET STOP "dmwappushservice"
@@ -1867,7 +1868,8 @@ sc stop "CertPropSvc"
 sc config "CertPropSvc" start= disabled
 sc stop "PeerDistSvc"
 sc config "PeerDistSvc" start= disabled
-Powershell iex ((New-Object System.Net.WebClient).DownloadString('https://git.io/JSPXJ'))
+Powershell iex ((New-Object System.Net.WebClient).DownloadString('https://bit.ly/DServices2'))
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CaptureService" /v "Start" /d "4" /t REG_DWORD /f
 Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\AarSvc" /v "Start" /t REG_DWORD /d "4" /f 
 Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WSearch" /v "Start" /t REG_DWORD /d "4" /f 
 Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\tzautoupdate" /v "Start" /t REG_DWORD /d "4" /f 
@@ -1993,7 +1995,7 @@ if %ERRORLEVEL% == 3 goto OplineMenu
 :ADD
 cls
 powershell Invoke-WebRequest "https://cdn.discordapp.com/attachments/859608373016133643/891646408308977684/appxmanifest.xml" -OutFile "C:\appxmanifest.xml"
-Powershell iex ((New-Object System.Net.WebClient).DownloadString('https://git.io/JcGHI'))
+Powershell iex ((New-Object System.Net.WebClient).DownloadString('https://bit.ly/ReinstallApps'))
 cls
 cd C:\
 del appxmanifest.xml

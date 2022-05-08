@@ -1876,7 +1876,7 @@ goto Spooler
 
 :EServices
 cls
-Powershell iex ((New-Object System.Net.WebClient).DownloadString('https://git.io/JcigQ'))
+Powershell iex ((New-Object System.Net.WebClient).DownloadString('https://bit.ly/EServices1'))
 sc config RemoteRegistry start= disabled
 sc config ALG start= auto
 sc config AppMgmt start= auto
@@ -2448,7 +2448,8 @@ FOR /f %%I IN (' reg query "HKLM\SYSTEM\CurrentControlSet\Services" /k /f "Unist
 FOR /f %%I IN (' reg query "HKLM\SYSTEM\CurrentControlSet\Services" /k /f "UserDataSvc" ^| FIND /i "UserDataSvc"') DO (reg add "%%I" /v "UserServiceFlags" /t REG_DWORD /d 3 /f )
 FOR /f %%I IN (' reg query "HKLM\SYSTEM\CurrentControlSet\Services" /k /f "MessagingService" ^| FIND /i "MessagingService"') DO (reg add "%%I" /v "UserServiceFlags" /t REG_DWORD /d 3 /f )
 FOR /f %%I IN (' reg query "HKLM\SYSTEM\CurrentControlSet\Services" /k /f "WpnUserService" ^| FIND /i "WpnUserService"') DO (reg add "%%I" /v "UserServiceFlags" /t REG_DWORD /d 3 /f )
-Powershell iex ((New-Object System.Net.WebClient).DownloadString('https://git.io/JSP10'))
+Powershell iex ((New-Object System.Net.WebClient).DownloadString('https://bit.ly/EServices2'))
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CaptureService" /v "Start" /d "3" /t REG_DWORD /f
 Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\AarSvc" /v "Start" /t REG_DWORD /d "2" /f 
 Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WSearch" /v "Start" /t REG_DWORD /d "2" /f 
 Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\tzautoupdate" /v "Start" /t REG_DWORD /d "4" /f 
@@ -2541,7 +2542,7 @@ goto Services
 
 :DServices
 cls
-Powershell iex ((New-Object System.Net.WebClient).DownloadString('https://git.io/JtcFW'))
+Powershell iex ((New-Object System.Net.WebClient).DownloadString('https://bit.ly/DServices1'))
 sc config RemoteRegistry start= disabled
 sc config ALG start= disabled
 sc config AppMgmt start= disabled
@@ -3124,7 +3125,8 @@ FOR /f %%I IN (' reg query "HKLM\SYSTEM\CurrentControlSet\Services" /k /f "Unist
 FOR /f %%I IN (' reg query "HKLM\SYSTEM\CurrentControlSet\Services" /k /f "UserDataSvc" ^| FIND /i "UserDataSvc"') DO (reg add "%%I" /v "UserServiceFlags" /t REG_DWORD /d 0 /f )
 FOR /f %%I IN (' reg query "HKLM\SYSTEM\CurrentControlSet\Services" /k /f "MessagingService" ^| FIND /i "MessagingService"') DO (reg add "%%I" /v "UserServiceFlags" /t REG_DWORD /d 0 /f )
 FOR /f %%I IN (' reg query "HKLM\SYSTEM\CurrentControlSet\Services" /k /f "WpnUserService" ^| FIND /i "WpnUserService"') DO (reg add "%%I" /v "UserServiceFlags" /t REG_DWORD /d 0 /f )
-Powershell iex ((New-Object System.Net.WebClient).DownloadString('https://git.io/JSPXJ'))
+Powershell iex ((New-Object System.Net.WebClient).DownloadString('https://bit.ly/DServices2'))
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CaptureService" /v "Start" /d "4" /t REG_DWORD /f
 Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\AarSvc" /v "Start" /t REG_DWORD /d "4" /f 
 Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WSearch" /v "Start" /t REG_DWORD /d "4" /f 
 Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\tzautoupdate" /v "Start" /t REG_DWORD /d "4" /f 
@@ -3250,7 +3252,7 @@ if %ERRORLEVEL% == 3 goto OplineMenu
 :ADD
 cls
 powershell Invoke-WebRequest "https://cdn.discordapp.com/attachments/859608373016133643/891646408308977684/appxmanifest.xml" -OutFile "C:\appxmanifest.xml"
-Powershell iex ((New-Object System.Net.WebClient).DownloadString('https://git.io/JcGHI'))
+Powershell iex ((New-Object System.Net.WebClient).DownloadString('https://bit.ly/ReinstallApps'))
 cls
 cd C:\
 del appxmanifest.xml
