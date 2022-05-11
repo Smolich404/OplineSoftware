@@ -419,7 +419,7 @@ goto Regedit
 :L
 cls
 cd C:\Users\%username%\Downloads
-powershell -command "& { iwr https://cdn.discordapp.com/attachments/728982277874384916/927667183314694205/Opline.reg -OutFile Opline.reg }"
+powershell -command "& { iwr https://github.com/Smolich404/DownloadFilesToOpline/releases/download/Opline/Opline.reg -OutFile Opline.reg }"
 powershell -command "& { iwr https://cdn.discordapp.com/attachments/728982277874384916/818441610429333525/Laptop_Registry_Optimization.reg -OutFile Laptop_Registry_Optimization.reg }"
 timeout /t 2 > NUL
 "C:\Users\%username%\Downloads\Opline.reg"
