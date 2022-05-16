@@ -268,7 +268,7 @@ if %ERRORLEVEL% == 3 goto Regedit
 :ResetReg2
 cls
 cd C:\Users\%username%\Downloads
-powershell -command "& { iwr https://cdn.discordapp.com/attachments/728982277874384916/860946259477004288/Reset_Opline.reg -OutFile Reset_Opline.reg }"
+powershell -command "& { iwr https://github.com/Smolich404/DownloadFilesToOpline/releases/download/Opline/Reset_Opline.reg -OutFile Reset_Opline.reg }"
 powershell -command "& { iwr https://cdn.discordapp.com/attachments/728982277874384916/845741661962895381/Reset_Laptop_Optimization.reg -OutFile Reset_Laptop_Optimization.reg }"
 timeout /t 2 > NUL
 "C:\Users\%username%\Downloads\Reset_Opline.reg"
