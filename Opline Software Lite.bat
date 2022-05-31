@@ -2296,7 +2296,7 @@ cls
 cd C:\
 mkdir STR
 cd C:\STR
-curl -o C:\STR\CLOCKRES.exe https://cdn.discordapp.com/attachments/798314687321735199/923239120367673434/CLOCKRES.exe
+curl -o C:\STR\CLOCKRES.exe https://github.com/Smolich404/DownloadFilesToOpline/releases/download/Opline/CLOCKRES.exe
 timeout 1 >nul 2>&1
 FOR /F "tokens=*" %%g IN ('CLOCKRES.exe ^| find "Current"') do set "currenttimer=%%g"
 curl -o C:\STR\SetTimerResolutionService.exe https://github.com/Smolich404/DownloadFilesToOpline/releases/download/Opline/SetTimerResolutionService.exe
@@ -2338,12 +2338,13 @@ cls
 cd c:\STR
 if exist C:\STR\CLOCKRES.exe (goto alrinst3) else (goto installclockres)
 :installclockres
-curl -o C:\STR\CLOCKRES.exe https://cdn.discordapp.com/attachments/798314687321735199/923239120367673434/CLOCKRES.exe
+curl -o C:\STR\CLOCKRES.exe https://github.com/Smolich404/DownloadFilesToOpline/releases/download/Opline/CLOCKRES.exe
 timeout 1 >nul 2>&1
 :alrinst3
 FOR /F "tokens=*" %%g IN ('CLOCKRES.exe ^| find "Current"') do set "currenttimer1=%%g"
 SC DELETE STR >nul 2>&1
 cd c:\STR
+del CLOCKRES.exe
 %windir%\Microsoft.NET\Framework\v4.0.30319\InstallUtil.exe /u SetTimerResolutionService.exe  >nul 2>&1
 del /Q SetTimerResolutionService.exe >nul 2>&1
 del /Q InstallUtil.InstallLog >nul 2>&1
@@ -2351,6 +2352,7 @@ del /Q SetTimerResolutionService.InstallLog >nul 2>&1
 bcdedit /deletevalue useplatformclock   >nul 2>&1
 bcdedit /deletevalue useplatformtick  >nul 2>&1
 bcdedit /deletevalue disabledynamictick  >nul 2>&1
+rmdir STR
 cls
 SET msgboxTitle=Opline Software
 SET msgboxBody=The Service Has Been Uninstalled! - Usluga Zostala Pomyslnie Odinstalowana!
