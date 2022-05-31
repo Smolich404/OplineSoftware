@@ -3558,29 +3558,16 @@ if %ERRORLEVEL% == 4 goto Others
 
 :IESTR
 cls
-"C:\SetTimerResolutionService.exe" -install >nul 2>&1
+curl -o C:\SetTimerResolutionService.exe https://github.com/Smolich404/DownloadFilesToOpline/releases/download/Opline/SetTimerResolutionService.exe
+timeout 2 >nul 2>&1
 sc config "STR" start= auto >nul 2>&1
-sc start "STR" >nul 2>&1
-bcdedit /set useplatformtick yes >nul 2>&1
+NET START STR >nul 2>&1
+bcdedit /set useplatformtick yes  
 bcdedit /set disabledynamictick yes >nul 2>&1
-goto redists
-
-:redists
-if exist "C:\SetTimerResolutionService.exe" goto:alrinstalled
-powershell Invoke-WebRequest "https://cdn.discordapp.com/attachments/798652558351794196/820603647082889226/VisualCppRedist_AIO_x86_x64.exe" -OutFile "%temp%\VisualCppRedist_AIO_x86_x64.exe" >nul 2>&1
-%temp%\VisualCppRedist_AIO_x86_x64.exe >nul 2>&1
-del %temp%\VisualCppRedist_AIO_x86_x64.exe
-goto sinstall
-
-:sinstall
-powershell Invoke-WebRequest "https://cdn.discordapp.com/attachments/798652558351794196/798668491921162271/SetTimerResolutionService.exe" -OutFile "%temp%\SetTimerResolutionService.exe" >nul 2>&1
-move "%temp%\SetTimerResolutionService.exe" "C:\" >nul 2>&1
-"C:\SetTimerResolutionService.exe" -install >nul 2>&1
+cd c:\>nul 2>&1
+%windir%\Microsoft.NET\Framework\v4.0.30319\InstallUtil.exe /i SetTimerResolutionService.exe >nul 2>&1
 sc config "STR" start= auto >nul 2>&1
-sc start STR >nul 2>&1
-goto success1
-
-:success1
+NET START STR >nul 2>&1
 cls
 SET msgboxTitle=Opline Software
 SET msgboxBody=The Service Has Been Installed And Activated Successfully! - Usluga Zostala Pomyslnie Zainstalowana i Aktywowana!
@@ -3590,26 +3577,12 @@ ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
 WSCRIPT "%tmpmsgbox%"
 goto STR
 
-:alrinstalled
-cls
-SET msgboxTitle=Opline Software
-SET msgboxBody=The Service Was Enabled Successfully! - Usluga Zostala Pomyslnie Wlaczona!
-SET tmpmsgbox=%temp%~tmpmsgbox.vbs
-IF EXIST "%tmpmsgbox%" DEL /F /Q "%tmpmsgbox%"
-ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
-WSCRIPT "%tmpmsgbox%"
-goto STR
-
 :DSTR
 cls
-bcdeedit /deletevalue useplatformclock >nul 2>&1
-bcdeedit /deletevalue useplatformtick >nul 2>&1
-bcdeedit /deletevalue disabledynamictick >nul 2>&1
 sc config "STR" start= disabled >nul 2>&1
-sc stop STR
-goto success2
-
-:success2
+NET STOP STR >nul 2>&1
+bcdedit /deletevalue useplatformtick  
+bcdedit /deletevalue disabledynamictick >nul 2>&1
 cls
 SET msgboxTitle=Opline Software
 SET msgboxBody=Timer Resolution Has Been Successfully Disabled! - Timer Resolution Zostal Pomyslnie Wylaczony!
@@ -3621,14 +3594,15 @@ goto STR
 
 :USTR
 cls
-sc delete "STR"
-bcdeedit /deletevalue useplatformclock >nul 2>&1
-bcdeedit /deletevalue useplatformtick >nul 2>&1
-bcdeedit /deletevalue disabledynamictick >nul 2>&1
-del C:\SetTimerResolutionService.exe
-goto success3
-
-:success3
+SC DELETE STR >nul 2>&1
+cd c:\
+%windir%\Microsoft.NET\Framework\v4.0.30319\InstallUtil.exe /u SetTimerResolutionService.exe  >nul 2>&1
+del /Q SetTimerResolutionService.exe >nul 2>&1
+del /Q InstallUtil.InstallLog >nul 2>&1
+del /Q SetTimerResolutionService.InstallLog >nul 2>&1
+bcdedit /deletevalue useplatformclock   >nul 2>&1
+bcdedit /deletevalue useplatformtick  >nul 2>&1
+bcdedit /deletevalue disabledynamictick  >nul 2>&1
 cls
 SET msgboxTitle=Opline Software
 SET msgboxBody=The Service Has Been Uninstalled! - Usluga Zostala Pomyslnie Odinstalowana!
@@ -4314,8 +4288,8 @@ Goto RBoostOS
 
 :RSSDT
 cls
-fsutil behavior set DisableLastAccess 0
-fsutil behavior set EncryptPagingFile 1
+fsutil behavior set DisableLastAccess 2
+fsutil behavior set EncryptPagingFile 0
 cls
 SET msgboxTitle=Opline Software
 SET msgboxBody=Finished - Skonczone
