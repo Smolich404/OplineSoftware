@@ -2352,6 +2352,7 @@ del /Q SetTimerResolutionService.InstallLog >nul 2>&1
 bcdedit /deletevalue useplatformclock   >nul 2>&1
 bcdedit /deletevalue useplatformtick  >nul 2>&1
 bcdedit /deletevalue disabledynamictick  >nul 2>&1
+cd c:\
 rmdir STR
 cls
 SET msgboxTitle=Opline Software
