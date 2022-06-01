@@ -2296,10 +2296,10 @@ cls
 cd C:\
 mkdir STR
 cd C:\STR
-curl -o C:\STR\CLOCKRES.exe https://github.com/Smolich404/DownloadFilesToOpline/releases/download/Opline/CLOCKRES.exe
+curl -o C:\STR\CLOCKRES.exe https://cdn.discordapp.com/attachments/798314687321735199/923239120367673434/CLOCKRES.exe
 timeout 1 >nul 2>&1
 FOR /F "tokens=*" %%g IN ('CLOCKRES.exe ^| find "Current"') do set "currenttimer=%%g"
-curl -o C:\STR\SetTimerResolutionService.exe https://github.com/Smolich404/DownloadFilesToOpline/releases/download/Opline/SetTimerResolutionService.exe
+curl -o C:\STR\SetTimerResolutionService.exe https://cdn.discordapp.com/attachments/798314687321735199/923239064738627594/SetTimerResolutionService.exe
 timeout 2 >nul 2>&1
 sc config "STR" start= auto >nul 2>&1
 NET START STR >nul 2>&1
@@ -2338,7 +2338,7 @@ cls
 cd c:\STR
 if exist C:\STR\CLOCKRES.exe (goto alrinst3) else (goto installclockres)
 :installclockres
-curl -o C:\STR\CLOCKRES.exe https://github.com/Smolich404/DownloadFilesToOpline/releases/download/Opline/CLOCKRES.exe
+curl -o C:\STR\CLOCKRES.exe https://cdn.discordapp.com/attachments/798314687321735199/923239120367673434/CLOCKRES.exe
 timeout 1 >nul 2>&1
 :alrinst3
 FOR /F "tokens=*" %%g IN ('CLOCKRES.exe ^| find "Current"') do set "currenttimer1=%%g"
