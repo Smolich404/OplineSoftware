@@ -2311,7 +2311,7 @@ sc config "STR" start= auto >nul 2>&1
 NET START STR >nul 2>&1
 cls
 SET msgboxTitle=Opline Software
-SET msgboxBody=The Service Has Been Installed And Activated Successfully! - Usluga Zostala Pomyslnie Zainstalowana i Aktywowana!
+SET msgboxBody=The Service Has Been Installed And Activated Successfully - Usluga Zostala Pomyslnie Zainstalowana i Aktywowana
 SET tmpmsgbox=%temp%~tmpmsgbox.vbs
 IF EXIST "%tmpmsgbox%" DEL /F /Q "%tmpmsgbox%"
 ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
@@ -2326,7 +2326,7 @@ bcdedit /deletevalue useplatformtick
 bcdedit /deletevalue disabledynamictick >nul 2>&1
 cls
 SET msgboxTitle=Opline Software
-SET msgboxBody=Timer Resolution Has Been Successfully Disabled! - Timer Resolution Zostal Pomyslnie Wylaczony!
+SET msgboxBody=Timer Resolution Has Been Successfully Disabled - Timer Resolution Zostal Pomyslnie Wylaczony
 SET tmpmsgbox=%temp%~tmpmsgbox.vbs
 IF EXIST "%tmpmsgbox%" DEL /F /Q "%tmpmsgbox%"
 ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
@@ -2355,7 +2355,7 @@ bcdedit /deletevalue disabledynamictick  >nul 2>&1
 rmdir STR
 cls
 SET msgboxTitle=Opline Software
-SET msgboxBody=The Service Has Been Uninstalled! - Usluga Zostala Pomyslnie Odinstalowana!
+SET msgboxBody=The Service Has Been Uninstalled - Usluga Zostala Pomyslnie Odinstalowana
 SET tmpmsgbox=%temp%~tmpmsgbox.vbs
 IF EXIST "%tmpmsgbox%" DEL /F /Q "%tmpmsgbox%"
 ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
