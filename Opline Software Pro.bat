@@ -5173,8 +5173,8 @@ goto install
 
 :install
 TITLE Downloading the installer for MSI Afterburner... - Pobieranie instalatora dla MSI Afterburner...
-powershell Invoke-WebRequest "https://cdn.discordapp.com/attachments/798652558351794196/820583811737714688/MSIAfterburnerSetup463.exe" -OutFile "%temp%\MSIAfterburnerSetup463.exe"
-%temp%\MSIAfterburnerSetup463.exe
+powershell Invoke-WebRequest "https://files03.tchspt.com/temp/MSIAfterburnerSetup464.exe" -OutFile "%temp%\MSIAfterburnerSetup464.exe"
+%temp%\MSIAfterburnerSetup464.exe
 goto skin
 
 :skin
@@ -5217,7 +5217,7 @@ cls
 powershell Invoke-WebRequest "https://github.com/Smolich404/DownloadFilesToOpline/releases/download/KBoost/defaultX.uxf" -OutFile "%temp%\defaultX.uxf"
 move "%temp%\defaultX.uxf" "%MSI%\Skins\defaultX.uxf"
 cd %temp%
-del MSIAfterburnerSetup463.exe
+del MSIAfterburnerSetup464.exe
 title Opline Software [PRO]
 goto ENDGPU
 
