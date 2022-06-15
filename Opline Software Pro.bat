@@ -269,7 +269,7 @@ if %ERRORLEVEL% == 3 goto Regedit
 cls
 cd C:\Users\%username%\Downloads
 powershell -command "& { iwr https://github.com/Smolich404/DownloadFilesToOpline/releases/download/Opline/Reset_Opline.reg -OutFile Reset_Opline.reg }"
-powershell -command "& { iwr https://cdn.discordapp.com/attachments/728982277874384916/845741661962895381/Reset_Laptop_Optimization.reg -OutFile Reset_Laptop_Optimization.reg }"
+powershell -command "& { iwr https://github.com/Smolich404/DownloadFilesToOpline/releases/download/Opline/Reset_Laptop_Optimization.reg -OutFile Reset_Laptop_Optimization.reg }"
 timeout /t 2 > NUL
 "C:\Users\%username%\Downloads\Reset_Opline.reg"
 "C:\Users\%username%\Downloads\Reset_Laptop_Optimization.reg"
@@ -422,7 +422,7 @@ goto Regedit
 cls
 cd C:\Users\%username%\Downloads
 powershell -command "& { iwr https://github.com/Smolich404/DownloadFilesToOpline/releases/download/Opline/Opline.reg -OutFile Opline.reg }"
-powershell -command "& { iwr https://cdn.discordapp.com/attachments/728982277874384916/818441610429333525/Laptop_Registry_Optimization.reg -OutFile Laptop_Registry_Optimization.reg }"
+powershell -command "& { iwr https://github.com/Smolich404/DownloadFilesToOpline/releases/download/Opline/Laptop_Registry_Optimization.reg -OutFile Laptop_Registry_Optimization.reg }"
 timeout /t 2 > NUL
 "C:\Users\%username%\Downloads\Opline.reg"
 "C:\Users\%username%\Downloads\Laptop_Registry_Optimization.reg"
