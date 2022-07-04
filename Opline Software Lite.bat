@@ -3109,8 +3109,7 @@ if %ERRORLEVEL% == 9 goto BoostOS
 
 :RRAMR
 cls
-Fsutil behavior query memoryusage
-Fsutil behavior set memoryusage 1
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\FileSystem" /v "NtfsMemoryUsage" /t REG_DWORD /d "0" /f
 cls
 SET msgboxTitle=Opline Software
 SET msgboxBody=Finished - Skonczone
@@ -3477,8 +3476,7 @@ Goto BoostOS
 
 :RAMR
 cls
-Fsutil behavior query memoryusage
-Fsutil behavior set memoryusage 2
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\FileSystem" /v "NtfsMemoryUsage" /t REG_DWORD /d "2" /f
 cls
 SET msgboxTitle=Opline Software
 SET msgboxBody=Finished - Skonczone
