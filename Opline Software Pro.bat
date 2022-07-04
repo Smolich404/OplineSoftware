@@ -6827,6 +6827,7 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\ServiceProvider" /v "L
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\ServiceProvider" /v "HostsPriority" /t REG_DWORD /d "500" /f
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\ServiceProvider" /v "DnsPriority" /t REG_DWORD /d "2000" /f
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\ServiceProvider" /v "NetbtPriority" /t REG_DWORD /d "2001" /f
+Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters" /v "EnableICMPRedirect" /f
 Reg.exe delete "HKLM\SOFTWARE\Policies\Microsoft\Windows\Psched" /f
 Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Services\Psched" /v "NonBestEffortLimit" /f
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\Psched" /f
@@ -7002,7 +7003,6 @@ netsh int tcp set global rsc=enabled
 netsh int tcp set global nonsackrttresiliency=disabled
 netsh int tcp set security mpp=default
 netsh int tcp set security profiles=default
-netsh int ip set global icmpredirects=enabled
 netsh int tcp set security mpp=default profiles=default
 netsh int ip set global multicastforwarding=enabled
 netsh int tcp set supplemental internet congestionprovider=default
@@ -7128,6 +7128,7 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\Psched" /v "NonBestEffortLim
 Reg.exe add "HKLM\Software\Policies\Microsoft\Windows\Psched" /v "NonBestEffortLimit" /t REG_DWORD /d "0" /f
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\Psched" /v "NonBestEffortLimit" /t REG_DWORD /d "0" /f
 Reg.exe add "HKLM\SOFTWARE\Microsoft\MSMQ\Parameters\Security" /v "SecureDSCommunication" /t REG_DWORD /d "0" /f
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters" /v "EnableICMPRedirect" /t REG_DWORD /d "1" /f
 goto endinternet
 
 :Ping
@@ -7312,7 +7313,6 @@ netsh int tcp set global rsc=disabled
 netsh int tcp set global nonsackrttresiliency=disabled
 netsh int tcp set security mpp=disabled
 netsh int tcp set security profiles=disabled
-netsh int ip set global icmpredirects=disabled
 netsh int tcp set security mpp=disabled profiles=disabled
 netsh int ip set global multicastforwarding=disabled
 netsh int tcp set supplemental internet congestionprovider=ctcp
