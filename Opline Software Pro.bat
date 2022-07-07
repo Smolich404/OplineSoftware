@@ -116,7 +116,7 @@ echo.
 call :ColorText 1B "###############################################################################################"
 echo.
 echo.
-cmdMenuSel f3B0 "   [+]  Debloater" "   [+]  Regedit"  "   [+]  Cleaner" "   [+]  Booster | Optimization" "   [+]  Services" "   [+]  OneDrive" "   [+]  Other Windows Add-ons" "   [+]  Game Settings" "   [+]  GPU Tweaks" "   [+]  CPU Tweaks" "   [+]  RAM Tweaks" "   [+]  Internet Tweaks" "   [+]  Mouse and Keyboard Fix" "   [+]  Windows Apps" "   [+]  Windows Defender" "   [+]  Windows Update" "   [+]  System Restore Properties" "   [+]  Contact | Help" "   [+]  Exit"
+cmdMenuSel f3B0 "   [+]  Debloater" "   [+]  Regedit"  "   [+]  Cleaner" "   [+]  Booster | Optimization" "   [+]  Services" "   [+]  OneDrive" "   [+]  Other Windows Add-ons" "   [+]  Game Settings" "   [+]  GPU Tweaks" "   [+]  CPU Tweak" "   [+]  RAM Tweak" "   [+]  Internet Tweaks" "   [+]  Mouse and Keyboard Fix" "   [+]  Windows Apps" "   [+]  Windows Defender" "   [+]  Windows Update" "   [+]  System Restore Properties" "   [+]  Contact | Help" "   [+]  Exit"
 if %ERRORLEVEL% == 1 goto Debloater
 if %ERRORLEVEL% == 2 goto Regedit
 if %ERRORLEVEL% == 3 goto Cleaner
@@ -4640,108 +4640,17 @@ echo.
 call :ColorText 1B "###############################################################################################"
 echo.
 echo.
-echo                                 How many RAM (in GB) do you have?
-echo.
-echo                                    Ile masz pamieci RAM (w GB)?
-echo.
-set /p RAM=
-if %RAM%== 2 goto 2ram
-if %RAM%== 4 goto 4ram
-if %RAM%== 6 goto 6ram
-if %RAM%== 8 goto 8ram
-if %RAM%== 12 goto 12ram
-if %RAM%== 16 goto 16ram
-if %RAM%== 24 goto 24ram
-if %RAM%== 32 goto 32ram
-if %RAM%== 64 goto 64ram
-if %RAM%== 96 goto 96ram
-if %RAM%== 128 goto 128ram
-if %RAM%== 192 goto 192ram
-if %RAM%== 256 goto 256ram
-if %RAM%== Reset goto Reset
-if %RAM%== reset goto Reset
-if %RAM%== RESET goto Reset
-if %RAM%== X goto OplineMenu
-if %RAM%== x goto OplineMenu
-cls
-goto RAM
+cmdMenuSel f3B0 "   [+]  Tweak" "   [+]  Reset Tweak" "   [+]  Exit" 
+if %ERRORLEVEL% == 1 goto RAMT
+if %ERRORLEVEL% == 2 goto Reset
+if %ERRORLEVEL% == 3 goto OplineMenu
 
-:2ram
+:RAMT
 cls
-Reg.exe add "HKLM\SYSTEM\ControlSet001\Control" /v "SvcHostSplitThresholdInKB" /t REG_DWORD /d "34173266" /f
-Reg.exe add "HKLM\SYSTEM\ControlSet001\Control" /v "IoPageLockLimit" /t REG_DWORD /d "524288" /f
-goto ENDRAM
-
-:4ram
-cls
-Reg.exe add "HKLM\SYSTEM\ControlSet001\Control" /v "SvcHostSplitThresholdInKB" /t REG_DWORD /d "68764420" /f
-Reg.exe add "HKLM\SYSTEM\ControlSet001\Control" /v "IoPageLockLimit" /t REG_DWORD /d "1048576" /f
-goto ENDRAM
-
-:6ram
-cls
-Reg.exe add "HKLM\SYSTEM\ControlSet001\Control" /v "SvcHostSplitThresholdInKB" /t REG_DWORD /d "103355478" /f
-Reg.exe add "HKLM\SYSTEM\ControlSet001\Control" /v "IoPageLockLimit" /t REG_DWORD /d "1572864" /f
-goto ENDRAM
-
-:8ram
-cls
-Reg.exe add "HKLM\SYSTEM\ControlSet001\Control" /v "SvcHostSplitThresholdInKB" /t REG_DWORD /d "137922056" /f
-Reg.exe add "HKLM\SYSTEM\ControlSet001\Control" /v "IoPageLockLimit" /t REG_DWORD /d "2097152" /f
-goto ENDRAM
-
-:12ram
-cls
-Reg.exe add "HKLM\SYSTEM\ControlSet001\Control" /v "SvcHostSplitThresholdInKB" /t REG_DWORD /d "307767570" /f
-Reg.exe add "HKLM\SYSTEM\ControlSet001\Control" /v "IoPageLockLimit" /t REG_DWORD /d "3145728" /f
-goto ENDRAM
-
-:16ram
-cls
-Reg.exe add "HKLM\SYSTEM\ControlSet001\Control" /v "SvcHostSplitThresholdInKB" /t REG_DWORD /d "376926742" /f
-Reg.exe add "HKLM\SYSTEM\ControlSet001\Control" /v "IoPageLockLimit" /t REG_DWORD /d "4194304" /f
-goto ENDRAM
-
-:24ram
-cls
-Reg.exe add "HKLM\SYSTEM\ControlSet001\Control" /v "SvcHostSplitThresholdInKB" /t REG_DWORD /d "622221348" /f
-Reg.exe add "HKLM\SYSTEM\ControlSet001\Control" /v "IoPageLockLimit" /t REG_DWORD /d "6291456" /f
-goto ENDRAM
-
-:32ram
-cls
-Reg.exe add "HKLM\SYSTEM\ControlSet001\Control" /v "SvcHostSplitThresholdInKB" /t REG_DWORD /d "861226034" /f
-Reg.exe add "HKLM\SYSTEM\ControlSet001\Control" /v "IoPageLockLimit" /t REG_DWORD /d "8388608" /f
-goto ENDRAM
-
-:64ram
-cls
-Reg.exe add "HKLM\SYSTEM\ControlSet001\Control" /v "SvcHostSplitThresholdInKB" /t REG_DWORD /d "1729136740" /f
-Reg.exe add "HKLM\SYSTEM\ControlSet001\Control" /v "IoPageLockLimit" /t REG_DWORD /d "16777216" /f
-goto ENDRAM
-
-:96ram
-cls
-Reg.exe add "HKLM\SYSTEM\ControlSet001\Control" /v "SvcHostSplitThresholdInKB" /t REG_DWORD /d "4301664918" /f
-Reg.exe add "HKLM\SYSTEM\ControlSet001\Control" /v "IoPageLockLimit" /t REG_DWORD /d "18874368" /f
-goto ENDRAM
-
-:128ram
-cls
-Reg.exe add "HKLM\SYSTEM\ControlSet001\Control" /v "SvcHostSplitThresholdInKB" /t REG_DWORD /d "5169575720" /f
-Reg.exe add "HKLM\SYSTEM\ControlSet001\Control" /v "IoPageLockLimit" /t REG_DWORD /d "33554432" /f
-goto ENDRAM
-
-:192ram
-cls
-Reg.exe add "HKLM\SYSTEM\ControlSet001\Control" /v "SvcHostSplitThresholdInKB" /t REG_DWORD /d "8610014610" /f
-Reg.exe add "HKLM\SYSTEM\ControlSet001\Control" /v "IoPageLockLimit" /t REG_DWORD /d "50331648" /f
-goto ENDRAM
-
-:256ram
-cls
-Reg.exe add "HKLM\SYSTEM\ControlSet001\Control" /v "SvcHostSplitThresholdInKB" /t REG_DWORD /d "10339177558" /f
-Reg.exe add "HKLM\SYSTEM\ControlSet001\Control" /v "IoPageLockLimit" /t REG_DWORD /d "67108864" /f
+FOR /f "delims=" %%G in ('powershell -command "&{ [math]::Ceiling((get-wmiobject -class Win32_ComputerSystem).TotalPhysicalMemory/1Gb)}"') DO SET TOTALRAM=%%G
+SET /A "REGISTRYTWEAK=TOTALRAM*1024*1024"
+SET /A TWEAKREGISTRY=0x%REGISTRYTWEAK%
+REG ADD "HKLM\SYSTEM\CurrentControlSet\Control" /V "SvcHostSplitThresholdInKB" /T REG_DWORD /D "%TWEAKREGISTRY%" /F >nul 2>&1
 goto ENDRAM
 
 :Reset
@@ -5726,78 +5635,11 @@ echo.
 echo                                    Ile masz rdzeni procesora?
 echo.
 set /p CPU=
-if %CPU%== 1 goto CPUTWEAK
-if %CPU%== 2 goto CPUTWEAK
-if %CPU%== 3 goto CPUTWEAK
-if %CPU%== 4 goto CPUTWEAK
-if %CPU%== 5 goto CPUTWEAK
-if %CPU%== 6 goto CPUTWEAK
-if %CPU%== 7 goto CPUTWEAK
-if %CPU%== 8 goto CPUTWEAK
-if %CPU%== 9 goto CPUTWEAK
-if %CPU%== 10 goto CPUTWEAK
-if %CPU%== 11 goto CPUTWEAK
-if %CPU%== 12 goto CPUTWEAK
-if %CPU%== 13 goto CPUTWEAK
-if %CPU%== 14 goto CPUTWEAK
-if %CPU%== 15 goto CPUTWEAK
-if %CPU%== 16 goto CPUTWEAK
-if %CPU%== 17 goto CPUTWEAK
-if %CPU%== 18 goto CPUTWEAK
-if %CPU%== 19 goto CPUTWEAK
-if %CPU%== 20 goto CPUTWEAK
-if %CPU%== 21 goto CPUTWEAK
-if %CPU%== 22 goto CPUTWEAK
-if %CPU%== 23 goto CPUTWEAK
-if %CPU%== 24 goto CPUTWEAK
-if %CPU%== 25 goto CPUTWEAK
-if %CPU%== 26 goto CPUTWEAK
-if %CPU%== 27 goto CPUTWEAK
-if %CPU%== 28 goto CPUTWEAK
-if %CPU%== 29 goto CPUTWEAK
-if %CPU%== 30 goto CPUTWEAK
-if %CPU%== 31 goto CPUTWEAK
-if %CPU%== 32 goto CPUTWEAK
-if %CPU%== 33 goto CPUTWEAK
-if %CPU%== 34 goto CPUTWEAK
-if %CPU%== 35 goto CPUTWEAK
-if %CPU%== 36 goto CPUTWEAK
-if %CPU%== 37 goto CPUTWEAK
-if %CPU%== 38 goto CPUTWEAK
-if %CPU%== 39 goto CPUTWEAK
-if %CPU%== 41 goto CPUTWEAK
-if %CPU%== 42 goto CPUTWEAK
-if %CPU%== 43 goto CPUTWEAK
-if %CPU%== 44 goto CPUTWEAK
-if %CPU%== 45 goto CPUTWEAK
-if %CPU%== 46 goto CPUTWEAK
-if %CPU%== 47 goto CPUTWEAK
-if %CPU%== 48 goto CPUTWEAK
-if %CPU%== 49 goto CPUTWEAK
-if %CPU%== 50 goto CPUTWEAK
-if %CPU%== 51 goto CPUTWEAK
-if %CPU%== 52 goto CPUTWEAK
-if %CPU%== 53 goto CPUTWEAK
-if %CPU%== 54 goto CPUTWEAK
-if %CPU%== 55 goto CPUTWEAK
-if %CPU%== 56 goto CPUTWEAK
-if %CPU%== 57 goto CPUTWEAK
-if %CPU%== 58 goto CPUTWEAK
-if %CPU%== 59 goto CPUTWEAK
-if %CPU%== 60 goto CPUTWEAK
-if %CPU%== 61 goto CPUTWEAK
-if %CPU%== 62 goto CPUTWEAK
-if %CPU%== 63 goto CPUTWEAK
-if %CPU%== 64 goto CPUTWEAK
 if %CPU%== RESET goto RESETCPU
 if %CPU%== reset goto RESETCPU
 if %CPU%== Reset goto RESETCPU
 if %CPU%== X goto OplineMenu
 if %CPU%== x goto OplineMenu
-cls
-goto CPU
-
-:CPUTWEAK
 cls
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\NDIS\Parameters" /v "RssBaseCpu" /t REG_DWORD /d "%CPU%" /f
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\NDIS\Parameters" /v "MaxNumRssCpus" /t REG_DWORD /d "%CPU%" /f
