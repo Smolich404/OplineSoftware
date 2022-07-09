@@ -40,17 +40,11 @@ Przy innych opcjach, jak CPU Tweaks, jeżeli kliknąłeś przez przypadek, to wy
 
 ### 4
 
-In the case like in the Ram Tweaks option, if you want to enter how much ram you have, you enter any number, i.e. 2, or you want to reset the settings to default, then you enter reset.
-
-W przypadku jak w opcji Ram Tweaks jeżeli chcesz wpisać ile masz ramu to wpisujesz dowolną liczbę czyli 2 lub chcesz zresetować ustawienia na domyślne to wpisujesz reset.
-
-### 5
-
 If you are wondering about the location, such as in the Valorant Settings option, you need to enter the location of the folder where Valorant is installed with graphics settings and you must go to this folder in addition to these strange letters and numbers because, for example, after updating the game or Microsoft Edge, the name changes folder of this version, i.e. before updating - 93.1 after updating 93.2 or 94.1 and then you paste the entire folder location with strange numbers and letters into this program and then the script writes the name of the folder location.
 
 Jeśli się zastanawiasz o co chodzi z lokalizacją jak np w opcji Ustawienia Valoranta to musisz wpisać lokalizację folderu na którym jest zainstalowany Valorant ze ustawieniami grafiki i musisz do tego folderu przejść oprócz tych dziwnych literek i numerków ponieważ np po aktualizacji gry lub Microsoft Edge zmienia sie nazwa folderu tej wersji czyli np przed aktualizacją - 93.1 po aktualizacji 93.2 lub 94.1 i wtedy tą całą lokalizację folderu z dziwnymi numerkami i literami wklejasz do tego programu i wtedy skrypt zapisuje nazwę lokalizacji tego folderu.
 
-### 6
+### 5
 
 The second option to restore the default powercfg settings is to restore the default power plans and delete our current power plan and reinstall our power plan and then you should have a problem.
 
