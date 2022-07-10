@@ -3195,43 +3195,44 @@ Goto RBoostOS
 
 :RBcdedit
 cls
-bcdedit /set useplatformclock no
-bcdedit /set useplatformtick yes
-bcdedit /set disabledynamictick yes
-bcdedit /set tscsyncpolicy default
-bcdedit /set hypervisorlaunchtype auto
-bcdedit /set quietboot no
-bcdedit /set linearaddress57 OptIn
-bcdedit /set increaseuserva 268435328
-bcdedit /set tpmbootentropy default
-bcdedit /set firstmegabytepolicy UseAll
-bcdedit /set avoidlowmemory 0x8000000
-bcdedit /set nolowmem no
-bcdedit /set allowedinmemorysettings 0x15000075
-bcdedit /set isolatedcontext yes
-bcdedit /set vsmlaunchtype Off
-bcdedit /set vm No
-bcdedit /set configaccesspolicy Default
-bcdedit /set MSI Default
-bcdedit /set usephysicaldestination No
-bcdedit /set usefirmwarepcisettings No
-bcdedit /set nx OptIn
-bcdedit /set ems No
-bcdedit /set bootems No
-bcdedit /set integrityservices enable
-bcdedit /set tpmbootentropy Default
-bcdedit /set debug Yes
-bcdedit /set disableelamdrivers Yes
-bcdedit /timeout 180
-bcdedit /set bootux disabled
-bcdedit /set bootmenupolicy standard
-bcdedit /set x2apicpolicy default
-bcdedit /set uselegacyapicmode yes
 bcdedit /deletevalue useplatformclock
 bcdedit /deletevalue useplatformtick
 bcdedit /deletevalue disabledynamictick
-bcdedit /set tscsyncpolicy default
 bcdedit /deletevalue tscsyncpolicy
+bcdedit /deletevalue hypervisorlaunchtype
+bcdedit /deletevalue quietboot
+bcdedit /deletevalue linearaddress57
+bcdedit /deletevalue increaseuserva
+bcdedit /deletevalue tpmbootentropy
+bcdedit /deletevalue firstmegabytepolicy
+bcdedit /deletevalue avoidlowmemory
+bcdedit /deletevalue nolowmem
+bcdedit /set allowedinmemorysettings 0x15000075
+bcdedit /set isolatedcontext yes
+bcdedit /deletevalue vsmlaunchtype
+bcdedit /deletevalue vm
+bcdedit /deletevalue configaccesspolicy
+bcdedit /deletevalue MSI
+bcdedit /deletevalue usephysicaldestination
+bcdedit /deletevalue usefirmwarepcisettings
+bcdedit /set nx OptIn
+bcdedit /deletevalue ems
+bcdedit /deletevalue bootems
+bcdedit /deletevalue integrityservices
+bcdedit /deletevalue tpmbootentropy
+bcdedit /deletevalue debug
+bcdedit /deletevalue disableelamdrivers
+bcdedit /timeout 30
+bcdedit /deletevalue bootux
+bcdedit /set bootmenupolicy standard
+bcdedit /deletevalue x2apicpolicy
+bcdedit /deletevalue uselegacyapicmode
+bcdedit /deletevalue useplatformclock
+bcdedit /deletevalue useplatformtick
+bcdedit /deletevalue disabledynamictick
+bcdedit /deletevalue tscsyncpolicy
+bcdedit /deletevalue tscsyncpolicy
+bcdedit /deletevalue lastknowngood
 cls
 SET msgboxTitle=Opline Software
 SET msgboxBody=Finished - Skonczone
@@ -3441,6 +3442,7 @@ bcdedit /set bootmenupolicy standard
 bcdedit /set nx optout
 bcdedit /set x2apicpolicy disable
 bcdedit /set uselegacyapicmode yes
+bcdedit /set lastknowngood yes
 cls
 SET msgboxTitle=Opline Software
 SET msgboxBody=Finished - Skonczone
