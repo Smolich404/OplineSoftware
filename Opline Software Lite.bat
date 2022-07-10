@@ -1071,6 +1071,9 @@ Reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\InputPersonalization" /v "Restrict
 Reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\InputPersonalization" /v "RestrictImplicitTextCollection" /t REG_DWORD /d "1" /f
 REM ;=== Allow users to enable online speech recognition services - Disabled
 Reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\InputPersonalization" /v "AllowInputPersonalization" /t REG_DWORD /d "0" /f
+wevtutil sl Microsoft-Windows-SleepStudy/Diagnostic /e:false
+wevtutil sl Microsoft-Windows-Kernel-Processor-Power/Diagnostic /e:false
+wevtutil sl Microsoft-Windows-UserModePowerService/Diagnostic /e:false
 cls
 SET msgboxTitle=Opline Software
 SET msgboxBody=Finished - Skonczone
@@ -1358,6 +1361,9 @@ Reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\InputPersonalization" /v "Restrict
 Reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\InputPersonalization" /v "RestrictImplicitTextCollection" /t REG_DWORD /d "0" /f
 REM ;=== Allow users to enable online speech recognition services - Enabled
 Reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\InputPersonalization" /v "AllowInputPersonalization" /t REG_DWORD /d "1" /f
+wevtutil sl Microsoft-Windows-SleepStudy/Diagnostic /e:true
+wevtutil sl Microsoft-Windows-Kernel-Processor-Power/Diagnostic /e:true
+wevtutil sl Microsoft-Windows-UserModePowerService/Diagnostic /e:true
 cls
 SET msgboxTitle=Opline Software
 SET msgboxBody=Finished - Skonczone
