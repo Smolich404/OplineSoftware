@@ -1069,7 +1069,6 @@ REG ADD "HKCR\Wow6432Node\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" /V Syste
 REG ADD "HKCU\SOFTWARE\Microsoft\Input\TIPC" /V Enabled /T REG_DWORD /D 0 /F
 REG ADD "HKLM\SOFTWARE\Microsoft\PolicyManager\current\device\System" /V AllowExperimentation /T REG_DWORD /D 0 /F
 REG ADD "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\ImmersiveShell" /V UseActionCenterExperience /T REG_DWORD /D 0 /F
-REG ADD "HKCU\Software\Policies\Microsoft\Windows\Explorer" /V DisableNotificationCenter /T REG_DWORD /D 1 /F
 REG ADD "HKLM\Software\Policies\Microsoft\Windows NT\CurrentVersion\Software Protection Platform" /V NoGenTicket /T REG_DWORD /D 1 /F
 REG ADD "HKLM\Software\Policies\Microsoft\Windows\CloudContent" /V DisableSoftLanding /T REG_DWORD /D 1 /F
 REG ADD "HKLM\Software\Policies\Microsoft\Windows\CloudContent" /V DisableWindowsSpotlightFeatures /T REG_DWORD /D 1 /F
@@ -1305,8 +1304,6 @@ PowerShell "ForEach($v in (Get-Command -Name \"Set-ProcessMitigation\").Paramete
 Reg.exe add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Notifications\Settings" /v "NOC_GLOBAL_SETTING_ALLOW_TOASTS_ABOVE_LOCK" /t REG_DWORD /d "0" /f
 Reg.exe add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Notifications\Settings" /v "NOC_GLOBAL_SETTING_ALLOW_CRITICAL_TOASTS_ABOVE_LOCK" /t REG_DWORD /d "0" /f
 Reg.exe add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Notifications\Settings" /v "NOC_GLOBAL_SETTING_TOASTS_ENABLED" /t REG_DWORD /d "0" /f
-Reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Explorer" /v "DisableNotificationCenter" /t REG_DWORD /d "1" /f
-Reg.exe add "HKCU\SOFTWARE\Policies\Microsoft\Windows\Explorer" /v "DisableNotificationCenter" /t REG_DWORD /d "1" /f
 Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\PushNotifications" /v "ToastEnabled" /t REG_DWORD /d "0" /f
 Reg.exe add "HKLM\Software\Microsoft\Windows\CurrentVersion\PushNotifications" /v "ToastEnabled" /t REG_DWORD /d "0" /f
 Reg.exe add "HKCU\Software\Policies\Microsoft\Windows\CurrentVersion\PushNotifications" /v "NoToastApplicationNotification" /t REG_DWORD /d "1" /f
@@ -1592,7 +1589,6 @@ REG ADD "HKCR\Wow6432Node\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" /V Syste
 REG DELETE "HKCU\SOFTWARE\Microsoft\Input\TIPC" /V Enabled /F
 REG ADD "HKLM\SOFTWARE\Microsoft\PolicyManager\current\device\System" /V AllowExperimentation /T REG_DWORD /D 1 /F
 REG ADD "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\ImmersiveShell" /V UseActionCenterExperience /T REG_DWORD /D 1 /F
-REG DELETE "HKCU\Software\Policies\Microsoft\Windows\Explorer" /V DisableNotificationCenter /F
 REG DELETE "HKLM\Software\Policies\Microsoft\Windows NT\CurrentVersion" /F
 REG DELETE "HKLM\SOFTWARE\Policies\Microsoft\Windows\Maps" /V AutoDownloadAndUpdateMapData /F
 REG DELETE "HKLM\SOFTWARE\Policies\Microsoft\Windows\Maps" /V AllowUntriggeredNetworkTrafficOnSettingsPage /F
@@ -1700,9 +1696,7 @@ Reg.exe delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Notifications\Set
 Reg.exe delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Notifications\Settings" /v "NOC_GLOBAL_SETTING_ALLOW_CRITICAL_TOASTS_ABOVE_LOCK" /f
 Reg.exe delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Notifications\Settings" /v "NOC_GLOBAL_SETTING_TOASTS_ENABLED" /f
 Reg.exe add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Notifications\Settings" /f
-Reg.exe delete "HKLM\SOFTWARE\Policies\Microsoft\Windows\Explorer" /v "DisableNotificationCenter" /f
 Reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Explorer" /f
-Reg.exe delete "HKCU\SOFTWARE\Policies\Microsoft\Windows\Explorer" /v "DisableNotificationCenter" /f
 Reg.exe add "HKCU\SOFTWARE\Policies\Microsoft\Windows\Explorer" /f
 Reg.exe delete "HKCU\Software\Microsoft\Windows\CurrentVersion\PushNotifications" /v "ToastEnabled" /f
 Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\PushNotifications" /f
