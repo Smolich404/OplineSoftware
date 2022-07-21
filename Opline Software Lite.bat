@@ -735,17 +735,17 @@ goto Fixer
 
 :GANG2
 cls
-Powershell iex ((New-Object System.Net.WebClient).DownloadString('https://git.io/debloat'))
+powershell -command "iwr -useb https://git.io/debloat|iex"
 Goto Debloater
 
 :GANG3
 cls
-powershell iex ((New-Object System.Net.WebClient).DownloadString('https://christitus.com/win'))
+powershell -command "iwr -useb https://christitus.com/win | iex"
 Goto Debloater
 
 :GANG4
 cls
-powershell iex((New-Object System.Net.WebClient).DownloadString('https://ps.microsoft-toolbox.workers.dev'))
+powershell -command "irm app.sophi.app -useb | iex"
 Goto Debloater
 
 :GANG
