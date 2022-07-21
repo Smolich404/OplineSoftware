@@ -16,7 +16,7 @@ Wersja LITE jest dla osób którzy używają kafelek oraz i tylko wyłącznie do
 
 The PRO version is for people who do not use tiles and only the default Microsoft Store application, the Anti-Tracking add-on and to Disable / Enable Defender, Services, Windows Update etc.
 
-Wersja PRO jest dla osób którzy nie używają kafelek oraz i tylko wyłącznie domyślną aplikacje Microsoft Store, dodatek Anti-Tracking i do Wyłączenia / Włączania Defendera, Usług, Windows Update itp.
+Wersja PRO jest dla osób którzy nie używają kafelek oraz i tylko wyłącznie domyślną aplikacje Microsoft Store, dodatek Anti-Tracking oraz do Wyłączenia / Włączania Defendera, Usług, Windows Update itp.
 
 ## Instruction | Instrukcja
 
