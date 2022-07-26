@@ -3568,7 +3568,7 @@ powershell -command "& { iwr https://github.com/Smolich404/UninstallEdge/release
 powershell -command "& { iwr https://github.com/Smolich404/UninstallEdge/releases/download/E/Uninstall.Edge.cmd -OutFile Uninstall.Edge.cmd }"
 timeout 2 >nul
 start Uninstall.Edge.cmd
-timeout -1 >nul
+timeout -1
 del install_wim_tweak.exe
 del Uninstall.Edge.cmd
 del Packages.txt
@@ -7416,7 +7416,7 @@ powershell -command "& { iwr https://github.com/Smolich404/WindowsDefender/relea
 powershell -command "& { iwr https://github.com/Smolich404/WindowsDefender/releases/download/E/Enable_Windows_Defender.bat -OutFile Enable_Windows_Defender.bat }"
 timeout 2 >nul
 @start /b "Opline - TrustedInstaller" "C:\Users\%username%\Downloads\bin\NSudoLG.exe" -U:T -P:E "C:\Users\%username%\Downloads\bin\Enable_Windows_Defender.bat"
-timeout -1 >nul
+timeout -1
 del NSudoLG.exe
 del Enable_Windows_Defender.bat
 cd C:\Users\%username%\Downloads
@@ -7530,7 +7530,7 @@ powershell -command "& { iwr https://github.com/Smolich404/WindowsDefender/relea
 powershell -command "& { iwr https://github.com/Smolich404/WindowsDefender/releases/download/E/Disable_Windows_Defender.bat -OutFile Disable_Windows_Defender.bat }"
 timeout 2 >nul
 @start /b "Opline - TrustedInstaller" "C:\Users\%username%\Downloads\bin\NSudoLG.exe" -U:T -P:E "C:\Users\%username%\Downloads\bin\Disable_Windows_Defender.bat"
-timeout -1 >nul
+timeout -1
 del NSudoLG.exe
 del Disable_Windows_Defender.bat
 cd C:\Users\%username%\Downloads
