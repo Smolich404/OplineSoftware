@@ -3006,9 +3006,9 @@ call :ColorText 03 "                                         Contact - About"
 echo.
 echo.
 echo.
-echo                                        Discord: Smolich#0531
+echo                                       Discord: Smolich#0531
 echo.
-echo                                    Discord Server: dsc.gg/opline
+echo                                   Discord Server: dsc.gg/opline
 echo.
 echo.
 PAUSE>NUL
