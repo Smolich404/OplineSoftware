@@ -64,4 +64,4 @@ powershell -command "& { iwr https://bit.ly/oplinedl -OutFile OplineSoftware-X.z
 
 Discord: Smolich#0531
 
-Discord Server: Discord.Link/Opline
+Discord Server: https://dsc.gg/opline
