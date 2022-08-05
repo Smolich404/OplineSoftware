@@ -1834,11 +1834,69 @@ echo.
 call :ColorText 1B "###############################################################################################"
 echo.
 echo.
-cmdMenuSel f3B0 "   [+]  Enable" "   [+]  Disable" "   [+]  Spooler" "   [+]  Exit"
+cmdMenuSel f3B0 "   [+]  Enable" "   [+]  Disable" "   [+]  Spooler" "   [+]  Capture" "   [+]  Exit"
 if %ERRORLEVEL% == 1 goto EServices
 if %ERRORLEVEL% == 2 goto DServices
 if %ERRORLEVEL% == 3 goto Spooler
-if %ERRORLEVEL% == 4 goto OplineMenu
+if %ERRORLEVEL% == 4 goto Capture
+if %ERRORLEVEL% == 5 goto OplineMenu
+
+:Capture
+cls
+echo.
+echo.
+call :ColorText 1B "###############################################################################################"
+echo.
+echo.
+echo                             ____  _____  _      _____ _   _ ______                      
+echo                            / __ \^|  __ \^| ^|    ^|_   _^| \ ^| ^|  ____^|                     
+echo                           ^| ^|  ^| ^| ^|__) ^| ^|      ^| ^| ^|  \^| ^| ^|__                        
+echo                           ^| ^|  ^| ^|  ___/^| ^|      ^| ^| ^|   \ ^|  __^|                       
+echo                           ^| ^|__^| ^| ^|    ^| ^|____ _^| ^|_^| ^|\  ^| ^|____                      
+echo                            \____/^|_^|    ^|______^|_____^|_^| \_^|______^|                     
+echo                   _____  ____  ______ _________          __     _____  ______ 
+echo                  / ____^|/ __ \^|  ____^|__   __\ \        / /\   ^|  __ \^|  ____^|
+echo                 ^| (___ ^| ^|  ^| ^| ^|__     ^| ^|   \ \  /\  / /  \  ^| ^|__) ^| ^|__   
+echo                  \___ \^| ^|  ^| ^|  __^|    ^| ^|    \ \/  \/ / /\ \ ^|  _  /^|  __^|  
+echo                  ____) ^| ^|__^| ^| ^|       ^| ^|     \  /\  / ____ \^| ^| \ \^| ^|____ 
+echo                 ^|_____/ \____/^|_^|       ^|_^|      \/  \/_/    \_\_^|  \_\______^|
+echo.
+echo.
+call :ColorText 0C "                                             P R O"
+echo.
+echo.
+echo.
+call :ColorText 1B "###############################################################################################"
+echo.
+echo.
+cmdMenuSel f3B0 "   [+]  Enable" "   [+]  Disable" "   [+]  Exit"
+if %ERRORLEVEL% == 1 goto ECapture
+if %ERRORLEVEL% == 2 goto DCapture
+if %ERRORLEVEL% == 3 goto Services
+
+:DCapture
+cls
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CaptureService" /v "Start" /d "4" /t REG_DWORD /f
+cls
+SET msgboxTitle=Opline Software
+SET msgboxBody=Finished - Skonczone
+SET tmpmsgbox=%temp%~tmpmsgbox.vbs
+IF EXIST "%tmpmsgbox%" DEL /F /Q "%tmpmsgbox%"
+ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
+WSCRIPT "%tmpmsgbox%"
+goto Capture
+
+:ECapture
+cls
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CaptureService" /v "Start" /d "3" /t REG_DWORD /f
+cls
+SET msgboxTitle=Opline Software
+SET msgboxBody=Finished - Skonczone
+SET tmpmsgbox=%temp%~tmpmsgbox.vbs
+IF EXIST "%tmpmsgbox%" DEL /F /Q "%tmpmsgbox%"
+ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
+WSCRIPT "%tmpmsgbox%"
+goto Capture
 
 :Spooler
 cls
@@ -3385,7 +3443,7 @@ echo.
 call :ColorText 1B "###############################################################################################"
 echo.
 echo.
-cmdMenuSel f3B0 "   [+]  Boot Settings" "   [+]  Gpedit Enabler" "   [+]  UAC" "   [+]  Edge" "   [+]  Timer Resolution Service" "   [+]  ReadyBoost and Memory Compression" "   [+]  Encrypting File System" "   [+]  Compression" "   [+]  Exit"
+cmdMenuSel f3B0 "   [+]  Boot Settings" "   [+]  Gpedit Enabler" "   [+]  UAC" "   [+]  Edge" "   [+]  Timer Resolution Service" "   [+]  ReadyBoost and Memory Compression" "   [+]  Encrypting File System" "   [+]  Compression" "   [+]  Notifications" "   [+]  Exit"
 if %ERRORLEVEL% == 1 goto Boot
 if %ERRORLEVEL% == 2 goto Gpedit
 if %ERRORLEVEL% == 3 goto UAC
@@ -3394,7 +3452,8 @@ if %ERRORLEVEL% == 5 goto STR
 if %ERRORLEVEL% == 6 goto SF
 if %ERRORLEVEL% == 7 goto EFS
 if %ERRORLEVEL% == 8 goto COM
-if %ERRORLEVEL% == 9 goto OplineMenu
+if %ERRORLEVEL% == 9 goto Notifications
+if %ERRORLEVEL% == 10 goto OplineMenu
 
 :STR
 cls
@@ -3881,6 +3940,80 @@ IF EXIST "%tmpmsgbox%" DEL /F /Q "%tmpmsgbox%"
 ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
 WSCRIPT "%tmpmsgbox%"
 goto COM
+
+:Notifications
+cls
+echo.
+echo.
+call :ColorText 1B "###############################################################################################"
+echo.
+echo.
+echo                             ____  _____  _      _____ _   _ ______                      
+echo                            / __ \^|  __ \^| ^|    ^|_   _^| \ ^| ^|  ____^|                     
+echo                           ^| ^|  ^| ^| ^|__) ^| ^|      ^| ^| ^|  \^| ^| ^|__                        
+echo                           ^| ^|  ^| ^|  ___/^| ^|      ^| ^| ^|   \ ^|  __^|                       
+echo                           ^| ^|__^| ^| ^|    ^| ^|____ _^| ^|_^| ^|\  ^| ^|____                      
+echo                            \____/^|_^|    ^|______^|_____^|_^| \_^|______^|                     
+echo                   _____  ____  ______ _________          __     _____  ______ 
+echo                  / ____^|/ __ \^|  ____^|__   __\ \        / /\   ^|  __ \^|  ____^|
+echo                 ^| (___ ^| ^|  ^| ^| ^|__     ^| ^|   \ \  /\  / /  \  ^| ^|__) ^| ^|__   
+echo                  \___ \^| ^|  ^| ^|  __^|    ^| ^|    \ \/  \/ / /\ \ ^|  _  /^|  __^|  
+echo                  ____) ^| ^|__^| ^| ^|       ^| ^|     \  /\  / ____ \^| ^| \ \^| ^|____ 
+echo                 ^|_____/ \____/^|_^|       ^|_^|      \/  \/_/    \_\_^|  \_\______^|
+echo.
+echo.
+call :ColorText 0C "                                             P R O"
+echo.
+echo.
+echo.
+call :ColorText 1B "###############################################################################################"
+echo.
+echo.
+cmdMenuSel f3B0 "   [+]  Disable" "   [+]  Enable" "   [+]  Exit"
+if %ERRORLEVEL% == 1 goto DNotifications
+if %ERRORLEVEL% == 2 goto ENotifications
+if %ERRORLEVEL% == 3 goto Others
+
+:ENotifications
+cls
+reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Notifications\Settings" /v "NOC_GLOBAL_SETTING_ALLOW_TOASTS_ABOVE_LOCK" /f
+reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Notifications\Settings" /v "NOC_GLOBAL_SETTING_ALLOW_CRITICAL_TOASTS_ABOVE_LOCK" /f
+reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Notifications\Settings" /v "NOC_GLOBAL_SETTING_TOASTS_ENABLED" /f
+reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Notifications\Settings" /f
+reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\PushNotifications" /v "ToastEnabled" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\PushNotifications" /f
+reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\PushNotifications" /v "ToastEnabled" /f
+reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\PushNotifications" /f
+reg delete "HKCU\Software\Policies\Microsoft\Windows\CurrentVersion\PushNotifications" /v "NoToastApplicationNotification" /f
+reg add "HKCU\Software\Policies\Microsoft\Windows\CurrentVersion\PushNotifications" /f
+reg delete "HKCU\Software\Policies\Microsoft\Windows\CurrentVersion\PushNotifications" /v "NoTileApplicationNotification" /f
+reg add "HKCU\Software\Policies\Microsoft\Windows\CurrentVersion\PushNotifications" /f
+::
+reg add "HKCU\SOFTWARE\Policies\Microsoft\Windows\Explorer" /v "IsNotificationsDisabled" /t REG_DWORD /d "0" /f
+goto end7
+
+:DNotifications
+cls
+reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Notifications\Settings" /v "NOC_GLOBAL_SETTING_ALLOW_TOASTS_ABOVE_LOCK" /t REG_DWORD /d "0" /f
+reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Notifications\Settings" /v "NOC_GLOBAL_SETTING_ALLOW_CRITICAL_TOASTS_ABOVE_LOCK" /t REG_DWORD /d "0" /f
+reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Notifications\Settings" /v "NOC_GLOBAL_SETTING_TOASTS_ENABLED" /t REG_DWORD /d "0" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\PushNotifications" /v "ToastEnabled" /t REG_DWORD /d "0" /f
+reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\PushNotifications" /v "ToastEnabled" /t REG_DWORD /d "0" /f
+reg add "HKCU\Software\Policies\Microsoft\Windows\CurrentVersion\PushNotifications" /v "NoToastApplicationNotification" /t REG_DWORD /d "1" /f
+reg add "HKCU\Software\Policies\Microsoft\Windows\CurrentVersion\PushNotifications" /v "NoTileApplicationNotification" /t REG_DWORD /d "1" /f
+::
+reg add "HKCU\SOFTWARE\Policies\Microsoft\Windows\Explorer" /v "IsNotificationsDisabled" /t REG_DWORD /d "1" /f
+goto end7
+
+:end7
+cls
+SET msgboxTitle=Opline Software
+SET msgboxBody=Finished - Skonczone
+SET tmpmsgbox=%temp%~tmpmsgbox.vbs
+IF EXIST "%tmpmsgbox%" DEL /F /Q "%tmpmsgbox%"
+ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
+WSCRIPT "%tmpmsgbox%"
+goto Notifications
 
 :OneDrive
 cls
