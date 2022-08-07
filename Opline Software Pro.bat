@@ -5513,7 +5513,6 @@ Goto ENDRGPU
 :ENHDCP
 cls
 for /f %%a in ('Reg query "HKLM\System\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}" /t REG_SZ /s /e /f "NVIDIA" ^| findstr "HKEY"') do (
-Reg delete "HKCU\Software\Hone" /v HDCTweaks /f
 Reg add "%%a" /v "RMHdcpKeyglobZero" /t REG_DWORD /d "0" /f
 )
 goto ENDRGPU
@@ -5643,7 +5642,6 @@ Goto ENDGPU
 :DNHDCP
 cls
 for /f %%a in ('Reg query "HKLM\System\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}" /t REG_SZ /s /e /f "NVIDIA" ^| findstr "HKEY"') do (
-Reg add "HKCU\Software\Hone" /v HDCTweaks /f
 Reg add "%%a" /v "RMHdcpKeyglobZero" /t REG_DWORD /d "1" /f
 )
 goto ENDGPU
