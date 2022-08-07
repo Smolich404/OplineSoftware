@@ -1351,7 +1351,6 @@ Reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProf
 Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v "KernelSEHOPEnabled" /t Reg_DWORD /d "0" /f
 Reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Error Reporting" /v "Disabled" /t Reg_DWORD /d "1" /f
 wmic computersystem where name="%computername%" set AutomaticManagedPagefile=False
-powercfg /setacvalueindex scheme_current sub_processor IDLEDISABLE 1
 cls
 SET msgboxTitle=Opline Software
 SET msgboxBody=Finished - Skonczone
@@ -1784,7 +1783,6 @@ Reg delete "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemP
 Reg delete "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v "KernelSEHOPEnabled" /f
 Reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Error Reporting" /f
 wmic computersystem where name="%computername%" set AutomaticManagedPagefile=True
-powercfg -setacvalueindex scheme_current sub_processor IDLEDISABLE 0
 cls
 SET msgboxTitle=Opline Software
 SET msgboxBody=Finished - Skonczone
