@@ -772,12 +772,6 @@ SCHTASKS /END /TN "\Microsoft\Windows\Windows Error Reporting\QueueReporting"
 SCHTASKS /DELETE /TN "\Microsoft\Windows\Windows Error Reporting\QueueReporting" /F
 SCHTASKS /END /TN "\Intel\Intel Telemetry 2"
 SCHTASKS /DELETE /TN "\Intel\Intel Telemetry 2" /F
-SCHTASKS /END /TN "\NvTmMon_{B2FE1952-0186-46C3-BAEC-A80AA35AC5B8}"
-SCHTASKS /DELETE /TN "\NvTmMon_{B2FE1952-0186-46C3-BAEC-A80AA35AC5B8}" /F
-SCHTASKS /END /TN "\NvTmRep_{B2FE1952-0186-46C3-BAEC-A80AA35AC5B8}"
-SCHTASKS /DELETE /TN "\NvTmRep_{B2FE1952-0186-46C3-BAEC-A80AA35AC5B8}" /F
-SCHTASKS /END /TN "\NvTmRepOnLogon_{B2FE1952-0186-46C3-BAEC-A80AA35AC5B8}"
-SCHTASKS /DELETE /TN "\NvTmRepOnLogon_{B2FE1952-0186-46C3-BAEC-A80AA35AC5B8}" /F
 SCHTASKS /END /TN "\Microsoft\Windows\SMB\UninstallSMB1ClientTask"
 SCHTASKS /DELETE /TN "\Microsoft\Windows\SMB\UninstallSMB1ClientTask" /F
 SCHTASKS /END /TN "\Microsoft\Windows\SMB\UninstallSMB1ServerTask"
@@ -1096,9 +1090,6 @@ Reg add "HKLM\SYSTEM\CurrentControlSet\Control\FileSystem" /v "DontVerifyRandomD
 Reg add "HKLM\SYSTEM\CurrentControlSet\Control\FileSystem" /v "LongPathsEnabled" /t REG_DWORD /d "0" /f
 Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters" /v "EnablePrefetcher" /t Reg_DWORD /d "0" /f
 Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters" /v "EnableSuperfetch" /t Reg_DWORD /d "0" /f
-Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Power" /v "HiberbootEnabled" /t REG_DWORD /d "0" /f
-Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Power" /v "HibernateEnabledDefault" /t REG_DWORD /d "0" /f
-Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Power" /v "HibernateEnabled" /t REG_DWORD /d "0" /f
 Reg add "HKCU\Control Panel\Desktop" /v "WaitToKillAppTimeout" /t Reg_SZ /d "1000" /f
 Reg add "HKLM\System\CurrentControlSet\Control" /v "WaitToKillServiceTimeout" /t Reg_SZ /d "1000" /f
 Reg add "HKCU\Control Panel\Desktop" /v "HungAppTimeout" /t Reg_SZ /d "1000" /f
@@ -1106,6 +1097,9 @@ Reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Image File Execution 
 Reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\csrss.exe\PerfOptions" /v IoPriority /t Reg_DWORD /d "3" /f
 Reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile" /v "NoLazyMode" /t REG_DWORD /d "1" /f
 Reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile" /v "AlwaysOn" /t REG_DWORD /d "1" /f
+Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v "KernelSEHOPEnabled" /t Reg_DWORD /d "0" /f
+Reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Error Reporting" /v "Disabled" /t Reg_DWORD /d "1" /f
+wmic computersystem where name="%computername%" set AutomaticManagedPagefile=False
 powercfg /setacvalueindex scheme_current sub_processor IDLEDISABLE 1
 cls
 SET msgboxTitle=Opline Software
@@ -1379,51 +1373,45 @@ Reg.exe delete "HKCU\Software\Policies\Microsoft\Windows\CurrentVersion\PushNoti
 Reg.exe add "HKCU\Software\Policies\Microsoft\Windows\CurrentVersion\PushNotifications" /f
 Reg.exe delete "HKCU\Software\Policies\Microsoft\Windows\CurrentVersion\PushNotifications" /v "NoTileApplicationNotification" /f
 Reg.exe add "HKCU\Software\Policies\Microsoft\Windows\CurrentVersion\PushNotifications" /f
-REM ;=== Getting to know you - On
 Reg.exe add "HKCU\Software\Microsoft\InputPersonalization" /v "RestrictImplicitInkCollection" /t REG_DWORD /d "0" /f
 Reg.exe add "HKCU\Software\Microsoft\InputPersonalization" /v "RestrictImplicitTextCollection" /t REG_DWORD /d "0" /f
 Reg.exe add "HKCU\Software\Microsoft\InputPersonalization\TrainedDataStore" /v "HarvestContacts" /t REG_DWORD /d "1" /f
 Reg.exe add "HKCU\Software\Microsoft\Personalization\Settings" /v "AcceptedPrivacyPolicy" /t REG_DWORD /d "1" /f
-REM ;=== Turn off automatic learning - Disabled
 Reg.exe add "HKCU\SOFTWARE\Policies\Microsoft\InputPersonalization" /v "RestrictImplicitInkCollection" /t REG_DWORD /d "0" /f
 Reg.exe add "HKCU\SOFTWARE\Policies\Microsoft\InputPersonalization" /v "RestrictImplicitTextCollection" /t REG_DWORD /d "0" /f
 Reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\InputPersonalization" /v "RestrictImplicitInkCollection" /t REG_DWORD /d "0" /f
 Reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\InputPersonalization" /v "RestrictImplicitTextCollection" /t REG_DWORD /d "0" /f
-REM ;=== Allow users to enable online speech recognition services - Enabled
 Reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\InputPersonalization" /v "AllowInputPersonalization" /t REG_DWORD /d "1" /f
 wevtutil sl Microsoft-Windows-SleepStudy/Diagnostic /e:true
 wevtutil sl Microsoft-Windows-Kernel-Processor-Power/Diagnostic /e:true
 wevtutil sl Microsoft-Windows-UserModePowerService/Diagnostic /e:true
 powershell -NonInteractive -NoLogo -NoProfile Set-ProcessMitigation -Name vgc.exe -Disable CFG
 schtasks /Change /TN "Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser" /Enable
-Reg add "HKLM\SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity" /v "Enabled" /t REG_DWORD /d "1" /f
-Reg delete "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v "DisableExceptionChainValidation" /f
-Reg delete "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v FeatureSettings /f
-Reg delete "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v FeatureSettingsOverride /f
-Reg delete "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v FeatureSettingsOverrideMask /f
-Reg delete "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v "EnableCfg" /f
-Reg delete "HKLM\System\CurrentControlSet\Control\Session Manager" /v "ProtectionMode" /f
-Reg delete "HKLM\System\CurrentControlSet\Control\Session Manager\kernel" /v "MitigationOptions" /f
-Reg delete "HKLM\System\CurrentControlSet\Control\Session Manager\kernel" /v "MitigationAuditOptions" /f
-Reg delete "HKLM\Software\Microsoft\FTH" /v "Enabled" /f
-Reg delete "HKCU\Software\Microsoft\Windows\DWM" /v "Composition" /f
-Reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications" /v "GlobalUserDisabled" /f
-Reg delete "HKLM\Software\Policies\Microsoft\Windows\AppPrivacy" /v "LetAppsRunInBackground" /f
-Reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Search" /v "BackgroundAppGlobalToggle" /f
-Reg delete "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v "DisablePagingExecutive" /f
+Reg delete "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity" /f
+Reg delete "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v "DisableExceptionChainValidation" /f
+Reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v FeatureSettings /t Reg_DWORD /d "0" /f
+Reg delete "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v FeatureSettingsOverride /f
+Reg delete "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v FeatureSettingsOverrideMask /f
+Reg delete "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v "EnableCfg" /f
+Reg add "HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager" /v "ProtectionMode" /t Reg_DWORD /d "1" /f
+Reg delete "HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\kernel" /v "MitigationOptions" /f
+Reg delete "HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\kernel" /v "MitigationAuditOptions" /f
+Reg add "HKEY_LOCAL_MACHINE\Software\Microsoft\FTH" /v "Enabled" /t Reg_DWORD /d "1" /f
+Reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\DWM" /v "Composition" /t Reg_DWORD /d "1" /f
+Reg delete "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications" /v "GlobalUserDisabled" /f
+Reg delete "HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\AppPrivacy" /f
+Reg delete "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Search" /v "BackgroundAppGlobalToggle" /f
+Reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v "DisablePagingExecutive" /t Reg_DWORD /d "0" /f
 powershell -NoProfile -Command "Enable-MMAgent -PagingCombining -mc"
-Reg delete "HKLM\System\CurrentControlSet\Control\Session Manager" /v "HeapDeCommitFreeBlockThreshold" /f
-Reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Winlogon" /v "AutoRestartShell" /t REG_DWORD /d "0" /f
-Reg delete "HKLM\SYSTEM\CurrentControlSet\Control\FileSystem" /v "DontVerifyRandomDrivers" /f
-Reg delete "HKLM\SYSTEM\CurrentControlSet\Control\FileSystem" /v "LongPathsEnabled" /f
-Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters" /v "EnablePrefetcher" /t Reg_DWORD /d "3" /f
-Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters" /v "EnableSuperfetch" /t Reg_DWORD /d "3" /f
-Reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications" /v "GlobalUserDisabled" /t Reg_DWORD /d "0" /f
-Reg delete "HKLM\Software\Policies\Microsoft\Windows\AppPrivacy" /v "LetAppsRunInBackground" /f
-Reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Search" /v "BackgroundAppGlobalToggle" /t Reg_DWORD /d "1" /f
-Reg delete "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Power" /v "HiberbootEnabled" /f
-Reg delete "HKLM\SYSTEM\CurrentControlSet\Control\Power" /v "HibernateEnabledDefault" /f
-Reg delete "HKLM\SYSTEM\CurrentControlSet\Control\Power" /v "HibernateEnabled" /f
+Reg add "HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager" /v "HeapDeCommitFreeBlockThreshold" /t Reg_DWORD /d "0" /f
+Reg add "HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion\Winlogon" /v "AutoRestartShell" /t REG_DWORD /d "1" /f
+Reg delete "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\FileSystem" /v "DontVerifyRandomDrivers" /f
+Reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\FileSystem" /v "LongPathsEnabled" /t Reg_DWORD /d "0" /f
+Reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters" /v "EnablePrefetcher" /t Reg_DWORD /d "3" /f
+Reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters" /v "EnableSuperfetch" /t Reg_DWORD /d "3" /f
+Reg delete "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications" /v "GlobalUserDisabled" /f
+Reg delete "HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\AppPrivacy" /f
+Reg delete "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Search" /v "BackgroundAppGlobalToggle" /f
 Reg add "HKCU\Control Panel\Desktop" /v "WaitToKillAppTimeout" /t Reg_SZ /d "20000" /f
 Reg add "HKLM\System\CurrentControlSet\Control" /v "WaitToKillServiceTimeout" /t Reg_SZ /d "20000" /f
 Reg add "HKCU\Control Panel\Desktop" /v "HungAppTimeout" /t Reg_SZ /d "5000" /f
@@ -1431,6 +1419,9 @@ Reg delete "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Image File Executi
 Reg delete "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\csrss.exe\PerfOptions" /v IoPriority /f
 Reg delete "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile" /v "NoLazyMode" /f
 Reg delete "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile" /v "AlwaysOn" /f
+Reg delete "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v "KernelSEHOPEnabled" /f
+Reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Error Reporting" /f
+wmic computersystem where name="%computername%" set AutomaticManagedPagefile=True
 powercfg -setacvalueindex scheme_current sub_processor IDLEDISABLE 0
 cls
 SET msgboxTitle=Opline Software
@@ -1653,9 +1644,6 @@ NET START "IEEtwCollectorService"
 SC CONFIG "IEEtwCollectorService" START= AUTO
 NET START "wercplsupport"
 SC CONFIG "wercplsupport" START= AUTO
-SC CREATE "NvTelemetryContainer"
-NET START "NvTelemetryContainer"
-SC CONFIG "NvTelemetryContainer" START= AUTO
 NET START "TabletInputService"
 SC CONFIG "TabletInputService" START= AUTO
 SC CREATE "diagtrack"
@@ -1907,9 +1895,6 @@ NET STOP "IEEtwCollectorService"
 SC CONFIG "IEEtwCollectorService" START= DISABLED
 NET STOP "wercplsupport"
 SC CONFIG "wercplsupport" START= DISABLED
-NET STOP "NvTelemetryContainer"
-SC CONFIG "NvTelemetryContainer" START= DISABLED
-SC DELETE "NvTelemetryContainer"
 sc stop DiagTrack
 sc stop diagnosticshub.standardcollector.service
 sc stop dmwappushservice
@@ -1941,9 +1926,6 @@ NET STOP "IEEtwCollectorService"
 SC CONFIG "IEEtwCollectorService" START= DISABLED
 NET STOP "wercplsupport"
 SC CONFIG "wercplsupport" START= DISABLED
-NET STOP "NvTelemetryContainer"
-SC CONFIG "NvTelemetryContainer" START= DISABLED
-SC DELETE "NvTelemetryContainer"
 NET STOP "TabletInputService"
 SC CONFIG "TabletInputService" START= DISABLED
 NET STOP "diagtrack"
@@ -2568,7 +2550,7 @@ powershell -command "& { iwr https://github.com/Smolich404/UninstallEdge/release
 powershell -command "& { iwr https://github.com/Smolich404/UninstallEdge/releases/download/E/Uninstall.Edge.cmd -OutFile Uninstall.Edge.cmd }"
 timeout 2 >nul
 start Uninstall.Edge.cmd
-timeout -1
+timeout 7 >nul
 del install_wim_tweak.exe
 del Uninstall.Edge.cmd
 del Packages.txt
@@ -4346,6 +4328,11 @@ goto ENDRGPU
 
 :RNVTelemetry
 cls
+SCHTASKS /CHANGE /ENABLE /TN "\NvTmMon_{B2FE1952-0186-46C3-BAEC-A80AA35AC5B8}" /F
+SCHTASKS /CHANGE /ENABLE /TN "\NvTmRep_{B2FE1952-0186-46C3-BAEC-A80AA35AC5B8}" /F
+SCHTASKS /CHANGE /ENABLE /TN "\NvTmRepOnLogon_{B2FE1952-0186-46C3-BAEC-A80AA35AC5B8}" /F
+NET START "NvTelemetryContainer"
+SC CONFIG "NvTelemetryContainer" START= AUTO
 Reg delete "HKLM\SOFTWARE\NVIDIA Corporation\NvControlPanel2\Client" /v "OptInOrOutPreference" /f
 Reg delete "HKLM\SOFTWARE\NVIDIA Corporation\Global\FTS" /v "EnableRID44231" /f
 Reg delete "HKLM\SOFTWARE\NVIDIA Corporation\Global\FTS" /v "EnableRID64640" /f
@@ -4474,6 +4461,16 @@ goto ENDGPU
 
 :NVTelemetry
 cls
+SCHTASKS /END /TN "\NvTmMon_{B2FE1952-0186-46C3-BAEC-A80AA35AC5B8}"
+SCHTASKS /CHANGE /DISABLE /TN "\NvTmMon_{B2FE1952-0186-46C3-BAEC-A80AA35AC5B8}" /F
+SCHTASKS /END /TN "\NvTmRep_{B2FE1952-0186-46C3-BAEC-A80AA35AC5B8}"
+SCHTASKS /CHANGE /DISABLE /TN "\NvTmRep_{B2FE1952-0186-46C3-BAEC-A80AA35AC5B8}" /F
+SCHTASKS /END /TN "\NvTmRepOnLogon_{B2FE1952-0186-46C3-BAEC-A80AA35AC5B8}"
+SCHTASKS /CHANGE /DISABLE /TN "\NvTmRepOnLogon_{B2FE1952-0186-46C3-BAEC-A80AA35AC5B8}" /F
+NET STOP "NvTelemetryContainer"
+SC CONFIG "NvTelemetryContainer" START= DISABLED
+NET STOP "NvTelemetryContainer"
+SC CONFIG "NvTelemetryContainer" START= DISABLED
 Reg add "HKLM\SOFTWARE\NVIDIA Corporation\NvControlPanel2\Client" /v "OptInOrOutPreference" /t REG_DWORD /d 0 /f
 Reg add "HKLM\SOFTWARE\NVIDIA Corporation\Global\FTS" /v "EnableRID44231" /t REG_DWORD /d 0 /f
 Reg add "HKLM\SOFTWARE\NVIDIA Corporation\Global\FTS" /v "EnableRID64640" /t REG_DWORD /d 0 /f
@@ -6644,7 +6641,7 @@ powershell -command "& { iwr https://github.com/Smolich404/WindowsDefender/relea
 powershell -command "& { iwr https://github.com/Smolich404/WindowsDefender/releases/download/E/Enable_Windows_Defender.bat -OutFile Enable_Windows_Defender.bat }"
 timeout 2 >nul
 @start /b "Opline - TrustedInstaller" "C:\Users\%username%\Downloads\bin\NSudoLG.exe" -U:T -P:E "C:\Users\%username%\Downloads\bin\Enable_Windows_Defender.bat"
-timeout -1
+timeout 7 >nul
 del NSudoLG.exe
 del Enable_Windows_Defender.bat
 cd C:\Users\%username%\Downloads
@@ -6736,7 +6733,7 @@ powershell -command "& { iwr https://github.com/Smolich404/WindowsDefender/relea
 powershell -command "& { iwr https://github.com/Smolich404/WindowsDefender/releases/download/E/Disable_Windows_Defender.bat -OutFile Disable_Windows_Defender.bat }"
 timeout 2 >nul
 @start /b "Opline - TrustedInstaller" "C:\Users\%username%\Downloads\bin\NSudoLG.exe" -U:T -P:E "C:\Users\%username%\Downloads\bin\Disable_Windows_Defender.bat"
-timeout -1
+timeout 7 >nul
 del NSudoLG.exe
 del Disable_Windows_Defender.bat
 cd C:\Users\%username%\Downloads
