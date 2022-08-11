@@ -5221,7 +5221,7 @@ cls
 FOR /f "delims=" %%G in ('powershell -command "&{ [math]::Ceiling((get-wmiobject -class Win32_ComputerSystem).TotalPhysicalMemory/1Gb)}"') DO SET TOTALRAM=%%G
 SET /A "REGISTRYTWEAK=TOTALRAM*1024*1024"
 SET /A TWEAKREGISTRY=0x%REGISTRYTWEAK%
-REG ADD "HKLM\SYSTEM\CurrentControlSet\Control" /V "SvcHostSplitThresholdInKB" /T REG_DWORD /D "%TWEAKREGISTRY%" /F >nul 2>&1
+REG ADD "HKLM\SYSTEM\CurrentControlSet\Control" /V "SvcHostSplitThresholdInKB" /T REG_DWORD /D "%REGISTRYTWEAK%" /F >nul 2>&1
 goto ENDRAM
 
 :Reset
