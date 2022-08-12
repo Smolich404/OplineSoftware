@@ -836,6 +836,7 @@ RD /S /Q "C:\Users\All Users\Microsoft\Windows\WER\"
 RD /S /Q "C:\ProgramData\Microsoft\Diagnosis\"
 RD /S /Q "C:\Users\All Users\Microsoft\Diagnosis\"
 RD /S /Q "%WINDIR%\System32\LogFiles\SQM\"
+Reg.exe delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "MicrosoftEdgeAutoLaunch_2B10A56E508E694F3D32723A0FB513AD" /f
 REG DELETE "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /V "OneDrive" /F
 REG DELETE "HKLM\SOFTWARE\Wow6432Node\Microsoft\Active Setup\Installed Components\{44BBA840-CC51-11CF-AAFA-00AA00B6015C}" /F
 REG DELETE "HKLM\SOFTWARE\Microsoft\Active Setup\Installed Components\{44BBA840-CC51-11CF-AAFA-00AA00B6015C}" /F
@@ -1498,6 +1499,8 @@ SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\AppID\EDP Policy Manager"
 SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\DiskCleanup\SilentCleanup"
 SCHTASKS /CHANGE /ENABLE /TN "\User_Feed_Synchronization-{883C416D-BAEC-4ED9-90F4-26C0F091D0F5}"
 SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\RetailDemo\CleanupOfflineContent"
+Reg.exe add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "OneDrive" /t REG_SZ /d "\"C:\Users\tet\AppData\Local\Microsoft\OneDrive\OneDrive.exe\" /background" /f
+Reg.exe add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "MicrosoftEdgeAutoLaunch_2B10A56E508E694F3D32723A0FB513AD" /t REG_SZ /d "\"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe\" --no-startup-window --win-session-start /prefetch:5" /f
 REG ADD "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Device Metadata" /V PreventDeviceMetadataFromNetwork /T REG_DWORD /D 0 /F
 REG DELETE "HKLM\SOFTWARE\Policies\Microsoft\Windows\CredUI" /F
 REG DELETE "HKLM\SOFTWARE\Policies\Microsoft\Windows\AppCompat" /V "DisableUAR" /F
