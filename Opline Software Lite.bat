@@ -4378,6 +4378,47 @@ Reg.exe delete "HKLM\SYSTEM\ControlSet001\Control\Class\{4d36e968-e325-11ce-bfc1
 Reg.exe delete "HKLM\SYSTEM\ControlSet001\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000" /v "PP_DisableLightSleep" /f
 Reg.exe delete "HKLM\SYSTEM\ControlSet001\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000" /v "PP_ThermalAutoThrottlingEnable" /f
 Reg.exe add "HKLM\SYSTEM\ControlSet001\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000" /f
+::AMD Registry Location
+for /f %%i in ('reg query "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}" /s /v "DriverDesc"^| findstr "HKEY AMD ATI"') do if /i "%%i" neq "DriverDesc" (set "REGPATH_AMD=%%i")
+::AMD Tweaks
+Reg delete "%REGPATH_AMD%" /v "3D_Refresh_Rate_Override_DEF" /f
+Reg delete "%REGPATH_AMD%" /v "3to2Pulldown_NA" /f
+Reg delete "%REGPATH_AMD%" /v "AAF_NA" /f
+Reg delete "%REGPATH_AMD%" /v "Adaptive De-interlacing" /f
+Reg delete "%REGPATH_AMD%" /v "AllowRSOverlay" /f
+Reg delete "%REGPATH_AMD%" /v "AllowSkins" /f
+Reg delete "%REGPATH_AMD%" /v "AllowSnapshot" /f
+Reg delete "%REGPATH_AMD%" /v "AllowSubscription" /f
+Reg delete "%REGPATH_AMD%" /v "AntiAlias_NA" /f
+Reg delete "%REGPATH_AMD%" /v "AreaAniso_NA" /f
+Reg delete "%REGPATH_AMD%" /v "ASTT_NA" /f
+Reg delete "%REGPATH_AMD%" /v "AutoColorDepthReduction_NA" /f
+Reg delete "%REGPATH_AMD%" /v "DisableSAMUPowerGating" /f
+Reg delete "%REGPATH_AMD%" /v "DisableUVDPowerGatingDynamic" /f
+Reg delete "%REGPATH_AMD%" /v "DisableVCEPowerGating" /f
+Reg delete "%REGPATH_AMD%" /v "EnableAspmL0s" /f
+Reg delete "%REGPATH_AMD%" /v "EnableAspmL1" /f
+Reg delete "%REGPATH_AMD%" /v "EnableUlps" /f
+Reg delete "%REGPATH_AMD%" /v "EnableUlps_NA" /f
+Reg delete "%REGPATH_AMD%" /v "KMD_DeLagEnabled" /f
+Reg delete "%REGPATH_AMD%" /v "KMD_FRTEnabled" /f
+Reg delete "%REGPATH_AMD%" /v "DisableDMACopy" /f
+Reg delete "%REGPATH_AMD%" /v "DisableBlockWrite" /f
+Reg delete "%REGPATH_AMD%" /v "StutterMode" /f
+Reg delete "%REGPATH_AMD%" /v "EnableUlps" /f
+Reg delete "%REGPATH_AMD%" /v "PP_SclkDeepSleepDisable" /f
+Reg delete "%REGPATH_AMD%" /v "PP_ThermalAutoThrottlingEnable" /f
+Reg delete "%REGPATH_AMD%" /v "DisableDrmdmaPowerGating" /f
+Reg delete "%REGPATH_AMD%" /v "KMD_EnableComputePreemption" /f
+Reg delete "%REGPATH_AMD%\UMD" /v "Main3D_DEF" /f
+Reg delete "%REGPATH_AMD%\UMD" /v "Main3D" /f
+Reg delete "%REGPATH_AMD%\UMD" /v "FlipQueueSize" /f
+Reg delete "%REGPATH_AMD%\UMD" /v "ShaderCache" /f
+Reg delete "%REGPATH_AMD%\UMD" /v "Tessellation_OPTION" /f
+Reg delete "%REGPATH_AMD%\UMD" /v "Tessellation" /f
+Reg delete "%REGPATH_AMD%\UMD" /v "VSyncControl" /f
+Reg delete "%REGPATH_AMD%\UMD" /v "TFQ" /f
+Reg delete "%REGPATH_AMD%\DAL2_DATA__2_0\DisplayPath_4\EDID_D109_78E9\Option" /v "ProtectionControl" /f
 Goto ENDRGPU
 
 :RNRO
@@ -4859,6 +4900,47 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000\UMD" /v "TFQ" /t REG_BINARY /d "3200" /f
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000" /v "EnableUlps" /t REG_DWORD /d "0" /f
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000" /v "PP_ThermalAutoThrottlingEnable" /t REG_DWORD /d "0" /f
+::AMD Registry Location
+for /f %%i in ('reg query "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}" /s /v "DriverDesc"^| findstr "HKEY AMD ATI"') do if /i "%%i" neq "DriverDesc" (set "REGPATH_AMD=%%i")
+::AMD Tweaks
+Reg add "%REGPATH_AMD%" /v "3D_Refresh_Rate_Override_DEF" /t Reg_DWORD /d "0" /f
+Reg add "%REGPATH_AMD%" /v "3to2Pulldown_NA" /t Reg_DWORD /d "0" /f
+Reg add "%REGPATH_AMD%" /v "AAF_NA" /t Reg_DWORD /d "0" /f
+Reg add "%REGPATH_AMD%" /v "Adaptive De-interlacing" /t Reg_DWORD /d "1" /f
+Reg add "%REGPATH_AMD%" /v "AllowRSOverlay" /t Reg_SZ /d "false" /f
+Reg add "%REGPATH_AMD%" /v "AllowSkins" /t Reg_SZ /d "false" /f
+Reg add "%REGPATH_AMD%" /v "AllowSnapshot" /t Reg_DWORD /d "0" /f
+Reg add "%REGPATH_AMD%" /v "AllowSubscription" /t Reg_DWORD /d "0" /f
+Reg add "%REGPATH_AMD%" /v "AntiAlias_NA" /t Reg_SZ /d "0" /f
+Reg add "%REGPATH_AMD%" /v "AreaAniso_NA" /t Reg_SZ /d "0" /f
+Reg add "%REGPATH_AMD%" /v "ASTT_NA" /t Reg_SZ /d "0" /f
+Reg add "%REGPATH_AMD%" /v "AutoColorDepthReduction_NA" /t Reg_DWORD /d "0" /f
+Reg add "%REGPATH_AMD%" /v "DisableSAMUPowerGating" /t Reg_DWORD /d "1" /f
+Reg add "%REGPATH_AMD%" /v "DisableUVDPowerGatingDynamic" /t Reg_DWORD /d "1" /f
+Reg add "%REGPATH_AMD%" /v "DisableVCEPowerGating" /t Reg_DWORD /d "1" /f
+Reg add "%REGPATH_AMD%" /v "EnableAspmL0s" /t Reg_DWORD /d "0" /f
+Reg add "%REGPATH_AMD%" /v "EnableAspmL1" /t Reg_DWORD /d "0" /f
+Reg add "%REGPATH_AMD%" /v "EnableUlps" /t Reg_DWORD /d "0" /f
+Reg add "%REGPATH_AMD%" /v "EnableUlps_NA" /t Reg_SZ /d "0" /f
+Reg add "%REGPATH_AMD%" /v "KMD_DeLagEnabled" /t Reg_DWORD /d "1" /f
+Reg add "%REGPATH_AMD%" /v "KMD_FRTEnabled" /t Reg_DWORD /d "0" /f
+Reg add "%REGPATH_AMD%" /v "DisableDMACopy" /t Reg_DWORD /d "1" /f
+Reg add "%REGPATH_AMD%" /v "DisableBlockWrite" /t Reg_DWORD /d "0" /f
+Reg add "%REGPATH_AMD%" /v "StutterMode" /t Reg_DWORD /d "0" /f
+Reg add "%REGPATH_AMD%" /v "EnableUlps" /t Reg_DWORD /d "0" /f
+Reg add "%REGPATH_AMD%" /v "PP_SclkDeepSleepDisable" /t Reg_DWORD /d "1" /f
+Reg add "%REGPATH_AMD%" /v "PP_ThermalAutoThrottlingEnable" /t Reg_DWORD /d "0" /f
+Reg add "%REGPATH_AMD%" /v "DisableDrmdmaPowerGating" /t Reg_DWORD /d "1" /f
+Reg add "%REGPATH_AMD%" /v "KMD_EnableComputePreemption" /t Reg_DWORD /d "0" /f
+Reg add "%REGPATH_AMD%\UMD" /v "Main3D_DEF" /t Reg_SZ /d "1" /f
+Reg add "%REGPATH_AMD%\UMD" /v "Main3D" /t Reg_BINARY /d "3100" /f
+Reg add "%REGPATH_AMD%\UMD" /v "FlipQueueSize" /t Reg_BINARY /d "3100" /f
+Reg add "%REGPATH_AMD%\UMD" /v "ShaderCache" /t Reg_BINARY /d "3200" /f
+Reg add "%REGPATH_AMD%\UMD" /v "Tessellation_OPTION" /t Reg_BINARY /d "3200" /f
+Reg add "%REGPATH_AMD%\UMD" /v "Tessellation" /t Reg_BINARY /d "3100" /f
+Reg add "%REGPATH_AMD%\UMD" /v "VSyncControl" /t Reg_BINARY /d "3000" /f
+Reg add "%REGPATH_AMD%\UMD" /v "TFQ" /t Reg_BINARY /d "3200" /f
+Reg add "%REGPATH_AMD%\DAL2_DATA__2_0\DisplayPath_4\EDID_D109_78E9\Option" /v "ProtectionControl" /t Reg_BINARY /d "0100000001000000" /f
 Goto ENDGPU
 
 :ENDGPU
