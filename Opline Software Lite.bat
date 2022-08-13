@@ -4103,16 +4103,17 @@ echo.
 call :ColorText 1B "###############################################################################################"
 echo.
 echo.
-cmdMenuSel f3B0 "   [+]  Radeon Registry Optimization" "   [+]  GPU Thread Priority and Nvidia Unhide Silk Smoothness" "   [+]  Install MSI Afterburner and Import Skin" "   [+]  Nvidia Registry Optimization" "   [+]  Disable Nvidia Telemetry" "   [+]  Disable Nvidia HDCP" "   [+]  Import Nvidia Settings" "   [+]  Reset" "   [+]  Exit"
+cmdMenuSel f3B0 "   [+]  Radeon Registry Optimization" "   [+]  GPU Thread Priority" "   [+]  Install MSI Afterburner and Import Skin" "   [+]  Nvidia Unhide Silk Smoothness" "   [+]  Nvidia Registry Optimization" "   [+]  Disable Nvidia Telemetry" "   [+]  Disable Nvidia HDCP" "   [+]  Import Nvidia Settings" "   [+]  Reset" "   [+]  Exit"
 if %ERRORLEVEL% == 1 goto RGPU
 if %ERRORLEVEL% == 2 goto OGPU
 if %ERRORLEVEL% == 3 goto IMSI
-if %ERRORLEVEL% == 4 goto NGPU
-if %ERRORLEVEL% == 5 goto NVTelemetry
-if %ERRORLEVEL% == 6 goto DNHDCP
-if %ERRORLEVEL% == 7 goto INVS
-if %ERRORLEVEL% == 8 goto RGPU2
-if %ERRORLEVEL% == 9 goto OplineMenu
+if %ERRORLEVEL% == 4 goto NUSS
+if %ERRORLEVEL% == 5 goto NGPU
+if %ERRORLEVEL% == 6 goto NVTelemetry
+if %ERRORLEVEL% == 7 goto DNHDCP
+if %ERRORLEVEL% == 8 goto INVS
+if %ERRORLEVEL% == 9 goto RGPU2
+if %ERRORLEVEL% == 10 goto OplineMenu
 
 :RGPU2
 cls
@@ -4142,13 +4143,14 @@ echo.
 call :ColorText 1B "###############################################################################################"
 echo.
 echo.
-cmdMenuSel f3B0 "   [+]  Reset Radeon Registry Optimization" "   [+]  Reset Nvidia Registry Optimization" "   [+]  Reset Thread Priority and Nvidia Unhide Silk Smoothness" "   [+]  Reset Disable Nvidia Telemetry" "   [+]  Reset Disable Nvidia HDCP" "   [+]  Exit"
+cmdMenuSel f3B0 "   [+]  Reset Radeon Registry Optimization" "   [+]  Reset Nvidia Registry Optimization" "   [+]  Reset Thread Priority" "   [+]  Reset Nvidia Unhide Silk Smoothness" "   [+]  Reset Disable Nvidia Telemetry" "   [+]  Reset Disable Nvidia HDCP" "   [+]  Exit"
 if %ERRORLEVEL% == 1 goto RGRO
 if %ERRORLEVEL% == 2 goto RNRO
 if %ERRORLEVEL% == 3 goto RTPSS
-if %ERRORLEVEL% == 4 goto RNVTelemetry
-if %ERRORLEVEL% == 5 goto ENHDCP
-if %ERRORLEVEL% == 6 goto GPU
+if %ERRORLEVEL% == 4 goto RNUSS
+if %ERRORLEVEL% == 5 goto RNVTelemetry
+if %ERRORLEVEL% == 6 goto ENHDCP
+if %ERRORLEVEL% == 7 goto GPU
 
 :RGRO
 cls
@@ -4406,6 +4408,11 @@ Reg delete "%%i" /v "DisableDynamicPstate" /f >nul 2>&1
 Reg add "HKLM\SYSTEM\ControlSet001\Control\Class\{4D36E968-E325-11CE-BFC1-08002BE10318}\0000" /v "AllowDeepCStates" /t REG_DWORD /d "1" /f
 goto ENDRGPU
 
+:RNUSS
+cls
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\nvlddmkm\FTS" /v "EnableRID61684" /t REG_DWORD /d "0" /f
+Goto ENDRGPU
+
 :RNVTelemetry
 cls
 SCHTASKS /CHANGE /ENABLE /TN "\NvTmMon_{B2FE1952-0186-46C3-BAEC-A80AA35AC5B8}" /F
@@ -4481,7 +4488,6 @@ goto RTPSS
 cls
 REM ;NVIDIA Driver Thread Priority
 Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Services\nvlddmkm\Parameters" /v "ThreadPriority" /f
-Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\nvlddmkm\FTS" /v "EnableRID61684" /t REG_DWORD /d "0" /f
 goto ENDRGPU
 
 :ramd
@@ -4538,6 +4544,11 @@ Reg add "%%i" /v "DisableDynamicPstate" /t REG_DWORD /d "1" /f >nul 2>&1
 )
 Reg add "HKLM\SYSTEM\ControlSet001\Control\Class\{4D36E968-E325-11CE-BFC1-08002BE10318}\0000" /v "AllowDeepCStates" /t REG_DWORD /d "0" /f
 goto ENDGPU
+
+:NUSS
+cls
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\nvlddmkm\FTS" /v "EnableRID61684" /t REG_DWORD /d "1" /f
+Goto ENDGPU2
 
 :NVTelemetry
 cls
@@ -4858,6 +4869,16 @@ ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
 WSCRIPT "%tmpmsgbox%"
 Goto GPU
 
+:ENDGPU2
+cls
+SET msgboxTitle=Opline Software
+SET msgboxBody=Finished, now you need to change the SILK option to Off in the Control Panel from Nvidia, click on Apply and it's ready. - Skonczone, teraz musisz w Panerze Sterowania od Nvidii zmienic opcje SILK na Off, kliknac w Zastosuj i gotowe.
+SET tmpmsgbox=%temp%~tmpmsgbox.vbs
+IF EXIST "%tmpmsgbox%" DEL /F /Q "%tmpmsgbox%"
+ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
+WSCRIPT "%tmpmsgbox%"
+Goto GPU
+
 :OGPU
 cls
 echo.
@@ -4909,15 +4930,7 @@ goto OGPU
 cls
 REM ;NVIDIA Driver Thread Priority
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\nvlddmkm\Parameters" /v "ThreadPriority" /t REG_DWORD /d "31" /f
-Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\nvlddmkm\FTS" /v "EnableRID61684" /t REG_DWORD /d "1" /f
-cls
-SET msgboxTitle=Opline Software
-SET msgboxBody=Finished, now you need to change the SILK option to Off in the Control Panel from Nvidia, click on Apply and it's ready. - Skonczone, teraz musisz w Panerze Sterowania od Nvidii zmienic opcje SILK na Off, kliknac w Zastosuj i gotowe.
-SET tmpmsgbox=%temp%~tmpmsgbox.vbs
-IF EXIST "%tmpmsgbox%" DEL /F /Q "%tmpmsgbox%"
-ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
-WSCRIPT "%tmpmsgbox%"
-goto GPU
+goto ENDGPU
 
 :amd
 cls
