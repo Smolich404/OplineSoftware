@@ -1341,7 +1341,6 @@ Reg add "HKCU\Control Panel\Desktop" /v "HungAppTimeout" /t Reg_SZ /d "4000" /f
 Reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Error Reporting" /v "Disabled" /t Reg_DWORD /d "1" /f
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v "EAFModules" /t REG_SZ /d "" /f
 powershell -NoProfile -Command "Disable-MMAgent -PC -MC -APL"
-wmic computersystem where name="%computername%" set AutomaticManagedPagefile=False
 cls
 SET msgboxTitle=Opline Software
 SET msgboxBody=Finished - Skonczone
@@ -1766,7 +1765,6 @@ Reg delete "HKCU\Control Panel\Desktop" /v "HungAppTimeout" /f
 Reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Error Reporting" /f
 Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v "EAFModules" /f
 powershell -NoProfile -Command "Enable-MMAgent -PC -MC -APL"
-wmic computersystem where name="%computername%" set AutomaticManagedPagefile=True
 cls
 SET msgboxTitle=Opline Software
 SET msgboxBody=Finished - Skonczone
