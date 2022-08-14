@@ -138,6 +138,7 @@ if %ERRORLEVEL% == 18 goto Help
 if %ERRORLEVEL% == 19 goto EXIT
 
 :ERROR
+MODE 104,17
 title Opline Software [LITE] [ERROR]
 cls
 color 4F
