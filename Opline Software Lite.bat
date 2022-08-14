@@ -154,7 +154,7 @@ echo.
 echo.
 echo                                     Wykryto problemy z cmdmenusel.exe
 echo    Sprobuj skontaktowac sie ze mna poprzez discord jezeli nadal wystepuja z tym problemy Smolich#0531
-echo                            i postaram sie jakos pomoc i naprawic ten blad :)
+echo                            i postaram sie jakos pomoc oraz naprawic ten blad :)
 echo.
 echo                                   Kliknij ENTER aby zamknac ten program
 echo.
