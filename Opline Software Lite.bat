@@ -827,6 +827,12 @@ SCHTASKS /END /TN "\Microsoft\Windows\DeviceDirectoryClient\RegisterDeviceSettin
 SCHTASKS /CHANGE /DISABLE /TN "\Microsoft\Windows\DeviceDirectoryClient\RegisterDeviceSettingChange"
 SCHTASKS /END /TN "\Microsoft\Windows\DeviceDirectoryClient\RegisterUserDevice"
 SCHTASKS /CHANGE /DISABLE /TN "\Microsoft\Windows\DeviceDirectoryClient\RegisterUserDevice"
+SCHTASKS /END /TN "\Microsoft\Windows\AppID\PolicyConverter"
+SCHTASKS /CHANGE /DISABLE /TN "\Microsoft\Windows\AppID\PolicyConverter"
+SCHTASKS /END /TN "\Microsoft\Windows\AppID\VerifiedPublisherCertStoreCheck"
+SCHTASKS /CHANGE /DISABLE /TN "\Microsoft\Windows\AppID\VerifiedPublisherCertStoreCheck"
+SCHTASKS /END /TN "\Microsoft\Windows\Power Efficiency Diagnostics\AnalyzeSystem"
+SCHTASKS /CHANGE /DISABLE /TN "\Microsoft\Windows\Power Efficiency Diagnostics\AnalyzeSystem"
 RD /S /Q "C:\ProgramData\Microsoft\windows\Sqm\"
 RD /S /Q "C:\ProgramData\Microsoft\windows\WER\"
 RD /S /Q "%USERPROFILE%\AppData\Local\Microsoft\Windows\WER\"
@@ -1145,6 +1151,9 @@ SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\AppID\EDP Policy Manager"
 SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\DiskCleanup\SilentCleanup"
 SCHTASKS /CHANGE /ENABLE /TN "\User_Feed_Synchronization-{883C416D-BAEC-4ED9-90F4-26C0F091D0F5}"
 SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\RetailDemo\CleanupOfflineContent"
+SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\AppID\PolicyConverter"
+SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\AppID\VerifiedPublisherCertStoreCheck"
+SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\Power Efficiency Diagnostics\AnalyzeSystem"
 Reg.exe add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "OneDrive" /t REG_SZ /d "\"C:\Users\tet\AppData\Local\Microsoft\OneDrive\OneDrive.exe\" /background" /f
 Reg.exe add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "MicrosoftEdgeAutoLaunch_2B10A56E508E694F3D32723A0FB513AD" /t REG_SZ /d "\"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe\" --no-startup-window --win-session-start /prefetch:5" /f
 REG ADD "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Device Metadata" /V PreventDeviceMetadataFromNetwork /T REG_DWORD /D 0 /F
