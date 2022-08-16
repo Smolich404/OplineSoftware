@@ -1216,6 +1216,8 @@ SCHTASKS /END /TN "\Microsoft\Windows\Work Folders\Work Folders Logon Synchroniz
 SCHTASKS /CHANGE /DISABLE /TN "\Microsoft\Windows\Work Folders\Work Folders Logon Synchronization"
 SCHTASKS /END /TN "\Microsoft\Windows\Work Folders\Work Folders Maintenance Work"
 SCHTASKS /CHANGE /DISABLE /TN "\Microsoft\Windows\Work Folders\Work Folders Maintenance Work"
+schtasks /end /TN "Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser"
+schtasks /Change /TN "Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser" /Disable
 Reg.exe add "HKCU\Control Panel\International\User Profile" /v "HttpAcceptLanguageOptOut" /t REG_DWORD /d "1" /f
 Reg.exe add "HKCU\Software\Microsoft\Input\TIPC" /v "Enabled" /t REG_DWORD /d "0" /f
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\AdvertisingInfo" /v "Enabled" /t REG_DWORD /d "0" /f
@@ -1323,7 +1325,6 @@ wevtutil sl Microsoft-Windows-SleepStudy/Diagnostic /e:false
 wevtutil sl Microsoft-Windows-Kernel-Processor-Power/Diagnostic /e:false
 wevtutil sl Microsoft-Windows-UserModePowerService/Diagnostic /e:false
 powershell -NonInteractive -NoLogo -NoProfile Set-ProcessMitigation -Name vgc.exe -Enable CFG
-schtasks /Change /TN "Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser" /Disable
 Reg add "HKLM\SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity" /v "Enabled" /t REG_DWORD /d "0" /f
 Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v "FeatureSettings" /t REG_DWORD /d "1" /f
 Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v "FeatureSettingsOverride" /t REG_DWORD /d "3" /f
@@ -1508,6 +1509,7 @@ SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\RetailDemo\CleanupOfflineConten
 SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\AppID\PolicyConverter"
 SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\AppID\VerifiedPublisherCertStoreCheck"
 SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\Power Efficiency Diagnostics\AnalyzeSystem"
+schtasks /Change /TN "Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser" /Enable
 Reg.exe add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "OneDrive" /t REG_SZ /d "\"C:\Users\tet\AppData\Local\Microsoft\OneDrive\OneDrive.exe\" /background" /f
 Reg.exe add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "MicrosoftEdgeAutoLaunch_2B10A56E508E694F3D32723A0FB513AD" /t REG_SZ /d "\"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe\" --no-startup-window --win-session-start /prefetch:5" /f
 REG ADD "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Device Metadata" /V PreventDeviceMetadataFromNetwork /T REG_DWORD /D 0 /F
@@ -1749,7 +1751,6 @@ wevtutil sl Microsoft-Windows-SleepStudy/Diagnostic /e:true
 wevtutil sl Microsoft-Windows-Kernel-Processor-Power/Diagnostic /e:true
 wevtutil sl Microsoft-Windows-UserModePowerService/Diagnostic /e:true
 powershell -NonInteractive -NoLogo -NoProfile Set-ProcessMitigation -Name vgc.exe -Disable CFG
-schtasks /Change /TN "Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser" /Enable
 Reg delete "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity" /f
 Reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v FeatureSettings /t Reg_DWORD /d "0" /f
 Reg delete "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v FeatureSettingsOverride /f
