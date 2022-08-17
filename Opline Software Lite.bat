@@ -1456,7 +1456,7 @@ cmdMenuSel f3B0 "   [+]  AppXSvc" "   [+]  Store" "   [+]  Xbox" "   [+]  Exit"
 if %ERRORLEVEL% == 1 goto AppXSvc
 if %ERRORLEVEL% == 2 goto Store
 if %ERRORLEVEL% == 3 goto Xbox
-if %ERRORLEVEL% == 4 goto OplineMenu
+if %ERRORLEVEL% == 4 goto Debloater
 
 :AppXSvc
 cls
