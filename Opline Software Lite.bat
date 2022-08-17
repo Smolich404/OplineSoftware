@@ -189,13 +189,14 @@ echo.
 call :ColorText 1B "###############################################################################################"
 echo.
 echo.
-cmdMenuSel f3B0 "   [+]  Debloater" "   [+]  Debloater V2" "   [+]  Debloater V3" "   [+]  Debloater V4" "   [+]  Reset Debloater" "   [+]  Exit"
+cmdMenuSel f3B0 "   [+]  Debloater" "   [+]  Debloater V2" "   [+]  Debloater V3" "   [+]  Debloater V4" "   [+]  Reset Debloater" "   [+]  Other Debloat" "   [+]  Exit"
 if %ERRORLEVEL% == 1 goto GANG
 if %ERRORLEVEL% == 2 goto GANG2
 if %ERRORLEVEL% == 3 goto GANG3
 if %ERRORLEVEL% == 4 goto GANG4
 if %ERRORLEVEL% == 5 goto RESETGANG
-if %ERRORLEVEL% == 6 goto OplineMenu
+if %ERRORLEVEL% == 6 goto OtherD
+if %ERRORLEVEL% == 7 goto OplineMenu
 
 :Regedit
 cls
@@ -1422,6 +1423,321 @@ IF EXIST "%tmpmsgbox%" DEL /F /Q "%tmpmsgbox%"
 ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
 WSCRIPT "%tmpmsgbox%"
 goto Debloater
+
+:OtherD
+cls
+echo.
+echo.
+call :ColorText 1B "###############################################################################################"
+echo.
+echo.
+echo                             ____  _____  _      _____ _   _ ______                      
+echo                            / __ \^|  __ \^| ^|    ^|_   _^| \ ^| ^|  ____^|                     
+echo                           ^| ^|  ^| ^| ^|__) ^| ^|      ^| ^| ^|  \^| ^| ^|__                        
+echo                           ^| ^|  ^| ^|  ___/^| ^|      ^| ^| ^|   \ ^|  __^|                       
+echo                           ^| ^|__^| ^| ^|    ^| ^|____ _^| ^|_^| ^|\  ^| ^|____                      
+echo                            \____/^|_^|    ^|______^|_____^|_^| \_^|______^|                     
+echo                   _____  ____  ______ _________          __     _____  ______ 
+echo                  / ____^|/ __ \^|  ____^|__   __\ \        / /\   ^|  __ \^|  ____^|
+echo                 ^| (___ ^| ^|  ^| ^| ^|__     ^| ^|   \ \  /\  / /  \  ^| ^|__) ^| ^|__   
+echo                  \___ \^| ^|  ^| ^|  __^|    ^| ^|    \ \/  \/ / /\ \ ^|  _  /^|  __^|  
+echo                  ____) ^| ^|__^| ^| ^|       ^| ^|     \  /\  / ____ \^| ^| \ \^| ^|____ 
+echo                 ^|_____/ \____/^|_^|       ^|_^|      \/  \/_/    \_\_^|  \_\______^|
+echo.
+echo.
+call :ColorText 0A "                                            L I T E"
+echo.
+echo.
+echo.
+call :ColorText 1B "###############################################################################################"
+echo.
+echo.
+cmdMenuSel f3B0 "   [+]  AppXSvc" "   [+]  Store" "   [+]  Xbox" "   [+]  Exit"
+if %ERRORLEVEL% == 1 goto AppXSvc
+if %ERRORLEVEL% == 2 goto Store
+if %ERRORLEVEL% == 3 goto Xbox
+if %ERRORLEVEL% == 4 goto OplineMenu
+
+:AppXSvc
+cls
+echo.
+echo.
+call :ColorText 1B "###############################################################################################"
+echo.
+echo.
+echo                             ____  _____  _      _____ _   _ ______                      
+echo                            / __ \^|  __ \^| ^|    ^|_   _^| \ ^| ^|  ____^|                     
+echo                           ^| ^|  ^| ^| ^|__) ^| ^|      ^| ^| ^|  \^| ^| ^|__                        
+echo                           ^| ^|  ^| ^|  ___/^| ^|      ^| ^| ^|   \ ^|  __^|                       
+echo                           ^| ^|__^| ^| ^|    ^| ^|____ _^| ^|_^| ^|\  ^| ^|____                      
+echo                            \____/^|_^|    ^|______^|_____^|_^| \_^|______^|                     
+echo                   _____  ____  ______ _________          __     _____  ______ 
+echo                  / ____^|/ __ \^|  ____^|__   __\ \        / /\   ^|  __ \^|  ____^|
+echo                 ^| (___ ^| ^|  ^| ^| ^|__     ^| ^|   \ \  /\  / /  \  ^| ^|__) ^| ^|__   
+echo                  \___ \^| ^|  ^| ^|  __^|    ^| ^|    \ \/  \/ / /\ \ ^|  _  /^|  __^|  
+echo                  ____) ^| ^|__^| ^| ^|       ^| ^|     \  /\  / ____ \^| ^| \ \^| ^|____ 
+echo                 ^|_____/ \____/^|_^|       ^|_^|      \/  \/_/    \_\_^|  \_\______^|
+echo.
+echo.
+call :ColorText 0A "                                            L I T E"
+echo.
+echo.
+echo.
+call :ColorText 1B "###############################################################################################"
+echo.
+echo.
+cmdMenuSel f3B0 "   [+]  Enable" "   [+]  Disable" "   [+]  Exit"
+if %ERRORLEVEL% == 1 goto EAppXSvc
+if %ERRORLEVEL% == 2 goto DAppXSvc
+if %ERRORLEVEL% == 3 goto OtherD
+
+:DAppXSvc
+cls
+REG ADD "HKLM\SYSTEM\CurrentControlSet\Services\AppXSvc" /V Start /T REG_DWORD /D 4 /F
+cls
+SET msgboxTitle=Opline Software
+SET msgboxBody=Finished - Skonczone
+SET tmpmsgbox=%temp%~tmpmsgbox.vbs
+IF EXIST "%tmpmsgbox%" DEL /F /Q "%tmpmsgbox%"
+ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
+WSCRIPT "%tmpmsgbox%"
+goto AppXSvc
+
+:EAppXSvc
+cls
+REG ADD "HKLM\SYSTEM\CurrentControlSet\Services\AppXSvc" /V Start /T REG_DWORD /D 3 /F
+cls
+SET msgboxTitle=Opline Software
+SET msgboxBody=Finished - Skonczone
+SET tmpmsgbox=%temp%~tmpmsgbox.vbs
+IF EXIST "%tmpmsgbox%" DEL /F /Q "%tmpmsgbox%"
+ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
+WSCRIPT "%tmpmsgbox%"
+goto AppXSvc
+
+:Store
+cls
+echo.
+echo.
+call :ColorText 1B "###############################################################################################"
+echo.
+echo.
+echo                             ____  _____  _      _____ _   _ ______                      
+echo                            / __ \^|  __ \^| ^|    ^|_   _^| \ ^| ^|  ____^|                     
+echo                           ^| ^|  ^| ^| ^|__) ^| ^|      ^| ^| ^|  \^| ^| ^|__                        
+echo                           ^| ^|  ^| ^|  ___/^| ^|      ^| ^| ^|   \ ^|  __^|                       
+echo                           ^| ^|__^| ^| ^|    ^| ^|____ _^| ^|_^| ^|\  ^| ^|____                      
+echo                            \____/^|_^|    ^|______^|_____^|_^| \_^|______^|                     
+echo                   _____  ____  ______ _________          __     _____  ______ 
+echo                  / ____^|/ __ \^|  ____^|__   __\ \        / /\   ^|  __ \^|  ____^|
+echo                 ^| (___ ^| ^|  ^| ^| ^|__     ^| ^|   \ \  /\  / /  \  ^| ^|__) ^| ^|__   
+echo                  \___ \^| ^|  ^| ^|  __^|    ^| ^|    \ \/  \/ / /\ \ ^|  _  /^|  __^|  
+echo                  ____) ^| ^|__^| ^| ^|       ^| ^|     \  /\  / ____ \^| ^| \ \^| ^|____ 
+echo                 ^|_____/ \____/^|_^|       ^|_^|      \/  \/_/    \_\_^|  \_\______^|
+echo.
+echo.
+call :ColorText 0A "                                            L I T E"
+echo.
+echo.
+echo.
+call :ColorText 1B "###############################################################################################"
+echo.
+echo.
+cmdMenuSel f3B0 "   [+]  Unblock" "   [+]  Block" "   [+]  Exit"
+if %ERRORLEVEL% == 1 goto UBStore
+if %ERRORLEVEL% == 2 goto BStore
+if %ERRORLEVEL% == 3 goto OtherD
+
+:BStore
+cls
+SCHTASKS /END /TN "\Microsoft\Windows\Windows\WS\Badge Update"
+SCHTASKS /CHANGE /DISABLE /TN "\Microsoft\Windows\Windows\WS\Badge Update"
+SCHTASKS /END /TN "\Microsoft\Windows\WS\License Validation"
+SCHTASKS /CHANGE /DISABLE /TN "\Microsoft\Windows\WS\License Validation"
+SCHTASKS /END /TN "\Microsoft\Windows\Windows\WS\Sync Licenses"
+SCHTASKS /CHANGE /DISABLE /TN "\Microsoft\Windows\Windows\WS\Sync Licenses"
+SCHTASKS /END /TN "\Microsoft\Windows\Windows\WS\WSRefreshBannedAppsListTask"
+SCHTASKS /CHANGE /DISABLE /TN "\Microsoft\Windows\Windows\WS\WSRefreshBannedAppsListTask"
+SCHTASKS /END /TN "\Microsoft\Windows\WS\WSTask"
+SCHTASKS /CHANGE /DISABLE /TN "\Microsoft\Windows\WS\WSTask"
+SCHTASKS /END /TN "\Microsoft\Windows\WindowsUpdate\Automatic App Update"
+SCHTASKS /CHANGE /DISABLE /TN "\Microsoft\Windows\WindowsUpdate\Automatic App Update"
+cls
+SET msgboxTitle=Opline Software
+SET msgboxBody=Finished - Skonczone
+SET tmpmsgbox=%temp%~tmpmsgbox.vbs
+IF EXIST "%tmpmsgbox%" DEL /F /Q "%tmpmsgbox%"
+ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
+WSCRIPT "%tmpmsgbox%"
+goto Store
+
+:UBStore
+cls
+SCHTASKS /RUN /TN "\Microsoft\Windows\Windows\WS\Badge Update"
+SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\Windows\WS\Badge Update"
+SCHTASKS /RUN /TN "\Microsoft\Windows\WS\License Validation"
+SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\WS\License Validation"
+SCHTASKS /RUN /TN "\Microsoft\Windows\Windows\WS\Sync Licenses"
+SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\Windows\WS\Sync Licenses"
+SCHTASKS /RUN /TN "\Microsoft\Windows\Windows\WS\WSRefreshBannedAppsListTask"
+SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\Windows\WS\WSRefreshBannedAppsListTask"
+SCHTASKS /RUN /TN "\Microsoft\Windows\WS\WSTask"
+SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\WS\WSTask"
+SCHTASKS /RUN /TN "\Microsoft\Windows\WindowsUpdate\Automatic App Update"
+SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\WindowsUpdate\Automatic App Update"
+cls
+SET msgboxTitle=Opline Software
+SET msgboxBody=Finished - Skonczone
+SET tmpmsgbox=%temp%~tmpmsgbox.vbs
+IF EXIST "%tmpmsgbox%" DEL /F /Q "%tmpmsgbox%"
+ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
+WSCRIPT "%tmpmsgbox%"
+goto Store
+
+:Xbox
+cls
+echo.
+echo.
+call :ColorText 1B "###############################################################################################"
+echo.
+echo.
+echo                             ____  _____  _      _____ _   _ ______                      
+echo                            / __ \^|  __ \^| ^|    ^|_   _^| \ ^| ^|  ____^|                     
+echo                           ^| ^|  ^| ^| ^|__) ^| ^|      ^| ^| ^|  \^| ^| ^|__                        
+echo                           ^| ^|  ^| ^|  ___/^| ^|      ^| ^| ^|   \ ^|  __^|                       
+echo                           ^| ^|__^| ^| ^|    ^| ^|____ _^| ^|_^| ^|\  ^| ^|____                      
+echo                            \____/^|_^|    ^|______^|_____^|_^| \_^|______^|                     
+echo                   _____  ____  ______ _________          __     _____  ______ 
+echo                  / ____^|/ __ \^|  ____^|__   __\ \        / /\   ^|  __ \^|  ____^|
+echo                 ^| (___ ^| ^|  ^| ^| ^|__     ^| ^|   \ \  /\  / /  \  ^| ^|__) ^| ^|__   
+echo                  \___ \^| ^|  ^| ^|  __^|    ^| ^|    \ \/  \/ / /\ \ ^|  _  /^|  __^|  
+echo                  ____) ^| ^|__^| ^| ^|       ^| ^|     \  /\  / ____ \^| ^| \ \^| ^|____ 
+echo                 ^|_____/ \____/^|_^|       ^|_^|      \/  \/_/    \_\_^|  \_\______^|
+echo.
+echo.
+call :ColorText 0A "                                            L I T E"
+echo.
+echo.
+echo.
+call :ColorText 1B "###############################################################################################"
+echo.
+echo.
+cmdMenuSel f3B0 "   [+]  Enable" "   [+]  Disable" "   [+]  XboxGameDVR" "   [+]  Exit"
+if %ERRORLEVEL% == 1 goto EXbox
+if %ERRORLEVEL% == 2 goto DXbox
+if %ERRORLEVEL% == 3 goto XboxGameDVR
+if %ERRORLEVEL% == 4 goto OtherD
+
+:DXbox
+cls
+SC CONFIG "XboxNetApiSvc" START= DISABLED
+NET STOP "XboxNetApiSvc"
+SC CONFIG "XboxGipSvc" START= DISABLED
+NET STOP "XboxGipSvc"
+SC CONFIG "XblGameSave" START= DISABLED
+NET STOP "XblGameSave"
+SC CONFIG "XblAuthManager" START= DISABLED
+NET STOP "XblAuthManager"
+SC CONFIG "xbgm" START= DISABLED
+NET STOP "xbgm"
+SCHTASKS /END /TN "\Microsoft\XblGameSave\XblGameSaveTask"
+SCHTASKS /CHANGE /DISABLE /TN "\Microsoft\XblGameSave\XblGameSaveTask"
+SCHTASKS /END /TN "\Microsoft\XblGameSave\XblGameSaveTaskLogon"
+SCHTASKS /CHANGE /DISABLE /TN "\Microsoft\XblGameSave\XblGameSaveTaskLogon"
+cls
+SET msgboxTitle=Opline Software
+SET msgboxBody=Finished - Skonczone
+SET tmpmsgbox=%temp%~tmpmsgbox.vbs
+IF EXIST "%tmpmsgbox%" DEL /F /Q "%tmpmsgbox%"
+ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
+WSCRIPT "%tmpmsgbox%"
+goto Xbox
+
+:EXbox
+cls
+SC CONFIG "XboxNetApiSvc" START= AUTO
+NET START "XboxNetApiSvc"
+SC CONFIG "XboxGipSvc" START= AUTO
+NET START "XboxGipSvc"
+SC CONFIG "XblGameSave" START= AUTO
+NET START "XblGameSave"
+SC CONFIG "XblAuthManager" START= AUTO
+NET START "XblAuthManager"
+SC CONFIG "xbgm" START= AUTO
+NET START "xbgm"
+SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\XblGameSave\XblGameSaveTask"
+SCHTASKS /RUN /TN "\Microsoft\XblGameSave\XblGameSaveTask"
+SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\XblGameSave\XblGameSaveTaskLogon"
+SCHTASKS /RUN /TN "\Microsoft\XblGameSave\XblGameSaveTaskLogon"
+cls
+SET msgboxTitle=Opline Software
+SET msgboxBody=Finished - Skonczone
+SET tmpmsgbox=%temp%~tmpmsgbox.vbs
+IF EXIST "%tmpmsgbox%" DEL /F /Q "%tmpmsgbox%"
+ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
+WSCRIPT "%tmpmsgbox%"
+goto Xbox
+
+:XboxGameDVR
+cls
+echo.
+echo.
+call :ColorText 1B "###############################################################################################"
+echo.
+echo.
+echo                             ____  _____  _      _____ _   _ ______                      
+echo                            / __ \^|  __ \^| ^|    ^|_   _^| \ ^| ^|  ____^|                     
+echo                           ^| ^|  ^| ^| ^|__) ^| ^|      ^| ^| ^|  \^| ^| ^|__                        
+echo                           ^| ^|  ^| ^|  ___/^| ^|      ^| ^| ^|   \ ^|  __^|                       
+echo                           ^| ^|__^| ^| ^|    ^| ^|____ _^| ^|_^| ^|\  ^| ^|____                      
+echo                            \____/^|_^|    ^|______^|_____^|_^| \_^|______^|                     
+echo                   _____  ____  ______ _________          __     _____  ______ 
+echo                  / ____^|/ __ \^|  ____^|__   __\ \        / /\   ^|  __ \^|  ____^|
+echo                 ^| (___ ^| ^|  ^| ^| ^|__     ^| ^|   \ \  /\  / /  \  ^| ^|__) ^| ^|__   
+echo                  \___ \^| ^|  ^| ^|  __^|    ^| ^|    \ \/  \/ / /\ \ ^|  _  /^|  __^|  
+echo                  ____) ^| ^|__^| ^| ^|       ^| ^|     \  /\  / ____ \^| ^| \ \^| ^|____ 
+echo                 ^|_____/ \____/^|_^|       ^|_^|      \/  \/_/    \_\_^|  \_\______^|
+echo.
+echo.
+call :ColorText 0A "                                            L I T E"
+echo.
+echo.
+echo.
+call :ColorText 1B "###############################################################################################"
+echo.
+echo.
+cmdMenuSel f3B0 "   [+]  Enable" "   [+]  Disable" "   [+]  Exit"
+if %ERRORLEVEL% == 1 goto EXboxGameDVR
+if %ERRORLEVEL% == 2 goto DXboxGameDVR
+if %ERRORLEVEL% == 3 goto OtherD
+
+:DXboxGameDVR
+cls
+REG ADD "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\GameDVR" /V AppCaptureEnabled /T REG_DWORD /D 0 /F
+REG ADD "HKCU\System\GameConfigStore" /V GameDVR_Enabled /T REG_DWORD /D 0 /F
+REG ADD "HKLM\SOFTWARE\Microsoft\PolicyManager\default\ApplicationManagement\AllowGameDVR" /V value /T REG_DWORD /D 0 /F
+cls
+SET msgboxTitle=Opline Software
+SET msgboxBody=Finished - Skonczone
+SET tmpmsgbox=%temp%~tmpmsgbox.vbs
+IF EXIST "%tmpmsgbox%" DEL /F /Q "%tmpmsgbox%"
+ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
+WSCRIPT "%tmpmsgbox%"
+goto XboxGameDVR
+
+:EXboxGameDVR
+cls
+REG ADD "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\GameDVR" /V AppCaptureEnabled /T REG_DWORD /D 1 /F
+REG ADD "HKCU\System\GameConfigStore" /V GameDVR_Enabled /T REG_DWORD /D 1 /F
+REG ADD "HKLM\SOFTWARE\Microsoft\PolicyManager\default\ApplicationManagement\AllowGameDVR" /V value /T REG_DWORD /D 1 /F
+cls
+SET msgboxTitle=Opline Software
+SET msgboxBody=Finished - Skonczone
+SET tmpmsgbox=%temp%~tmpmsgbox.vbs
+IF EXIST "%tmpmsgbox%" DEL /F /Q "%tmpmsgbox%"
+ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
+WSCRIPT "%tmpmsgbox%"
+goto XboxGameDVR
 
 :Services
 cls
