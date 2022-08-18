@@ -1285,12 +1285,9 @@ reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManag
 reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "OemPreInstalledAppsEnabled" /t REG_DWORD /d "0" /f
 reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "FeatureManagementEnabled" /t REG_DWORD /d "0" /f
 reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "ContentDeliveryAllowed" /t REG_DWORD /d "0" /f
-REG ADD "HKLM\SYSTEM\CurrentControlSet\Services\AppXSvc" /V Start /T REG_DWORD /D 4 /F
 REG ADD "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\GameDVR" /V AppCaptureEnabled /T REG_DWORD /D 0 /F
 REG ADD "HKCU\System\GameConfigStore" /V GameDVR_Enabled /T REG_DWORD /D 0 /F
 REG ADD "HKLM\SOFTWARE\Microsoft\PolicyManager\default\ApplicationManagement\AllowGameDVR" /V value /T REG_DWORD /D 0 /F
-ROUTE -P DELETE 207.46.101.29 MASK 255.255.255.255 0.0.0.0
-ROUTE -P DELETE 204.79.197.200 MASK 255.255.255.255 0.0.0.0
 Reg.exe add "HKCU\Software\Policies\Microsoft\Windows\CurrentVersion\PushNotifications" /v "NoToastApplicationNotification" /t REG_DWORD /d "1" /f
 Reg.exe add "HKCU\Software\Policies\Microsoft\Windows\CurrentVersion\PushNotifications" /v "NoToastApplicationNotificationOnLockScreen" /t REG_DWORD /d "1" /f
 Reg.exe add "HKLM\SOFTWARE\Microsoft\WindowsSelfHost\UI\Visibility" /v "DiagnosticErrorText" /t REG_DWORD /d "0" /f
@@ -1709,9 +1706,6 @@ Reg.exe add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\SettingSync\Groups\S
 REG ADD "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\GameDVR" /V AppCaptureEnabled /T REG_DWORD /D 1 /F
 REG ADD "HKCU\System\GameConfigStore" /V GameDVR_Enabled /T REG_DWORD /D 1 /F
 REG ADD "HKLM\SOFTWARE\Microsoft\PolicyManager\default\ApplicationManagement\AllowGameDVR" /V value /T REG_DWORD /D 1 /F
-REG ADD "HKLM\SYSTEM\CurrentControlSet\Services\AppXSvc" /V Start /T REG_DWORD /D 3 /F
-ROUTE -P ADD 207.46.101.29 MASK 255.255.255.255 0.0.0.0
-ROUTE -P ADD 204.79.197.200 MASK 255.255.255.255 0.0.0.0
 Reg.exe delete "HKCU\Software\Policies\Microsoft\Windows\CurrentVersion\PushNotifications" /v "NoToastApplicationNotification" /f
 Reg.exe delete "HKCU\Software\Policies\Microsoft\Windows\CurrentVersion\PushNotifications" /v "NoToastApplicationNotificationOnLockScreen" /f
 Reg.exe add "HKCU\Software\Policies\Microsoft\Windows\CurrentVersion\PushNotifications" /f
@@ -1984,6 +1978,12 @@ if %ERRORLEVEL% == 3 goto OtherD
 
 :BStore
 cls
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\wlidsvc" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\AppMgmt" /v "Start" /t REG_DWORD /d "4" /f
+sc config AppMgmt start= disabled
+sc stop AppMgmt
+sc config wlidsvc start= disabled
+sc stop wlidsvc
 SCHTASKS /END /TN "\Microsoft\Windows\Windows\WS\Badge Update"
 SCHTASKS /CHANGE /DISABLE /TN "\Microsoft\Windows\Windows\WS\Badge Update"
 SCHTASKS /END /TN "\Microsoft\Windows\WS\License Validation"
@@ -2007,6 +2007,12 @@ goto Store
 
 :UBStore
 cls
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\wlidsvc" /v "Start" /t REG_DWORD /d "3" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\AppMgmt" /v "Start" /t REG_DWORD /d "3" /f
+sc config wlidsvc start= demand
+sc start wlidsvc
+sc config AppMgmt start= demand
+sc start AppMgmt
 SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\Windows\WS\Badge Update"
 SCHTASKS /RUN /TN "\Microsoft\Windows\Windows\WS\Badge Update"
 SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\WS\License Validation"
@@ -2397,7 +2403,6 @@ cls
 Powershell iex ((New-Object System.Net.WebClient).DownloadString('https://bit.ly/EServices1'))
 sc config RemoteRegistry start= disabled
 sc config ALG start= auto
-sc config AppMgmt start= auto
 sc config BthHFSrv start= auto
 sc config bthserv start= auto
 sc config CertPropSvc start= auto
@@ -2696,8 +2701,6 @@ sc config SysMain start=auto
 sc start SysMain
 sc config NcaSvc start=auto
 sc start NcaSvc
-sc config wlidsvc start=auto
-sc start wlidsvc
 sc config SCardSvr start=auto
 sc start SCardSvr
 sc config NgcCtnrSvc start=auto
@@ -2780,8 +2783,6 @@ sc config Schedule start=auto
 sc start Schedule
 sc config NgcCtnrSvc start= auto
 sc start NgcCtnrSvc
-sc config wlidsvc start= auto
-sc start wlidsvc
 SC CONFIG "TabletInputService" START= AUTO
 NET START "TabletInputService"
 SC CONFIG "dmwappushservice" START= AUTO 
@@ -2856,8 +2857,6 @@ sc config SysMain start=auto
 sc start SysMain
 sc config NcaSvc start=auto
 sc start NcaSvc
-sc config wlidsvc start=auto
-sc start wlidsvc
 sc config SCardSvr start=auto
 sc start SCardSvr
 sc config NgcCtnrSvc start=auto
@@ -3100,7 +3099,6 @@ Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\wercplsupport"
 Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\RetailDemo" /v "Start" /t REG_DWORD /d "3" /f
 reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\MicrosoftEdgeElevationService" /v "Start" /t REG_DWORD /d "3" /f
 Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\GpuEnergyDrv" /v "Start" /t Reg_DWORD /d "2" /f
-Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\wlidsvc" /v "Start" /t REG_DWORD /d "3" /f
 Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanmanServer" /v "Start" /t REG_DWORD /d "2" /f
 sc config DPS start=auto
 sc config WdiSystemHost start=auto
@@ -3124,7 +3122,6 @@ cls
 Powershell iex ((New-Object System.Net.WebClient).DownloadString('https://bit.ly/DServices1'))
 sc config RemoteRegistry start= disabled
 sc config ALG start= disabled
-sc config AppMgmt start= disabled
 sc config BthHFSrv start= disabled
 sc config bthserv start= disabled
 sc config CertPropSvc start= disabled
@@ -3425,8 +3422,6 @@ sc config SysMain start=disabled
 sc stop SysMain
 sc config NcaSvc start=disabled
 sc stop NcaSvc
-sc config wlidsvc start=disabled
-sc stop wlidsvc
 sc config SCardSvr start=disabled
 sc stop SCardSvr
 sc config NgcCtnrSvc start=disabled
@@ -3509,8 +3504,6 @@ sc config Schedule start=disabled
 sc stop Schedule
 sc config NgcCtnrSvc start= auto
 sc start NgcCtnrSvc
-sc config wlidsvc start= auto
-sc start wlidsvc
 NET STOP "TabletInputService"
 SC CONFIG "TabletInputService" START= DISABLED
 NET STOP "dmwappushservice"
@@ -3587,8 +3580,6 @@ sc config SysMain start=disabled
 sc stop SysMain
 sc config NcaSvc start=disabled
 sc stop NcaSvc
-sc config wlidsvc start=disabled
-sc stop wlidsvc
 sc config SCardSvr start=disabled
 sc stop SCardSvr
 sc config NgcCtnrSvc start=disabled
@@ -3671,8 +3662,6 @@ sc config Schedule start=disabled
 sc stop Schedule
 sc config NgcCtnrSvc start= auto
 sc start NgcCtnrSvc
-sc config wlidsvc start= auto
-sc start wlidsvc
 sc stop "CertPropSvc"
 sc config "CertPropSvc" start= disabled
 sc stop "PeerDistSvc"
@@ -3834,7 +3823,6 @@ Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\wercplsupport"
 Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\RetailDemo" /v "Start" /t REG_DWORD /d "4" /f
 reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\MicrosoftEdgeElevationService" /v "Start" /t REG_DWORD /d "4" /f
 Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\GpuEnergyDrv" /v "Start" /t Reg_DWORD /d "4" /f
-Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\wlidsvc" /v "Start" /t REG_DWORD /d "4" /f
 Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanmanServer" /v "Start" /t REG_DWORD /d "4" /f
 sc config DPS start=disabled
 sc config WdiSystemHost start=disabled
@@ -8522,25 +8510,6 @@ reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet" /v DontReport
 REG ADD "HKLM\SYSTEM\CurrentControlSet\Services\MpsSvc" /V Start /T REG_DWORD /D 2 /F
 REG ADD "HKLM\SYSTEM\CurrentControlSet\Services\SecurityHealthService" /V Start /T REG_DWORD /D 2 /F
 icacls "%systemroot%\System32\smartscreen.exe" /reset
-powershell.exe -command "Remove-MpPreference -ExclusionExtension ".exe""
-powershell.exe -command "Set-MpPreference -EnableControlledFolderAccess Enabled"
-powershell.exe -command "Set-MpPreference -PUAProtection enable"
-powershell.exe -command "Set-MpPreference -DisableRealtimeMonitoring $false"
-powershell.exe -command "Set-MpPreference -DisableBehaviorMonitoring $false"
-powershell.exe -command "Set-MpPreference -DisableBlockAtFirstSeen $false"
-powershell.exe -command "Set-MpPreference -DisableIOAVProtection $false"
-powershell.exe -command "Set-MpPreference -DisablePrivacyMode $false"
-powershell.exe -command "Set-MpPreference -SignatureDisableUpdateOnStartupWithoutEngine $false"
-powershell.exe -command "Set-MpPreference -DisableArchiveScanning $false"
-powershell.exe -command "Set-MpPreference -DisableIntrusionPreventionSystem $false"
-powershell.exe -command "Set-MpPreference -DisableScriptScanning $false"
-powershell.exe -command "Set-MpPreference -SubmitSamplesConsent 1"
-powershell.exe -command "Set-MpPreference -MAPSReporting 2"
-powershell.exe -command "Set-MpPreference -HighThreatDefaultAction 0 -Force"
-powershell.exe -command "Set-MpPreference -ModerateThreatDefaultAction 0"
-powershell.exe -command "Set-MpPreference -LowThreatDefaultAction 0"
-powershell.exe -command "Set-MpPreference -SevereThreatDefaultAction 0"
-powershell.exe -command "Set-MpPreference -ScanScheduleDay 0"
 Reg del "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender" /v DisableAntiSpyware /f
 powershell.exe -command "netsh advfirewall set allprofiles state on"
 sc start WinDefend
@@ -8634,25 +8603,6 @@ takeown /f "%systemroot%\System32\smartscreen.exe" /a
 icacls "%systemroot%\System32\smartscreen.exe" /reset
 taskkill /im smartscreen.exe /f
 icacls "%systemroot%\System32\smartscreen.exe" /inheritance:r /remove *S-1-5-32-544 *S-1-5-11 *S-1-5-32-545 *S-1-5-18
-powershell.exe -command "Add-MpPreference -ExclusionExtension ".exe""
-powershell.exe -command "Set-MpPreference -EnableControlledFolderAccess Disabled"
-powershell.exe -command "Set-MpPreference -PUAProtection disable"
-powershell.exe -command "Set-MpPreference -DisableRealtimeMonitoring $true"
-powershell.exe -command "Set-MpPreference -DisableBehaviorMonitoring $true"
-powershell.exe -command "Set-MpPreference -DisableBlockAtFirstSeen $true"
-powershell.exe -command "Set-MpPreference -DisableIOAVProtection $true"
-powershell.exe -command "Set-MpPreference -DisablePrivacyMode $true"
-powershell.exe -command "Set-MpPreference -SignatureDisableUpdateOnStartupWithoutEngine $true"
-powershell.exe -command "Set-MpPreference -DisableArchiveScanning $true"
-powershell.exe -command "Set-MpPreference -DisableIntrusionPreventionSystem $true"
-powershell.exe -command "Set-MpPreference -DisableScriptScanning $true"
-powershell.exe -command "Set-MpPreference -SubmitSamplesConsent 2"
-powershell.exe -command "Set-MpPreference -MAPSReporting 0"
-powershell.exe -command "Set-MpPreference -HighThreatDefaultAction 6 -Force"
-powershell.exe -command "Set-MpPreference -ModerateThreatDefaultAction 6"
-powershell.exe -command "Set-MpPreference -LowThreatDefaultAction 6"
-powershell.exe -command "Set-MpPreference -SevereThreatDefaultAction 6"
-powershell.exe -command "Set-MpPreference -ScanScheduleDay 8"
 Reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender" /v DisableAntiSpyware /t REG_DWORD /d 1 /f
 powershell.exe -command "netsh advfirewall set allprofiles state off"
 Reg.exe delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "WindowsDefender" /f
@@ -8717,6 +8667,36 @@ if %ERRORLEVEL% == 3 goto Defender
 cls
 REG ADD "HKLM\SYSTEM\CurrentControlSet\Services\MpsSvc" /V Start /T REG_DWORD /D 4 /F
 cls
+echo.
+echo  
+echo.
+echo  Disable Settings Firewall?
+echo.
+echo  - (N) No - (Y) Yes
+echo.
+SET /P DFIREWALL=
+if %DFIREWALL%== X goto DFirewall3
+if %DFIREWALL%== x goto DFirewall3
+if %DFIREWALL%== N goto DFirewall3
+if %DFIREWALL%== n goto DFirewall3
+if %DFIREWALL%== Y goto DFirewall2
+if %DFIREWALL%== y goto DFirewall2
+Goto DFirewall
+
+:DFirewall2
+cls
+powershell.exe -command "netsh advfirewall set allprofiles state off"
+cls
+SET msgboxTitle=Opline Software
+SET msgboxBody=Finished - Skonczone
+SET tmpmsgbox=%temp%~tmpmsgbox.vbs
+IF EXIST "%tmpmsgbox%" DEL /F /Q "%tmpmsgbox%"
+ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
+WSCRIPT "%tmpmsgbox%"
+goto Firewall
+
+:DFirewall3
+cls
 SET msgboxTitle=Opline Software
 SET msgboxBody=Finished - Skonczone
 SET tmpmsgbox=%temp%~tmpmsgbox.vbs
@@ -8728,6 +8708,36 @@ goto Firewall
 :EFirewall
 cls
 REG ADD "HKLM\SYSTEM\CurrentControlSet\Services\MpsSvc" /V Start /T REG_DWORD /D 2 /F
+cls
+echo.
+echo  
+echo.
+echo  Enable Settings Firewall?
+echo.
+echo  - (N) No - (Y) Yes
+echo.
+SET /P EFIREWALL=
+if %EFIREWALL%== X goto EFirewall3
+if %EFIREWALL%== x goto EFirewall3
+if %EFIREWALL%== N goto EFirewall3
+if %EFIREWALL%== n goto EFirewall3
+if %EFIREWALL%== Y goto EFirewall2
+if %EFIREWALL%== y goto EFirewall2
+Goto EFirewall
+
+:EFirewall2
+cls
+powershell.exe -command "netsh advfirewall set allprofiles state on"
+cls
+SET msgboxTitle=Opline Software
+SET msgboxBody=Finished - Skonczone
+SET tmpmsgbox=%temp%~tmpmsgbox.vbs
+IF EXIST "%tmpmsgbox%" DEL /F /Q "%tmpmsgbox%"
+ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
+WSCRIPT "%tmpmsgbox%"
+goto Firewall
+
+:EFirewall3
 cls
 SET msgboxTitle=Opline Software
 SET msgboxBody=Finished - Skonczone

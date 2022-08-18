@@ -1550,6 +1550,12 @@ if %ERRORLEVEL% == 3 goto OtherD
 
 :BStore
 cls
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\wlidsvc" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\AppMgmt" /v "Start" /t REG_DWORD /d "4" /f
+sc config AppMgmt start= disabled
+sc stop AppMgmt
+sc config wlidsvc start= disabled
+sc stop wlidsvc
 SCHTASKS /END /TN "\Microsoft\Windows\Windows\WS\Badge Update"
 SCHTASKS /CHANGE /DISABLE /TN "\Microsoft\Windows\Windows\WS\Badge Update"
 SCHTASKS /END /TN "\Microsoft\Windows\WS\License Validation"
@@ -1573,6 +1579,12 @@ goto Store
 
 :UBStore
 cls
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\wlidsvc" /v "Start" /t REG_DWORD /d "3" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\AppMgmt" /v "Start" /t REG_DWORD /d "3" /f
+sc config wlidsvc start= demand
+sc start wlidsvc
+sc config AppMgmt start= demand
+sc start AppMgmt
 SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\Windows\WS\Badge Update"
 SCHTASKS /RUN /TN "\Microsoft\Windows\Windows\WS\Badge Update"
 SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\WS\License Validation"
