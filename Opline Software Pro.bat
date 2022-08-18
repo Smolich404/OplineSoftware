@@ -2007,18 +2007,18 @@ goto Store
 
 :UBStore
 cls
-SCHTASKS /RUN /TN "\Microsoft\Windows\Windows\WS\Badge Update"
 SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\Windows\WS\Badge Update"
-SCHTASKS /RUN /TN "\Microsoft\Windows\WS\License Validation"
+SCHTASKS /RUN /TN "\Microsoft\Windows\Windows\WS\Badge Update"
 SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\WS\License Validation"
-SCHTASKS /RUN /TN "\Microsoft\Windows\Windows\WS\Sync Licenses"
+SCHTASKS /RUN /TN "\Microsoft\Windows\WS\License Validation"
 SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\Windows\WS\Sync Licenses"
-SCHTASKS /RUN /TN "\Microsoft\Windows\Windows\WS\WSRefreshBannedAppsListTask"
+SCHTASKS /RUN /TN "\Microsoft\Windows\Windows\WS\Sync Licenses"
 SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\Windows\WS\WSRefreshBannedAppsListTask"
-SCHTASKS /RUN /TN "\Microsoft\Windows\WS\WSTask"
+SCHTASKS /RUN /TN "\Microsoft\Windows\Windows\WS\WSRefreshBannedAppsListTask"
 SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\WS\WSTask"
-SCHTASKS /RUN /TN "\Microsoft\Windows\WindowsUpdate\Automatic App Update"
+SCHTASKS /RUN /TN "\Microsoft\Windows\WS\WSTask"
 SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\WindowsUpdate\Automatic App Update"
+SCHTASKS /RUN /TN "\Microsoft\Windows\WindowsUpdate\Automatic App Update"
 cls
 SET msgboxTitle=Opline Software
 SET msgboxBody=Finished - Skonczone
