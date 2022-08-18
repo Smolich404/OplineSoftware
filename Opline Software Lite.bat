@@ -2047,8 +2047,6 @@ sc config SysMain start=auto
 sc start SysMain
 sc config NcaSvc start=auto
 sc start NcaSvc
-sc config wlidsvc start=auto
-sc start wlidsvc
 sc config SCardSvr start=auto
 sc start SCardSvr
 sc config NgcCtnrSvc start=auto
@@ -2371,8 +2369,6 @@ sc config SysMain start=disabled
 sc stop SysMain
 sc config NcaSvc start=disabled
 sc stop NcaSvc
-sc config wlidsvc start=disabled
-sc stop wlidsvc
 sc config SCardSvr start=disabled
 sc stop SCardSvr
 sc config NgcCtnrSvc start=disabled
@@ -2455,8 +2451,6 @@ sc config Schedule start=disabled
 sc stop Schedule
 sc config NgcCtnrSvc start= auto
 sc start NgcCtnrSvc
-sc config wlidsvc start= auto
-sc start wlidsvc
 sc stop "CertPropSvc"
 sc config "CertPropSvc" start= disabled
 sc stop "PeerDistSvc"
