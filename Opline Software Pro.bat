@@ -1449,7 +1449,7 @@ Reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate" /v "DeferUp
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Device Metadata" /v "PreventDeviceMetadataFromNetwork" /t REG_DWORD /d "1" /f
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsStore\WindowsUpdate" /v "AutoDownload" /t REG_DWORD /d "2" /f
 Reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" /v "NoAutoUpdate" /t REG_DWORD /d "1" /f
-Reg.exe add "HKLM\SYSTEM\ControlSet001\Services\wuauserv" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKLM\SYSTEM\ControlSet001\Services\wuauserv" /v "Start" /t REG_DWORD /d "3" /f
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Services\7971f918-a847-4430-9279-4a52d1efe18d" /v "RegisteredWithAU" /t REG_DWORD /d "0" /f
 Reg.exe add "HKLM\SOFTWARE\Microsoft\OneDrive" /v "PreventNetworkTrafficPreUserSignIn" /t REG_DWORD /d "1" /f
 Reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet" /v "SpyNetReporting" /t REG_DWORD /d "0" /f
@@ -4615,7 +4615,29 @@ goto OneDrive
 
 :OUninstall
 cls
-Powershell iex ((New-Object System.Net.WebClient).DownloadString('https://bit.ly/DeleteOneDrive'))
+TASKKILL /F /IM "OneDrive.exe"
+TASKKILL /F /IM "explorer.exe"
+IF EXIST "C:\Windows\System32\OneDriveSetup.exe" START /WAIT C:\Windows\System32\OneDriveSetup.exe /uninstall
+IF EXIST "C:\Windows\SysWOW64\OneDriveSetup.exe" START /WAIT C:\Windows\SysWOW64\OneDriveSetup.exe /uninstall
+TAKEOWN /F "%UserProfile%\OneDrive" /R /D Y
+TAKEOWN /F "%LocalAppData%\Microsoft\OneDrive" /R /D Y
+TAKEOWN /F "%ProgramData%\Microsoft OneDrive" /R /D Y
+TAKEOWN /F "C:\OneDriveTemp" /R /D Y
+ICACLS "%UserProfile%\OneDrive" /T /GRANT Wszyscy:F
+ICACLS "%LocalAppData%\Microsoft\OneDrive" /T /GRANT Wszyscy:F
+ICACLS "%ProgramData%\Microsoft OneDrive" /T /GRANT Wszyscy:F
+ICACLS "C:\OneDriveTemp" /T /GRANT Wszyscy:F
+RD "%UserProfile%\OneDrive" /Q /S
+RD "%LocalAppData%\Microsoft\OneDrive" /Q /S
+RD "%ProgramData%\Microsoft OneDrive" /Q /S
+RD "C:\OneDriveTemp" /Q /S
+RD "%UserProfile%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\OneDrive.lnk"
+DEL /F /Q "%localappdata%\Microsoft\OneDrive\OneDriveStandaloneUpdater.exe" >nul 2>&1
+REG DELETE "HKEY_CLASSES_ROOT\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" /F
+REG DELETE "HKEY_CLASSES_ROOT\Wow6432Node\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" /F
+SCHTASKS /END /TN "\OneDrive Standalone Update Task*"
+SCHTASKS /CHANGE /DISABLE /TN "\OneDrive Standalone Update Task*"
+START "" "explorer.exe"
 cls
 SET msgboxTitle=Opline Software
 SET msgboxBody=Finished - Skonczone
