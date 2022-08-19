@@ -6947,11 +6947,6 @@ Reg.exe add "HKLM\SYSTEM\ControlSet001\Services\wuauserv" /v "Start" /t REG_DWOR
 Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\BITS" /v "Start" /t REG_DWORD /d "2" /f
 Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\UsoSvc" /v "Start" /t REG_DWORD /d "2" /f
 reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Services\7971f918-a847-4430-9279-4a52d1efe18d" /v "RegisteredWithAU" /t REG_DWORD /d "1" /f
-SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\Windows\WS\Badge Update"
-SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\WS\License Validation"
-SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\Windows\WS\Sync Licenses"
-SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\Windows\WS\WSRefreshBannedAppsListTask"
-SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\WS\WSTask"
 SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\WindowsUpdate\Automatic App Update"
 REG ADD "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate" /V DeferUpgrade /T REG_DWORD /D 1 /F
 icacls "%systemroot%\System32\osrss.dll" /reset
@@ -7015,10 +7010,6 @@ Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Servic
 Reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate" /v "NoAutoRebootWithLoggedOnUsers" /t REG_DWORD /d "1" /f
 Reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate" /v "ExcludeWUDriversInQualityUpdate" /t REG_DWORD /d "1" /f
 reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate" /v "SetDisableUXWUAccess" /t REG_DWORD /d "1" /f
-SCHTASKS /END /TN "\Microsoft\Windows\Windows\WS\License Validation"
-SCHTASKS /CHANGE /DISABLE /TN "\Microsoft\Windows\WS\License Validation"
-SCHTASKS /END /TN "\Microsoft\Windows\Windows\WS\WSTask"
-SCHTASKS /CHANGE /DISABLE /TN "\Microsoft\Windows\WS\WSTask"
 SCHTASKS /END /TN "\Microsoft\Windows\WindowsUpdate\Automatic App Update"
 SCHTASKS /CHANGE /DISABLE /TN "\Microsoft\Windows\WindowsUpdate\Automatic App Update"
 SCHTASKS /END /TN "\Microsoft\Windows\WindowsUpdate\Automatic App Update"

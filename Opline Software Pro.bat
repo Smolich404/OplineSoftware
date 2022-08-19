@@ -1001,6 +1001,19 @@ REG ADD "HKLM\SOFTWARE\Policies\Microsoft\Windows\System" /V UploadUserActivitie
 REG ADD "HKLM\SOFTWARE\Policies\Microsoft\Windows\System" /V AllowClipboardHistory /T REG_DWORD /D 0 /F 
 REG ADD "HKCU\Software\Microsoft\Clipboard" /V EnableClipboardHistory /T REG_DWORD /D 0 /F 
 REG ADD "HKLM\SOFTWARE\Policies\Microsoft\Windows\System" /V AllowCrossDeviceClipboard /T REG_DWORD /D 0 /F
+REG ADD "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\userAccountInformation" /V Value /T REG_SZ /D "Deny" /F
+REG ADD "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\webcam" /V Value /T REG_SZ /D "Deny" /F
+REG ADD "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\microphone" /V Value /T REG_SZ /D "Deny" /F
+REG ADD "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\contacts" /V Value /T REG_SZ /D "Deny" /F
+REG ADD "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\appointments" /V Value /T REG_SZ /D "Deny" /F
+REG ADD "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\phoneCallHistory" /V Value /T REG_SZ /D "Deny" /F
+REG ADD "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\email" /V Value /T REG_SZ /D "Deny" /F
+REG ADD "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\userDataTasks" /V Value /T REG_SZ /D "Deny" /F
+REG ADD "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\chat" /V Value /T REG_SZ /D "Deny" /F
+REG ADD "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\documentsLibrary" /V Value /T REG_SZ /D "Deny" /F
+REG ADD "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\picturesLibrary" /V Value /T REG_SZ /D "Deny" /F
+REG ADD "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\videosLibrary" /V Value /T REG_SZ /D "Deny" /F
+REG ADD "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\broadFileSystemAccess" /V Value /T REG_SZ /D "Deny" /F
 REG ADD "HKCU\Control Panel\International\User Profile" /V HttpAcceptLanguageOptOut /T REG_DWORD /D 1 /F
 REG ADD "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\AppHost" /V EnableWebContentEvaluation /T REG_DWORD /D 0 /F
 REG ADD "HKLM\SOFTWARE\Microsoft\PolicyManager\current\device\Bluetooth" /V AllowAdvertising /T REG_DWORD /D 0 /F
@@ -8226,11 +8239,6 @@ takeown /F "$env:WinDIR\System32\MusNotification.exe"
 icacls "$env:WinDIR\System32\MusNotification.exe" /allow "$($EveryOne):(X)"
 takeown /F "$env:WinDIR\System32\MusNotificationUx.exe"
 icacls "$env:WinDIR\System32\MusNotificationUx.exe" /allow "$($EveryOne):(X)"
-SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\Windows\WS\Badge Update"
-SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\WS\License Validation"
-SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\Windows\WS\Sync Licenses"
-SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\Windows\WS\WSRefreshBannedAppsListTask"
-SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\WS\WSTask"
 SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\WindowsUpdate\Automatic App Update"
 REG ADD "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate" /V DeferUpgrade /T REG_DWORD /D 1 /F
 icacls "%systemroot%\System32\osrss.dll" /reset
@@ -8320,10 +8328,6 @@ takeown /F "$env:WinDIR\System32\MusNotification.exe"
 icacls "$env:WinDIR\System32\MusNotification.exe" /deny "$($EveryOne):(X)"
 takeown /F "$env:WinDIR\System32\MusNotificationUx.exe"
 icacls "$env:WinDIR\System32\MusNotificationUx.exe" /deny "$($EveryOne):(X)"
-SCHTASKS /END /TN "\Microsoft\Windows\Windows\WS\License Validation"
-SCHTASKS /CHANGE /DISABLE /TN "\Microsoft\Windows\WS\License Validation"
-SCHTASKS /END /TN "\Microsoft\Windows\Windows\WS\WSTask"
-SCHTASKS /CHANGE /DISABLE /TN "\Microsoft\Windows\WS\WSTask"
 SCHTASKS /END /TN "\Microsoft\Windows\WindowsUpdate\Automatic App Update"
 SCHTASKS /CHANGE /DISABLE /TN "\Microsoft\Windows\WindowsUpdate\Automatic App Update"
 SCHTASKS /END /TN "\Microsoft\Windows\WindowsUpdate\Automatic App Update"
