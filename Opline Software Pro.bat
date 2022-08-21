@@ -4145,7 +4145,7 @@ powershell -command "& { iwr https://github.com/Smolich404/UninstallEdge/release
 powershell -command "& { iwr https://github.com/Smolich404/UninstallEdge/releases/download/E/Uninstall.Edge.cmd -OutFile Uninstall.Edge.cmd }"
 timeout 2 >nul
 start Uninstall.Edge.cmd
-timeout 7 >nul
+timeout 10 >nul
 del install_wim_tweak.exe
 del Uninstall.Edge.cmd
 del Packages.txt
