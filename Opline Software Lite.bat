@@ -1115,6 +1115,9 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control" /v "SystemStartOptions" /t R
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control" /v "LastBootShutdown" /t REG_DWORD /d "1" /f
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\AppID" /v "dbc4c77e-cf0a-44d7-8a79-5eb45d64decd" /t REG_DWORD /d "0" /f
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\AppID\Configuration\SMARTLOCKER" /v "START_PENDING" /t REG_DWORD /d "0" /f
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\CI\Config" /v "VulnerableDriverBlocklistEnable" /t REG_DWORD /d "1" /f
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\CI\Policy" /v "VerifiedAndReputablePolicyState" /t REG_DWORD /d "0" /f
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\CI\Protected" /v "VerifiedAndReputablePolicyStateMinValueSeen" /t REG_DWORD /d "0" /f
 powershell -NoProfile -Command "Disable-MMAgent -PC -MC -APL"
 cls
 SET msgboxTitle=Opline Software
@@ -1447,6 +1450,12 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control" /v "SystemStartOptions" /t R
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control" /v "LastBootShutdown" /t REG_DWORD /d "0" /f
 Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Control\AppID" /v "dbc4c77e-cf0a-44d7-8a79-5eb45d64decd" /f
 Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Control\AppID\Configuration\SMARTLOCKER" /f
+Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Control\CI\Config" /v "VulnerableDriverBlocklistEnable" /f
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\CI\Config" /f
+Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Control\CI\Policy" /v "VerifiedAndReputablePolicyState" /f
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\CI\Policy" /f
+Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Control\CI\Protected" /v "VerifiedAndReputablePolicyStateMinValueSeen" /f
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\CI\Protected" /f
 powershell -NoProfile -Command "Enable-MMAgent -PC -MC -APL"
 cls
 SET msgboxTitle=Opline Software
