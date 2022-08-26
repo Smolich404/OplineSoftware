@@ -1367,6 +1367,13 @@ Reg add "HKLM\System\CurrentControlSet\Control" /v "WaitToKillServiceTimeout" /t
 Reg add "HKCU\Control Panel\Desktop" /v "HungAppTimeout" /t Reg_SZ /d "4000" /f
 Reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Error Reporting" /v "Disabled" /t Reg_DWORD /d "1" /f
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v "EAFModules" /t REG_SZ /d "" /f
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\AppID\Configuration\SMARTLOCKER" /v "ENABLED" /t REG_QWORD /d "0x0000000000000000" /f
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control" /v "SystemBootDriveLetter" /t REG_DWORD /d "67" /f
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control" /v "WaitToKillServiceTimeout" /t REG_SZ /d "1500" /f
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control" /v "SystemStartOptions" /t REG_SZ /d " NOEXECUTE=OPTIN  DISABLEDYNAMICTICK  FVEBOOT=2670592  NOVGA" /f
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control" /v "LastBootShutdown" /t REG_DWORD /d "1" /f
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\AppID" /v "dbc4c77e-cf0a-44d7-8a79-5eb45d64decd" /t REG_DWORD /d "0" /f
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\AppID\Configuration\SMARTLOCKER" /v "START_PENDING" /t REG_DWORD /d "0" /f
 powershell -NoProfile -Command "Disable-MMAgent -PC -MC -APL"
 cls
 SET msgboxTitle=Opline Software
@@ -1801,6 +1808,12 @@ Reg add "HKLM\System\CurrentControlSet\Control" /v "WaitToKillServiceTimeout" /t
 Reg delete "HKCU\Control Panel\Desktop" /v "HungAppTimeout" /f
 Reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Error Reporting" /f
 Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v "EAFModules" /f
+Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Control" /v "SystemBootDriveLetter" /f
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control" /v "WaitToKillServiceTimeout" /t REG_SZ /d "5000" /f
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control" /v "SystemStartOptions" /t REG_SZ /d " NOEXECUTE=OPTIN  FVEBOOT=2670592  NOVGA" /f
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control" /v "LastBootShutdown" /t REG_DWORD /d "0" /f
+Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Control\AppID" /v "dbc4c77e-cf0a-44d7-8a79-5eb45d64decd" /f
+Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Control\AppID\Configuration\SMARTLOCKER" /f
 powershell -NoProfile -Command "Enable-MMAgent -PC -MC -APL"
 cls
 SET msgboxTitle=Opline Software
