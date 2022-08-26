@@ -8577,11 +8577,9 @@ reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet" /v SubmitSamp
 reg add "HKLM\SOFTWARE\Microsoft\Windows Defender\Spynet" /v SpyNetReporting /t REG_DWORD /d 1 /f
 reg add "HKLM\SOFTWARE\Microsoft\Windows Defender\Spynet" /v SubmitSamplesConsent /t REG_DWORD /d 1 /f
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet" /v DontReportInfectionInformation /t REG_DWORD /d 0 /f
-REG ADD "HKLM\SYSTEM\CurrentControlSet\Services\MpsSvc" /V Start /T REG_DWORD /D 2 /F
 REG ADD "HKLM\SYSTEM\CurrentControlSet\Services\SecurityHealthService" /V Start /T REG_DWORD /D 2 /F
 icacls "%systemroot%\System32\smartscreen.exe" /reset
 Reg del "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender" /v DisableAntiSpyware /f
-powershell.exe -command "netsh advfirewall set allprofiles state on"
 sc start WinDefend
 sc config WinDefend start= auto
 cd C:\Users\%username%\Downloads
@@ -8654,7 +8652,6 @@ Reg.exe add "HKLM\SOFTWARE\Windows Defender Security Center\Notifications" /v "D
 Reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender" /v "DisableRoutinelyTakingAction" /t REG_DWORD /d "1" /f
 Reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Notifications" /v "DisableNotifications" /t REG_DWORD /d "1" /f
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet" /v DontReportInfectionInformation /t REG_DWORD /d 1 /f
-REG ADD "HKLM\SYSTEM\CurrentControlSet\Services\MpsSvc" /V Start /T REG_DWORD /D 4 /F
 REG ADD "HKLM\SYSTEM\CurrentControlSet\Services\SecurityHealthService" /V Start /T REG_DWORD /D 4 /F
 reg add HKLM\SOFTWARE\Microsoft\Windows Defender\Spynet /v "SpyNetReporting" /t REG_DWORD /d "0" /f
 reg add HKLM\SOFTWARE\Microsoft\Windows Defender\Spynet /v "SubmitSamplesConsent" /t REG_DWORD /d "2" /f
@@ -8674,7 +8671,6 @@ icacls "%systemroot%\System32\smartscreen.exe" /reset
 taskkill /im smartscreen.exe /f
 icacls "%systemroot%\System32\smartscreen.exe" /inheritance:r /remove *S-1-5-32-544 *S-1-5-11 *S-1-5-32-545 *S-1-5-18
 Reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender" /v DisableAntiSpyware /t REG_DWORD /d 1 /f
-powershell.exe -command "netsh advfirewall set allprofiles state off"
 Reg.exe delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "WindowsDefender" /f
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /f
 sc stop WinDefend
@@ -8728,30 +8724,24 @@ echo.
 call :ColorText 1B "###############################################################################################"
 echo.
 echo.
-cmdMenuSel f3B0 "   [+]  Enable" "   [+]  Disable" "   [+]  Exit"
+cmdMenuSel f3B0 "   [+]  Enable Service" "   [+]  Disable Service" "   [+]  Enable Configuring Firewall Settings" "   [+]  Disable Configuring Firewall Settings" "   [+]  Exit"
 if %ERRORLEVEL% == 1 goto EFirewall
 if %ERRORLEVEL% == 2 goto DFirewall
-if %ERRORLEVEL% == 3 goto Defender
+if %ERRORLEVEL% == 3 goto EFirewall2
+if %ERRORLEVEL% == 4 goto DFirewall2
+if %ERRORLEVEL% == 5 goto Defender
 
 :DFirewall
 cls
 REG ADD "HKLM\SYSTEM\CurrentControlSet\Services\MpsSvc" /V Start /T REG_DWORD /D 4 /F
 cls
-echo.
-echo  
-echo.
-echo  Disable Settings Firewall?
-echo.
-echo  - (N) No - (Y) Yes
-echo.
-SET /P DFIREWALL=
-if %DFIREWALL%== X goto DFirewall3
-if %DFIREWALL%== x goto DFirewall3
-if %DFIREWALL%== N goto DFirewall3
-if %DFIREWALL%== n goto DFirewall3
-if %DFIREWALL%== Y goto DFirewall2
-if %DFIREWALL%== y goto DFirewall2
-Goto DFirewall
+SET msgboxTitle=Opline Software
+SET msgboxBody=Finished - Skonczone
+SET tmpmsgbox=%temp%~tmpmsgbox.vbs
+IF EXIST "%tmpmsgbox%" DEL /F /Q "%tmpmsgbox%"
+ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
+WSCRIPT "%tmpmsgbox%"
+goto Firewall
 
 :DFirewall2
 cls
@@ -8765,40 +8755,10 @@ ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
 WSCRIPT "%tmpmsgbox%"
 goto Firewall
 
-:DFirewall3
-cls
-SET msgboxTitle=Opline Software
-SET msgboxBody=Finished - Skonczone
-SET tmpmsgbox=%temp%~tmpmsgbox.vbs
-IF EXIST "%tmpmsgbox%" DEL /F /Q "%tmpmsgbox%"
-ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
-WSCRIPT "%tmpmsgbox%"
-goto Firewall
-
 :EFirewall
 cls
 REG ADD "HKLM\SYSTEM\CurrentControlSet\Services\MpsSvc" /V Start /T REG_DWORD /D 2 /F
 cls
-echo.
-echo  
-echo.
-echo  Enable Settings Firewall?
-echo.
-echo  - (N) No - (Y) Yes
-echo.
-SET /P EFIREWALL=
-if %EFIREWALL%== X goto EFirewall3
-if %EFIREWALL%== x goto EFirewall3
-if %EFIREWALL%== N goto EFirewall3
-if %EFIREWALL%== n goto EFirewall3
-if %EFIREWALL%== Y goto EFirewall2
-if %EFIREWALL%== y goto EFirewall2
-Goto EFirewall
-
-:EFirewall2
-cls
-powershell.exe -command "netsh advfirewall set allprofiles state on"
-cls
 SET msgboxTitle=Opline Software
 SET msgboxBody=Finished - Skonczone
 SET tmpmsgbox=%temp%~tmpmsgbox.vbs
@@ -8807,7 +8767,9 @@ ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
 WSCRIPT "%tmpmsgbox%"
 goto Firewall
 
-:EFirewall3
+:EFirewall2
+cls
+powershell.exe -command "netsh advfirewall set allprofiles state on"
 cls
 SET msgboxTitle=Opline Software
 SET msgboxBody=Finished - Skonczone
