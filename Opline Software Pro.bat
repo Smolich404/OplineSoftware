@@ -2039,6 +2039,8 @@ sc config AppMgmt start= disabled
 sc stop AppMgmt
 sc config wlidsvc start= disabled
 sc stop wlidsvc
+sc stop LicenseManager
+sc config LicenseManager start= disabled
 SCHTASKS /END /TN "\Microsoft\Windows\Windows\WS\Badge Update"
 SCHTASKS /CHANGE /DISABLE /TN "\Microsoft\Windows\Windows\WS\Badge Update"
 SCHTASKS /END /TN "\Microsoft\Windows\WS\License Validation"
@@ -2068,6 +2070,8 @@ sc config wlidsvc start= demand
 sc start wlidsvc
 sc config AppMgmt start= demand
 sc start AppMgmt
+sc config LicenseManager start= demand
+sc start LicenseManager
 SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\Windows\WS\Badge Update"
 SCHTASKS /RUN /TN "\Microsoft\Windows\Windows\WS\Badge Update"
 SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\WS\License Validation"
@@ -2711,8 +2715,6 @@ sc stop UevAgentService
 sc config UevAgentService start= disabled
 sc start Wecsvc
 sc config Wecsvc start= auto
-sc start LicenseManager
-sc config LicenseManager start= auto
 NET start "dmwappushservice"
 SC CONFIG "dmwappushservice" START= auto 
 NET start "diagnosticshub.standardcollector.service"
@@ -3428,8 +3430,6 @@ sc stop UevAgentService
 sc config UevAgentService start= disabled
 sc stop Wecsvc
 sc config Wecsvc start= disabled
-sc stop LicenseManager
-sc config LicenseManager start= disabled
 NET STOP "dmwappushservice"
 SC CONFIG "dmwappushservice" START= DISABLED 
 NET STOP "diagnosticshub.standardcollector.service"

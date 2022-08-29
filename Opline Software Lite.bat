@@ -1598,6 +1598,8 @@ sc config AppMgmt start= disabled
 sc stop AppMgmt
 sc config wlidsvc start= disabled
 sc stop wlidsvc
+sc stop LicenseManager
+sc config LicenseManager start= disabled
 SCHTASKS /END /TN "\Microsoft\Windows\Windows\WS\Badge Update"
 SCHTASKS /CHANGE /DISABLE /TN "\Microsoft\Windows\Windows\WS\Badge Update"
 SCHTASKS /END /TN "\Microsoft\Windows\WS\License Validation"
@@ -1627,6 +1629,8 @@ sc config wlidsvc start= demand
 sc start wlidsvc
 sc config AppMgmt start= demand
 sc start AppMgmt
+sc config LicenseManager start= demand
+sc start LicenseManager
 SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\Windows\WS\Badge Update"
 SCHTASKS /RUN /TN "\Microsoft\Windows\Windows\WS\Badge Update"
 SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\WS\License Validation"
