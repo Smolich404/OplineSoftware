@@ -4744,34 +4744,34 @@ cls
 echo.
 echo.
 echo.
-call :ColorText 0C "                                      WARNING - OSTRZEZENIE"
+call :ColorText 0C "                                       WARNING - OSTRZEZENIE"
 echo.
 echo.
-echo                      Clean Junk V3 is too harsh for any hard disk cleaning, 
-echo                    and can cause loss of data, files, installed applications, 
-echo         and much more, I recommend that you create a system restore point on each disk, 
-echo     and when it comes to data or your personal files, I recommend saving them in the cloud, 
-echo                     on usb or create a system restore point in the same way, 
-echo                        sometimes it can be that Clean Junk can go crazy, 
-echo                 I also recommend that Opline Software be running on the desktop, 
-echo                             and then maybe thanks to the Clean Junk V3
-echo                     option nothing will remove any applications or the like, 
-echo                             if you don't like do not use this option
+echo                      Clean Junk V3 is too harsh for any hard disk cleaning
+echo                     and can cause loss of data files installed applications
+echo          and much more I recommend that you create a system restore point on each disk
+echo     and when it comes to data or your personal files I recommend saving them in the cloud
+echo                     on usb or create a system restore point in the same way
+echo                        sometimes it can be that Clean Junk can go crazy
+echo                 I also recommend that Opline Software be running on the desktop
+echo                            and then maybe thanks to the Clean Junk V3
+echo                                 nothing will delete or the like
+echo                           if you don't like this option don't use it
 echo.
-echo               Clean Junk V3 jest zbyt ostry do kazdego czyszczenia dysku twardego, 
-echo                i moze powodowac utrate danych, plikow, zainstalowanych aplikacji, 
-echo          i wiele wiecej zalecam utworzyc punkt przywracania systemu na kazdych dyskach, 
-echo       a jezeli chodzi o dane czy tam swoje osobiste pliki to zalecam zapisac je w chmurze, 
-echo                       na usb lub tak samo utworzyc punkt przywracania systemu, 
-echo                          czasami moze byc tak ze Clean Junk moze zwariowac, 
-echo                  takze zalecam zeby Opline Software byl na pulpicie uruchomiony, 
-echo                              i wtedy moze dzieki opcji Clean Junk V3 
-echo                        nic sie nie usunie zadnych aplikacji lub tym podobne, 
-echo                         jezeli niepodoba ci sie taka opcja to jej nieuzywaj
+echo               Clean Junk V3 jest zbyt ostry do kazdego czyszczenia dysku twardego
+echo                 i moze powodowac utrate danych plikow zainstalowanych aplikacji
+echo          i wiele wiecej zalecam utworzyc punkt przywracania systemu na kazdych dyskach
+echo       a jezeli chodzi o dane czy tam swoje osobiste pliki to zalecam zapisac je w chmurze
+echo                       na usb lub tak samo utworzyc punkt przywracania systemu
+echo                          czasami moze byc tak ze Clean Junk moze zwariowac
+echo                  takze zalecam zeby Opline Software byl na pulpicie uruchomiony
+echo                              i wtedy moze dzieki opcji Clean Junk V3
+echo                                 nic sie nie usunie lub tym podobne
+echo                       jezeli nie podoba ci sie taka opcja to jej nie uzywaj
 echo.
-echo            I have launched an application for you to create a System Restore Point
+echo             I have launched an application for you to create a System Restore Point
 echo.
-echo           Uruchomilem dla ciebie aplikacje do utworzenia Punktu Przywracania Systemu
+echo            Uruchomilem dla ciebie aplikacje do utworzenia Punktu Przywracania Systemu
 echo.
 C:\Windows\System32\SystemPropertiesProtection.exe>nul
 call :ColorText 0C "  Press (Y) to continue the Clean Junk V3 options and (N) to cancel the Clean Junk V3 options"
