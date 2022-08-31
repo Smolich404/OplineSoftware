@@ -834,6 +834,10 @@ SCHTASKS /END /TN "\Microsoft\Windows\AppID\VerifiedPublisherCertStoreCheck"
 SCHTASKS /CHANGE /DISABLE /TN "\Microsoft\Windows\AppID\VerifiedPublisherCertStoreCheck"
 SCHTASKS /END /TN "\Microsoft\Windows\Power Efficiency Diagnostics\AnalyzeSystem"
 SCHTASKS /CHANGE /DISABLE /TN "\Microsoft\Windows\Power Efficiency Diagnostics\AnalyzeSystem"
+SCHTASKS /END /TN "\Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser"
+SCHTASKS /DISABLE /TN "\Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser" /F
+SCHTASKS /END /TN "\Microsoft\Windows\Application Experience\ProgramDataUpdater"
+SCHTASKS /DISABLE /TN "\Microsoft\Windows\Application Experience\ProgramDataUpdater" /F
 schtasks /end /TN "Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser"
 schtasks /Change /TN "Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser" /Disable
 RD /S /Q "C:\ProgramData\Microsoft\windows\Sqm\"
@@ -1176,6 +1180,10 @@ SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\RetailDemo\CleanupOfflineConten
 SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\AppID\PolicyConverter"
 SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\AppID\VerifiedPublisherCertStoreCheck"
 SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\Power Efficiency Diagnostics\AnalyzeSystem"
+SCHTASKS /ENABLE /TN "\Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser" /F
+SCHTASKS /RUN /TN "\Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser"
+SCHTASKS /ENABLE /TN "\Microsoft\Windows\Application Experience\ProgramDataUpdater" /F
+SCHTASKS /RUN /TN "\Microsoft\Windows\Application Experience\ProgramDataUpdater"
 schtasks /Change /TN "Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser" /Enable
 Reg.exe add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "OneDrive" /t REG_SZ /d "\"C:\Users\tet\AppData\Local\Microsoft\OneDrive\OneDrive.exe\" /background" /f
 Reg.exe add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "MicrosoftEdgeAutoLaunch_2B10A56E508E694F3D32723A0FB513AD" /t REG_SZ /d "\"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe\" --no-startup-window --win-session-start /prefetch:5" /f
@@ -1600,14 +1608,14 @@ sc config wlidsvc start= disabled
 sc stop wlidsvc
 sc stop LicenseManager
 sc config LicenseManager start= disabled
-SCHTASKS /END /TN "\Microsoft\Windows\Windows\WS\Badge Update"
-SCHTASKS /CHANGE /DISABLE /TN "\Microsoft\Windows\Windows\WS\Badge Update"
+SCHTASKS /END /TN "\Microsoft\Windows\WS\Badge Update"
+SCHTASKS /CHANGE /DISABLE /TN "\Microsoft\Windows\WS\Badge Update"
 SCHTASKS /END /TN "\Microsoft\Windows\WS\License Validation"
 SCHTASKS /CHANGE /DISABLE /TN "\Microsoft\Windows\WS\License Validation"
-SCHTASKS /END /TN "\Microsoft\Windows\Windows\WS\Sync Licenses"
-SCHTASKS /CHANGE /DISABLE /TN "\Microsoft\Windows\Windows\WS\Sync Licenses"
-SCHTASKS /END /TN "\Microsoft\Windows\Windows\WS\WSRefreshBannedAppsListTask"
-SCHTASKS /CHANGE /DISABLE /TN "\Microsoft\Windows\Windows\WS\WSRefreshBannedAppsListTask"
+SCHTASKS /END /TN "\Microsoft\Windows\WS\Sync Licenses"
+SCHTASKS /CHANGE /DISABLE /TN "\Microsoft\Windows\WS\Sync Licenses"
+SCHTASKS /END /TN "\Microsoft\Windows\WS\WSRefreshBannedAppsListTask"
+SCHTASKS /CHANGE /DISABLE /TN "\Microsoft\Windows\WS\WSRefreshBannedAppsListTask"
 SCHTASKS /END /TN "\Microsoft\Windows\WS\WSTask"
 SCHTASKS /CHANGE /DISABLE /TN "\Microsoft\Windows\WS\WSTask"
 SCHTASKS /END /TN "\Microsoft\Windows\WindowsUpdate\Automatic App Update"
@@ -1631,14 +1639,14 @@ sc config AppMgmt start= demand
 sc start AppMgmt
 sc config LicenseManager start= demand
 sc start LicenseManager
-SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\Windows\WS\Badge Update"
-SCHTASKS /RUN /TN "\Microsoft\Windows\Windows\WS\Badge Update"
+SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\WS\Badge Update"
+SCHTASKS /RUN /TN "\Microsoft\Windows\WS\Badge Update"
 SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\WS\License Validation"
 SCHTASKS /RUN /TN "\Microsoft\Windows\WS\License Validation"
-SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\Windows\WS\Sync Licenses"
-SCHTASKS /RUN /TN "\Microsoft\Windows\Windows\WS\Sync Licenses"
-SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\Windows\WS\WSRefreshBannedAppsListTask"
-SCHTASKS /RUN /TN "\Microsoft\Windows\Windows\WS\WSRefreshBannedAppsListTask"
+SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\WS\Sync Licenses"
+SCHTASKS /RUN /TN "\Microsoft\Windows\WS\Sync Licenses"
+SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\WS\WSRefreshBannedAppsListTask"
+SCHTASKS /RUN /TN "\Microsoft\Windows\WS\WSRefreshBannedAppsListTask"
 SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\WS\WSTask"
 SCHTASKS /RUN /TN "\Microsoft\Windows\WS\WSTask"
 SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\WindowsUpdate\Automatic App Update"
