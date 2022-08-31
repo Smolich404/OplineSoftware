@@ -1882,7 +1882,7 @@ reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\AdvertisingInfo" /v "Ena
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\AdvertisingInfo" /v "Enabled" /t REG_DWORD /d "0" /f
 reg add "HKCU\Software\Microsoft\Input\TIPC" /v "Enabled" /t REG_DWORD /d "0" /f
 reg add "HKLM\SYSTEM\ControlSet001\Services\wuauserv" /v "Start" /t REG_DWORD /d "3" /f
-reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Services\7971f918-a847-4430-9279-4a52d1efe18d" /v "RegisteredWithAU" /t REG_DWORD /d "0" /f
+reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Services\7971f918-a847-4430-9279-4a52d1efe18d" /f
 reg add "HKCU\Software\Microsoft\Personalization\Settings" /v "AcceptedPrivacyPolicy" /t REG_DWORD /d "1" /f
 reg add "HKCU\Software\Microsoft\InputPersonalization" /v "RestrictImplicitTextCollection" /t REG_DWORD /d "0" /f
 reg add "HKCU\Software\Microsoft\InputPersonalization" /v "RestrictImplicitInkCollection" /t REG_DWORD /d "0" /f
@@ -2633,7 +2633,6 @@ NET start "WerSvc"
 SC CONFIG "WerSvc" START= auto
 NET start "diagtrack"
 SC CONFIG "diagtrack" START= auto
-SC DELETE "diagtrack"
 NET start "WMPNetworkSvc"
 SC CONFIG "WMPNetworkSvc" START= auto
 NET start "WSearch"
@@ -2737,7 +2736,6 @@ NET start "TabletInputService"
 SC CONFIG "TabletInputService" START= auto
 NET start "diagtrack"
 SC CONFIG "diagtrack" START= auto
-SC DELETE "diagtrack"
 sc config xbgm start=auto
 sc start xbgm
 sc config XboxGipSvc start=auto
@@ -3344,10 +3342,8 @@ NET STOP "WerSvc"
 SC CONFIG "WerSvc" START= DISABLED
 NET STOP "diagtrack"
 SC CONFIG "diagtrack" START= DISABLED
-SC DELETE "diagtrack"
 REG DELETE "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Diagnostics\DiagTrack" /F
 REG DELETE "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Svchost\utcsvc" /F
-REG DELETE "HKLM\System\CurrentControlSet\Services\DiagTrack" /F
 REG DELETE "HKLM\System\CurrentControlSet\Control\WMI\Autologger\AutoLogger-Diagtrack-Listener" /F
 NET STOP "WMPNetworkSvc"
 SC CONFIG "WMPNetworkSvc" START= DISABLED
@@ -3452,7 +3448,6 @@ NET STOP "TabletInputService"
 SC CONFIG "TabletInputService" START= DISABLED
 NET STOP "diagtrack"
 SC CONFIG "diagtrack" START= DISABLED
-SC DELETE "diagtrack"
 sc config xbgm start=disabled
 sc stop xbgm
 sc config XboxGipSvc start=disabled
@@ -3608,7 +3603,6 @@ NET STOP "TabletInputService"
 SC CONFIG "TabletInputService" START= DISABLED
 NET STOP "diagtrack"
 SC CONFIG "diagtrack" START= DISABLED
-SC DELETE "diagtrack"
 sc config xbgm start=disabled
 sc stop xbgm
 sc config XboxGipSvc start=disabled
@@ -8298,7 +8292,7 @@ Reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate" /v "DeferUp
 Reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate" /v "DeferUpdatePeriod" /t REG_DWORD /d "1" /f
 Reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" /v "NoAutoUpdate" /t REG_DWORD /d "0" /f
 Reg.exe add "HKLM\SYSTEM\ControlSet001\Services\wuauserv" /v "Start" /t REG_DWORD /d "3" /f
-Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Services\7971f918-a847-4430-9279-4a52d1efe18d" /v "RegisteredWithAU" /t REG_DWORD /d "1" /f
+Reg.exe delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Services\7971f918-a847-4430-9279-4a52d1efe18d" /f
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate" /v "DeferFeatureUpdates" /t REG_DWORD /d "1" /f
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate" /v "DeferFeatureUpdatesPeriodInDays" /t REG_DWORD /d "1" /f
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate" /v "ExcludeWUDriversInQualityUpdate" /t REG_DWORD /d "1" /f
