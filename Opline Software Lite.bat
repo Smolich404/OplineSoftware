@@ -770,8 +770,8 @@ SCHTASKS /END /TN "\Microsoft\Windows\DiskDiagnostic\Microsoft-Windows-DiskDiagn
 SCHTASKS /DELETE /TN "\Microsoft\Windows\DiskDiagnostic\Microsoft-Windows-DiskDiagnosticDataCollector" /F
 SCHTASKS /END /TN "\Microsoft\Windows\PI\Sqm-Tasks" 
 SCHTASKS /DELETE /TN "\Microsoft\Windows\PI\Sqm-Tasks" /F
-SCHTASKS /END /TN "\Microsoft\Windows\Windows Error Reporting\QueueReporting"
-SCHTASKS /DELETE /TN "\Microsoft\Windows\Windows Error Reporting\QueueReporting" /F
+SCHTASKS /END /TN "\Microsoft\Windows Error Reporting\QueueReporting"
+SCHTASKS /DELETE /TN "\Microsoft\Windows Error Reporting\QueueReporting" /F
 SCHTASKS /END /TN "\Intel\Intel Telemetry 2"
 SCHTASKS /DELETE /TN "\Intel\Intel Telemetry 2" /F
 SCHTASKS /END /TN "\Microsoft\Windows\SMB\UninstallSMB1ClientTask"
@@ -796,8 +796,8 @@ SCHTASKS /END /TN "\Microsoft\Windows\Maps\MapsUpdateTask"
 SCHTASKS /CHANGE /DISABLE /TN "\Microsoft\Windows\Maps\MapsUpdateTask"
 SCHTASKS /END /TN "\Microsoft\Windows\Diagnosis\Scheduled"
 SCHTASKS /CHANGE /DISABLE /TN "\Microsoft\Windows\Diagnosis\Scheduled"
-SCHTASKS /END /TN "\Microsoft\Windows\Windows Media Sharing\UpdateLibrary"
-SCHTASKS /CHANGE /DISABLE /TN "\Microsoft\Windows\Windows Media Sharing\UpdateLibrary"
+SCHTASKS /END /TN "\Microsoft\Windows Media Sharing\UpdateLibrary"
+SCHTASKS /CHANGE /DISABLE /TN "\Microsoft\Windows Media Sharing\UpdateLibrary"
 SCHTASKS /END /TN "\Microsoft\Windows\ErrorDetails\EnableErrorDetailsUpdate"
 SCHTASKS /CHANGE /DISABLE /TN "\Microsoft\Windows\ErrorDetails\EnableErrorDetailsUpdate"
 SCHTASKS /END /TN "\Microsoft\Windows\ErrorDetails\ErrorDetailsUpdate"
@@ -873,31 +873,31 @@ REG ADD "HKLM\SOFTWARE\Microsoft\Internet Explorer\Main" /V "RunOnceComplete" /T
 REG ADD "HKCU\Software\Policies\Microsoft\Internet Explorer\Main" /V "DisableFirstRunCustomize" /T REG_DWORD /D 1 /F
 REG ADD "HKCU\Software\Policies\Microsoft\Internet Explorer\Main" /V "RunOnceHasShown" /T REG_DWORD /D 1 /F
 REG ADD "HKCU\Software\Policies\Microsoft\Internet Explorer\Main" /V "RunOnceComplete" /T REG_DWORD /D 1 /F
-REG ADD "HKCU\Software\Microsoft\Windows\Windows Error Reporting" /V "AutoApproveOSdumps" /T REG_DWORD /D 0 /F
-REG ADD "HKCU\Software\Microsoft\Windows\Windows Error Reporting" /V "ConfigureArchive" /T REG_DWORD /D 0 /F
-REG ADD "HKCU\Software\Microsoft\Windows\Windows Error Reporting" /V "DisableArchive" /T REG_DWORD /D 1 /F
-REG ADD "HKCU\Software\Microsoft\Windows\Windows Error Reporting" /V "Disabled" /T REG_DWORD /D 1 /F
-REG ADD "HKCU\Software\Microsoft\Windows\Windows Error Reporting" /V "DisableQueue" /T REG_DWORD /D 1 /F
-REG ADD "HKCU\Software\Microsoft\Windows\Windows Error Reporting" /V "DontSendAdditionalData" /T REG_DWORD /D 1 /F
-REG ADD "HKCU\Software\Microsoft\Windows\Windows Error Reporting" /V "DontShowUI" /T REG_DWORD /D 0 /F
-REG ADD "HKCU\Software\Microsoft\Windows\Windows Error Reporting" /V "ForceQueue" /T REG_DWORD /D 0 /F
-REG ADD "HKCU\Software\Microsoft\Windows\Windows Error Reporting" /V "LoggingDisabled" /T REG_DWORD /D 1 /F
-REG ADD "HKCU\Software\Microsoft\Windows\Windows Error Reporting" /V "MaxArchiveCount" /T REG_DWORD /D 1 /F
-REG ADD "HKCU\Software\Microsoft\Windows\Windows Error Reporting" /V "MaxQueueCount" /T REG_DWORD /D 1 /F
-REG ADD "HKCU\Software\Microsoft\Windows\Windows Error Reporting" /V "MaxQueueSize" /T REG_DWORD /D 1 /F
-REG ADD "HKCU\SOFTWARE\Microsoft\Windows\Windows Error Reporting" /V "LastQueuePesterTime" /T REG_BINARY /D "0000000000000000" /F
-REG ADD "HKLM\SOFTWARE\Microsoft\Windows\Windows Error Reporting" /V "EnableZip" /T REG_DWORD /D 0 /F
-REG ADD "HKLM\SOFTWARE\Microsoft\Windows\Windows Error Reporting" /V "ErrorPort" /T REG_SZ /D "\DonNotSpy" /F
-REG ADD "HKLM\SOFTWARE\Microsoft\Windows\Windows Error Reporting" /V "MaxQueueSizePercentage" /T REG_DWORD /D 0 /F
-REG ADD "HKLM\SOFTWARE\Microsoft\Windows\Windows Error Reporting" /V "PurgeThreshholdValueInKB" /T REG_DWORD /D 0 /F
-REG ADD "HKLM\SOFTWARE\Microsoft\Windows\Windows Error Reporting" /V "ServiceTimeout" /T REG_DWORD /D 0 /F
-REG ADD "HKLM\SOFTWARE\Microsoft\Windows\Windows Error Reporting\Assert Filtering Policy" /V "ReportAndContinue" /T REG_DWORD /D 0 /F
-REG ADD "HKLM\SOFTWARE\Microsoft\Windows\Windows Error Reporting\BrokerUp" /V "WWAJSE" /T REG_DWORD /D 0 /F
-REG ADD "HKLM\SOFTWARE\Microsoft\Windows\Windows Error Reporting\Consent" /V "DefaultConsent" /T REG_DWORD /D 0 /F
-REG ADD "HKLM\SOFTWARE\Microsoft\Windows\Windows Error Reporting\HeapControlledList\dwm.exe" /V "EnableHeapThrottle" /T REG_DWORD /D 0 /F
-REG ADD "HKLM\SOFTWARE\Microsoft\Windows\Windows Error Reporting\RuntimeExceptionHelperModules" /V "C:\Windows\System32\msiwer.dll" /T REG_DWORD /D 0 /F
-REG ADD "HKLM\SOFTWARE\Microsoft\Windows\Windows Error Reporting\RuntimeExceptionHelperModules" /V "C:\Windows\Microsoft.NET\Framework64\v4.0.30319\mscordacwks.dll" /T REG_DWORD /D 0 /F
-REG ADD "HKLM\SOFTWARE\Microsoft\Windows\Windows Error Reporting\WMR" /V "Disable" /T REG_DWORD /D 1 /F /F
+REG ADD "HKCU\Software\Microsoft\Windows Error Reporting" /V "AutoApproveOSdumps" /T REG_DWORD /D 0 /F
+REG ADD "HKCU\Software\Microsoft\Windows Error Reporting" /V "ConfigureArchive" /T REG_DWORD /D 0 /F
+REG ADD "HKCU\Software\Microsoft\Windows Error Reporting" /V "DisableArchive" /T REG_DWORD /D 1 /F
+REG ADD "HKCU\Software\Microsoft\Windows Error Reporting" /V "Disabled" /T REG_DWORD /D 1 /F
+REG ADD "HKCU\Software\Microsoft\Windows Error Reporting" /V "DisableQueue" /T REG_DWORD /D 1 /F
+REG ADD "HKCU\Software\Microsoft\Windows Error Reporting" /V "DontSendAdditionalData" /T REG_DWORD /D 1 /F
+REG ADD "HKCU\Software\Microsoft\Windows Error Reporting" /V "DontShowUI" /T REG_DWORD /D 0 /F
+REG ADD "HKCU\Software\Microsoft\Windows Error Reporting" /V "ForceQueue" /T REG_DWORD /D 0 /F
+REG ADD "HKCU\Software\Microsoft\Windows Error Reporting" /V "LoggingDisabled" /T REG_DWORD /D 1 /F
+REG ADD "HKCU\Software\Microsoft\Windows Error Reporting" /V "MaxArchiveCount" /T REG_DWORD /D 1 /F
+REG ADD "HKCU\Software\Microsoft\Windows Error Reporting" /V "MaxQueueCount" /T REG_DWORD /D 1 /F
+REG ADD "HKCU\Software\Microsoft\Windows Error Reporting" /V "MaxQueueSize" /T REG_DWORD /D 1 /F
+REG ADD "HKCU\SOFTWARE\Microsoft\Windows Error Reporting" /V "LastQueuePesterTime" /T REG_BINARY /D "0000000000000000" /F
+REG ADD "HKLM\SOFTWARE\Microsoft\Windows Error Reporting" /V "EnableZip" /T REG_DWORD /D 0 /F
+REG ADD "HKLM\SOFTWARE\Microsoft\Windows Error Reporting" /V "ErrorPort" /T REG_SZ /D "\DonNotSpy" /F
+REG ADD "HKLM\SOFTWARE\Microsoft\Windows Error Reporting" /V "MaxQueueSizePercentage" /T REG_DWORD /D 0 /F
+REG ADD "HKLM\SOFTWARE\Microsoft\Windows Error Reporting" /V "PurgeThreshholdValueInKB" /T REG_DWORD /D 0 /F
+REG ADD "HKLM\SOFTWARE\Microsoft\Windows Error Reporting" /V "ServiceTimeout" /T REG_DWORD /D 0 /F
+REG ADD "HKLM\SOFTWARE\Microsoft\Windows Error Reporting\Assert Filtering Policy" /V "ReportAndContinue" /T REG_DWORD /D 0 /F
+REG ADD "HKLM\SOFTWARE\Microsoft\Windows Error Reporting\BrokerUp" /V "WWAJSE" /T REG_DWORD /D 0 /F
+REG ADD "HKLM\SOFTWARE\Microsoft\Windows Error Reporting\Consent" /V "DefaultConsent" /T REG_DWORD /D 0 /F
+REG ADD "HKLM\SOFTWARE\Microsoft\Windows Error Reporting\HeapControlledList\dwm.exe" /V "EnableHeapThrottle" /T REG_DWORD /D 0 /F
+REG ADD "HKLM\SOFTWARE\Microsoft\Windows Error Reporting\RuntimeExceptionHelperModules" /V "C:\Windows\System32\msiwer.dll" /T REG_DWORD /D 0 /F
+REG ADD "HKLM\SOFTWARE\Microsoft\Windows Error Reporting\RuntimeExceptionHelperModules" /V "C:\Windows\Microsoft.NET\Framework64\v4.0.30319\mscordacwks.dll" /T REG_DWORD /D 0 /F
+REG ADD "HKLM\SOFTWARE\Microsoft\Windows Error Reporting\WMR" /V "Disable" /T REG_DWORD /D 1 /F /F
 REG ADD "HKLM\SOFTWARE\Policies\Microsoft\SQMClient\Windows" /V "CEIPEnable" /T REG_DWORD /D 0 /F
 REG ADD "HKCU\SOFTWARE\Microsoft\SQMClient" /V "UserId" /T REG_SZ /D "{00000000-0000-0000-0000-000000000000}" /F
 REG ADD "HKLM\SOFTWARE\Microsoft\SQMClient" /V "CabSessionAfterSize" /T REG_DWORD /D 0 /F
@@ -1110,7 +1110,7 @@ Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management
 Reg add "HKCU\Control Panel\Desktop" /v "WaitToKillAppTimeout" /t Reg_SZ /d "5000" /f
 Reg add "HKLM\System\CurrentControlSet\Control" /v "WaitToKillServiceTimeout" /t Reg_SZ /d "1000" /f
 Reg add "HKCU\Control Panel\Desktop" /v "HungAppTimeout" /t Reg_SZ /d "4000" /f
-Reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Error Reporting" /v "Disabled" /t Reg_DWORD /d "1" /f
+Reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Error Reporting" /v "Disabled" /t Reg_DWORD /d "1" /f
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v "EAFModules" /t REG_SZ /d "" /f
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\AppID\Configuration\SMARTLOCKER" /v "ENABLED" /t REG_QWORD /d "0x0000000000000000" /f
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control" /v "SystemBootDriveLetter" /t REG_DWORD /d "67" /f
@@ -1143,7 +1143,7 @@ SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\Location\WindowsActionDialog"
 SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\Maps\MapsToastTask"
 SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\Maps\MapsUpdateTask"
 SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\Diagnosis\Scheduled"
-SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\Windows Media Sharing\UpdateLibrary"
+SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows Media Sharing\UpdateLibrary"
 SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\CloudExperienceHost\CreateObjectTask"
 SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\FileHistory\File History (maintenance mode)"
 SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\DUSM\dusmtask"
@@ -1255,7 +1255,7 @@ REG ADD "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\SettingSync\Groups\Crede
 REG ADD "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\SettingSync\Groups\Accessibility" /V Enabled /T REG_DWORD /D 1 /F
 REG ADD "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\SettingSync\Groups\Windows" /V Enabled /T REG_DWORD /D 1 /F
 REG DELETE "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Windows Search" /V CortanaConsent /F
-REG DELETE "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /V AllowCortana /F
+REG DELETE "HKLM\SOFTWARE\Policies\Microsoft\Windows Search" /V AllowCortana /F
 REG DELETE "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" /V CortanaEnabled /F
 REG DELETE "HKLM\SOFTWARE\Microsoft\PolicyManager\default\Experience\AllowCortana" /F
 REG DELETE "HKCU\SOFTWARE\Microsoft\Personalization\Settings" /V AcceptedPrivacyPolicy /F
@@ -1263,13 +1263,13 @@ REG DELETE "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\SettingSync\Groups\La
 REG DELETE "HKCU\SOFTWARE\Microsoft\InputPersonalization" /F
 REG DELETE "HKLM\SOFTWARE\Policies\Microsoft\InputPersonalization" /V AllowInputPersonalization /F
 REG ADD "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" /V SearchboxTaskbarMode /T REG_DWORD /D 1 /F
-REG DELETE "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /V AllowSearchToUseLocation /F
-REG DELETE "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /V DisableWebSearch /F
-REG DELETE "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /V ConnectedSearchUseWeb /F
-REG DELETE "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /V ConnectedSearchUseWebOverMeteredConnections /F
-REG DELETE "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /V ConnectedSearchPrivacy /F
+REG DELETE "HKLM\SOFTWARE\Policies\Microsoft\Windows Search" /V AllowSearchToUseLocation /F
+REG DELETE "HKLM\SOFTWARE\Policies\Microsoft\Windows Search" /V DisableWebSearch /F
+REG DELETE "HKLM\SOFTWARE\Policies\Microsoft\Windows Search" /V ConnectedSearchUseWeb /F
+REG DELETE "HKLM\SOFTWARE\Policies\Microsoft\Windows Search" /V ConnectedSearchUseWebOverMeteredConnections /F
+REG DELETE "HKLM\SOFTWARE\Policies\Microsoft\Windows Search" /V ConnectedSearchPrivacy /F
 REG ADD "HKLM\SOFTWARE\Microsoft\Speech_OneCore\Preferences" /V ModelDownloadAllowed /T REG_DWORD /D 1 /F
-REG DELETE "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /V AllowCloudSearch /F
+REG DELETE "HKLM\SOFTWARE\Policies\Microsoft\Windows Search" /V AllowCloudSearch /F
 REG DELETE "HKLM\SOFTWARE\Policies\Microsoft\Windows\LocationAndSensors" /V DisableLocation /F
 REG DELETE "HKLM\SOFTWARE\Policies\Microsoft\Windows\LocationAndSensors" /V DisableWindowsLocationProvider /F
 REG DELETE "HKLM\SOFTWARE\Policies\Microsoft\Windows\LocationAndSensors" /V DisableLocationScripting /F
@@ -1450,7 +1450,7 @@ Reg delete "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Search" 
 Reg delete "HKCU\Control Panel\Desktop" /v "WaitToKillAppTimeout" /f
 Reg add "HKLM\System\CurrentControlSet\Control" /v "WaitToKillServiceTimeout" /t Reg_SZ /d "5000" /f
 Reg delete "HKCU\Control Panel\Desktop" /v "HungAppTimeout" /f
-Reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Error Reporting" /f
+Reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Error Reporting" /f
 Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v "EAFModules" /f
 Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Control" /v "SystemBootDriveLetter" /f
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control" /v "WaitToKillServiceTimeout" /t REG_SZ /d "5000" /f
@@ -1618,8 +1618,8 @@ SCHTASKS /END /TN "\Microsoft\Windows\WS\WSRefreshBannedAppsListTask"
 SCHTASKS /CHANGE /DISABLE /TN "\Microsoft\Windows\WS\WSRefreshBannedAppsListTask"
 SCHTASKS /END /TN "\Microsoft\Windows\WS\WSTask"
 SCHTASKS /CHANGE /DISABLE /TN "\Microsoft\Windows\WS\WSTask"
-SCHTASKS /END /TN "\Microsoft\Windows\WindowsUpdate\Automatic App Update"
-SCHTASKS /CHANGE /DISABLE /TN "\Microsoft\Windows\WindowsUpdate\Automatic App Update"
+SCHTASKS /END /TN "\Microsoft\WindowsUpdate\Automatic App Update"
+SCHTASKS /CHANGE /DISABLE /TN "\Microsoft\WindowsUpdate\Automatic App Update"
 cls
 SET msgboxTitle=Opline Software
 SET msgboxBody=Finished - Skonczone
@@ -1649,8 +1649,8 @@ SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\WS\WSRefreshBannedAppsListTask"
 SCHTASKS /RUN /TN "\Microsoft\Windows\WS\WSRefreshBannedAppsListTask"
 SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\WS\WSTask"
 SCHTASKS /RUN /TN "\Microsoft\Windows\WS\WSTask"
-SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\WindowsUpdate\Automatic App Update"
-SCHTASKS /RUN /TN "\Microsoft\Windows\WindowsUpdate\Automatic App Update"
+SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\WindowsUpdate\Automatic App Update"
+SCHTASKS /RUN /TN "\Microsoft\WindowsUpdate\Automatic App Update"
 cls
 SET msgboxTitle=Opline Software
 SET msgboxBody=Finished - Skonczone
@@ -6979,15 +6979,15 @@ if %ERRORLEVEL% == 5 goto OplineMenu
 
 :OUpdate
 cls
-reg add "HKLM\SOFTWARE\Wow6432Node\Policies\Microsoft\Windows\WindowsUpdate\AU" /v "NoAutoUpdate" /t REG_DWORD /d "1" /f
-reg add "HKLM\SOFTWARE\Wow6432Node\Policies\Microsoft\Windows\WindowsUpdate\AU" /v "AUOptions" /t REG_DWORD /d "2" /f
-reg add "HKLM\SOFTWARE\Wow6432Node\Policies\Microsoft\Windows\WindowsUpdate\AU" /v "ScheduledInstallDay" /t REG_DWORD /d "0" /f
-reg add "HKLM\SOFTWARE\Wow6432Node\Policies\Microsoft\Windows\WindowsUpdate\AU" /v "ScheduledInstallTime" /t REG_DWORD /d "3" /f
+reg add "HKLM\SOFTWARE\Wow6432Node\Policies\Microsoft\WindowsUpdate\AU" /v "NoAutoUpdate" /t REG_DWORD /d "1" /f
+reg add "HKLM\SOFTWARE\Wow6432Node\Policies\Microsoft\WindowsUpdate\AU" /v "AUOptions" /t REG_DWORD /d "2" /f
+reg add "HKLM\SOFTWARE\Wow6432Node\Policies\Microsoft\WindowsUpdate\AU" /v "ScheduledInstallDay" /t REG_DWORD /d "0" /f
+reg add "HKLM\SOFTWARE\Wow6432Node\Policies\Microsoft\WindowsUpdate\AU" /v "ScheduledInstallTime" /t REG_DWORD /d "3" /f
 reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\DriverSearching" /v "SearchOrderConfig" /t REG_DWORD /d "0" /f
 Reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Windows\DeliveryOptimization" /v "DODownloadMode" /t REG_DWORD /d "0" /f
 reg.exe add "HKCU\Software\Policies\Microsoft\Windows\DriverSearching" /v "DontPromptForWindowsUpdate" /t REG_DWORD /d "1" /f
 reg.exe add "HKLM\Software\Policies\Microsoft\Windows\DriverSearching" /v "DontPromptForWindowsUpdate" /t REG_DWORD /d "1" /f
-reg.exe add "HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate" /v "ExcludeWUDriversInQualityUpdate" /t REG_DWORD /d "1" /f
+reg.exe add "HKLM\Software\Policies\Microsoft\WindowsUpdate" /v "ExcludeWUDriversInQualityUpdate" /t REG_DWORD /d "1" /f
 takeown /F "$env:WinDIR\System32\MusNotification.exe"
 icacls "$env:WinDIR\System32\MusNotification.exe" /deny "$($EveryOne):(X)"
 takeown /F "$env:WinDIR\System32\MusNotificationUx.exe"
@@ -7005,8 +7005,8 @@ Goto Update
 cls
 reg.exe add "HKCU\Software\Policies\Microsoft\Windows\DriverSearching" /v "DontPromptForWindowsUpdate" /t REG_DWORD /d "0" /f
 reg.exe add "HKLM\Software\Policies\Microsoft\Windows\DriverSearching" /v "DontPromptForWindowsUpdate" /t REG_DWORD /d "0" /f
-reg.exe add "HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate" /v "ExcludeWUDriversInQualityUpdate" /t REG_DWORD /d "0" /f
-reg delete "HKLM\SOFTWARE\Wow6432Node\Policies\Microsoft\Windows\WindowsUpdate" /f
+reg.exe add "HKLM\Software\Policies\Microsoft\WindowsUpdate" /v "ExcludeWUDriversInQualityUpdate" /t REG_DWORD /d "0" /f
+reg delete "HKLM\SOFTWARE\Wow6432Node\Policies\Microsoft\WindowsUpdate" /f
 reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\DriverSearching" /v "SearchOrderConfig" /t REG_DWORD /d "1" /f
 reg delete "HKLM\SOFTWARE\Policies\Microsoft\Windows\DeliveryOptimization" /f
 takeown /F "$env:WinDIR\System32\MusNotification.exe"
@@ -7031,22 +7031,22 @@ reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer" /
 reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "IsWUHidden" /t REG_DWORD /d "0" /f
 Reg.exe delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "SettingsPageVisibility" /f
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer" /f
-Reg.exe delete "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate" /v "DoNotConnectToWindowsUpdateInternetLocations" /f
-Reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate" /f
+Reg.exe delete "HKLM\SOFTWARE\Policies\Microsoft\WindowsUpdate" /v "DoNotConnectToWindowsUpdateInternetLocations" /f
+Reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\WindowsUpdate" /f
 REG DELETE "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\EOSNOTIFY.EXE" /F
 REG DELETE "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\MusNotification.EXE" /F
 REG DELETE "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\MusNotificationUX.EXE" /F
-reg delete "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate" /f
-Reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate" /v "DeferUpdatePeriod" /t REG_DWORD /d "1" /f
-Reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" /v "NoAutoUpdate" /t REG_DWORD /d "0" /f
+reg delete "HKLM\SOFTWARE\Policies\Microsoft\WindowsUpdate" /f
+Reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\WindowsUpdate" /v "DeferUpdatePeriod" /t REG_DWORD /d "1" /f
+Reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\WindowsUpdate\AU" /v "NoAutoUpdate" /t REG_DWORD /d "0" /f
 REG ADD "HKLM\SYSTEM\CurrentControlSet\Services\wuauserv" /V Start /T REG_DWORD /D 3 /F
 Reg.exe add "HKLM\SYSTEM\ControlSet001\Services\wuauserv" /v "Start" /t REG_DWORD /d "3" /f
 Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\BITS" /v "Start" /t REG_DWORD /d "2" /f
 Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\UsoSvc" /v "Start" /t REG_DWORD /d "2" /f
 Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WaaSMedicSvc" /v "Start" /t REG_DWORD /d "3" /f
 reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Services\7971f918-a847-4430-9279-4a52d1efe18d" /f
-SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\WindowsUpdate\Automatic App Update"
-REG ADD "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate" /V DeferUpgrade /T REG_DWORD /D 1 /F
+SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\WindowsUpdate\Automatic App Update"
+REG ADD "HKLM\SOFTWARE\Policies\Microsoft\WindowsUpdate" /V DeferUpgrade /T REG_DWORD /D 1 /F
 icacls "%systemroot%\System32\osrss.dll" /reset
 icacls "%systemroot%\System32\UsoClient.exe" /reset
 icacls "%systemroot%\System32\WaaSMedic.exe" /reset
@@ -7055,28 +7055,28 @@ icacls "%systemroot%\System32\WaaSMedicPS.dll" /reset
 icacls "%systemroot%\System32\WaaSAssessment.dll" /reset
 icacls "%systemroot%\System32\SIHClient.exe" /reset
 icacls "%systemroot%\System32\MusNotificationUx.exe" /reset
-SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\WindowsUpdate\Automatic App Update"
-SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\WindowsUpdate\Scheduled Start"
-SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\WindowsUpdate\sih"
-SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\WindowsUpdate\sihboot"
+SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\WindowsUpdate\Automatic App Update"
+SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\WindowsUpdate\Scheduled Start"
+SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\WindowsUpdate\sih"
+SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\WindowsUpdate\sihboot"
 SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\UpdateOrchestrator\Maintenance Install"
 SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\UpdateOrchestrator\Reboot"
 SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\UpdateOrchestrator\Schedule Scan"
 SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\UpdateOrchestrator\USO_Broker_Display"
-SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\WindowsUpdate\Automatic App Update"
-SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\WindowsUpdate\Scheduled Start"
-SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\WindowsUpdate\sih"
-SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\WindowsUpdate\sihboot"
+SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\WindowsUpdate\Automatic App Update"
+SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\WindowsUpdate\Scheduled Start"
+SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\WindowsUpdate\sih"
+SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\WindowsUpdate\sihboot"
 SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\UpdateOrchestrator\Maintenance Install"
 SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\UpdateOrchestrator\Reboot"
 SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\UpdateOrchestrator\Schedule Scan"
 SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\UpdateOrchestrator\USO_Broker_Display"
-REG DELETE "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate" /V ExcludeWUDriversInQualityUpdate /F
-REG DELETE "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" /F
-Reg.exe delete "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate" /v "NoAutoRebootWithLoggedOnUsers" /f
-Reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate" /f
-Reg.exe delete "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate" /f
-reg delete "HKLM\SOFTWARE\Wow6432Node\Policies\Microsoft\Windows\WindowsUpdate" /f
+REG DELETE "HKLM\SOFTWARE\Policies\Microsoft\WindowsUpdate" /V ExcludeWUDriversInQualityUpdate /F
+REG DELETE "HKLM\SOFTWARE\Policies\Microsoft\WindowsUpdate\AU" /F
+Reg.exe delete "HKLM\SOFTWARE\Policies\Microsoft\WindowsUpdate" /v "NoAutoRebootWithLoggedOnUsers" /f
+Reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\WindowsUpdate" /f
+Reg.exe delete "HKLM\SOFTWARE\Policies\Microsoft\WindowsUpdate" /f
+reg delete "HKLM\SOFTWARE\Wow6432Node\Policies\Microsoft\WindowsUpdate" /f
 reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\DriverSearching" /v "SearchOrderConfig" /t REG_DWORD /d "1" /f
 takeown /F "$env:WinDIR\System32\MusNotification.exe"
 icacls "$env:WinDIR\System32\MusNotification.exe" /allow "$($EveryOne):(X)"
@@ -7099,28 +7099,28 @@ sc config "wuauserv" start= disabled
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "SettingsPageVisibility" /t REG_SZ /d "hide:windowsupdate;" /f
 reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "SettingsPageVisibility" /t REG_SZ /d "hide:cortana;privacy-automaticfiledownloads;privacy-feedback;windowsinsider;windowsupdate" /f
 reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "IsWUHidden" /t REG_DWORD /d "1" /f
-Reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate" /v "DoNotConnectToWindowsUpdateInternetLocations" /t REG_DWORD /d "1" /f
-Reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate" /v "DeferUpdatePeriod" /t REG_DWORD /d "0" /f
-Reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" /v "NoAutoUpdate" /t REG_DWORD /d "1" /f
+Reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\WindowsUpdate" /v "DoNotConnectToWindowsUpdateInternetLocations" /t REG_DWORD /d "1" /f
+Reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\WindowsUpdate" /v "DeferUpdatePeriod" /t REG_DWORD /d "0" /f
+Reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\WindowsUpdate\AU" /v "NoAutoUpdate" /t REG_DWORD /d "1" /f
 REG ADD "HKLM\SYSTEM\CurrentControlSet\Services\wuauserv" /V Start /T REG_DWORD /D 4 /F
 Reg.exe add "HKLM\SYSTEM\ControlSet001\Services\wuauserv" /v "Start" /t REG_DWORD /d "4" /f
 Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\BITS" /v "Start" /t REG_DWORD /d "4" /f
 Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\UsoSvc" /v "Start" /t REG_DWORD /d "4" /f
 Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WaaSMedicSvc" /v "Start" /t REG_DWORD /d "4" /f
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Services\7971f918-a847-4430-9279-4a52d1efe18d" /v "RegisteredWithAU" /t REG_DWORD /d "0" /f
-Reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate" /v "NoAutoRebootWithLoggedOnUsers" /t REG_DWORD /d "1" /f
-Reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate" /v "ExcludeWUDriversInQualityUpdate" /t REG_DWORD /d "1" /f
-reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate" /v "SetDisableUXWUAccess" /t REG_DWORD /d "1" /f
-SCHTASKS /END /TN "\Microsoft\Windows\WindowsUpdate\Automatic App Update"
-SCHTASKS /CHANGE /DISABLE /TN "\Microsoft\Windows\WindowsUpdate\Automatic App Update"
-SCHTASKS /END /TN "\Microsoft\Windows\WindowsUpdate\Automatic App Update"
-SCHTASKS /CHANGE /DISABLE /TN "\Microsoft\Windows\WindowsUpdate\Automatic App Update"
-SCHTASKS /END /TN "\Microsoft\Windows\WindowsUpdate\Scheduled Start"
-SCHTASKS /CHANGE /DISABLE /TN "\Microsoft\Windows\WindowsUpdate\Scheduled Start"
-SCHTASKS /END /TN "\Microsoft\Windows\WindowsUpdate\sih"
-SCHTASKS /CHANGE /DISABLE /TN "\Microsoft\Windows\WindowsUpdate\sih"
-SCHTASKS /END /TN "\Microsoft\Windows\WindowsUpdate\sihboot"
-SCHTASKS /CHANGE /DISABLE /TN "\Microsoft\Windows\WindowsUpdate\sihboot"
+Reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\WindowsUpdate" /v "NoAutoRebootWithLoggedOnUsers" /t REG_DWORD /d "1" /f
+Reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\WindowsUpdate" /v "ExcludeWUDriversInQualityUpdate" /t REG_DWORD /d "1" /f
+reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\WindowsUpdate" /v "SetDisableUXWUAccess" /t REG_DWORD /d "1" /f
+SCHTASKS /END /TN "\Microsoft\WindowsUpdate\Automatic App Update"
+SCHTASKS /CHANGE /DISABLE /TN "\Microsoft\WindowsUpdate\Automatic App Update"
+SCHTASKS /END /TN "\Microsoft\WindowsUpdate\Automatic App Update"
+SCHTASKS /CHANGE /DISABLE /TN "\Microsoft\WindowsUpdate\Automatic App Update"
+SCHTASKS /END /TN "\Microsoft\WindowsUpdate\Scheduled Start"
+SCHTASKS /CHANGE /DISABLE /TN "\Microsoft\WindowsUpdate\Scheduled Start"
+SCHTASKS /END /TN "\Microsoft\WindowsUpdate\sih"
+SCHTASKS /CHANGE /DISABLE /TN "\Microsoft\WindowsUpdate\sih"
+SCHTASKS /END /TN "\Microsoft\WindowsUpdate\sihboot"
+SCHTASKS /CHANGE /DISABLE /TN "\Microsoft\WindowsUpdate\sihboot"
 SCHTASKS /END /TN "\Microsoft\Windows\UpdateOrchestrator\Maintenance Install"
 SCHTASKS /CHANGE /DISABLE /TN "\Microsoft\Windows\UpdateOrchestrator\Maintenance Install"
 SCHTASKS /END /TN "\Microsoft\Windows\UpdateOrchestrator\Reboot"
@@ -7129,28 +7129,28 @@ SCHTASKS /END /TN "\Microsoft\Windows\UpdateOrchestrator\Schedule Scan"
 SCHTASKS /CHANGE /DISABLE /TN "\Microsoft\Windows\UpdateOrchestrator\Schedule Scan"
 SCHTASKS /END /TN "\Microsoft\Windows\UpdateOrchestrator\USO_Broker_Display"
 SCHTASKS /CHANGE /DISABLE /TN "\Microsoft\Windows\UpdateOrchestrator\USO_Broker_Display"
-REG ADD "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate" /V ExcludeWUDriversInQualityUpdate /T REG_DWORD /D 1 /F
+REG ADD "HKLM\SOFTWARE\Policies\Microsoft\WindowsUpdate" /V ExcludeWUDriversInQualityUpdate /T REG_DWORD /D 1 /F
 REG ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\EOSNOTIFY.EXE" /V "Debugger" /T REG_SZ /D "" /F
 REG ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\MusNotification.EXE" /V "Debugger" /T REG_SZ /D "" /F
 REG ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\MusNotificationUX.EXE" /V "Debugger" /T REG_SZ /D "" /F
-REG ADD "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate" /V DeferUpgrade /T REG_DWORD /D 1 /F
-reg add "HKLM\SOFTWARE\Wow6432Node\Policies\Microsoft\Windows\WindowsUpdate\AU" /v "NoAutoUpdate" /t REG_DWORD /d "0" /f
-reg add "HKLM\SOFTWARE\Wow6432Node\Policies\Microsoft\Windows\WindowsUpdate\AU" /v "AUOptions" /t REG_DWORD /d "2" /f
-reg add "HKLM\SOFTWARE\Wow6432Node\Policies\Microsoft\Windows\WindowsUpdate\AU" /v "ScheduledInstallDay" /t REG_DWORD /d "0" /f
-reg add "HKLM\SOFTWARE\Wow6432Node\Policies\Microsoft\Windows\WindowsUpdate\AU" /v "ScheduledInstallTime" /t REG_DWORD /d "3" /f
+REG ADD "HKLM\SOFTWARE\Policies\Microsoft\WindowsUpdate" /V DeferUpgrade /T REG_DWORD /D 1 /F
+reg add "HKLM\SOFTWARE\Wow6432Node\Policies\Microsoft\WindowsUpdate\AU" /v "NoAutoUpdate" /t REG_DWORD /d "0" /f
+reg add "HKLM\SOFTWARE\Wow6432Node\Policies\Microsoft\WindowsUpdate\AU" /v "AUOptions" /t REG_DWORD /d "2" /f
+reg add "HKLM\SOFTWARE\Wow6432Node\Policies\Microsoft\WindowsUpdate\AU" /v "ScheduledInstallDay" /t REG_DWORD /d "0" /f
+reg add "HKLM\SOFTWARE\Wow6432Node\Policies\Microsoft\WindowsUpdate\AU" /v "ScheduledInstallTime" /t REG_DWORD /d "3" /f
 reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\DriverSearching" /v "SearchOrderConfig" /t REG_DWORD /d "0" /f
 takeown /F "$env:WinDIR\System32\MusNotification.exe"
 icacls "$env:WinDIR\System32\MusNotification.exe" /deny "$($EveryOne):(X)"
 takeown /F "$env:WinDIR\System32\MusNotificationUx.exe"
 icacls "$env:WinDIR\System32\MusNotificationUx.exe" /deny "$($EveryOne):(X)"
-SCHTASKS /END /TN "\Microsoft\Windows\WindowsUpdate\Automatic App Update"
-SCHTASKS /CHANGE /DISABLE /TN "\Microsoft\Windows\WindowsUpdate\Automatic App Update"
-SCHTASKS /END /TN "\Microsoft\Windows\WindowsUpdate\Scheduled Start"
-SCHTASKS /CHANGE /DISABLE /TN "\Microsoft\Windows\WindowsUpdate\Scheduled Start"
-SCHTASKS /END /TN "\Microsoft\Windows\WindowsUpdate\sih"
-SCHTASKS /CHANGE /DISABLE /TN "\Microsoft\Windows\WindowsUpdate\sih"
-SCHTASKS /END /TN "\Microsoft\Windows\WindowsUpdate\sihboot"
-SCHTASKS /CHANGE /DISABLE /TN "\Microsoft\Windows\WindowsUpdate\sihboot"
+SCHTASKS /END /TN "\Microsoft\WindowsUpdate\Automatic App Update"
+SCHTASKS /CHANGE /DISABLE /TN "\Microsoft\WindowsUpdate\Automatic App Update"
+SCHTASKS /END /TN "\Microsoft\WindowsUpdate\Scheduled Start"
+SCHTASKS /CHANGE /DISABLE /TN "\Microsoft\WindowsUpdate\Scheduled Start"
+SCHTASKS /END /TN "\Microsoft\WindowsUpdate\sih"
+SCHTASKS /CHANGE /DISABLE /TN "\Microsoft\WindowsUpdate\sih"
+SCHTASKS /END /TN "\Microsoft\WindowsUpdate\sihboot"
+SCHTASKS /CHANGE /DISABLE /TN "\Microsoft\WindowsUpdate\sihboot"
 SCHTASKS /END /TN "\Microsoft\Windows\UpdateOrchestrator\Maintenance Install"
 SCHTASKS /CHANGE /DISABLE /TN "\Microsoft\Windows\UpdateOrchestrator\Maintenance Install"
 SCHTASKS /END /TN "\Microsoft\Windows\UpdateOrchestrator\Reboot"
@@ -7243,10 +7243,10 @@ REG DELETE "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender" /V DisableAntiSpy
 REG DELETE "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender" /V DisableBehaviorMonitoring /F
 REG DELETE "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender" /V DisableOnAccessProtection /F
 REG DELETE "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender" /V DisableScanOnRealtimeEnable /F
-SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\Windows Defender\Windows Defender Cache Maintenance"
-SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\Windows Defender\Windows Defender Cleanup"
-SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\Windows Defender\Windows Defender Scheduled Scan"
-SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\Windows Defender\Windows Defender Verification"
+SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows Defender\Windows Defender Cache Maintenance"
+SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows Defender\Windows Defender Cleanup"
+SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows Defender\Windows Defender Scheduled Scan"
+SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows Defender\Windows Defender Verification"
 REG DELETE "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet" /V SpyNetReporting /F
 REG DELETE "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet" /V SubmitSamplesConsent /F
 REG DELETE "HKLM\SOFTWARE\Policies\Microsoft\MRT" /V DontReportInfectionInformation /F
@@ -7336,14 +7336,14 @@ REG ADD "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender" /V DisableAntiSpywar
 REG ADD "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender" /V DisableBehaviorMonitoring /T REG_DWORD /D 1 /F
 REG ADD "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender" /V DisableOnAccessProtection /T REG_DWORD /D 1 /F
 REG ADD "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender" /V DisableScanOnRealtimeEnable /T REG_DWORD /D 1 /F
-SCHTASKS /END /TN "\Microsoft\Windows\Windows Defender\Windows Defender Cache Maintenance"
-SCHTASKS /CHANGE /DISABLE /TN "\Microsoft\Windows\Windows Defender\Windows Defender Cache Maintenance"
-SCHTASKS /END /TN "\Microsoft\Windows\Windows Defender\Windows Defender Cleanup"
-SCHTASKS /CHANGE /DISABLE /TN "\Microsoft\Windows\Windows Defender\Windows Defender Cleanup"
-SCHTASKS /END /TN "\Microsoft\Windows\Windows Defender\Windows Defender Scheduled Scan"
-SCHTASKS /CHANGE /DISABLE /TN "\Microsoft\Windows\Windows Defender\Windows Defender Scheduled Scan"
-SCHTASKS /END /TN "\Microsoft\Windows\Windows Defender\Windows Defender Verification"
-SCHTASKS /CHANGE /DISABLE /TN "\Microsoft\Windows\Windows Defender\Windows Defender Verification"
+SCHTASKS /END /TN "\Microsoft\Windows Defender\Windows Defender Cache Maintenance"
+SCHTASKS /CHANGE /DISABLE /TN "\Microsoft\Windows Defender\Windows Defender Cache Maintenance"
+SCHTASKS /END /TN "\Microsoft\Windows Defender\Windows Defender Cleanup"
+SCHTASKS /CHANGE /DISABLE /TN "\Microsoft\Windows Defender\Windows Defender Cleanup"
+SCHTASKS /END /TN "\Microsoft\Windows Defender\Windows Defender Scheduled Scan"
+SCHTASKS /CHANGE /DISABLE /TN "\Microsoft\Windows Defender\Windows Defender Scheduled Scan"
+SCHTASKS /END /TN "\Microsoft\Windows Defender\Windows Defender Verification"
+SCHTASKS /CHANGE /DISABLE /TN "\Microsoft\Windows Defender\Windows Defender Verification"
 REG ADD "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet" /V SpyNetReporting /T REG_DWORD /D 0 /F
 REG ADD "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet" /V SubmitSamplesConsent /T REG_DWORD /D 2 /F
 reg add "HKLM\System\CurrentControlSet\Services\WinDefend" /v "Start" /t REG_DWORD /d "4" /f
