@@ -1287,6 +1287,8 @@ REG DELETE "HKLM\SOFTWARE\Policies\Microsoft\Windows\DeliveryOptimization" /V DO
 REG DELETE "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\DeliveryOptimization" /V SystemSettingsDownloadMode /F
 REG DELETE "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\DeliveryOptimization\Config" /V DownloadMode /F
 REG DELETE "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\DeliveryOptimization\Config" /V DODownloadMode /F
+REG DELETE "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\DeliveryOptimization\Config" /V ExternalIpAddress_saved /F
+REG DELETE "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate" /V DeferUpgrade /F
 REG DELETE "HKLM\SOFTWARE\Policies\Microsoft\Speech" /V AllowSpeechModelUpdate /F
 REG DELETE "HKCU\SOFTWARE\Microsoft\Siuf\Rules" /V NumberOfSIUFInPeriod /F
 REG DELETE "HKCU\SOFTWARE\Microsoft\Siuf\Rules" /V PeriodInNanoSeconds /F
