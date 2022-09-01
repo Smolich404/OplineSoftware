@@ -1254,6 +1254,8 @@ REG ADD "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\SettingSync\Groups\Brows
 REG ADD "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\SettingSync\Groups\Credentials" /V Enabled /T REG_DWORD /D 1 /F
 REG ADD "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\SettingSync\Groups\Accessibility" /V Enabled /T REG_DWORD /D 1 /F
 REG ADD "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\SettingSync\Groups\Windows" /V Enabled /T REG_DWORD /D 1 /F
+REG DELETE "HKLM\Software\Policies\Microsoft\Windows\OneDrive" /F
+REG ADD "HKLM\SOFTWARE\Microsoft\OneDrive" /V PreventNetworkTrafficPreUserSignIn /T REG_DWORD /D 0 /F
 REG DELETE "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Windows Search" /V CortanaConsent /F
 REG DELETE "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /V AllowCortana /F
 REG DELETE "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" /V CortanaEnabled /F
