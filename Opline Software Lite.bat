@@ -2045,8 +2045,8 @@ SC CONFIG "WSearch" START= AUTO
 NET START "WSearch"
 SC CONFIG "TrkWks" START= AUTO
 NET START "TrkWks"
-SC CONFIG "RemoteRegistry" START= DISABLED
-NET STOP "RemoteRegistry"
+SC CONFIG "RemoteRegistry" START= AUTO
+NET START "RemoteRegistry"
 SC CONFIG "IEEtwCollectorService" START= AUTO
 NET START "IEEtwCollectorService"
 SC CONFIG "wercplsupport" START= AUTO

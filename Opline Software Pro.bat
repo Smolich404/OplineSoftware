@@ -2555,80 +2555,80 @@ sc config ScDeviceEnum start= auto
 sc config SCPolicySvc start= auto
 sc config PrintNotify start= auto
 sc config WMPNetworkSvc start= auto
-NET start "XboxNetApiSvc"
-SC CONFIG "XboxNetApiSvc" START= auto
-NET start "XboxGipSvc"
-SC CONFIG "XboxGipSvc" START= auto
-NET start "XblGameSave"
-SC CONFIG "XblGameSave" START= auto
-NET start "XblAuthManager"
-SC CONFIG "XblAuthManager" START= auto
-NET start "xbgm"
-SC CONFIG "xbgm" START= auto
-SCHTASKS /END /TN "\Microsoft\XblGameSave\XblGameSaveTask"
+SC CONFIG "XboxNetApiSvc" START= AUTO
+NET START "XboxNetApiSvc"
+SC CONFIG "XboxGipSvc" START= AUTO
+NET START "XboxGipSvc"
+SC CONFIG "XblGameSave" START= AUTO
+NET START "XblGameSave"
+SC CONFIG "XblAuthManager" START= AUTO
+NET START "XblAuthManager"
+SC CONFIG "xbgm" START= AUTO
+NET START "xbgm"
 SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\XblGameSave\XblGameSaveTask"
-SCHTASKS /END /TN "\Microsoft\XblGameSave\XblGameSaveTaskLogon"
+SCHTASKS /RUN /TN "\Microsoft\XblGameSave\XblGameSaveTask"
 SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\XblGameSave\XblGameSaveTaskLogon"
-NET start "DoSvc"
-SC CONFIG "DoSvc" START= auto
-NET start "MapsBroker"
-SC CONFIG "MapsBroker" START= auto
-NET start "DcpSvc"
-SC CONFIG "DcpSvc" START= auto
-NET start "lfsvc"
-SC CONFIG "lfsvc" START= auto
-NET start "wisvc"
-SC CONFIG "wisvc" START= auto
-NET start "SensorService"
-SC CONFIG "SensorService" START= auto
-NET start "SensorDataService"
-SC CONFIG "SensorDataService" START= auto
-NET start "embeddedmode"
-SC CONFIG "embeddedmode" START= auto
-NET start "WbioSrvc"
-SC CONFIG "WbioSrvc" START= auto
+SCHTASKS /RUN /TN "\Microsoft\XblGameSave\XblGameSaveTaskLogon"
+SC CONFIG "DoSvc" START= AUTO
+NET START "DoSvc"
+SC CONFIG "MapsBroker" START= AUTO
+NET START "MapsBroker"
+SC CONFIG "DcpSvc" START= AUTO
+NET START "DcpSvc"
+SC CONFIG "lfsvc" START= AUTO
+NET START "lfsvc"
+NET START "wisvc"
+SC CONFIG "wisvc" START= AUTO
+SC CONFIG "SensorService" START= AUTO
+NET START "SensorService"
+SC CONFIG "SensorDataService" START= AUTO
+NET START "SensorDataService"
+SC CONFIG "embeddedmode" START= AUTO
+NET START "embeddedmode"
+SC CONFIG "WbioSrvc" START= AUTO
+NET START "WbioSrvc"
 REG DELETE "HKLM\SOFTWARE\Policies\Microsoft\Biometrics" /V Enabled /F
-NET start "CDPsvc"
-SC CONFIG "CDPsvc" START= auto
-NET start "AJRouter"
-SC CONFIG "AJRouter" START= auto
-NET start "SmsRouter"
-SC CONFIG "SmsRouter" START= auto
-NET start "NgcCtnrSvc"
-SC CONFIG "NgcCtnrSvc" START= auto
-NET start "FrameServer"
-SC CONFIG "FrameServer" START= auto
-NET start "WpnService"
-SC CONFIG "WpnService" START= auto
-NET start "icssvc"
-SC CONFIG "icssvc" START= auto
-NET start "imon"
-SC CONFIG "imon" START= auto
-NET start "RetailDemo"
-SC CONFIG "RetailDemo" START= auto
+SC CONFIG "CDPsvc" START= AUTO
+NET START "CDPsvc"
+SC CONFIG "AJRouter" START= AUTO
+NET START "AJRouter"
+SC CONFIG "SmsRouter" START= AUTO
+NET START "SmsRouter"
+SC CONFIG "NgcCtnrSvc" START= AUTO
+NET START "NgcCtnrSvc"
+SC CONFIG "FrameServer" START= AUTO
+NET START "FrameServer"
+SC CONFIG "WpnService" START= AUTO
+NET START "WpnService"
+SC CONFIG "icssvc" START= AUTO
+NET START "icssvc"
+SC CONFIG "imon" START= AUTO
+NET START "imon"
+SC CONFIG "RetailDemo" START= AUTO
+NET START "RetailDemo"
 REG ADD "HKLM\SYSTEM\CurrentControlSet\Services\TimeBroker" /V "Start" /T REG_DWORD /D 3 /F
-NET start "diagsvc"
-SC CONFIG "diagsvc" START= auto
-NET start "DmEnrollmentSvc"
-SC CONFIG "DmEnrollmentSvc" START= auto
-NET start "GraphicsPerfSvc"
-SC CONFIG "GraphicsPerfSvc" START= auto
-NET start "SEMgrSvc"
-SC CONFIG "SEMgrSvc" START= auto
-NET start "SharedRealitySvc"
-SC CONFIG "SharedRealitySvc" START= auto
-NET start "NaturalAuthentication"
-SC CONFIG "NaturalAuthentication" START= auto
-NET start "WarpJITSvc"
-SC CONFIG "WarpJITSvc" START= auto
-NET start "WalletService"
-SC CONFIG "WalletService" START= auto
-NET start "PrintNotify"
-SC CONFIG "PrintNotify" START= auto
-NET start "RmSvc"
-SC CONFIG "RmSvc" START= auto
-NET start "fhsvc"
-SC CONFIG "fhsvc" START= auto
+SC CONFIG "diagsvc" START= AUTO
+NET START "diagsvc"
+SC CONFIG "DmEnrollmentSvc" START= AUTO
+NET START "DmEnrollmentSvc"
+SC CONFIG "GraphicsPerfSvc" START= AUTO
+NET START "GraphicsPerfSvc"
+SC CONFIG "SEMgrSvc" START= AUTO
+NET START "SEMgrSvc"
+SC CONFIG "SharedRealitySvc" START= AUTO
+NET START "SharedRealitySvc"
+SC CONFIG "NaturalAuthentication" START= AUTO
+NET START "NaturalAuthentication"
+SC CONFIG "WarpJITSvc" START= AUTO
+NET START "WarpJITSvc"
+SC CONFIG "WalletService" START= AUTO
+NET START "WalletService"
+SC CONFIG "PrintNotify" START= AUTO
+NET START "PrintNotify"
+SC CONFIG "RmSvc" START= AUTO
+NET START "RmSvc"
+SC CONFIG "fhsvc" START= AUTO
+NET START "fhsvc"
 NET start "dmwappushservice"
 SC CONFIG "dmwappushservice" START= auto 
 NET start "diagnosticshub.standardcollector.service"
@@ -2647,8 +2647,8 @@ NET stop "RemoteRegistry"
 SC CONFIG "RemoteRegistry" START= disabled
 NET start "IEEtwCollectorService"
 SC CONFIG "IEEtwCollectorService" START= auto
-NET start "wercplsupport"
-SC CONFIG "wercplsupport" START= auto
+SC CONFIG "wercplsupport" START= AUTO
+NET START "wercplsupport"
 sc start DiagTrack
 sc start diagnosticshub.standardcollector.service
 sc start dmwappushservice
@@ -2718,26 +2718,26 @@ sc stop UevAgentService
 sc config UevAgentService start= disabled
 sc start Wecsvc
 sc config Wecsvc start= auto
-NET start "dmwappushservice"
-SC CONFIG "dmwappushservice" START= auto 
-NET start "diagnosticshub.standardcollector.service"
-SC CONFIG "diagnosticshub.standardcollector.service" START= auto
-NET start "WerSvc"
-SC CONFIG "WerSvc" START= auto
-NET start "WMPNetworkSvc"
-SC CONFIG "WMPNetworkSvc" START= auto
-NET start "WSearch"
-SC CONFIG "WSearch" START= auto
-NET start "TrkWks"
-SC CONFIG "TrkWks" START= auto
-NET stop "RemoteRegistry"
-SC CONFIG "RemoteRegistry" START= disabled
-NET start "IEEtwCollectorService"
-SC CONFIG "IEEtwCollectorService" START= auto
+SC CONFIG "dmwappushservice" START= AUTO 
+NET START "dmwappushservice"
+SC CONFIG "diagnosticshub.standardcollector.service" START= AUTO
+NET START "diagnosticshub.standardcollector.service"
+SC CONFIG "WerSvc" START= AUTO
+NET START "WerSvc"
+SC CONFIG "WMPNetworkSvc" START= AUTO
+NET START "WMPNetworkSvc"
+SC CONFIG "WSearch" START= AUTO
+NET START "WSearch"
+SC CONFIG "TrkWks" START= AUTO
+NET START "TrkWks"
+SC CONFIG "RemoteRegistry" START= AUTO
+NET START "RemoteRegistry"
+SC CONFIG "IEEtwCollectorService" START= AUTO
+NET START "IEEtwCollectorService"
 NET start "wercplsupport"
 SC CONFIG "wercplsupport" START= auto
-NET start "TabletInputService"
-SC CONFIG "TabletInputService" START= auto
+SC CONFIG "TabletInputService" START= AUTO
+NET START "TabletInputService"
 NET start "diagtrack"
 SC CONFIG "diagtrack" START= auto
 sc config xbgm start=auto
