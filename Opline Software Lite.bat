@@ -2819,6 +2819,7 @@ PowerShell -Command "Get-AppxPackage -AllUsers *Clipchamp.Clipchamp* | Remove-Ap
 PowerShell -Command "Get-AppxPackage -AllUsers *MicrosoftCorporationII.MicrosoftFamily* | Remove-AppxPackage"
 PowerShell -Command "Get-AppxPackage -AllUsers *MicrosoftCorporationII.QuickAssist* | Remove-AppxPackage"
 PowerShell -Command "Get-AppxPackage -AllUsers *Microsoft.MSPaint* | Remove-AppxPackage"
+PowerShell -Command "Get-AppxPackage -AllUsers *Disney* | Remove-AppxPackage"
 cls
 SET msgboxTitle=Opline Software
 SET msgboxBody=Finished - Skonczone
