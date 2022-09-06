@@ -2820,6 +2820,7 @@ PowerShell -Command "Get-AppxPackage -AllUsers *MicrosoftCorporationII.Microsoft
 PowerShell -Command "Get-AppxPackage -AllUsers *MicrosoftCorporationII.QuickAssist* | Remove-AppxPackage"
 PowerShell -Command "Get-AppxPackage -AllUsers *Microsoft.MSPaint* | Remove-AppxPackage"
 PowerShell -Command "Get-AppxPackage -AllUsers *Disney* | Remove-AppxPackage"
+PowerShell -Command "Get-AppxPackage -AllUsers *Spotify* | Remove-AppxPackage"
 cls
 SET msgboxTitle=Opline Software
 SET msgboxBody=Finished - Skonczone
