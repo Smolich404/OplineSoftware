@@ -4233,6 +4233,11 @@ bcdedit /deletevalue disabledynamictick
 bcdedit /deletevalue tscsyncpolicy
 bcdedit /deletevalue tscsyncpolicy
 bcdedit /deletevalue lastknowngood
+bcdedit /deletevalue x2apicpolicy
+bcdedit /deletevalue uselegacyapicmode
+Reg delete "HKLM\Software\Policies\Microsoft\FVE" /v "DisableExternalDMAUnderLock" /f
+Reg delete "HKLM\Software\Policies\Microsoft\Windows\DeviceGuard" /v "EnableVirtualizationBasedSecurity" /f
+Reg delete "HKLM\Software\Policies\Microsoft\Windows\DeviceGuard" /v "HVCIMATRequired" /f
 cls
 SET msgboxTitle=Opline Software
 SET msgboxBody=Finished - Skonczone
@@ -4468,6 +4473,12 @@ bcdedit /set nx optout
 bcdedit /set x2apicpolicy disable
 bcdedit /set uselegacyapicmode yes
 bcdedit /set lastknowngood yes
+bcdedit /set x2apicpolicy Enable
+bcdedit /set uselegacyapicmode No
+echo %PROCESSOR_IDENTIFIER% ^| find "Intel" >nul && bcdedit /set nx optout || bcdedit /set nx alwaysoff
+Reg add "HKLM\Software\Policies\Microsoft\FVE" /v "DisableExternalDMAUnderLock" /t Reg_DWORD /d "0" /f
+Reg add "HKLM\Software\Policies\Microsoft\Windows\DeviceGuard" /v "EnableVirtualizationBasedSecurity" /t Reg_DWORD /d "0" /f
+Reg add "HKLM\Software\Policies\Microsoft\Windows\DeviceGuard" /v "HVCIMATRequired" /t Reg_DWORD /d "0" /f
 cls
 SET msgboxTitle=Opline Software
 SET msgboxBody=Finished - Skonczone
