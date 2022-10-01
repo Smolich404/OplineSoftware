@@ -2625,8 +2625,6 @@ SC CONFIG "WalletService" START= AUTO
 NET START "WalletService"
 SC CONFIG "PrintNotify" START= AUTO
 NET START "PrintNotify"
-SC CONFIG "RmSvc" START= AUTO
-NET START "RmSvc"
 SC CONFIG "fhsvc" START= AUTO
 NET START "fhsvc"
 NET start "dmwappushservice"
@@ -2824,8 +2822,6 @@ sc config WMPNetworkSvc start=auto
 sc start WMPNetworkSvc
 sc config CDPUserSvc_3228d start=auto
 sc start CDPUserSvc_3228d
-sc config WpnUserService_3228d start=auto
-sc start WpnUserService_3228d
 sc config shpamsvc start=disabled
 sc stop shpamsvc
 sc config LanmanWorkstation start=auto
@@ -2978,8 +2974,6 @@ sc config WMPNetworkSvc start=auto
 sc start WMPNetworkSvc
 sc config CDPUserSvc_3228d start=auto
 sc start CDPUserSvc_3228d
-sc config WpnUserService_3228d start=auto
-sc start WpnUserService_3228d
 sc config shpamsvc start=disabled
 sc stop shpamsvc
 sc config LanmanWorkstation start=auto
@@ -3002,14 +2996,12 @@ FOR /f %%I IN (' reg query "HKLM\SYSTEM\CurrentControlSet\Services" /k /f "PimIn
 FOR /f %%I IN (' reg query "HKLM\SYSTEM\CurrentControlSet\Services" /k /f "UnistoreSvc" ^| FIND /i "UnistoreSvc"') DO (reg add "%%I" /v "Start" /t REG_DWORD /d 3 /f )
 FOR /f %%I IN (' reg query "HKLM\SYSTEM\CurrentControlSet\Services" /k /f "UserDataSvc" ^| FIND /i "UserDataSvc"') DO (reg add "%%I" /v "Start" /t REG_DWORD /d 3 /f )
 FOR /f %%I IN (' reg query "HKLM\SYSTEM\CurrentControlSet\Services" /k /f "MessagingService" ^| FIND /i "MessagingService"') DO (reg add "%%I" /v "Start" /t REG_DWORD /d 3 /f )
-FOR /f %%I IN (' reg query "HKLM\SYSTEM\CurrentControlSet\Services" /k /f "WpnUserService" ^| FIND /i "WpnUserService"') DO (reg add "%%I" /v "Start" /t REG_DWORD /d 3 /f )
 FOR /f %%I IN (' reg query "HKLM\SYSTEM\CurrentControlSet\Services" /k /f "CDPUserSvc" ^| FIND /i "CDPUserSvc"') DO (reg add "%%I" /v "UserServiceFlags" /t REG_DWORD /d 3 /f )
 FOR /f %%I IN (' reg query "HKLM\SYSTEM\CurrentControlSet\Services" /k /f "OneSyncSvc" ^| FIND /i "OneSyncSvc"') DO (reg add "%%I" /v "UserServiceFlags" /t REG_DWORD /d 3 /f )
 FOR /f %%I IN (' reg query "HKLM\SYSTEM\CurrentControlSet\Services" /k /f "PimIndexMaintenanceSvc" ^| FIND /i "PimIndexMaintenanceSvc"') DO (reg add "%%I" /v "UserServiceFlags" /t REG_DWORD /d 3 /f )
 FOR /f %%I IN (' reg query "HKLM\SYSTEM\CurrentControlSet\Services" /k /f "UnistoreSvc" ^| FIND /i "UnistoreSvc"') DO (reg add "%%I" /v "UserServiceFlags" /t REG_DWORD /d 3 /f )
 FOR /f %%I IN (' reg query "HKLM\SYSTEM\CurrentControlSet\Services" /k /f "UserDataSvc" ^| FIND /i "UserDataSvc"') DO (reg add "%%I" /v "UserServiceFlags" /t REG_DWORD /d 3 /f )
 FOR /f %%I IN (' reg query "HKLM\SYSTEM\CurrentControlSet\Services" /k /f "MessagingService" ^| FIND /i "MessagingService"') DO (reg add "%%I" /v "UserServiceFlags" /t REG_DWORD /d 3 /f )
-FOR /f %%I IN (' reg query "HKLM\SYSTEM\CurrentControlSet\Services" /k /f "WpnUserService" ^| FIND /i "WpnUserService"') DO (reg add "%%I" /v "UserServiceFlags" /t REG_DWORD /d 3 /f )
 Powershell iex ((New-Object System.Net.WebClient).DownloadString('https://bit.ly/EServices2'))
 Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\icssvc" /v "Start" /d "3" /t REG_DWORD /f
 Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\FrameServer" /v "Start" /d "3" /t REG_DWORD /f
@@ -3079,7 +3071,6 @@ Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\wersvc" /v "St
 Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\MSiSCSI" /v "Start" /t REG_DWORD /d "3" /f  
 Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WMPNetworkSvc" /v "Start" /t REG_DWORD /d "3" /f  
 Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CDPUserSvc" /v "Start" /t REG_DWORD /d "2" /f >nul 2>&1
-Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WpnUserService" /v "Start" /t REG_DWORD /d "2" /f 
 Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanmanWorkstation" /v "Start" /t REG_DWORD /d "2" /f   
 Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\UnistoreSvc" /v "Start" /t REG_DWORD /d "3" /f 
 Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\MapsBroker" /v "Start" /t REG_DWORD /d "2" /f  
@@ -3340,8 +3331,6 @@ NET STOP "WalletService"
 SC CONFIG "WalletService" START= DISABLED
 NET STOP "PrintNotify"
 SC CONFIG "PrintNotify" START= DISABLED
-NET STOP "RmSvc"
-SC CONFIG "RmSvc" START= DISABLED
 NET STOP "fhsvc"
 SC CONFIG "fhsvc" START= DISABLED
 NET STOP "dmwappushservice"
@@ -3540,8 +3529,6 @@ sc config WMPNetworkSvc start=disabled
 sc stop WMPNetworkSvc
 sc config CDPUserSvc_3228d start=disabled
 sc stop CDPUserSvc_3228d
-sc config WpnUserService_3228d start=disabled
-sc stop WpnUserService_3228d
 sc config shpamsvc start=disabled
 sc stop shpamsvc
 sc config LanmanWorkstation start=disabled
@@ -3695,8 +3682,6 @@ sc config WMPNetworkSvc start=disabled
 sc stop WMPNetworkSvc
 sc config CDPUserSvc_3228d start=disabled
 sc stop CDPUserSvc_3228d
-sc config WpnUserService_3228d start=disabled
-sc stop WpnUserService_3228d
 sc config shpamsvc start=disabled
 sc stop shpamsvc
 sc config LanmanWorkstation start=disabled
@@ -3721,14 +3706,12 @@ FOR /f %%I IN (' reg query "HKLM\SYSTEM\CurrentControlSet\Services" /k /f "PimIn
 FOR /f %%I IN (' reg query "HKLM\SYSTEM\CurrentControlSet\Services" /k /f "UnistoreSvc" ^| FIND /i "UnistoreSvc"') DO (reg add "%%I" /v "Start" /t REG_DWORD /d 4 /f )
 FOR /f %%I IN (' reg query "HKLM\SYSTEM\CurrentControlSet\Services" /k /f "UserDataSvc" ^| FIND /i "UserDataSvc"') DO (reg add "%%I" /v "Start" /t REG_DWORD /d 4 /f )
 FOR /f %%I IN (' reg query "HKLM\SYSTEM\CurrentControlSet\Services" /k /f "MessagingService" ^| FIND /i "MessagingService"') DO (reg add "%%I" /v "Start" /t REG_DWORD /d 4 /f )
-FOR /f %%I IN (' reg query "HKLM\SYSTEM\CurrentControlSet\Services" /k /f "WpnUserService" ^| FIND /i "WpnUserService"') DO (reg add "%%I" /v "Start" /t REG_DWORD /d 4 /f )
 FOR /f %%I IN (' reg query "HKLM\SYSTEM\CurrentControlSet\Services" /k /f "CDPUserSvc" ^| FIND /i "CDPUserSvc"') DO (reg add "%%I" /v "UserServiceFlags" /t REG_DWORD /d 0 /f )
 FOR /f %%I IN (' reg query "HKLM\SYSTEM\CurrentControlSet\Services" /k /f "OneSyncSvc" ^| FIND /i "OneSyncSvc"') DO (reg add "%%I" /v "UserServiceFlags" /t REG_DWORD /d 0 /f )
 FOR /f %%I IN (' reg query "HKLM\SYSTEM\CurrentControlSet\Services" /k /f "PimIndexMaintenanceSvc" ^| FIND /i "PimIndexMaintenanceSvc"') DO (reg add "%%I" /v "UserServiceFlags" /t REG_DWORD /d 0 /f )
 FOR /f %%I IN (' reg query "HKLM\SYSTEM\CurrentControlSet\Services" /k /f "UnistoreSvc" ^| FIND /i "UnistoreSvc"') DO (reg add "%%I" /v "UserServiceFlags" /t REG_DWORD /d 0 /f )
 FOR /f %%I IN (' reg query "HKLM\SYSTEM\CurrentControlSet\Services" /k /f "UserDataSvc" ^| FIND /i "UserDataSvc"') DO (reg add "%%I" /v "UserServiceFlags" /t REG_DWORD /d 0 /f )
 FOR /f %%I IN (' reg query "HKLM\SYSTEM\CurrentControlSet\Services" /k /f "MessagingService" ^| FIND /i "MessagingService"') DO (reg add "%%I" /v "UserServiceFlags" /t REG_DWORD /d 0 /f )
-FOR /f %%I IN (' reg query "HKLM\SYSTEM\CurrentControlSet\Services" /k /f "WpnUserService" ^| FIND /i "WpnUserService"') DO (reg add "%%I" /v "UserServiceFlags" /t REG_DWORD /d 0 /f )
 Powershell iex ((New-Object System.Net.WebClient).DownloadString('https://bit.ly/DServices2'))
 Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\icssvc" /v "Start" /d "4" /t REG_DWORD /f
 Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\FrameServer" /v "Start" /d "4" /t REG_DWORD /f
@@ -3796,7 +3779,6 @@ Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\gupdatem" /v "
 Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\MSiSCSI" /v "Start" /t REG_DWORD /d "4" /f  
 Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WMPNetworkSvc" /v "Start" /t REG_DWORD /d "4" /f  
 Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CDPUserSvc" /v "Start" /t REG_DWORD /d "4" /f >nul 2>&1
-Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WpnUserService" /v "Start" /t REG_DWORD /d "4" /f
 Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanmanWorkstation" /v "Start" /t REG_DWORD /d "4" /f   
 Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\UnistoreSvc" /v "Start" /t REG_DWORD /d "4" /f 
 Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\MapsBroker" /v "Start" /t REG_DWORD /d "4" /f  
