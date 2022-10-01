@@ -3251,7 +3251,8 @@ reg add "HKLM\SYSTEM\ControlSet001\Control\Session Manager\Memory Management\Pre
 reg add "HKLM\SYSTEM\ControlSet001\Control\Session Manager\Memory Management\PrefetchParameters" /v "EnableSuperfetch" /t REG_DWORD /d "0" /f
 reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\EMDMgmt" /v "GroupPolicyDisallowCaches" /t REG_DWORD /d "1" /f
 reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\EMDMgmt" /v "AllowNewCachesByDefault" /t REG_DWORD /d "0" /f
-powershell -NoProfile -Command "Disable-MMAgent -MC"
+PowerShell -NonInteractive -NoLogo -NoProfile -Command "Disable-MMAgent -mc"
+reg add "HKLM\SYSTEM\ControlSet001\Control\Session Manager\Memory Management\PrefetchParameters" /v "isMemoryCompressionEnabled" /t REG_DWORD /d "0" /f
 ::Disable-MMAgent -mc
 goto end4
 
@@ -3265,7 +3266,8 @@ reg add "HKLM\SYSTEM\ControlSet001\Control\Session Manager\Memory Management\Pre
 reg add "HKLM\SYSTEM\ControlSet001\Control\Session Manager\Memory Management\PrefetchParameters" /v "EnableSuperfetch" /t REG_DWORD /d "3" /f
 reg delete "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\EMDMgmt" /v "GroupPolicyDisallowCaches" /f
 reg delete "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\EMDMgmt" /v "AllowNewCachesByDefault" /f
-powershell -NoProfile -Command "Enable-MMAgent -MC"
+PowerShell -NonInteractive -NoLogo -NoProfile -Command "Enable-MMAgent -mc"
+reg delete "HKLM\SYSTEM\ControlSet001\Control\Session Manager\Memory Management\PrefetchParameters" /v "isMemoryCompressionEnabled" /f
 ::Enable-MMAgent -mc
 goto end4
 
