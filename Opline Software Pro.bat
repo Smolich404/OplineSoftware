@@ -2694,8 +2694,6 @@ sc start vmicrdv
 sc config vmicrdv start= auto
 sc start vmictimesync
 sc config vmictimesync start= auto
-sc start vmicvss
-sc config vmicvss start= auto
 sc start SharedAccess
 sc config SharedAccess start= auto
 sc start lltdsvc
@@ -3404,8 +3402,6 @@ sc stop vmicrdv
 sc config vmicrdv start= disabled
 sc stop vmictimesync
 sc config vmictimesync start= disabled
-sc stop vmicvss
-sc config vmicvss start= disabled
 sc stop SharedAccess
 sc config SharedAccess start= disabled
 sc stop lltdsvc
