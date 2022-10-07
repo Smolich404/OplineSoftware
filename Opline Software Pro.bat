@@ -3340,9 +3340,6 @@ NET STOP "WerSvc"
 SC CONFIG "WerSvc" START= DISABLED
 NET STOP "diagtrack"
 SC CONFIG "diagtrack" START= DISABLED
-REG DELETE "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Diagnostics\DiagTrack" /F
-REG DELETE "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Svchost\utcsvc" /F
-REG DELETE "HKLM\System\CurrentControlSet\Control\WMI\Autologger\AutoLogger-Diagtrack-Listener" /F
 NET STOP "WMPNetworkSvc"
 SC CONFIG "WMPNetworkSvc" START= DISABLED
 NET STOP "WSearch"
