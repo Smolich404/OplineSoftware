@@ -835,9 +835,9 @@ SCHTASKS /CHANGE /DISABLE /TN "\Microsoft\Windows\AppID\VerifiedPublisherCertSto
 SCHTASKS /END /TN "\Microsoft\Windows\Power Efficiency Diagnostics\AnalyzeSystem"
 SCHTASKS /CHANGE /DISABLE /TN "\Microsoft\Windows\Power Efficiency Diagnostics\AnalyzeSystem"
 SCHTASKS /END /TN "\Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser"
-SCHTASKS /DISABLE /TN "\Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser" /F
+SCHTASKS /CHANGE /DISABLE /TN "\Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser"
 SCHTASKS /END /TN "\Microsoft\Windows\Application Experience\ProgramDataUpdater"
-SCHTASKS /DISABLE /TN "\Microsoft\Windows\Application Experience\ProgramDataUpdater" /F
+SCHTASKS /CHANGE /DISABLE /TN "\Microsoft\Windows\Application Experience\ProgramDataUpdater"
 schtasks /end /TN "Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser"
 schtasks /Change /TN "Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser" /Disable
 RD /S /Q "C:\ProgramData\Microsoft\windows\Sqm\"
@@ -1122,6 +1122,10 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\AppID\Configuration\SMARTLOCK
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\CI\Config" /v "VulnerableDriverBlocklistEnable" /t REG_DWORD /d "1" /f
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\CI\Policy" /v "VerifiedAndReputablePolicyState" /t REG_DWORD /d "0" /f
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\CI\Protected" /v "VerifiedAndReputablePolicyStateMinValueSeen" /t REG_DWORD /d "0" /f
+reg add "HKLM\Software\Policies\Microsoft\Windows\SettingSync" /v DisableSettingSync /t REG_DWORD /d 2 /f
+reg add "HKLM\Software\Policies\Microsoft\Windows\SettingSync" /v DisableSettingSyncUserOverride /t REG_DWORD /d 1 /f
+reg add "HKLM\SOFTWARE\Microsoft\Windows\Windows Error Reporting" /v Disabled /t REG_DWORD /d 1 /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "NoRecentDocsHistory" /t REG_DWORD /d 1 /f
 powershell -NoProfile -Command "Disable-MMAgent -PC -MC -APL"
 cls
 SET msgboxTitle=Opline Software
@@ -1180,9 +1184,9 @@ SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\RetailDemo\CleanupOfflineConten
 SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\AppID\PolicyConverter"
 SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\AppID\VerifiedPublisherCertStoreCheck"
 SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\Power Efficiency Diagnostics\AnalyzeSystem"
-SCHTASKS /ENABLE /TN "\Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser" /F
+SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser"
 SCHTASKS /RUN /TN "\Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser"
-SCHTASKS /ENABLE /TN "\Microsoft\Windows\Application Experience\ProgramDataUpdater" /F
+SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\Application Experience\ProgramDataUpdater"
 SCHTASKS /RUN /TN "\Microsoft\Windows\Application Experience\ProgramDataUpdater"
 schtasks /Change /TN "Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser" /Enable
 Reg.exe add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "OneDrive" /t REG_SZ /d "\"C:\Users\tet\AppData\Local\Microsoft\OneDrive\OneDrive.exe\" /background" /f
@@ -1468,6 +1472,9 @@ Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Control\CI\Policy" /v "VerifiedAnd
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\CI\Policy" /f
 Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Control\CI\Protected" /v "VerifiedAndReputablePolicyStateMinValueSeen" /f
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\CI\Protected" /f
+reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /f
+reg delete "HKLM\SOFTWARE\Microsoft\Windows\Windows Error Reporting" /v Disabled /f
+reg delete "HKLM\Software\Policies\Microsoft\Windows\SettingSync" /f
 powershell -NoProfile -Command "Enable-MMAgent -PC -MC -APL"
 cls
 SET msgboxTitle=Opline Software
@@ -7329,6 +7336,8 @@ reg add HKLM\SYSTEM\CurrentControlSet\Services\WdNisSvc /v "Start" /t REG_DWORD 
 reg delete HKLM\SYSTEM\CurrentControlSet\Services\WdNisSvc /v "AutorunsDisabled" /f
 reg add HKLM\SYSTEM\CurrentControlSet\Services\Sense /v "Start" /t REG_DWORD /d "2" /f
 reg delete HKLM\SYSTEM\CurrentControlSet\Services\Sense /v "AutorunsDisabled" /f
+reg delete "HKLM\SOFTWARE\Policies\Microsoft\Windows\System" /v "EnableSmartScreen" /f
+reg delete "HKCU\Software\Microsoft\Internet Explorer\PhishingFilter" /f
 Reg.exe add "HKLM\SOFTWARE\Classes\CLSID\{09A47860-11B0-4DA5-AFA5-26D86198A780}\InprocServer32" /ve /t REG_SZ /d "C:\Program Files\Windows Defender\shellext.dll" /f
 Reg.exe add "HKLM\SOFTWARE\Classes\CLSID\{09A47860-11B0-4DA5-AFA5-26D86198A780}\InprocServer32" /v "ThreadingModel" /t REG_SZ /d "Apartment" /f
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "SecurityHealth" /t REG_EXPAND_SZ /d "%%windir%%\system32\SecurityHealthSystray.exe" /f
@@ -7416,6 +7425,8 @@ reg add HKLM\SYSTEM\CurrentControlSet\Services\WdNisSvc /v "Start" /t REG_DWORD 
 reg add HKLM\SYSTEM\CurrentControlSet\Services\WdNisSvc /v "AutorunsDisabled" /t REG_DWORD /d "3" /f
 reg add HKLM\SYSTEM\CurrentControlSet\Services\Sense /v "Start" /t REG_DWORD /d "4" /f
 reg add HKLM\SYSTEM\CurrentControlSet\Services\Sense /v "AutorunsDisabled" /t REG_DWORD /d "3" /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\System" /v "EnableSmartScreen" /t REG_DWORD /d 0 /f
+reg add "HKCU\Software\Microsoft\Internet Explorer\PhishingFilter" /v "EnabledV9" /t REG_DWORD /d 0 /f
 Reg.exe delete "HKLM\SOFTWARE\Classes\CLSID\{09A47860-11B0-4DA5-AFA5-26D86198A780}\InprocServer32" /f
 Reg.exe delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "SecurityHealth" /f
 takeown /f "%systemroot%\System32\smartscreen.exe" /a
