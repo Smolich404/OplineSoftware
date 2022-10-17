@@ -228,11 +228,12 @@ echo.
 call :ColorText 1B "###############################################################################################"
 echo.
 echo.
-cmdMenuSel f3B0 "   [+]  Full Registry Optimization" "   [+]  Optimization of Application Settings Registry or Games Priority" "   [+]  Reset" "   [+]  Exit"
+cmdMenuSel f3B0 "   [+]  Full Registry Optimization" "   [+]  Optimization of Application Settings Registry or Games Priority" "   [+]  Game Booster" "   [+]  Reset" "   [+]  Exit"
 if %ERRORLEVEL% == 1 goto L
 if %ERRORLEVEL% == 2 goto LPRIO
-if %ERRORLEVEL% == 3 goto ResetReg
-if %ERRORLEVEL% == 4 goto OplineMenu
+if %ERRORLEVEL% == 3 goto GBooster
+if %ERRORLEVEL% == 4 goto ResetReg
+if %ERRORLEVEL% == 5 goto OplineMenu
 
 :ResetReg
 cls
@@ -262,10 +263,11 @@ echo.
 call :ColorText 1B "###############################################################################################"
 echo.
 echo.
-cmdMenuSel f3B0 "   [+]  Reset Regedit" "   [+]  Reset Optimization of Application Settings Registry or Games Priority" "   [+]  Exit"
+cmdMenuSel f3B0 "   [+]  Reset Regedit" "   [+]  Reset Optimization of Application Settings Registry or Games Priority" "   [+]  Reset Game Booster" "   [+]  Exit"
 if %ERRORLEVEL% == 1 goto ResetReg2
 if %ERRORLEVEL% == 2 goto ResetPrio
-if %ERRORLEVEL% == 3 goto Regedit
+if %ERRORLEVEL% == 3 goto RGBooster
+if %ERRORLEVEL% == 4 goto Regedit
 
 :ResetReg2
 cls
@@ -350,6 +352,71 @@ ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
 WSCRIPT "%tmpmsgbox%"
 goto ResetReg
 
+:RGBooster
+cls
+echo.
+echo.
+call :ColorText 1B "###############################################################################################"
+echo.
+echo.
+echo                             ____  _____  _      _____ _   _ ______                      
+echo                            / __ \^|  __ \^| ^|    ^|_   _^| \ ^| ^|  ____^|                     
+echo                           ^| ^|  ^| ^| ^|__) ^| ^|      ^| ^| ^|  \^| ^| ^|__                        
+echo                           ^| ^|  ^| ^|  ___/^| ^|      ^| ^| ^|   \ ^|  __^|                       
+echo                           ^| ^|__^| ^| ^|    ^| ^|____ _^| ^|_^| ^|\  ^| ^|____                      
+echo                            \____/^|_^|    ^|______^|_____^|_^| \_^|______^|                     
+echo                   _____  ____  ______ _________          __     _____  ______ 
+echo                  / ____^|/ __ \^|  ____^|__   __\ \        / /\   ^|  __ \^|  ____^|
+echo                 ^| (___ ^| ^|  ^| ^| ^|__     ^| ^|   \ \  /\  / /  \  ^| ^|__) ^| ^|__   
+echo                  \___ \^| ^|  ^| ^|  __^|    ^| ^|    \ \/  \/ / /\ \ ^|  _  /^|  __^|  
+echo                  ____) ^| ^|__^| ^| ^|       ^| ^|     \  /\  / ____ \^| ^| \ \^| ^|____ 
+echo                 ^|_____/ \____/^|_^|       ^|_^|      \/  \/_/    \_\_^|  \_\______^|
+echo.
+echo.
+call :ColorText 0C "                                             P R O"
+echo.
+echo.
+echo.
+call :ColorText 1B "###############################################################################################"
+echo.
+echo.
+call :ColorText 06 "                           Enter the name of the application with .exe"
+echo.
+echo.
+echo                       If you do not know how to do it, just enter your game
+echo                           right-click on it and click open file location 
+echo                       and you will see the name of this game and it's ready
+echo                   In the case of the Game via Steam it is different to find it 
+echo           you click on the folder where you have Steam, steamapps and common installed 
+echo              and there you will find the correct name of this game via exe and ready
+echo.
+call :ColorText 06 "                                  Wpisz nazwe aplikacji z .exe"
+echo.
+echo.
+echo                      Jesli nie wiesz, jak to zrobic, po prostu wejdz do gry
+echo              kliknij prawym przyciskiem myszy i kliknij otworz lokalizacje pliku
+echo                          a zobaczysz oryginalna nazwe tej gry i gotowe
+echo                      W przypadku Gry przez Steam inaczej jest ja znalezc
+echo           klikniesz na folder, w ktorym masz zainstalowany Steam, steamapps i common
+echo                  i tam znajdziesz poprawna nazwe tej gry przez exe i gotowe
+echo.
+set /p rfile=
+if %rfile%== X goto ResetReg
+if %rfile%== x goto ResetReg
+Goto RGBFile
+
+:RGBFile
+cls
+Reg delete "HKCU\Software\Microsoft\DirectX\UserGpuPreferences" /v "%rfile%" /f
+Reg delete "HKCU\Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers" /v "%rfile%" /f
+cls
+SET msgboxTitle=Opline Software
+SET msgboxBody=Finished - Skonczone
+SET tmpmsgbox=%temp%~tmpmsgbox.vbs
+IF EXIST "%tmpmsgbox%" DEL /F /Q "%tmpmsgbox%"
+ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
+WSCRIPT "%tmpmsgbox%"
+goto ResetReg
 
 :LPRIO
 cls
@@ -449,6 +516,72 @@ Goto EZ
 :PRIO
 cls
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games" /v "Priority" /t REG_DWORD /d "%PRIORITY%" /f
+cls
+SET msgboxTitle=Opline Software
+SET msgboxBody=Finished - Skonczone
+SET tmpmsgbox=%temp%~tmpmsgbox.vbs
+IF EXIST "%tmpmsgbox%" DEL /F /Q "%tmpmsgbox%"
+ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
+WSCRIPT "%tmpmsgbox%"
+goto Regedit
+
+:GBooster
+cls
+echo.
+echo.
+call :ColorText 1B "###############################################################################################"
+echo.
+echo.
+echo                             ____  _____  _      _____ _   _ ______                      
+echo                            / __ \^|  __ \^| ^|    ^|_   _^| \ ^| ^|  ____^|                     
+echo                           ^| ^|  ^| ^| ^|__) ^| ^|      ^| ^| ^|  \^| ^| ^|__                        
+echo                           ^| ^|  ^| ^|  ___/^| ^|      ^| ^| ^|   \ ^|  __^|                       
+echo                           ^| ^|__^| ^| ^|    ^| ^|____ _^| ^|_^| ^|\  ^| ^|____                      
+echo                            \____/^|_^|    ^|______^|_____^|_^| \_^|______^|                     
+echo                   _____  ____  ______ _________          __     _____  ______ 
+echo                  / ____^|/ __ \^|  ____^|__   __\ \        / /\   ^|  __ \^|  ____^|
+echo                 ^| (___ ^| ^|  ^| ^| ^|__     ^| ^|   \ \  /\  / /  \  ^| ^|__) ^| ^|__   
+echo                  \___ \^| ^|  ^| ^|  __^|    ^| ^|    \ \/  \/ / /\ \ ^|  _  /^|  __^|  
+echo                  ____) ^| ^|__^| ^| ^|       ^| ^|     \  /\  / ____ \^| ^| \ \^| ^|____ 
+echo                 ^|_____/ \____/^|_^|       ^|_^|      \/  \/_/    \_\_^|  \_\______^|
+echo.
+echo.
+call :ColorText 0C "                                             P R O"
+echo.
+echo.
+echo.
+call :ColorText 1B "###############################################################################################"
+echo.
+echo.
+call :ColorText 06 "                           Enter the name of the application with .exe"
+echo.
+echo.
+echo                       If you do not know how to do it, just enter your game
+echo                           right-click on it and click open file location 
+echo                       and you will see the name of this game and it's ready
+echo                   In the case of the Game via Steam it is different to find it 
+echo           you click on the folder where you have Steam, steamapps and common installed 
+echo              and there you will find the correct name of this game via exe and ready
+echo.
+call :ColorText 06 "                                  Wpisz nazwe aplikacji z .exe"
+echo.
+echo.
+echo                      Jesli nie wiesz, jak to zrobic, po prostu wejdz do gry
+echo              kliknij prawym przyciskiem myszy i kliknij otworz lokalizacje pliku
+echo                          a zobaczysz oryginalna nazwe tej gry i gotowe
+echo                      W przypadku Gry przez Steam inaczej jest ja znalezc
+echo           klikniesz na folder, w ktorym masz zainstalowany Steam, steamapps i common
+echo                  i tam znajdziesz poprawna nazwe tej gry przez exe i gotowe
+echo.
+set /p file=
+if %file%== X goto Regedit
+if %file%== x goto Regedit
+Goto GBFile
+
+:GBFile
+cls
+Reg add "HKCU\Software\Microsoft\DirectX\UserGpuPreferences" /v "%file%" /t Reg_SZ /d "GpuPreference=2;" /f
+Reg add "HKCU\Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers" /v "%file%" /t Reg_SZ /d "~ DISABLEDXMAXIMIZEDWINDOWEDMODE" /f
 cls
 SET msgboxTitle=Opline Software
 SET msgboxBody=Finished - Skonczone
@@ -1372,7 +1505,7 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\FileSystem" /v "RefsEnableDir
 Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters" /v "EnablePrefetcher" /t Reg_DWORD /d "0" /f
 Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters" /v "EnableSuperfetch" /t Reg_DWORD /d "0" /f
 Reg add "HKCU\Control Panel\Desktop" /v "WaitToKillAppTimeout" /t Reg_SZ /d "5000" /f
-Reg add "HKLM\System\CurrentControlSet\Control" /v "WaitToKillServiceTimeout" /t Reg_SZ /d "1000" /f
+Reg add "HKLM\System\CurrentControlSet\Control" /v "WaitToKillServiceTimeout" /t Reg_SZ /d "2000" /f
 Reg add "HKCU\Control Panel\Desktop" /v "HungAppTimeout" /t Reg_SZ /d "4000" /f
 Reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Error Reporting" /v "Disabled" /t Reg_DWORD /d "1" /f
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v "EAFModules" /t REG_SZ /d "" /f
@@ -4046,8 +4179,9 @@ powershell Invoke-WebRequest "https://github.com/Smolich404/DownloadFilesToOplin
 timeout 2 >nul 2>&1
 sc config "STR" start= auto >nul 2>&1
 NET START STR >nul 2>&1
-bcdedit /set useplatformtick yes  
+bcdedit /set useplatformtick yes >nul 2>&1
 bcdedit /set disabledynamictick yes >nul 2>&1
+bcdedit /deletevalue useplatformclock >nul 2>&1
 cd c:\STR>nul 2>&1
 %windir%\Microsoft.NET\Framework\v4.0.30319\InstallUtil.exe /i SetTimerResolutionService.exe >nul 2>&1
 sc config "STR" start= auto >nul 2>&1
@@ -4065,8 +4199,9 @@ goto STR
 cls
 sc config "STR" start= disabled >nul 2>&1
 NET STOP STR >nul 2>&1
-bcdedit /deletevalue useplatformtick  
+bcdedit /deletevalue useplatformtick >nul 2>&1
 bcdedit /deletevalue disabledynamictick >nul 2>&1
+bcdedit /deletevalue useplatformclock >nul 2>&1
 cls
 SET msgboxTitle=Opline Software
 SET msgboxBody=Timer Resolution Has Been Successfully Disabled - Timer Resolution Zostal Pomyslnie Wylaczony
@@ -4092,9 +4227,9 @@ del CLOCKRES.exe
 del /Q SetTimerResolutionService.exe >nul 2>&1
 del /Q InstallUtil.InstallLog >nul 2>&1
 del /Q SetTimerResolutionService.InstallLog >nul 2>&1
-bcdedit /deletevalue useplatformclock   >nul 2>&1
-bcdedit /deletevalue useplatformtick  >nul 2>&1
-bcdedit /deletevalue disabledynamictick  >nul 2>&1
+bcdedit /deletevalue useplatformclock >nul 2>&1
+bcdedit /deletevalue useplatformtick >nul 2>&1
+bcdedit /deletevalue disabledynamictick >nul 2>&1
 cd c:\
 rmdir STR
 cls
@@ -4962,7 +5097,7 @@ del /s /f /q C:\WINDOWS\Prefetch
 del /s /f /q %temp%\*.*
 rd /s /q %temp%
 md %temp%
-del/q/f/s %TEMP%\*
+del /q /f /s %TEMP%\*
 RD /S /Q %temp%
 MKDIR %temp%
 takeown /f "%temp%" /r /d y
@@ -4986,16 +5121,17 @@ del /s /f /q c:\windows\temp\*.*
 rd /s /q c:\windows\temp
 md c:\windows\temp
 del /s /f /q C:\WINDOWS\Prefetch
-del /s /f /q C:\Users\user\AppData\Local\Temp\*.*
-rd /s /q C:\Users\user\AppData\Local\Temp
-md C:\Users\user\AppData\Local\Temp
+del /s /f /q C:\Users\%username%\AppData\Local\Temp\*.*
+rd /s /q C:\Users\%username%\AppData\Local\Temp
+md C:\Users\%username%\AppData\Local\Temp
 del /s /f /q c:\windows\temp\*.*
 rd /s /q c:\windows\temp
 md c:\windows\temp
 del /s /f /q C:\WINDOWS\Prefetch
-del /s /f /q C:\Users\user\AppData\Local\Temp\*.*
-rd /s /q C:\Users\user\AppData\Local\Temp
-md C:\Users\user\AppData\Local\Temp
+del /s /f /q C:\Users\%username%\AppData\Local\Temp\*.*
+rd /s /q C:\Users\%username%\AppData\Local\Temp
+md C:\Users\%username%\AppData\Local\Temp
+del /s /f /Q C:\Users\%username%\AppData\Local\Microsoft\Windows\INetCache\IE\*.*
 del /s /f /q %WinDir%\Temp\*.*
 del /s /f /q %WinDir%\Prefetch\*.*
 del /s /f /q %Temp%\*.*
