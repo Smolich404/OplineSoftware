@@ -1495,13 +1495,6 @@ Reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Search" /v "BackgroundAp
 Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v "DisablePagingExecutive" /t Reg_DWORD /d "1" /f
 Reg add "HKLM\SYSTEM\CurrentControlSet\Control\FileSystem" /v "DontVerifyRandomDrivers" /t REG_DWORD /d "1" /f
 Reg add "HKLM\SYSTEM\CurrentControlSet\Control\FileSystem" /v "LongPathsEnabled" /t REG_DWORD /d "0" /f
-Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\FileSystem" /v "NtfsCachedRunsDelta" /t REG_QWORD /d "0x0000000000000000" /f
-Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\FileSystem" /v "NtfsCachedRunsInsertLimit" /t REG_QWORD /d "0x0000000000000000" /f
-Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\FileSystem" /v "NtfsCachedRunsLimitMode" /t REG_QWORD /d "0x0000000000000000" /f
-Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\FileSystem" /v "NtfsInitialCachedRuns" /t REG_QWORD /d "0x0000000000000000" /f
-Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\FileSystem" /v "NtfsMaxCachedRuns" /t REG_QWORD /d "0x0000000000000000" /f
-Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\FileSystem" /v "NtfsLimitPhysicalSectorSize" /t REG_DWORD /d "1" /f
-Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\FileSystem" /v "RefsEnableDirCaseSensitivity" /t REG_DWORD /d "3" /f
 Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters" /v "EnablePrefetcher" /t Reg_DWORD /d "0" /f
 Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters" /v "EnableSuperfetch" /t Reg_DWORD /d "0" /f
 Reg add "HKCU\Control Panel\Desktop" /v "WaitToKillAppTimeout" /t Reg_SZ /d "5000" /f
@@ -1951,13 +1944,6 @@ Reg delete "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Search" 
 Reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v "DisablePagingExecutive" /t Reg_DWORD /d "0" /f
 Reg delete "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\FileSystem" /v "DontVerifyRandomDrivers" /f
 Reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\FileSystem" /v "LongPathsEnabled" /t Reg_DWORD /d "0" /f
-Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Control\FileSystem" /v "NtfsCachedRunsDelta" /f
-Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Control\FileSystem" /v "NtfsCachedRunsInsertLimit" /f
-Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Control\FileSystem" /v "NtfsCachedRunsLimitMode" /f
-Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Control\FileSystem" /v "NtfsInitialCachedRuns" /f
-Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Control\FileSystem" /v "NtfsLimitPhysicalSectorSize" /f
-Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Control\FileSystem" /v "NtfsMaxCachedRuns" /f
-Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Control\FileSystem" /v "RefsEnableDirCaseSensitivity" /f
 Reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters" /v "EnablePrefetcher" /t Reg_DWORD /d "3" /f
 Reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters" /v "EnableSuperfetch" /t Reg_DWORD /d "3" /f
 Reg delete "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications" /v "GlobalUserDisabled" /f
