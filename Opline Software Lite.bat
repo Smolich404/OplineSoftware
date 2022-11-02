@@ -189,14 +189,15 @@ echo.
 call :ColorText 1B "###############################################################################################"
 echo.
 echo.
-cmdMenuSel f3B0 "   [+]  Debloater" "   [+]  Debloater V2" "   [+]  Debloater V3" "   [+]  Debloater V4" "   [+]  Reset Debloater" "   [+]  Other Debloat" "   [+]  Exit"
+cmdMenuSel f3B0 "   [+]  Debloater" "   [+]  Debloater V2" "   [+]  Debloater V3" "   [+]  Debloater V4" "   [+]  Debloater V5" "   [+]  Reset Debloater" "   [+]  Other Debloat" "   [+]  Exit"
 if %ERRORLEVEL% == 1 goto GANG
 if %ERRORLEVEL% == 2 goto GANG2
 if %ERRORLEVEL% == 3 goto GANG3
 if %ERRORLEVEL% == 4 goto GANG4
-if %ERRORLEVEL% == 5 goto RESETGANG
-if %ERRORLEVEL% == 6 goto OtherD
-if %ERRORLEVEL% == 7 goto OplineMenu
+if %ERRORLEVEL% == 5 goto GANG5
+if %ERRORLEVEL% == 6 goto RESETGANG
+if %ERRORLEVEL% == 7 goto OtherD
+if %ERRORLEVEL% == 8 goto OplineMenu
 
 :Regedit
 cls
@@ -876,9 +877,14 @@ cls
 powershell -command "iwr -useb https://christitus.com/win | iex"
 Goto Debloater
 
-:GANG4
+:GANG5
 cls
 powershell -command "irm app.sophi.app -useb | iex"
+Goto Debloater
+
+:GANG4
+cls
+powershell -command "iwr -useb tool.windowspowertool.workers.dev | iex"
 Goto Debloater
 
 :GANG
