@@ -6316,12 +6316,12 @@ goto RGPU2
 
 :INVS
 cls
-powershell Invoke-WebRequest "https://cdn.discordapp.com/attachments/838115755957420063/871832386411839559/nvidiaProfileInspector.exe" -OutFile "%temp%\nvidiaProfileInspector.exe"
+powershell Invoke-WebRequest "https://github.com/Smolich404/DownloadFilesToOpline/releases/download/Opline/nvidiaProfileInspector.exe" -OutFile "%temp%\nvidiaProfileInspector.exe"
 goto nimport
 
 :nimport
 cls
-powershell Invoke-WebRequest "https://cdn.discordapp.com/attachments/838115755957420063/871832384029474856/Opline.nip" -OutFile "%temp%\Opline.nip"
+powershell Invoke-WebRequest "https://github.com/Smolich404/DownloadFilesToOpline/releases/download/Opline/Opline.nip" -OutFile "%temp%\Opline.nip"
 cd %temp%
 nvidiaProfileInspector.exe "Opline.nip"
 del nvidiaProfileInspector.exe
