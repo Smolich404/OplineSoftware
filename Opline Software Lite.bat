@@ -3752,14 +3752,76 @@ echo.
 call :ColorText 1B "###############################################################################################"
 echo.
 echo.
-cmdMenuSel f3B0 "   [+]  Clean Junk" "   [+]  Clean Junk V2" "   [+]  Clean Junk V3" "   [+]  FPS Cleaner" "   [+]  FPS Cleaner V2" "   [+]  FPS Cleaner V3" "   [+]  Exit"
+cmdMenuSel f3B0 "   [+]  Clean Junk" "   [+]  Clean Junk V2" "   [+]  Clean Junk V3" "   [+]  Clean Junk V4" "   [+]  FPS Cleaner" "   [+]  FPS Cleaner V2" "   [+]  FPS Cleaner V3" "   [+]  Exit"
 if %ERRORLEVEL% == 1 goto FPS3
 if %ERRORLEVEL% == 2 goto FPS2
 if %ERRORLEVEL% == 3 goto FPS5
-if %ERRORLEVEL% == 4 goto FPS1
-if %ERRORLEVEL% == 5 goto FPS4
-if %ERRORLEVEL% == 6 goto FPS6
-if %ERRORLEVEL% == 7 goto OplineMenu
+if %ERRORLEVEL% == 4 goto FPS7
+if %ERRORLEVEL% == 5 goto FPS1
+if %ERRORLEVEL% == 6 goto FPS4
+if %ERRORLEVEL% == 7 goto FPS6
+if %ERRORLEVEL% == 8 goto OplineMenu
+
+:FPS7
+cls
+echo.
+echo.
+echo.
+call :ColorText 0C "                                       WARNING - OSTRZEZENIE"
+echo.
+echo.
+echo                      Clean Junk V4 is too harsh for any hard disk cleaning
+echo                     and can cause loss of data files installed applications
+echo          and much more I recommend that you create a system restore point on each disk
+echo     and when it comes to data or your personal files I recommend saving them in the cloud
+echo                     on usb or create a system restore point in the same way
+echo                        sometimes it can be that Clean Junk can go crazy
+echo                 I also recommend that Opline Software be running on the desktop
+echo                            and then maybe thanks to the Clean Junk V4
+echo                                 nothing will delete or the like
+echo                           if you don't like this option don't use it
+echo.
+echo               Clean Junk V4 jest zbyt ostry do kazdego czyszczenia dysku twardego
+echo                 i moze powodowac utrate danych plikow zainstalowanych aplikacji
+echo          i wiele wiecej zalecam utworzyc punkt przywracania systemu na kazdych dyskach
+echo       a jezeli chodzi o dane czy tam swoje osobiste pliki to zalecam zapisac je w chmurze
+echo                       na usb lub tak samo utworzyc punkt przywracania systemu
+echo                          czasami moze byc tak ze Clean Junk moze zwariowac
+echo                  takze zalecam zeby Opline Software byl na pulpicie uruchomiony
+echo                              i wtedy moze dzieki opcji Clean Junk V4
+echo                                 nic sie nie usunie lub tym podobne
+echo                       jezeli nie podoba ci sie taka opcja to jej nie uzywaj
+echo.
+echo             I have launched an application for you to create a System Restore Point
+echo.
+echo            Uruchomilem dla ciebie aplikacje do utworzenia Punktu Przywracania Systemu
+echo.
+C:\Windows\System32\SystemPropertiesProtection.exe>nul
+call :ColorText 0C "  Press (Y) to continue the Clean Junk V4 options and (N) to cancel the Clean Junk V4 options"
+echo.
+echo.
+call :ColorText 0C "      Nacisnij (Y) aby kontynuowac opcje Clean Junk V4 a (N) anulowac opcje Clean Junk V4"
+echo.
+echo.
+set /p USR2= 
+if %USR2%==Y (goto :YES2)
+if %USR2%==N (goto :Cleaner)
+if %USR2%==y (goto :YES2)
+if %USR2%==n (goto :Cleaner)
+cls
+goto FPS7
+
+:YES2
+cls
+COMPACT /U /S /A /I /F C:\*.*
+cls
+SET msgboxTitle=Opline Software
+SET msgboxBody=Finished - Skonczone
+SET tmpmsgbox=%temp%~tmpmsgbox.vbs
+IF EXIST "%tmpmsgbox%" DEL /F /Q "%tmpmsgbox%"
+ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
+WSCRIPT "%tmpmsgbox%"
+goto Cleaner
 
 :FPS6
 cls
@@ -4749,7 +4811,7 @@ echo.
 call :ColorText 1B "###############################################################################################"
 echo.
 echo.
-cmdMenuSel f3B0 "   [+]  Radeon Registry Optimization" "   [+]  GPU Thread Priority" "   [+]  Install MSI Afterburner and Import Skin" "   [+]  Nvidia Unhide Silk Smoothness" "   [+]  Nvidia Registry Optimization" "   [+]  Disable Nvidia Telemetry" "   [+]  Disable Nvidia HDCP" "   [+]  Import Nvidia Settings" "   [+]  Reset" "   [+]  Exit"
+cmdMenuSel f3B0 "   [+]  Radeon Registry Optimization" "   [+]  GPU Thread Priority" "   [+]  Install MSI Afterburner and Import Skin" "   [+]  Nvidia Unhide Silk Smoothness" "   [+]  Nvidia Registry Optimization" "   [+]  Disable Nvidia Telemetry" "   [+]  Disable Nvidia HDCP" "   [+]  Disable Nvidia PowerMizer" "   [+]  Import Nvidia Settings" "   [+]  Reset" "   [+]  Exit"
 if %ERRORLEVEL% == 1 goto RGPU
 if %ERRORLEVEL% == 2 goto OGPU
 if %ERRORLEVEL% == 3 goto IMSI
@@ -4757,9 +4819,10 @@ if %ERRORLEVEL% == 4 goto NUSS
 if %ERRORLEVEL% == 5 goto NGPU
 if %ERRORLEVEL% == 6 goto NVTelemetry
 if %ERRORLEVEL% == 7 goto DNHDCP
-if %ERRORLEVEL% == 8 goto INVS
-if %ERRORLEVEL% == 9 goto RGPU2
-if %ERRORLEVEL% == 10 goto OplineMenu
+if %ERRORLEVEL% == 8 goto DNPM
+if %ERRORLEVEL% == 9 goto INVS
+if %ERRORLEVEL% == 10 goto RGPU2
+if %ERRORLEVEL% == 11 goto OplineMenu
 
 :RGPU2
 cls
@@ -4789,14 +4852,15 @@ echo.
 call :ColorText 1B "###############################################################################################"
 echo.
 echo.
-cmdMenuSel f3B0 "   [+]  Reset Radeon Registry Optimization" "   [+]  Reset Nvidia Registry Optimization" "   [+]  Reset Thread Priority" "   [+]  Reset Nvidia Unhide Silk Smoothness" "   [+]  Reset Disable Nvidia Telemetry" "   [+]  Reset Disable Nvidia HDCP" "   [+]  Exit"
+cmdMenuSel f3B0 "   [+]  Reset Radeon Registry Optimization" "   [+]  Reset Nvidia Registry Optimization" "   [+]  Reset Thread Priority" "   [+]  Reset Nvidia Unhide Silk Smoothness" "   [+]  Reset Disable Nvidia Telemetry" "   [+]  Reset Disable Nvidia HDCP" "   [+]  Reset Disable Nvidia PowerMizer" "   [+]  Exit"
 if %ERRORLEVEL% == 1 goto RGRO
 if %ERRORLEVEL% == 2 goto RNRO
 if %ERRORLEVEL% == 3 goto RTPSS
 if %ERRORLEVEL% == 4 goto RNUSS
 if %ERRORLEVEL% == 5 goto RNVTelemetry
 if %ERRORLEVEL% == 6 goto ENHDCP
-if %ERRORLEVEL% == 7 goto GPU
+if %ERRORLEVEL% == 7 goto RDNPM
+if %ERRORLEVEL% == 8 goto GPU
 
 :RGRO
 cls
@@ -5126,6 +5190,15 @@ Reg add "%%a" /v "RMHdcpKeyglobZero" /t REG_DWORD /d "0" /f
 )
 goto ENDRGPU
 
+:RDNPM
+cls
+Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Control\Video" /v "PerfLevelSrc" /f
+Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Control\Video" /v "PowerMizerEnable" /f
+Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Control\Video" /v "PowermizerLevel" /f
+Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Control\Video" /v "PowermizerLevelAC" /f
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Video" /f
+goto ENDRGPU
+
 :RTPSS
 cls
 echo.
@@ -5269,6 +5342,14 @@ cls
 for /f %%a in ('Reg query "HKLM\System\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}" /t REG_SZ /s /e /f "NVIDIA" ^| findstr "HKEY"') do (
 Reg add "%%a" /v "RMHdcpKeyglobZero" /t REG_DWORD /d "1" /f
 )
+goto ENDGPU
+
+:DNPM
+cls
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Video" /v "PerfLevelSrc" /t REG_BINARY /d "3322" /f
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Video" /v "PowerMizerEnable" /t REG_DWORD /d "0" /f
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Video" /v "PowermizerLevel" /t REG_DWORD /d "1" /f
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Video" /v "PowermizerLevelAC" /t REG_DWORD /d "1" /f
 goto ENDGPU
 
 :IMSI
