@@ -3967,7 +3967,6 @@ del /f /s /q *.*
 del /f /s /q %systemroot%\Tmp\*.*
 rmdir "%systemroot%\Tmp" /s /q
 if not exist "%systemroot%\Tmp" mkdir "%systemroot%\Tmp"
-title %beguiobjn% %bhrghirlt% %sbgtisklr% %gtsrnhkml% %yeetzel%
 cd %systemroot%\Tempor~1
 del /f /s /q *.*
 del /f /s /q %systemroot%\Tempor~1\*.*
