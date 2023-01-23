@@ -1277,6 +1277,7 @@ Reg add "HKCU\Control Panel\Desktop" /v "WaitToKillAppTimeout" /t Reg_SZ /d "500
 Reg add "HKLM\System\CurrentControlSet\Control" /v "WaitToKillServiceTimeout" /t Reg_SZ /d "2000" /f
 Reg add "HKCU\Control Panel\Desktop" /v "HungAppTimeout" /t Reg_SZ /d "4000" /f
 Reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Error Reporting" /v "Disabled" /t Reg_DWORD /d "1" /f
+reg add "HKLM\Software\Policies\Microsoft\Windows\Windows Error Reporting" /v "DontSendAdditionalData" /t REG_DWORD /d "1" /f
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v "EAFModules" /t REG_SZ /d "" /f
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\AppID\Configuration\SMARTLOCKER" /v "ENABLED" /t REG_QWORD /d "0x0000000000000000" /f
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control" /v "SystemBootDriveLetter" /t REG_DWORD /d "67" /f
@@ -1618,6 +1619,7 @@ Reg delete "HKCU\Control Panel\Desktop" /v "WaitToKillAppTimeout" /f
 Reg add "HKLM\System\CurrentControlSet\Control" /v "WaitToKillServiceTimeout" /t Reg_SZ /d "5000" /f
 Reg delete "HKCU\Control Panel\Desktop" /v "HungAppTimeout" /f
 Reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Error Reporting" /f
+reg delete "HKLM\Software\Policies\Microsoft\Windows\Windows Error Reporting" /f
 Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v "EAFModules" /f
 Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Control" /v "SystemBootDriveLetter" /f
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control" /v "WaitToKillServiceTimeout" /t REG_SZ /d "5000" /f
