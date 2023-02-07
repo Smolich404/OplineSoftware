@@ -1294,6 +1294,8 @@ reg add "HKLM\Software\Policies\Microsoft\Windows\SettingSync" /v DisableSetting
 reg add "HKLM\SOFTWARE\Microsoft\Windows\Windows Error Reporting" /v Disabled /t REG_DWORD /d 1 /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "NoRecentDocsHistory" /t REG_DWORD /d 1 /f
 powershell -NoProfile -Command "Disable-MMAgent -PC -MC -APL"
+powershell set-ProcessMitigation -System -Disable  EmulateAtlThunks, BottomUp, ForceRelocateImages, RequireInfo, HighEntropy, DisableWin32kSystemCalls, DisableExtensionPoints, BlockDynamicCode, SuppressExports, MicrosoftSignedOnly, AllowStoreSignedBinaries, EnforceModuleDependencySigning, AuditStoreSigned, DisableNonSystemFonts, BlockRemoteImageLoads, AuditRemoteImageLoads, BlockLowLabelImageLoads, AuditLowLabelImageLoads, PreferSystem32, AuditPreferSystem32, TerminateOnError, UserShadowStack, UserShadowStackStrictMode, AuditUserShadowStack
+powershell set-ProcessMitigation -System -Disable  TelemetryOnly
 cls
 SET msgboxTitle=Opline Software
 SET msgboxBody=Finished - Skonczone
@@ -1305,6 +1307,9 @@ goto Debloater
 
 :RESETGANG
 cls
+powershell set-ProcessMitigation -System -Enable  BottomUp, HighEntropy, TerminateOnError
+powershell set-ProcessMitigation -System -Disable  EmulateAtlThunks, ForceRelocateImages, RequireInfo, DisableWin32kSystemCalls, DisableExtensionPoints, BlockDynamicCode,  MicrosoftSignedOnly, AllowStoreSignedBinaries, EnforceModuleDependencySigning,  DisableNonSystemFonts, BlockRemoteImageLoads, AuditRemoteImageLoads, BlockLowLabelImageLoads, AuditLowLabelImageLoads, PreferSystem32, AuditPreferSystem32, UserShadowStack, UserShadowStackStrictMode, AuditUserShadowStack
+powershell set-ProcessMitigation -System -Disable  TelemetryOnly
 SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\AppID\SmartScreenSpecific"
 SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\NetTrace\GatherNetworkInfo"
 SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\Feedback\Siuf\DmClient"
@@ -4558,6 +4563,9 @@ Reg delete "HKLM\System\CurrentControlSet\Enum\%%i\Device Parameters" /v "Device
 Reg delete "HKLM\System\CurrentControlSet\Enum\%%i\Device Parameters" /v "SelectiveSuspendEnabled" /f
 Reg delete "HKLM\System\CurrentControlSet\Enum\%%i\Device Parameters" /v "SelectiveSuspendOn" /f
 Reg delete "HKLM\System\CurrentControlSet\Enum\%%i\Device Parameters" /v "D3ColdSupported" /f
+Reg delete "HKLM\System\CurrentControlSet\Enum\%%i\Device Parameters" /v "EnumerationRetryCount" /f
+Reg delete "HKLM\System\CurrentControlSet\Enum\%%i\Device Parameters" /v "WaitWakeEnabled" /f
+Reg delete "HKLM\System\CurrentControlSet\Enum\%%i\Device Parameters" /v "IdleInWorkingState" /f
 )
 cls
 SET msgboxTitle=Opline Software
@@ -4812,6 +4820,9 @@ Reg add "HKLM\System\CurrentControlSet\Enum\%%i\Device Parameters" /v "DeviceSel
 Reg add "HKLM\System\CurrentControlSet\Enum\%%i\Device Parameters" /v "SelectiveSuspendEnabled" /t REG_DWORD /d "0" /f
 Reg add "HKLM\System\CurrentControlSet\Enum\%%i\Device Parameters" /v "SelectiveSuspendOn" /t REG_DWORD /d "0" /f
 Reg add "HKLM\System\CurrentControlSet\Enum\%%i\Device Parameters" /v "D3ColdSupported" /t REG_DWORD /d "0" /f
+Reg add "HKLM\System\CurrentControlSet\Enum\%%i\Device Parameters" /v "EnumerationRetryCount" /t REG_DWORD /d "0" /f
+Reg add "HKLM\System\CurrentControlSet\Enum\%%i\Device Parameters" /v "WaitWakeEnabled" /t REG_DWORD /d "0" /f
+Reg add "HKLM\System\CurrentControlSet\Enum\%%i\Device Parameters" /v "IdleInWorkingState" /t REG_DWORD /d "0" /f
 )
 cls
 SET msgboxTitle=Opline Software
