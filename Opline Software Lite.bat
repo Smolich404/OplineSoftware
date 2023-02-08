@@ -1307,9 +1307,6 @@ goto Debloater
 
 :RESETGANG
 cls
-powershell set-ProcessMitigation -System -Enable  BottomUp, HighEntropy, TerminateOnError
-powershell set-ProcessMitigation -System -Disable  EmulateAtlThunks, ForceRelocateImages, RequireInfo, DisableWin32kSystemCalls, DisableExtensionPoints, BlockDynamicCode,  MicrosoftSignedOnly, AllowStoreSignedBinaries, EnforceModuleDependencySigning,  DisableNonSystemFonts, BlockRemoteImageLoads, AuditRemoteImageLoads, BlockLowLabelImageLoads, AuditLowLabelImageLoads, PreferSystem32, AuditPreferSystem32, UserShadowStack, UserShadowStackStrictMode, AuditUserShadowStack
-powershell set-ProcessMitigation -System -Disable  TelemetryOnly
 SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\AppID\SmartScreenSpecific"
 SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\NetTrace\GatherNetworkInfo"
 SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\Feedback\Siuf\DmClient"
@@ -1642,6 +1639,7 @@ reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /f
 reg delete "HKLM\SOFTWARE\Microsoft\Windows\Windows Error Reporting" /v Disabled /f
 reg delete "HKLM\Software\Policies\Microsoft\Windows\SettingSync" /f
 powershell -NoProfile -Command "Enable-MMAgent -PC -MC -APL"
+powershell set-ProcessMitigation -System -Enable  BottomUp, HighEntropy, TerminateOnError
 cls
 SET msgboxTitle=Opline Software
 SET msgboxBody=Finished - Skonczone
