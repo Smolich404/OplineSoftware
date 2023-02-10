@@ -1417,6 +1417,8 @@ SCHTASKS /END /TN "\Microsoft\Windows\Shell\FamilySafetyMonitorToastTask"
 schtasks /Change /Disable /TN "\Microsoft\Windows\Shell\FamilySafetyMonitorToastTask"
 schtasks /end /TN "Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser"
 schtasks /Change /TN "Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser" /Disable
+schtasks /change /tn "\Microsoft\Windows\MemoryDiagnostic\ProcessMemoryDiagnosticEvents" /disable
+schtasks /change /tn "\Microsoft\Windows\MemoryDiagnostic\RunFullMemoryDiagnostic" /disable
 Reg.exe add "HKCU\Control Panel\International\User Profile" /v "HttpAcceptLanguageOptOut" /t REG_DWORD /d "1" /f
 Reg.exe add "HKCU\Software\Microsoft\Input\TIPC" /v "Enabled" /t REG_DWORD /d "0" /f
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\AdvertisingInfo" /v "Enabled" /t REG_DWORD /d "0" /f
@@ -1564,6 +1566,7 @@ Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\DeliveryOptimization
 reg add "HKLM\SOFTWARE\Microsoft\Windows\Windows Error Reporting" /v Disabled /t REG_DWORD /d 1 /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "NoRecentDocsHistory" /t REG_DWORD /d 1 /f
 powershell -NoProfile -Command "Disable-MMAgent -PC -MC -APL"
+PowerShell -NonInteractive -NoLogo -NoProfile -Command "Disable-WindowsErrorReporting"
 powershell set-ProcessMitigation -System -Disable  EmulateAtlThunks, BottomUp, ForceRelocateImages, RequireInfo, HighEntropy, DisableWin32kSystemCalls, DisableExtensionPoints, BlockDynamicCode, SuppressExports, MicrosoftSignedOnly, AllowStoreSignedBinaries, EnforceModuleDependencySigning, AuditStoreSigned, DisableNonSystemFonts, BlockRemoteImageLoads, AuditRemoteImageLoads, BlockLowLabelImageLoads, AuditLowLabelImageLoads, PreferSystem32, AuditPreferSystem32, TerminateOnError, UserShadowStack, UserShadowStackStrictMode, AuditUserShadowStack
 powershell set-ProcessMitigation -System -Disable  TelemetryOnly
 cls
@@ -1735,6 +1738,8 @@ SCHTASKS /RUN /TN "\Microsoft\Windows\Application Experience\Microsoft Compatibi
 SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\Windows\Application Experience\ProgramDataUpdater"
 SCHTASKS /RUN /TN "\Microsoft\Windows\Application Experience\ProgramDataUpdater"
 schtasks /Change /TN "Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser" /Enable
+schtasks /change /tn "\Microsoft\Windows\MemoryDiagnostic\ProcessMemoryDiagnosticEvents" /enable
+schtasks /change /tn "\Microsoft\Windows\MemoryDiagnostic\RunFullMemoryDiagnostic" /enable
 Reg.exe add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "OneDrive" /t REG_SZ /d "\"C:\Users\tet\AppData\Local\Microsoft\OneDrive\OneDrive.exe\" /background" /f
 Reg.exe add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "MicrosoftEdgeAutoLaunch_2B10A56E508E694F3D32723A0FB513AD" /t REG_SZ /d "\"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe\" --no-startup-window --win-session-start /prefetch:5" /f
 REG ADD "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Device Metadata" /V PreventDeviceMetadataFromNetwork /T REG_DWORD /D 0 /F
@@ -2020,6 +2025,7 @@ Reg.exe delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\DeliveryOptimizat
 reg delete "HKLM\SOFTWARE\Microsoft\Windows\Windows Error Reporting" /v Disabled /f
 reg delete "HKLM\Software\Policies\Microsoft\Windows\SettingSync" /f
 powershell -NoProfile -Command "Enable-MMAgent -PC -MC -APL"
+PowerShell -NonInteractive -NoLogo -NoProfile -Command "Enable-WindowsErrorReporting"
 powershell set-ProcessMitigation -System -Enable  BottomUp, HighEntropy, TerminateOnError
 cls
 SET msgboxTitle=Opline Software
