@@ -618,7 +618,7 @@ echo.
 call :ColorText 1B "###############################################################################################"
 echo.
 echo.
-cmdMenuSel f3B0 "   [+]  Mouse Fix V1" "   [+]  Mouse Fix V2" "   [+]  Mouse Fix V3" "   [+]  Mouse Fix V4" "   [+]  Mouse Fix V5" "   [+]  Mouse Fix V6" "   [+]  Mouse Fix V7" "   [+]  Mouse Fix V8" "   [+]  Mouse and Keyboard Fix MAX" "   [+]  Keyboard Fix V1" "   [+]  Keyboard Fix V2" "   [+]  Keyboard Fix V3" "   [+]  Keyboard Fix V4" "   [+]  Reset ALL" "   [+]  Exit"
+cmdMenuSel f3B0 "   [+]  Mouse Fix V1" "   [+]  Mouse Fix V2" "   [+]  Mouse Fix V3" "   [+]  Mouse Fix V4" "   [+]  Mouse Fix V5" "   [+]  Mouse Fix V6" "   [+]  Mouse Fix V7" "   [+]  Mouse Fix V8" "   [+]  Mouse Fix V9" "   [+]  Mouse Fix V10" "   [+]  Mouse and Keyboard Fix MAX" "   [+]  Keyboard Fix V1" "   [+]  Keyboard Fix V2" "   [+]  Keyboard Fix V3" "   [+]  Keyboard Fix V4" "   [+]  Keyboard Fix V5" "   [+]  Reset ALL" "   [+]  Exit"
 if %ERRORLEVEL% == 1 goto MFix1
 if %ERRORLEVEL% == 2 goto MFix2
 if %ERRORLEVEL% == 3 goto MFix3
@@ -627,13 +627,16 @@ if %ERRORLEVEL% == 5 goto MFix5
 if %ERRORLEVEL% == 6 goto MFix6
 if %ERRORLEVEL% == 7 goto MFix7
 if %ERRORLEVEL% == 8 goto MFix8
-if %ERRORLEVEL% == 9 goto FixMax
-if %ERRORLEVEL% == 10 goto KFix1
-if %ERRORLEVEL% == 11 goto KFix2
-if %ERRORLEVEL% == 12 goto KFix3
-if %ERRORLEVEL% == 13 goto KFix4
-if %ERRORLEVEL% == 14 goto RFix
-if %ERRORLEVEL% == 15 goto OplineMenu
+if %ERRORLEVEL% == 9 goto MFix9
+if %ERRORLEVEL% == 10 goto MFix10
+if %ERRORLEVEL% == 11 goto FixMax
+if %ERRORLEVEL% == 12 goto KFix1
+if %ERRORLEVEL% == 13 goto KFix2
+if %ERRORLEVEL% == 14 goto KFix3
+if %ERRORLEVEL% == 15 goto KFix4
+if %ERRORLEVEL% == 16 goto KFix5
+if %ERRORLEVEL% == 17 goto RFix
+if %ERRORLEVEL% == 18 goto OplineMenu
 
 :RFix
 cls
@@ -675,6 +678,12 @@ Reg.exe add "HKU\.DEFAULT\Control Panel\Keyboard" /v "KeyboardDelay" /t REG_SZ /
 Reg.exe add "HKU\.DEFAULT\Control Panel\Keyboard" /v "KeyboardSpeed" /t REG_SZ /d "31" /f
 Reg.exe add "HKU\.DEFAULT\Control Panel\Accessibility\MouseKeys" /v "Flags" /t REG_SZ /d "62" /f
 Reg.exe add "HKCU\Control Panel\Accessibility\MouseKeys" /v "Flags" /t REG_SZ /d "62" /f
+Reg.exe delete "HKCU\Control Panel\Desktop" /v "LogPixels" /f
+Reg.exe add "HKCU\Control Panel\Desktop" /v "Win8DpiScaling" /t REG_DWORD /d "0" /f
+Reg.exe add "HKCU\Control Panel\Accessibility\Keyboard Response" /v "AutoRepeatRate" /t REG_SZ /d "500" /f
+Reg.exe add "HKCU\Control Panel\Accessibility\Keyboard Response" /v "AutoRepeatDelay" /t REG_SZ /d "1000" /f
+Reg.exe add "HKCU\Control Panel\Accessibility\MouseKeys" /v "MaximumSpeed" /t REG_SZ /d "80" /f
+Reg.exe add "HKCU\Control Panel\Accessibility\MouseKeys" /v "TimeToMaximumSpeed" /t REG_SZ /d "3000" /f
 cls
 SET msgboxTitle=Opline Software
 SET msgboxBody=Finished - Skonczone
@@ -798,6 +807,32 @@ ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
 WSCRIPT "%tmpmsgbox%"
 goto Fixer
 
+:MFix9
+cls
+Reg.exe add "HKCU\Control Panel\Accessibility\MouseKeys" /v "MaximumSpeed" /t REG_SZ /d "39" /f
+Reg.exe add "HKCU\Control Panel\Accessibility\MouseKeys" /v "TimeToMaximumSpeed" /t REG_SZ /d "3000" /f
+cls
+SET msgboxTitle=Opline Software
+SET msgboxBody=Finished - Skonczone
+SET tmpmsgbox=%temp%~tmpmsgbox.vbs
+IF EXIST "%tmpmsgbox%" DEL /F /Q "%tmpmsgbox%"
+ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
+WSCRIPT "%tmpmsgbox%"
+goto Fixer
+
+:MFix10
+cls
+Reg.exe add "HKCU\Control Panel\Desktop" /v "LogPixels" /t REG_DWORD /d "96" /f
+Reg.exe add "HKCU\Control Panel\Desktop" /v "Win8DpiScaling" /t REG_DWORD /d "1" /f
+cls
+SET msgboxTitle=Opline Software
+SET msgboxBody=Finished - Skonczone
+SET tmpmsgbox=%temp%~tmpmsgbox.vbs
+IF EXIST "%tmpmsgbox%" DEL /F /Q "%tmpmsgbox%"
+ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
+WSCRIPT "%tmpmsgbox%"
+goto Fixer
+
 :FixMax
 cls
 Reg.exe add "HKCU\Control Panel\Desktop" /v "UserPreferencesMask" /t REG_BINARY /d "9e1e068012000000" /f
@@ -838,6 +873,12 @@ Reg.exe add "HKCU\Control Panel\Keyboard" /v "KeyboardSpeed" /t REG_SZ /d "31" /
 Reg.exe add "HKU\.DEFAULT\Control Panel\Keyboard" /v "InitialKeyboardIndicators" /t REG_SZ /d "0" /f
 Reg.exe add "HKU\.DEFAULT\Control Panel\Keyboard" /v "KeyboardDelay" /t REG_SZ /d "0" /f
 Reg.exe add "HKU\.DEFAULT\Control Panel\Keyboard" /v "KeyboardSpeed" /t REG_SZ /d "31" /f
+Reg.exe add "HKCU\Control Panel\Desktop" /v "LogPixels" /t REG_DWORD /d "96" /f
+Reg.exe add "HKCU\Control Panel\Desktop" /v "Win8DpiScaling" /t REG_DWORD /d "1" /f
+Reg.exe add "HKCU\Control Panel\Accessibility\Keyboard Response" /v "AutoRepeatRate" /t REG_SZ /d "0" /f
+Reg.exe add "HKCU\Control Panel\Accessibility\Keyboard Response" /v "AutoRepeatDelay" /t REG_SZ /d "0" /f
+Reg.exe add "HKCU\Control Panel\Accessibility\MouseKeys" /v "MaximumSpeed" /t REG_SZ /d "39" /f
+Reg.exe add "HKCU\Control Panel\Accessibility\MouseKeys" /v "TimeToMaximumSpeed" /t REG_SZ /d "3000" /f
 cls
 SET msgboxTitle=Opline Software
 SET msgboxBody=Finished - Skonczone
@@ -894,6 +935,19 @@ cls
 Reg.exe add "HKU\.DEFAULT\Control Panel\Keyboard" /v "InitialKeyboardIndicators" /t REG_SZ /d "0" /f
 Reg.exe add "HKU\.DEFAULT\Control Panel\Keyboard" /v "KeyboardDelay" /t REG_SZ /d "0" /f
 Reg.exe add "HKU\.DEFAULT\Control Panel\Keyboard" /v "KeyboardSpeed" /t REG_SZ /d "31" /f
+cls
+SET msgboxTitle=Opline Software
+SET msgboxBody=Finished - Skonczone
+SET tmpmsgbox=%temp%~tmpmsgbox.vbs
+IF EXIST "%tmpmsgbox%" DEL /F /Q "%tmpmsgbox%"
+ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
+WSCRIPT "%tmpmsgbox%"
+goto Fixer
+
+:KFix5
+cls
+Reg.exe add "HKCU\Control Panel\Accessibility\Keyboard Response" /v "AutoRepeatRate" /t REG_SZ /d "0" /f
+Reg.exe add "HKCU\Control Panel\Accessibility\Keyboard Response" /v "AutoRepeatDelay" /t REG_SZ /d "0" /f
 cls
 SET msgboxTitle=Opline Software
 SET msgboxBody=Finished - Skonczone
@@ -4703,6 +4757,7 @@ Goto Powercfg
 :DH
 cls
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FlyoutMenuSettings" /v "ShowSleepOption" /t REG_DWORD /d "0" /f
+Reg.exe add "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\FlyoutMenuSettings" /v "ShowLockOption" /t REG_DWORD /d "0" /f
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Power" /v "HibernateEnabled" /t REG_DWORD /d "0" /f
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Power" /v "HiberbootEnabled" /t REG_DWORD /d "0" /f
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Power" /v "HibernateEnabledDefault" /t REG_DWORD /d "0" /f
@@ -4931,18 +4986,20 @@ echo.
 call :ColorText 1B "###############################################################################################"
 echo.
 echo.
-cmdMenuSel f3B0 "   [+]  Radeon Registry Optimization" "   [+]  GPU Thread Priority" "   [+]  Install MSI Afterburner and Import Skin" "   [+]  Nvidia Unhide Silk Smoothness" "   [+]  Nvidia Registry Optimization" "   [+]  Disable Nvidia Telemetry" "   [+]  Disable Nvidia HDCP" "   [+]  Disable Nvidia PowerMizer" "   [+]  Import Nvidia Settings" "   [+]  Reset" "   [+]  Exit"
+cmdMenuSel f3B0 "   [+]  Radeon Registry Optimization" "   [+]  GPU Thread Priority" "   [+]  Install MSI Afterburner and Import Skin" "   [+]  Nvidia Unhide Silk Smoothness" "   [+]  Disable Nvidia Notification Tray Icon" "   [+]  Disable Nvidia Image Sharpening" "   [+]  Nvidia Registry Optimization" "   [+]  Disable Nvidia Telemetry" "   [+]  Disable Nvidia HDCP" "   [+]  Disable Nvidia PowerMizer" "   [+]  Import Nvidia Settings" "   [+]  Reset" "   [+]  Exit"
 if %ERRORLEVEL% == 1 goto RGPU
 if %ERRORLEVEL% == 2 goto OGPU
 if %ERRORLEVEL% == 3 goto IMSI
 if %ERRORLEVEL% == 4 goto NUSS
-if %ERRORLEVEL% == 5 goto NGPU
-if %ERRORLEVEL% == 6 goto NVTelemetry
-if %ERRORLEVEL% == 7 goto DNHDCP
-if %ERRORLEVEL% == 8 goto DNPM
-if %ERRORLEVEL% == 9 goto INVS
-if %ERRORLEVEL% == 10 goto RGPU2
-if %ERRORLEVEL% == 11 goto OplineMenu
+if %ERRORLEVEL% == 5 goto NNTI
+if %ERRORLEVEL% == 6 goto NIS
+if %ERRORLEVEL% == 7 goto NGPU
+if %ERRORLEVEL% == 8 goto NVTelemetry
+if %ERRORLEVEL% == 9 goto DNHDCP
+if %ERRORLEVEL% == 10 goto DNPM
+if %ERRORLEVEL% == 11 goto INVS
+if %ERRORLEVEL% == 12 goto RGPU2
+if %ERRORLEVEL% == 13 goto OplineMenu
 
 :RGPU2
 cls
@@ -4972,15 +5029,17 @@ echo.
 call :ColorText 1B "###############################################################################################"
 echo.
 echo.
-cmdMenuSel f3B0 "   [+]  Reset Radeon Registry Optimization" "   [+]  Reset Nvidia Registry Optimization" "   [+]  Reset Thread Priority" "   [+]  Reset Nvidia Unhide Silk Smoothness" "   [+]  Reset Disable Nvidia Telemetry" "   [+]  Reset Disable Nvidia HDCP" "   [+]  Reset Disable Nvidia PowerMizer" "   [+]  Exit"
+cmdMenuSel f3B0 "   [+]  Reset Radeon Registry Optimization" "   [+]  Reset Nvidia Registry Optimization" "   [+]  Reset Thread Priority" "   [+]  Reset Nvidia Unhide Silk Smoothness" "   [+]  Disable Nvidia Notification Tray Icon" "   [+]  Disable Nvidia Image Sharpening" "   [+]  Reset Disable Nvidia Telemetry" "   [+]  Reset Disable Nvidia HDCP" "   [+]  Reset Disable Nvidia PowerMizer" "   [+]  Exit"
 if %ERRORLEVEL% == 1 goto RGRO
 if %ERRORLEVEL% == 2 goto RNRO
 if %ERRORLEVEL% == 3 goto RTPSS
 if %ERRORLEVEL% == 4 goto RNUSS
-if %ERRORLEVEL% == 5 goto RNVTelemetry
-if %ERRORLEVEL% == 6 goto ENHDCP
-if %ERRORLEVEL% == 7 goto RDNPM
-if %ERRORLEVEL% == 8 goto GPU
+if %ERRORLEVEL% == 5 goto RNNTI
+if %ERRORLEVEL% == 6 goto RNIS
+if %ERRORLEVEL% == 7 goto RNVTelemetry
+if %ERRORLEVEL% == 8 goto ENHDCP
+if %ERRORLEVEL% == 9 goto RDNPM
+if %ERRORLEVEL% == 10 goto GPU
 
 :RGRO
 cls
@@ -5285,6 +5344,17 @@ cls
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\nvlddmkm\FTS" /v "EnableRID61684" /t REG_DWORD /d "0" /f
 Goto ENDRGPU
 
+:RNNTI
+cls
+Reg.exe delete "HKCU\Software\NVIDIA Corporation\NvTray" /f
+Goto ENDRGPU
+
+:RNIS
+cls
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\nvlddmkm\FTS" /f
+Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Services\nvlddmkm\FTS" /v "EnableGR535" /f
+Goto ENDRGPU
+
 :RNVTelemetry
 cls
 SCHTASKS /CHANGE /ENABLE /TN "\NvTmMon_{B2FE1952-0186-46C3-BAEC-A80AA35AC5B8}" /F
@@ -5431,6 +5501,16 @@ goto ENDGPU
 :NUSS
 cls
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\nvlddmkm\FTS" /v "EnableRID61684" /t REG_DWORD /d "1" /f
+Goto ENDGPU2
+
+:NNTI
+cls
+Reg.exe add "HKCU\Software\NVIDIA Corporation\NvTray" /v "StartOnLogin" /t REG_DWORD /d "0" /f
+Goto ENDGPU2
+
+:NIS
+cls
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\nvlddmkm\FTS" /v "EnableGR535" /t REG_DWORD /d "0" /f
 Goto ENDGPU2
 
 :NVTelemetry
