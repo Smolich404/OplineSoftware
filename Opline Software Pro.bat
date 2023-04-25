@@ -1051,7 +1051,7 @@ if %EZ%==B (Goto :2K)
 if %EZ%==C (Goto :3K)
 if %EZ%==D (Goto :4K)
 if %EZ%==E (Goto :5K)
-if %EZ%==R (Goto :Reset)
+if %EZ%==R (Goto :ResetFix)
 if %EZ%==M (Goto :Full)
 if %EZ%==X (Goto :ExitFix)
 if %EZ%==x (Goto :ExitFix)
@@ -1344,7 +1344,7 @@ ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
 WSCRIPT "%tmpmsgbox%"
 goto GO
 
-:Reset
+:ResetFix
 cls
 Reg.exe add "HKCU\Control Panel\Desktop" /v "UserPreferencesMask" /t REG_BINARY /d "9e1e078012000000" /f
 Reg.exe add "HKU\.DEFAULT\Control Panel\Desktop" /v "UserPreferencesMask" /t REG_BINARY /d "9e3e038012000000" /f
@@ -6548,7 +6548,7 @@ echo.
 echo.
 cmdMenuSel f3B0 "   [+]  Tweak" "   [+]  Reset Tweak" "   [+]  Exit" 
 if %ERRORLEVEL% == 1 goto RAMT
-if %ERRORLEVEL% == 2 goto Reset
+if %ERRORLEVEL% == 2 goto ResetRAM
 if %ERRORLEVEL% == 3 goto OplineMenu
 
 :RAMT
@@ -6559,7 +6559,7 @@ SET /A TWEAKREGISTRY=0x%REGISTRYTWEAK%
 REG ADD "HKLM\SYSTEM\CurrentControlSet\Control" /V "SvcHostSplitThresholdInKB" /T REG_DWORD /D "%REGISTRYTWEAK%" /F >nul 2>&1
 goto ENDRAM
 
-:Reset
+:ResetRAM
 cls
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control" /v "SvcHostSplitThresholdInKB" /t REG_DWORD /d "3670016" /f
 goto ENDRAM
