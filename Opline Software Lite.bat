@@ -8284,12 +8284,12 @@ Reg del "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender" /v Dis
 cd C:\Users\%username%\Downloads
 mkdir bin
 cd C:\Users\%username%\Downloads\bin
-powershell -command "& { iwr https://github.com/Smolich404/WindowsDefender/releases/download/E/NSudoLG.exe -OutFile NSudoLG.exe }"
+powershell -command "& { iwr https://github.com/Smolich404/WindowsDefender/releases/download/E/MinSudo.exe -OutFile MinSudo.exe }"
 powershell -command "& { iwr https://github.com/Smolich404/WindowsDefender/releases/download/E/Enable_Windows_Defender.bat -OutFile Enable_Windows_Defender.bat }"
 timeout 2 >nul
-@start /b "Opline - TrustedInstaller" "C:\Users\%username%\Downloads\bin\NSudoLG.exe" -U:T -P:E "C:\Users\%username%\Downloads\bin\Enable_Windows_Defender.bat"
+@start /b "" "C:\Users\%username%\Downloads\bin\MinSudo.exe" --NoLogo --TrustedInstaller "C:\Users\%username%\Downloads\bin\Enable_Windows_Defender.bat"
 timeout 7 >nul
-del NSudoLG.exe
+del MinSudo.exe
 del Enable_Windows_Defender.bat
 cd C:\Users\%username%\Downloads
 rmdir bin
@@ -8377,12 +8377,12 @@ Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /f
 cd C:\Users\%username%\Downloads
 mkdir bin
 cd C:\Users\%username%\Downloads\bin
-powershell -command "& { iwr https://github.com/Smolich404/WindowsDefender/releases/download/E/NSudoLG.exe -OutFile NSudoLG.exe }"
+powershell -command "& { iwr https://github.com/Smolich404/WindowsDefender/releases/download/E/MinSudo.exe -OutFile MinSudo.exe }"
 powershell -command "& { iwr https://github.com/Smolich404/WindowsDefender/releases/download/E/Disable_Windows_Defender.bat -OutFile Disable_Windows_Defender.bat }"
 timeout 2 >nul
-@start /b "Opline - TrustedInstaller" "C:\Users\%username%\Downloads\bin\NSudoLG.exe" -U:T -P:E "C:\Users\%username%\Downloads\bin\Disable_Windows_Defender.bat"
+@start /b "" "C:\Users\%username%\Downloads\bin\MinSudo.exe" --NoLogo --TrustedInstaller "C:\Users\%username%\Downloads\bin\Disable_Windows_Defender.bat"
 timeout 7 >nul
-del NSudoLG.exe
+del MinSudo.exe
 del Disable_Windows_Defender.bat
 cd C:\Users\%username%\Downloads
 rmdir bin
