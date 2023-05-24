@@ -4560,8 +4560,47 @@ ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
 WSCRIPT "%tmpmsgbox%"
 goto Cleaner
 
-
 :FPS4
+cls
+echo.
+echo.
+echo.
+call :ColorText 0C "                                       WARNING - OSTRZEZENIE"
+echo.
+echo.
+echo                         FPS Cleaner V2 It can delete such as programmes
+echo                     programme files located on other drives such as D: or E:
+echo                       delete films executable files txt files full folders
+echo         unused folders to replace a few as well as steam riotgames games and game data.
+echo        I encourage you to create a system restore point on each drive or create a backup.
+echo.
+echo                           FPS Cleaner V2 moze usuwac takie jak programy
+echo                  pliki programow znajdujace sie na innych dyskach jak D: lub E:
+echo                usuwa filmy pliki wykonywalne txt foldery pelne foldery nieuzywane
+echo                   by je kilka wymienic a takze steam riotgames gry i dane gier.
+echo                  Zachecam utworzyc punkt przywracania systemu na kazdych dyskach
+echo                                   lub utworzyc kopie zapasowa.
+echo.
+echo             I have launched an application for you to create a System Restore Point
+echo.
+echo            Uruchomilem dla ciebie aplikacje do utworzenia Punktu Przywracania Systemu
+echo.
+C:\Windows\System32\SystemPropertiesProtection.exe>nul
+call :ColorText 0C "  Press (Y) to continue the FPS Cleaner V2 options and (N) to cancel the FPS Cleaner V2 options"
+echo.
+echo.
+call :ColorText 0C "      Nacisnij (Y) aby kontynuowac opcje FPS Cleaner V2 a (N) anulowac opcje FPS Cleaner V2"
+echo.
+echo.
+set /p CLE= 
+if %CLE%==Y (goto :YES3)
+if %CLE%==N (goto :Cleaner)
+if %CLE%==y (goto :YES3)
+if %CLE%==n (goto :Cleaner)
+cls
+goto FPS4
+
+:YES3
 cls
 Dism /Online /Cleanup-Image /CheckHealth 
 Dism /Online /Cleanup-Image /ScanHealth 
