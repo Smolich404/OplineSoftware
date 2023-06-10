@@ -7546,6 +7546,9 @@ cls
 netsh winsock reset catalog
 netsh int ip reset c:resetlog.txt
 netsh int ip reset C:\tcplog.txt
+powershell -command "Set-NetOffloadGlobalSetting -PacketCoalescingFilter enabled"
+powershell -command "Set-NetTCPSetting -SettingName InternetCustom -CongestionProvider Default"
+powershell Set-NetOffloadGlobalSetting -PacketCoalescingFilter enabled
 netsh int tcp set heuristics default
 netsh int tcp set supplemental Internet congestionprovider=default
 netsh int tcp set global initialRto=3000
@@ -7589,13 +7592,11 @@ netsh interface ipv4 set subinterface "Internet" mtu=1500 store=persistent
 netsh interface ipv4 set subinterface "Local Area Connection" mtu=1500 store=persistent
 netsh interface ipv6 set subinterface "Internet" mtu=1500 store=persistent
 netsh interface ipv6 set subinterface "Local Area Connection" mtu=1500 store=persistent
-powershell -command "Set-NetOffloadGlobalSetting -PacketCoalescingFilter enabled"
 netsh interface ipv4 set subinterface "Ethernet" mtu=1500 store=persistent
 netsh interface ipv6 set subinterface "Ethernet" mtu=1500 store=persistent
 netsh interface ipv4 set subinterface "Wi-Fi" mtu=1500 store=persistent
 netsh interface ipv6 set subinterface "Wi-Fi" mtu=1500 store=persistent
 netsh int tcp set global congestionprovider=default
-powershell -command "Set-NetTCPSetting -SettingName InternetCustom -CongestionProvider Default"
 netsh int tcp set supplemental Internet congestionprovider=default
 powershell Set-NetTCPSetting -SettingName InternetCustom -MaxSynRetransmissions 4
 powershell Set-NetTCPSetting -SettingName Internet -MaxSynRetransmissions 4
@@ -7622,7 +7623,6 @@ powershell Set-NetTCPSetting -SettingName InternetCustom -EcnCapability Disabled
 powershell Set-NetTCPSetting -SettingName DatacenterCustom -EcnCapability Disabled
 powershell Set-NetTCPSetting -SettingName Datacenter -EcnCapability Disabled
 powershell Enable-NetAdapterLso -Name *
-powershell Set-NetOffloadGlobalSetting -PacketCoalescingFilter enabled
 powershell Enable-NetAdapterChecksumOffload -Name *
 powershell Enable-NetAdapterRss -Name *
 powershell Set-NetOffloadGlobalSetting -ReceiveSideScaling Enabled
@@ -7895,6 +7895,9 @@ netsh interface ipv4 set subinterface "Ethernet" mtu=1500 store=persistent
 netsh interface ipv6 set subinterface "Ethernet" mtu=1500 store=persistent
 netsh interface ipv4 set subinterface "Wi-Fi" mtu=1500 store=persistent
 netsh interface ipv6 set subinterface "Wi-Fi" mtu=1500 store=persistent
+powershell -command "Set-NetTCPSetting -SettingName InternetCustom -CongestionProvider CTCP"
+powershell -command "Set-NetOffloadGlobalSetting -Chimney Disabled"
+powershell -command "Set-NetOffloadGlobalSetting -PacketCoalescingFilter enabled"
 netsh int tcp set global autotuninglevel=normal
 netsh int tcp set global chimney=enabled
 netsh int tcp set global dca=enabled
@@ -7910,17 +7913,14 @@ netsh int tcp set global rsc=enabled
 netsh int tcp set global maxsynretransmissions=2
 netsh int tcp set global initialRto=1000
 netsh int tcp set supplemental template=custom icw=10
-powershell -command "Set-NetTCPSetting -SettingName InternetCustom -CongestionProvider CTCP"
 netsh int tcp set supplemental Internet congestionprovider=ctcp
 netsh int tcp set global rsc=disabled
 netsh interface tcp set global autotuning=disabled
 netsh int tcp set global autotuninglevel=normal
 netsh int tcp set global chimney=disabled
-powershell -command "Set-NetOffloadGlobalSetting -Chimney Disabled"
 netsh int tcp set global netdma=disabled
 netsh int tcp set global rss=enabled
 netsh int tcp set global rsc=disabled
-powershell -command "Set-NetOffloadGlobalSetting -PacketCoalescingFilter enabled"
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Nsi\{eb004a03-9b1a-11d4-9123-0050047759bc}\0" /v "0200" /t REG_BINARY /d "0000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000ff000000000000000000000000000000000000000000ff000000000000000000000000000000" /f
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Nsi\{eb004a03-9b1a-11d4-9123-0050047759bc}\0" /v "1700" /t REG_BINARY /d "0000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000ff000000000000000000000000000000000000000000ff000000000000000000000000000000" /f
 ipconfig /release
