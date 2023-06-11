@@ -7895,6 +7895,8 @@ netsh interface ipv4 set subinterface "Ethernet" mtu=1500 store=persistent
 netsh interface ipv6 set subinterface "Ethernet" mtu=1500 store=persistent
 netsh interface ipv4 set subinterface "Wi-Fi" mtu=1500 store=persistent
 netsh interface ipv6 set subinterface "Wi-Fi" mtu=1500 store=persistent
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Nsi\{eb004a03-9b1a-11d4-9123-0050047759bc}\0" /v "0200" /t REG_BINARY /d "0000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000ff000000000000000000000000000000000000000000ff000000000000000000000000000000" /f
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Nsi\{eb004a03-9b1a-11d4-9123-0050047759bc}\0" /v "1700" /t REG_BINARY /d "0000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000ff000000000000000000000000000000000000000000ff000000000000000000000000000000" /f
 powershell -command "Set-NetTCPSetting -SettingName InternetCustom -CongestionProvider CTCP"
 powershell -command "Set-NetOffloadGlobalSetting -Chimney Disabled"
 powershell -command "Set-NetOffloadGlobalSetting -PacketCoalescingFilter enabled"
@@ -7921,8 +7923,6 @@ netsh int tcp set global chimney=disabled
 netsh int tcp set global netdma=disabled
 netsh int tcp set global rss=enabled
 netsh int tcp set global rsc=disabled
-Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Nsi\{eb004a03-9b1a-11d4-9123-0050047759bc}\0" /v "0200" /t REG_BINARY /d "0000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000ff000000000000000000000000000000000000000000ff000000000000000000000000000000" /f
-Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Nsi\{eb004a03-9b1a-11d4-9123-0050047759bc}\0" /v "1700" /t REG_BINARY /d "0000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000ff000000000000000000000000000000000000000000ff000000000000000000000000000000" /f
 ipconfig /release
 ipconfig /renew
 ipconfig /flushdns
