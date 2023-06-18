@@ -4,7 +4,7 @@ MODE 124,29
 shift /0
 call :admin
 color F
-Powershell Invoke-WebRequest https://cdn.discordapp.com/attachments/713738104963334154/803321861832048662/cmdMenuSel.exe -OutFile C:\Windows\System32\cmdMenuSel.exe
+Powershell Invoke-WebRequest https://github.com/Smolich404/DownloadFilesToOpline/releases/download/Opline/cmdMenuSel.exe -OutFile C:\Windows\System32\cmdMenuSel.exe
 
 :menu
 SETLOCAL EnableDelayedExpansion
@@ -3452,7 +3452,7 @@ if %ERRORLEVEL% == 3 goto OplineMenu
 
 :ADD
 cls
-powershell Invoke-WebRequest "https://cdn.discordapp.com/attachments/859608373016133643/891646408308977684/appxmanifest.xml" -OutFile "C:\appxmanifest.xml"
+powershell Invoke-WebRequest "https://github.com/Smolich404/DownloadFilesToOpline/releases/download/Opline/appxmanifest.xml" -OutFile "C:\appxmanifest.xml"
 Powershell iex ((New-Object System.Net.WebClient).DownloadString('https://bit.ly/ReinstallApps'))
 cls
 cd C:\
@@ -6803,7 +6803,7 @@ if %ERRORLEVEL% == 7 goto GameBoost
 :BC
 cls
 mkdir BLClient-Mod-Profiles
-powershell Invoke-WebRequest "https://cdn.discordapp.com/attachments/728982277874384916/837790814598856795/FPS.json" -OutFile "C:\Users\%username%\AppData\Roaming\.minecraft\BLClient-Mod-Profiles\FPS.json"
+powershell Invoke-WebRequest "https://github.com/Smolich404/DownloadFilesToOpline/releases/download/BC/FPS.json" -OutFile "C:\Users\%username%\AppData\Roaming\.minecraft\BLClient-Mod-Profiles\FPS.json"
 goto mcend3
 
 
@@ -6816,31 +6816,31 @@ mkdir C:\Users\%username%\.lunarclient\settings\game\Arena PvP\
 mkdir C:\Users\%username%\.lunarclient\settings\game\Default\
 mkdir C:\Users\%username%\.lunarclient\settings\game\Hypixel Skyblock\
 mkdir C:\Users\%username%\.lunarclient\settings\game\UHC\
-powershell Invoke-WebRequest "https://cdn.discordapp.com/attachments/728982277874384916/837631180668796928/launcher.json" -OutFile "C:\Users\%username%\.lunarclient\settings\launcher.json"
-powershell Invoke-WebRequest "https://cdn.discordapp.com/attachments/728982277874384916/837631239137001502/features.json" -OutFile "C:\Users\%username%\.lunarclient\settings\game\features.json"
-powershell Invoke-WebRequest "https://cdn.discordapp.com/attachments/728982277874384916/837631242819862569/language.json" -OutFile "C:\Users\%username%\.lunarclient\settings\game\language.json"
-powershell Invoke-WebRequest "https://cdn.discordapp.com/attachments/728982277874384916/837631244707561482/launcher_lc_msa.json" -OutFile "C:\Users\%username%\.lunarclient\settings\game\launcher_lc_msa.json"
-powershell Invoke-WebRequest "https://cdn.discordapp.com/attachments/728982277874384916/837631246498005012/muted_users.json" -OutFile "C:\Users\%username%\.lunarclient\settings\game\muted_users.json"
-powershell Invoke-WebRequest "https://cdn.discordapp.com/attachments/728982277874384916/837631247650914345/profile_manager.json" -OutFile "C:\Users\%username%\.lunarclient\settings\game\profile_manager.json"
-powershell Invoke-WebRequest "https://cdn.discordapp.com/attachments/728982277874384916/837631249014325258/rule-features.json" -OutFile "C:\Users\%username%\.lunarclient\settings\game\rule-features.json"
-powershell Invoke-WebRequest "https://cdn.discordapp.com/attachments/728982277874384916/837631250915000370/waypoints.json" -OutFile "C:\Users\%username%\.lunarclient\settings\game\waypoints.json"
-powershell Invoke-WebRequest "https://cdn.discordapp.com/attachments/728982277874384916/837633222132629546/controls.json" -OutFile "C:\Users\%username%\.lunarclient\settings\game\Arena PvP\controls.json"
-powershell Invoke-WebRequest "https://cdn.discordapp.com/attachments/728982277874384916/837633223660011530/general.json" -OutFile "C:\Users\%username%\.lunarclient\settings\game\Arena PvP\general.json"
-powershell Invoke-WebRequest "https://cdn.discordapp.com/attachments/728982277874384916/837633225353330718/mods.json" -OutFile "C:\Users\%username%\.lunarclient\settings\game\Arena PvP\mods.json"
-powershell Invoke-WebRequest "https://cdn.discordapp.com/attachments/728982277874384916/837633226394435614/performance.json" -OutFile "C:\Users\%username%\.lunarclient\settings\game\Arena PvP\performance.json"
-powershell Invoke-WebRequest "https://cdn.discordapp.com/attachments/728982277874384916/837633471747981332/controls.json" -OutFile "C:\Users\%username%\.lunarclient\settings\game\Default\controls.json"
-powershell Invoke-WebRequest "https://cdn.discordapp.com/attachments/728982277874384916/837633473057259530/general.json" -OutFile "C:\Users\%username%\.lunarclient\settings\game\Default\general.json"
-powershell Invoke-WebRequest "https://cdn.discordapp.com/attachments/728982277874384916/837633476617437184/mods.json" -OutFile "C:\Users\%username%\.lunarclient\settings\game\Default\mods.json"
-powershell Invoke-WebRequest "https://cdn.discordapp.com/attachments/728982277874384916/837633475929440266/performance.json" -OutFile "C:\Users\%username%\.lunarclient\settings\game\Default\performance.json"
-powershell Invoke-WebRequest "https://cdn.discordapp.com/attachments/728982277874384916/837633477611356160/staff_mods.json" -OutFile "C:\Users\%username%\.lunarclient\settings\game\Default\staff_mods.json"
-powershell Invoke-WebRequest "https://cdn.discordapp.com/attachments/728982277874384916/837639561864937492/controls.json" -OutFile "C:\Users\%username%\.lunarclient\settings\game\Hypixel Skyblock\controls.json"
-powershell Invoke-WebRequest "https://cdn.discordapp.com/attachments/728982277874384916/837639563307909130/general.json" -OutFile "C:\Users\%username%\.lunarclient\settings\game\Hypixel Skyblock\general.json"
-powershell Invoke-WebRequest "https://cdn.discordapp.com/attachments/728982277874384916/837639564448759808/mods.json" -OutFile "C:\Users\%username%\.lunarclient\settings\game\Hypixel Skyblock\mods.json"
-powershell Invoke-WebRequest "https://cdn.discordapp.com/attachments/728982277874384916/837639565148684318/performance.json" -OutFile "C:\Users\%username%\.lunarclient\settings\game\Hypixel Skyblock\performance.json"
-powershell Invoke-WebRequest "https://cdn.discordapp.com/attachments/728982277874384916/837639632858513448/controls.json" -OutFile "C:\Users\%username%\.lunarclient\settings\game\UHC\controls.json"
-powershell Invoke-WebRequest "https://cdn.discordapp.com/attachments/728982277874384916/837639634255216640/general.json" -OutFile "C:\Users\%username%\.lunarclient\settings\game\UHC\general.json"
-powershell Invoke-WebRequest "https://cdn.discordapp.com/attachments/728982277874384916/837639635433160754/mods.json" -OutFile "C:\Users\%username%\.lunarclient\settings\game\UHC\mods.json"
-powershell Invoke-WebRequest "https://cdn.discordapp.com/attachments/728982277874384916/837639636457095248/performance.json" -OutFile "C:\Users\%username%\.lunarclient\settings\game\UHC\performance.json"
+powershell Invoke-WebRequest "https://github.com/Smolich404/DownloadFilesToOpline/releases/download/LC/launcher.json" -OutFile "C:\Users\%username%\.lunarclient\settings\launcher.json"
+powershell Invoke-WebRequest "https://github.com/Smolich404/DownloadFilesToOpline/releases/download/LC2/features.json" -OutFile "C:\Users\%username%\.lunarclient\settings\game\features.json"
+powershell Invoke-WebRequest "https://github.com/Smolich404/DownloadFilesToOpline/releases/download/LC2/language.json" -OutFile "C:\Users\%username%\.lunarclient\settings\game\language.json"
+powershell Invoke-WebRequest "https://github.com/Smolich404/DownloadFilesToOpline/releases/download/LC2/launcher_lc_msa.json" -OutFile "C:\Users\%username%\.lunarclient\settings\game\launcher_lc_msa.json"
+powershell Invoke-WebRequest "https://github.com/Smolich404/DownloadFilesToOpline/releases/download/LC2/muted_users.json" -OutFile "C:\Users\%username%\.lunarclient\settings\game\muted_users.json"
+powershell Invoke-WebRequest "https://github.com/Smolich404/DownloadFilesToOpline/releases/download/LC2/profile_manager.json" -OutFile "C:\Users\%username%\.lunarclient\settings\game\profile_manager.json"
+powershell Invoke-WebRequest "https://github.com/Smolich404/DownloadFilesToOpline/releases/download/LC2/rule-features.json" -OutFile "C:\Users\%username%\.lunarclient\settings\game\rule-features.json"
+powershell Invoke-WebRequest "https://github.com/Smolich404/DownloadFilesToOpline/releases/download/LC2/waypoints.json" -OutFile "C:\Users\%username%\.lunarclient\settings\game\waypoints.json"
+powershell Invoke-WebRequest "https://github.com/Smolich404/DownloadFilesToOpline/releases/download/LC3/controls.json" -OutFile "C:\Users\%username%\.lunarclient\settings\game\Arena PvP\controls.json"
+powershell Invoke-WebRequest "https://github.com/Smolich404/DownloadFilesToOpline/releases/download/LC3/general.json" -OutFile "C:\Users\%username%\.lunarclient\settings\game\Arena PvP\general.json"
+powershell Invoke-WebRequest "https://github.com/Smolich404/DownloadFilesToOpline/releases/download/LC3/mods.json" -OutFile "C:\Users\%username%\.lunarclient\settings\game\Arena PvP\mods.json"
+powershell Invoke-WebRequest "https://github.com/Smolich404/DownloadFilesToOpline/releases/download/LC3/performance.json" -OutFile "C:\Users\%username%\.lunarclient\settings\game\Arena PvP\performance.json"
+powershell Invoke-WebRequest "https://github.com/Smolich404/DownloadFilesToOpline/releases/download/LC4/controls.json" -OutFile "C:\Users\%username%\.lunarclient\settings\game\Default\controls.json"
+powershell Invoke-WebRequest "https://github.com/Smolich404/DownloadFilesToOpline/releases/download/LC4/general.json" -OutFile "C:\Users\%username%\.lunarclient\settings\game\Default\general.json"
+powershell Invoke-WebRequest "https://github.com/Smolich404/DownloadFilesToOpline/releases/download/LC4/mods.json" -OutFile "C:\Users\%username%\.lunarclient\settings\game\Default\mods.json"
+powershell Invoke-WebRequest "https://github.com/Smolich404/DownloadFilesToOpline/releases/download/LC4/performance.json" -OutFile "C:\Users\%username%\.lunarclient\settings\game\Default\performance.json"
+powershell Invoke-WebRequest "https://github.com/Smolich404/DownloadFilesToOpline/releases/download/LC4/staff_mods.json" -OutFile "C:\Users\%username%\.lunarclient\settings\game\Default\staff_mods.json"
+powershell Invoke-WebRequest "https://github.com/Smolich404/DownloadFilesToOpline/releases/download/LC5/controls.json" -OutFile "C:\Users\%username%\.lunarclient\settings\game\Hypixel Skyblock\controls.json"
+powershell Invoke-WebRequest "https://github.com/Smolich404/DownloadFilesToOpline/releases/download/LC5/general.json" -OutFile "C:\Users\%username%\.lunarclient\settings\game\Hypixel Skyblock\general.json"
+powershell Invoke-WebRequest "https://github.com/Smolich404/DownloadFilesToOpline/releases/download/LC5/mods.json" -OutFile "C:\Users\%username%\.lunarclient\settings\game\Hypixel Skyblock\mods.json"
+powershell Invoke-WebRequest "https://github.com/Smolich404/DownloadFilesToOpline/releases/download/LC5/performance.json" -OutFile "C:\Users\%username%\.lunarclient\settings\game\Hypixel Skyblock\performance.json"
+powershell Invoke-WebRequest "https://github.com/Smolich404/DownloadFilesToOpline/releases/download/LC6/controls.json" -OutFile "C:\Users\%username%\.lunarclient\settings\game\UHC\controls.json"
+powershell Invoke-WebRequest "https://github.com/Smolich404/DownloadFilesToOpline/releases/download/LC6/general.json" -OutFile "C:\Users\%username%\.lunarclient\settings\game\UHC\general.json"
+powershell Invoke-WebRequest "https://github.com/Smolich404/DownloadFilesToOpline/releases/download/LC6/mods.json" -OutFile "C:\Users\%username%\.lunarclient\settings\game\UHC\mods.json"
+powershell Invoke-WebRequest "https://github.com/Smolich404/DownloadFilesToOpline/releases/download/LC6/performance.json" -OutFile "C:\Users\%username%\.lunarclient\settings\game\UHC\performance.json"
 powershell Invoke-WebRequest "https://github.com/Smolich404/DownloadFilesToOpline/releases/download/Opline/optionsLC.txt" -OutFile "C:\Users\%username%\AppData\Roaming\.minecraft\optionsLC.txt"
 goto mcend2
 
@@ -6958,14 +6958,14 @@ goto csinstall
 
 :csinstall
 cls
-powershell Invoke-WebRequest "https://cdn.discordapp.com/attachments/838115755957420063/838152920041521152/trening.cfg" -OutFile "%CS%\trening.cfg"
-powershell Invoke-WebRequest "https://cdn.discordapp.com/attachments/838115755957420063/838152921777438770/treaninglite.cfg" -OutFile "%CS%\treaninglite.cfg"
-powershell Invoke-WebRequest "https://cdn.discordapp.com/attachments/838115755957420063/838152923150024742/gaben.cfg" -OutFile "%CS%\gaben.cfg"
-powershell Invoke-WebRequest "https://cdn.discordapp.com/attachments/838115755957420063/838152923954413588/autoexec.cfg" -OutFile "%CS%\autoexec.cfg"
-powershell Invoke-WebRequest "https://cdn.discordapp.com/attachments/838115755957420063/838152925783785543/gitattributes" -OutFile "%CS%\gitattributes"
-powershell Invoke-WebRequest "https://cdn.discordapp.com/attachments/838115755957420063/838152927805702174/config.cfg" -OutFile "%CS%\config.cfg"
-powershell Invoke-WebRequest "https://cdn.discordapp.com/attachments/838115755957420063/838205334849060914/video.txt" -OutFile "%CS%\video.txt"
-powershell Invoke-WebRequest "https://cdn.discordapp.com/attachments/838115755957420063/838205338150371379/videodefaults.txt" -OutFile "%CS%\videodefaults.txt"
+powershell Invoke-WebRequest "https://github.com/Smolich404/DownloadFilesToOpline/releases/download/CS/trening.cfg" -OutFile "%CS%\trening.cfg"
+powershell Invoke-WebRequest "https://github.com/Smolich404/DownloadFilesToOpline/releases/download/CS/treaninglite.cfg" -OutFile "%CS%\treaninglite.cfg"
+powershell Invoke-WebRequest "https://github.com/Smolich404/DownloadFilesToOpline/releases/download/CS/gaben.cfg" -OutFile "%CS%\gaben.cfg"
+powershell Invoke-WebRequest "https://github.com/Smolich404/DownloadFilesToOpline/releases/download/CS/autoexec.cfg" -OutFile "%CS%\autoexec.cfg"
+powershell Invoke-WebRequest "https://github.com/Smolich404/DownloadFilesToOpline/releases/download/CS/gitattributes" -OutFile "%CS%\gitattributes"
+powershell Invoke-WebRequest "https://github.com/Smolich404/DownloadFilesToOpline/releases/download/CS/config.cfg" -OutFile "%CS%\config.cfg"
+powershell Invoke-WebRequest "https://github.com/Smolich404/DownloadFilesToOpline/releases/download/CS/video.txt" -OutFile "%CS%\video.txt"
+powershell Invoke-WebRequest "https://github.com/Smolich404/DownloadFilesToOpline/releases/download/CS/videodefaults.txt" -OutFile "%CS%\videodefaults.txt"
 goto csend
 
 :csend
@@ -7086,17 +7086,17 @@ if %ERRORLEVEL% == 4 goto svalorant
 
 :high
 cls
-powershell Invoke-WebRequest "https://cdn.discordapp.com/attachments/728982277874384916/855146802898010152/GameUserSettings.ini" -OutFile "%VALO%\GameUserSettings.ini"
+powershell Invoke-WebRequest "https://github.com/Smolich404/DownloadFilesToOpline/releases/download/VALO/GameUserSettings.ini" -OutFile "%VALO%\GameUserSettings.ini"
 goto endvalo
 
 :higher
 cls
-powershell Invoke-WebRequest "https://cdn.discordapp.com/attachments/728982277874384916/855146852914561094/GameUserSettings.ini" -OutFile "%VALO%\GameUserSettings.ini"
+powershell Invoke-WebRequest "https://github.com/Smolich404/DownloadFilesToOpline/releases/download/VALO2/GameUserSettings.ini" -OutFile "%VALO%\GameUserSettings.ini"
 goto endvalo
 
 :highest
 cls
-powershell Invoke-WebRequest "https://cdn.discordapp.com/attachments/728982277874384916/855146884875157564/GameUserSettings.ini" -OutFile "%VALO%\GameUserSettings.ini"
+powershell Invoke-WebRequest "https://github.com/Smolich404/DownloadFilesToOpline/releases/download/VALO3/GameUserSettings.ini" -OutFile "%VALO%\GameUserSettings.ini"
 goto endvalo
 
 :endvalo
@@ -7145,17 +7145,17 @@ if %ERRORLEVEL% == 4 goto svalorant
 
 :low
 cls
-powershell Invoke-WebRequest "https://cdn.discordapp.com/attachments/728982277874384916/853401169241571399/GameUserSettings.ini" -OutFile "%VALO%\GameUserSettings.ini"
+powershell Invoke-WebRequest "https://github.com/Smolich404/DownloadFilesToOpline/releases/download/VALO4/GameUserSettings.ini" -OutFile "%VALO%\GameUserSettings.ini"
 goto endvalo2
 
 :lower
 cls
-powershell Invoke-WebRequest "https://cdn.discordapp.com/attachments/728982277874384916/853401246571692082/GameUserSettings.ini" -OutFile "%VALO%\GameUserSettings.ini"
+powershell Invoke-WebRequest "https://github.com/Smolich404/DownloadFilesToOpline/releases/download/VALO5/GameUserSettings.ini" -OutFile "%VALO%\GameUserSettings.ini"
 goto endvalo2
 
 :lowest
 cls
-powershell Invoke-WebRequest "https://cdn.discordapp.com/attachments/728982277874384916/853401318046433290/GameUserSettings.ini" -OutFile "%VALO%\GameUserSettings.ini"
+powershell Invoke-WebRequest "https://github.com/Smolich404/DownloadFilesToOpline/releases/download/VALO6/GameUserSettings.ini" -OutFile "%VALO%\GameUserSettings.ini"
 goto endvalo2
 
 :endvalo2
@@ -7276,17 +7276,17 @@ if %ERRORLEVEL% == 4 goto sfortnite
 
 :high
 cls
-powershell Invoke-WebRequest "https://cdn.discordapp.com/attachments/728982277874384916/855163204783308830/GameUserSettings.ini" -OutFile "%FORT%\GameUserSettings.ini"
+powershell Invoke-WebRequest "https://github.com/Smolich404/DownloadFilesToOpline/releases/download/FORT/GameUserSettings.ini" -OutFile "%FORT%\GameUserSettings.ini"
 goto endfort
 
 :higher
 cls
-powershell Invoke-WebRequest "https://cdn.discordapp.com/attachments/728982277874384916/855163271183335494/GameUserSettings.ini" -OutFile "%FORT%\GameUserSettings.ini"
+powershell Invoke-WebRequest "https://github.com/Smolich404/DownloadFilesToOpline/releases/download/FORT2/GameUserSettings.ini" -OutFile "%FORT%\GameUserSettings.ini"
 goto endfort
 
 :highest
 cls
-powershell Invoke-WebRequest "https://cdn.discordapp.com/attachments/728982277874384916/855163324744204349/GameUserSettings.ini" -OutFile "%FORT%\GameUserSettings.ini"
+powershell Invoke-WebRequest "https://github.com/Smolich404/DownloadFilesToOpline/releases/download/FORT3/GameUserSettings.ini" -OutFile "%FORT%\GameUserSettings.ini"
 goto endfort
 
 :endfort
@@ -7335,17 +7335,17 @@ if %ERRORLEVEL% == 4 goto sfortnite
 
 :low
 cls
-powershell Invoke-WebRequest "https://cdn.discordapp.com/attachments/728982277874384916/855163780471980072/GameUserSettings.ini" -OutFile "%FORT%\GameUserSettings.ini"
+powershell Invoke-WebRequest "https://github.com/Smolich404/DownloadFilesToOpline/releases/download/FORT4/GameUserSettings.ini" -OutFile "%FORT%\GameUserSettings.ini"
 goto endfort2
 
 :lower
 cls
-powershell Invoke-WebRequest "https://cdn.discordapp.com/attachments/728982277874384916/855164314842955796/GameUserSettings.ini" -OutFile "%FORT%\GameUserSettings.ini"
+powershell Invoke-WebRequest "https://github.com/Smolich404/DownloadFilesToOpline/releases/download/FORT5/GameUserSettings.ini" -OutFile "%FORT%\GameUserSettings.ini"
 goto endfort2
 
 :lowest
 cls
-powershell Invoke-WebRequest "https://cdn.discordapp.com/attachments/728982277874384916/855165563595653191/GameUserSettings.ini" -OutFile "%FORT%\GameUserSettings.ini"
+powershell Invoke-WebRequest "https://github.com/Smolich404/DownloadFilesToOpline/releases/download/FORT6/GameUserSettings.ini" -OutFile "%FORT%\GameUserSettings.ini"
 goto endfort2
 
 :endfort2
