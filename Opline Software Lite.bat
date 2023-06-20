@@ -3787,9 +3787,6 @@ echo *** Removing shortcuts ***
 call :delshortcut "C:\Users\Public\Desktop\Microsoft Edge.lnk"
 call :delshortcut "%ProgramData%\Microsoft\Windows\Start Menu\Programs\Microsoft Edge.lnk"
 call :delshortcut "%APPDATA%\Microsoft\Internet Explorer\Quick Launch\User Pinned\TaskBar\Microsoft Edge.lnk"
-Reg del "HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Microsoft Edge" /f
-Reg del "HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Microsoft Edge Update" /f
-Reg del "HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Microsoft EdgeWebView" /f
 echo Finished!
 goto NEdge
 
@@ -3864,12 +3861,15 @@ powershell -command "& { iwr https://github.com/Smolich404/UninstallEdge/release
 powershell -command "& { iwr https://github.com/Smolich404/UninstallEdge/releases/download/E/Uninstall.Edge.cmd -OutFile Uninstall.Edge.cmd }"
 timeout 2 >nul
 start Uninstall.Edge.cmd
-timeout 10 >nul
+timeout 13 >nul
 del install_wim_tweak.exe
 del Uninstall.Edge.cmd
 del Packages.txt
 cd C:\Users\%username%\Downloads
 rmdir Edge
+Reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Microsoft Edge" /f
+Reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Microsoft Edge Update" /f
+Reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Microsoft EdgeWebView" /f
 Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\edgeupdate" /v "Start" /t REG_DWORD /d "4" /f
 Reg.exe add "HKLM\SOFTWARE\Microsoft\EdgeUpdate" /v "DoNotUpdateToEdgeWithChromium" /t REG_DWORD /d "1" /f
 goto end3
@@ -8368,7 +8368,7 @@ Reg.exe add "HKLM\SOFTWARE\Classes\CLSID\{09A47860-11B0-4DA5-AFA5-26D86198A780}\
 Reg.exe add "HKLM\SOFTWARE\Classes\CLSID\{09A47860-11B0-4DA5-AFA5-26D86198A780}\InprocServer32" /v "ThreadingModel" /t REG_SZ /d "Apartment" /f
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "SecurityHealth" /t REG_EXPAND_SZ /d "%%windir%%\system32\SecurityHealthSystray.exe" /f
 icacls "%systemroot%\System32\smartscreen.exe" /reset
-Reg del "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender" /v DisableAntiSpyware /f
+Reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender" /v DisableAntiSpyware /f
 cd C:\Users\%username%\Downloads
 mkdir bin
 cd C:\Users\%username%\Downloads\bin
