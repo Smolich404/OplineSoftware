@@ -941,7 +941,7 @@ WSCRIPT "%tmpmsgbox%"
 goto Fixer
 
 :MenuOMAndK2
-MODE 56,60
+MODE 60,56
 color F
 cls
 echo.
