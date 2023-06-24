@@ -628,21 +628,18 @@ if %ERRORLEVEL% == 6 goto MFix6
 if %ERRORLEVEL% == 7 goto MFix7
 if %ERRORLEVEL% == 8 goto MFix8
 if %ERRORLEVEL% == 9 goto MFix9
-if %ERRORLEVEL% == 10 goto MFix10
-if %ERRORLEVEL% == 11 goto FixMax
-if %ERRORLEVEL% == 12 goto KFix1
-if %ERRORLEVEL% == 13 goto KFix2
-if %ERRORLEVEL% == 14 goto KFix3
-if %ERRORLEVEL% == 15 goto KFix4
-if %ERRORLEVEL% == 16 goto KFix5
-if %ERRORLEVEL% == 17 goto RFix
-if %ERRORLEVEL% == 18 goto MenuOMAndK2
-if %ERRORLEVEL% == 19 goto OplineMenu
+if %ERRORLEVEL% == 10 goto FixMax
+if %ERRORLEVEL% == 11 goto KFix1
+if %ERRORLEVEL% == 12 goto KFix2
+if %ERRORLEVEL% == 13 goto KFix3
+if %ERRORLEVEL% == 14 goto KFix4
+if %ERRORLEVEL% == 15 goto KFix5
+if %ERRORLEVEL% == 16 goto RFix
+if %ERRORLEVEL% == 17 goto MenuOMAndK2
+if %ERRORLEVEL% == 18 goto OplineMenu
 
 :RFix
 cls
-Reg.exe add "HKCU\Control Panel\Desktop" /v "UserPreferencesMask" /t REG_BINARY /d "9e1e078012000000" /f
-Reg.exe add "HKU\.DEFAULT\Control Panel\Desktop" /v "UserPreferencesMask" /t REG_BINARY /d "9e3e038012000000" /f
 Reg.exe add "HKCU\Control Panel\Accessibility\StickyKeys" /v "Flags" /t REG_SZ /d "510" /f
 Reg.exe add "HKCU\Control Panel\Accessibility\Keyboard Response" /v "Flags" /t REG_SZ /d "126" /f
 Reg.exe add "HKCU\Control Panel\Accessibility\ToggleKeys" /v "Flags" /t REG_SZ /d "62" /f
@@ -752,19 +749,6 @@ goto Fixer
 
 :MFix5
 cls
-Reg.exe add "HKU\.DEFAULT\Control Panel\Desktop" /v "UserPreferencesMask" /t REG_BINARY /d "9e3e028012000000" /f
-Reg.exe add "HKCU\Control Panel\Desktop" /v "UserPreferencesMask" /t REG_BINARY /d "9e1e068012000000" /f
-cls
-SET msgboxTitle=Opline Software
-SET msgboxBody=Finished - Skonczone
-SET tmpmsgbox=%temp%~tmpmsgbox.vbs
-IF EXIST "%tmpmsgbox%" DEL /F /Q "%tmpmsgbox%"
-ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
-WSCRIPT "%tmpmsgbox%"
-goto Fixer
-
-:MFix6
-cls
 Reg.exe add "HKCU\Control Panel\Mouse" /v "MouseHoverTime" /t REG_SZ /d "100" /f
 Reg.exe add "HKU\.DEFAULT\Control Panel\Mouse" /v "MouseHoverTime" /t REG_SZ /d "100" /f
 cls
@@ -776,7 +760,7 @@ ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
 WSCRIPT "%tmpmsgbox%"
 goto Fixer
 
-:MFix7
+:MFix6
 cls
 Reg.exe add "HKCU\Control Panel\Mouse" /v "SmoothMouseXCurve" /t REG_BINARY /d "0000000000000000c0cc0c0000000000809919000000000040662600000000000033330000000000" /f
 Reg.exe add "HKCU\Control Panel\Mouse" /v "SmoothMouseYCurve" /t REG_BINARY /d "0000000000000000000038000000000000007000000000000000a800000000000000e00000000000" /f
@@ -791,7 +775,7 @@ ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
 WSCRIPT "%tmpmsgbox%"
 goto Fixer
 
-:MFix8
+:MFix7
 cls
 Reg.exe add "HKCU\Control Panel\Desktop" /v "MouseWheelRouting" /t REG_DWORD /d "0" /f
 Reg.exe add "HKCU\Control Panel\Cursors" /v "ContactVisualization" /t REG_DWORD /d "0" /f
@@ -808,7 +792,7 @@ ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
 WSCRIPT "%tmpmsgbox%"
 goto Fixer
 
-:MFix9
+:MFix8
 cls
 Reg.exe add "HKCU\Control Panel\Accessibility\MouseKeys" /v "MaximumSpeed" /t REG_SZ /d "39" /f
 Reg.exe add "HKCU\Control Panel\Accessibility\MouseKeys" /v "TimeToMaximumSpeed" /t REG_SZ /d "3000" /f
@@ -821,7 +805,7 @@ ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
 WSCRIPT "%tmpmsgbox%"
 goto Fixer
 
-:MFix10
+:MFix9
 cls
 Reg.exe add "HKCU\Control Panel\Desktop" /v "LogPixels" /t REG_DWORD /d "96" /f
 Reg.exe add "HKCU\Control Panel\Desktop" /v "Win8DpiScaling" /t REG_DWORD /d "1" /f
@@ -836,8 +820,6 @@ goto Fixer
 
 :FixMax
 cls
-Reg.exe add "HKCU\Control Panel\Desktop" /v "UserPreferencesMask" /t REG_BINARY /d "9e1e068012000000" /f
-Reg.exe add "HKU\.DEFAULT\Control Panel\Desktop" /v "UserPreferencesMask" /t REG_BINARY /d "9e3e028012000000" /f
 Reg.exe add "HKCU\Control Panel\Mouse" /v "MouseSensitivity" /t REG_SZ /d "10" /f
 Reg.exe add "HKCU\Control Panel\Mouse" /v "SmoothMouseXCurve" /t REG_BINARY /d "0000000000000000c0cc0c0000000000809919000000000040662600000000000033330000000000" /f
 Reg.exe add "HKCU\Control Panel\Mouse" /v "SmoothMouseYCurve" /t REG_BINARY /d "0000000000000000000038000000000000007000000000000000a800000000000000e00000000000" /f
@@ -959,7 +941,7 @@ WSCRIPT "%tmpmsgbox%"
 goto Fixer
 
 :MenuOMAndK2
-MODE 60,60
+MODE 56,60
 color F
 cls
 echo.
@@ -969,39 +951,35 @@ echo.
 call :ColorText 0E "    Mouse
 echo.
 echo.
-echo     (1) - UserPreferencesMask
+echo     (1) - Sensitivity
 echo.
-echo     (2) - UserPreferencesMask V2
+echo     (2) - Sensitivity V2
 echo.
-echo     (3) - Sensitivity
+echo     (3) - Smooth Curve
 echo.
-echo     (4) - Sensitivity V2
+echo     (4) - Smooth Curve V2
 echo.
-echo     (5) - Smooth Curve
+echo     (5) - Speed
 echo.
-echo     (6) - Smooth Curve V2
+echo     (6) - Speed V2
 echo.
-echo     (7) - Speed
+echo     (7) - Hover Time
 echo.
-echo     (8) - Speed V2
+echo     (8) - Hover Time V2
 echo.
-echo     (9) - Hover Time
+echo     (9) - Double Click Speed
 echo.
-echo     (10) - Hover Time V2
+echo     (10) - Double Click Speed V2
 echo.
-echo     (11) - Double Click Speed
+echo     (11) - Flags
 echo.
-echo     (12) - Double Click Speed V2
+echo     (12) - Flags V2
 echo.
-echo     (13) - Flags
+echo     (13) - Cursor
 echo.
-echo     (14) - Flags V2
+echo     (14) - Maximum Speed
 echo.
-echo     (15) - Cursor
-echo.
-echo     (16) - Maximum Speed
-echo.
-echo     (17) - LogPixels and Win8DpiScaling
+echo     (15) - LogPixels and Win8DpiScaling
 echo.
 call :ColorText 0E "    Keyboard
 echo.
@@ -1042,8 +1020,6 @@ if %EZ%==12 (Goto :12M)
 if %EZ%==13 (Goto :13M)
 if %EZ%==14 (Goto :14M)
 if %EZ%==15 (Goto :15M)
-if %EZ%==16 (Goto :16M)
-if %EZ%==17 (Goto :17M)
 if %EZ%==A (Goto :1K)
 if %EZ%==B (Goto :2K)
 if %EZ%==C (Goto :3K)
@@ -1058,7 +1034,7 @@ goto GO
 
 :1M
 cls
-Reg.exe add "HKCU\Control Panel\Desktop" /v "UserPreferencesMask" /t REG_BINARY /d "9e1e068012000000" /f
+Reg.exe add "HKCU\Control Panel\Mouse" /v "MouseSensitivity" /t REG_SZ /d "10" /f
 cls
 SET msgboxTitle=OOTMAKS V2 by Smolich
 SET msgboxBody=Finished - Skonczone
@@ -1070,30 +1046,6 @@ goto GO
 
 :2M
 cls
-Reg.exe add "HKU\.DEFAULT\Control Panel\Desktop" /v "UserPreferencesMask" /t REG_BINARY /d "9e3e028012000000" /f
-cls
-SET msgboxTitle=OOTMAKS V2 by Smolich
-SET msgboxBody=Finished - Skonczone
-SET tmpmsgbox=%temp%~tmpmsgbox.vbs
-IF EXIST "%tmpmsgbox%" DEL /F /Q "%tmpmsgbox%"
-ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
-WSCRIPT "%tmpmsgbox%"
-goto GO
-
-:3M
-cls
-Reg.exe add "HKCU\Control Panel\Mouse" /v "MouseSensitivity" /t REG_SZ /d "10" /f
-cls
-SET msgboxTitle=OOTMAKS V2 by Smolich
-SET msgboxBody=Finished - Skonczone
-SET tmpmsgbox=%temp%~tmpmsgbox.vbs
-IF EXIST "%tmpmsgbox%" DEL /F /Q "%tmpmsgbox%"
-ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
-WSCRIPT "%tmpmsgbox%"
-goto GO
-
-:4M
-cls
 Reg.exe add "HKU\.DEFAULT\Control Panel\Mouse" /v "MouseSensitivity" /t REG_SZ /d "10" /f
 cls
 SET msgboxTitle=OOTMAKS V2 by Smolich
@@ -1104,7 +1056,7 @@ ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
 WSCRIPT "%tmpmsgbox%"
 goto GO
 
-:5M
+:3M
 cls
 Reg.exe add "HKCU\Control Panel\Mouse" /v "SmoothMouseXCurve" /t REG_BINARY /d "0000000000000000c0cc0c0000000000809919000000000040662600000000000033330000000000" /f
 Reg.exe add "HKCU\Control Panel\Mouse" /v "SmoothMouseYCurve" /t REG_BINARY /d "0000000000000000000038000000000000007000000000000000a800000000000000e00000000000" /f
@@ -1117,7 +1069,7 @@ ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
 WSCRIPT "%tmpmsgbox%"
 goto GO
 
-:6M
+:4M
 cls
 Reg.exe add "HKU\.DEFAULT\Control Panel\Mouse" /v "SmoothMouseXCurve" /t REG_BINARY /d "0000000000000000c0cc0c0000000000809919000000000040662600000000000033330000000000" /f
 Reg.exe add "HKU\.DEFAULT\Control Panel\Mouse" /v "SmoothMouseYCurve" /t REG_BINARY /d "0000000000000000000038000000000000007000000000000000a800000000000000e00000000000" /f
@@ -1130,7 +1082,7 @@ ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
 WSCRIPT "%tmpmsgbox%"
 goto GO
 
-:7M
+:5M
 cls
 Reg.exe add "HKCU\Control Panel\Mouse" /v "MouseSpeed" /t REG_SZ /d "0" /f
 Reg.exe add "HKCU\Control Panel\Mouse" /v "MouseThreshold1" /t REG_SZ /d "0" /f
@@ -1144,7 +1096,7 @@ ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
 WSCRIPT "%tmpmsgbox%"
 goto GO
 
-:8M
+:6M
 cls
 Reg.exe add "HKU\.DEFAULT\Control Panel\Mouse" /v "MouseSpeed" /t REG_SZ /d "0" /f
 Reg.exe add "HKU\.DEFAULT\Control Panel\Mouse" /v "MouseThreshold1" /t REG_SZ /d "0" /f
@@ -1158,7 +1110,7 @@ ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
 WSCRIPT "%tmpmsgbox%"
 goto GO
 
-:9M
+:7M
 cls
 Reg.exe add "HKCU\Control Panel\Mouse" /v "MouseHoverTime" /t REG_SZ /d "100" /f
 cls
@@ -1170,7 +1122,7 @@ ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
 WSCRIPT "%tmpmsgbox%"
 goto GO
 
-:10M
+:8M
 cls
 Reg.exe add "HKU\.DEFAULT\Control Panel\Mouse" /v "MouseHoverTime" /t REG_SZ /d "100" /f
 cls
@@ -1182,7 +1134,7 @@ ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
 WSCRIPT "%tmpmsgbox%"
 goto GO
 
-:11M
+:9M
 cls
 Reg.exe add "HKCU\Control Panel\Mouse" /v "DoubleClickSpeed" /t REG_SZ /d "480" /f
 cls
@@ -1194,7 +1146,7 @@ ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
 WSCRIPT "%tmpmsgbox%"
 goto GO
 
-:12M
+:10M
 cls
 Reg.exe add "HKU\.DEFAULT\Control Panel\Mouse" /v "DoubleClickSpeed" /t REG_SZ /d "480" /f
 cls
@@ -1206,7 +1158,7 @@ ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
 WSCRIPT "%tmpmsgbox%"
 goto GO
 
-:13M
+:11M
 cls
 Reg.exe add "HKCU\Control Panel\Accessibility\MouseKeys" /v "Flags" /t REG_SZ /d "58" /f
 cls
@@ -1218,7 +1170,7 @@ ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
 WSCRIPT "%tmpmsgbox%"
 goto GO
 
-:14M
+:12M
 cls
 Reg.exe add "HKU\.DEFAULT\Control Panel\Accessibility\MouseKeys" /v "Flags" /t REG_SZ /d "58" /f
 cls
@@ -1230,7 +1182,7 @@ ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
 WSCRIPT "%tmpmsgbox%"
 goto GO
 
-:15M
+:13M
 cls
 Reg.exe add "HKCU\Control Panel\Desktop" /v "MouseWheelRouting" /t REG_DWORD /d "0" /f
 Reg.exe add "HKCU\Control Panel\Cursors" /v "ContactVisualization" /t REG_DWORD /d "0" /f
@@ -1247,7 +1199,7 @@ ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
 WSCRIPT "%tmpmsgbox%"
 goto GO
 
-:16M
+:14M
 cls
 Reg.exe add "HKCU\Control Panel\Accessibility\MouseKeys" /v "MaximumSpeed" /t REG_SZ /d "39" /f
 Reg.exe add "HKCU\Control Panel\Accessibility\MouseKeys" /v "TimeToMaximumSpeed" /t REG_SZ /d "3000" /f
@@ -1260,7 +1212,7 @@ ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
 WSCRIPT "%tmpmsgbox%"
 goto GO
 
-:17M
+:15M
 cls
 Reg.exe add "HKCU\Control Panel\Desktop" /v "LogPixels" /t REG_DWORD /d "96" /f
 Reg.exe add "HKCU\Control Panel\Desktop" /v "Win8DpiScaling" /t REG_DWORD /d "1" /f
@@ -1344,8 +1296,6 @@ goto GO
 
 :ResetFix
 cls
-Reg.exe add "HKCU\Control Panel\Desktop" /v "UserPreferencesMask" /t REG_BINARY /d "9e1e078012000000" /f
-Reg.exe add "HKU\.DEFAULT\Control Panel\Desktop" /v "UserPreferencesMask" /t REG_BINARY /d "9e3e038012000000" /f
 Reg.exe add "HKCU\Control Panel\Accessibility\StickyKeys" /v "Flags" /t REG_SZ /d "510" /f
 Reg.exe add "HKCU\Control Panel\Accessibility\Keyboard Response" /v "Flags" /t REG_SZ /d "126" /f
 Reg.exe add "HKCU\Control Panel\Accessibility\ToggleKeys" /v "Flags" /t REG_SZ /d "62" /f
@@ -1399,8 +1349,6 @@ goto GO
 
 :Full
 cls
-Reg.exe add "HKCU\Control Panel\Desktop" /v "UserPreferencesMask" /t REG_BINARY /d "9e1e068012000000" /f
-Reg.exe add "HKU\.DEFAULT\Control Panel\Desktop" /v "UserPreferencesMask" /t REG_BINARY /d "9e3e028012000000" /f
 Reg.exe add "HKCU\Control Panel\Mouse" /v "MouseSensitivity" /t REG_SZ /d "10" /f
 Reg.exe add "HKCU\Control Panel\Mouse" /v "SmoothMouseXCurve" /t REG_BINARY /d "0000000000000000c0cc0c0000000000809919000000000040662600000000000033330000000000" /f
 Reg.exe add "HKCU\Control Panel\Mouse" /v "SmoothMouseYCurve" /t REG_BINARY /d "0000000000000000000038000000000000007000000000000000a800000000000000e00000000000" /f
