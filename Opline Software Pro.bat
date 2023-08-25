@@ -2071,6 +2071,7 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Feeds" /v "ShellFeedsTas
 reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "TaskbarDa" /t REG_DWORD /d "0" /f
 reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\Widgets.exe" /v "Debugger" /t REG_SZ /d "%%windir%%\System32\taskkill.exe" /f
 reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\WidgetService.exe" /v "Debugger" /t REG_SZ /d "%%windir%%\System32\taskkill.exe" /f
+reg add "HKLM\Software\Policies\Microsoft\Windows\AdvertisingInfo" /v "DisabledByGroupPolicy" /t REG_DWORD /d "1" /f
 powershell -NoProfile -Command "Disable-MMAgent -PC -MC -APL"
 PowerShell -NonInteractive -NoLogo -NoProfile -Command "Disable-WindowsErrorReporting"
 powershell set-ProcessMitigation -System -Disable  EmulateAtlThunks, BottomUp, ForceRelocateImages, RequireInfo, HighEntropy, DisableWin32kSystemCalls, DisableExtensionPoints, BlockDynamicCode, SuppressExports, MicrosoftSignedOnly, AllowStoreSignedBinaries, EnforceModuleDependencySigning, AuditStoreSigned, DisableNonSystemFonts, BlockRemoteImageLoads, AuditRemoteImageLoads, BlockLowLabelImageLoads, AuditLowLabelImageLoads, PreferSystem32, AuditPreferSystem32, TerminateOnError, UserShadowStack, UserShadowStackStrictMode, AuditUserShadowStack
@@ -2535,6 +2536,7 @@ reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Feeds" /v "ShellFeeds
 reg delete "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "TaskbarDa" /f
 reg delete "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\Widgets.exe" /f
 reg delete "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\WidgetService.exe" /f
+reg delete "HKLM\Software\Policies\Microsoft\Windows\AdvertisingInfo" /f
 powershell -NoProfile -Command "Enable-MMAgent -PC -MC -APL"
 PowerShell -NonInteractive -NoLogo -NoProfile -Command "Enable-WindowsErrorReporting"
 powershell set-ProcessMitigation -System -Enable  BottomUp, HighEntropy, TerminateOnError
