@@ -580,7 +580,7 @@ Goto GBFile
 :GBFile
 cls
 Reg add "HKCU\Software\Microsoft\DirectX\UserGpuPreferences" /v "%file%" /t Reg_SZ /d "GpuPreference=2;" /f
-Reg add "HKCU\Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers" /v "%file%" /t Reg_SZ /d "~ DISABLEDXMAXIMIZEDWINDOWEDMODE" /f
+Reg add "HKCU\Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers" /v "%file%" /t Reg_SZ /d "~ DISABLEDXMAXIMIZEDWINDOWEDMODE HIGHDPIAWARE" /f
 cls
 SET msgboxTitle=Opline Software
 SET msgboxBody=Finished - Skonczone
@@ -1801,7 +1801,10 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Feeds" /v "ShellFeedsTas
 reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "TaskbarDa" /t REG_DWORD /d "0" /f
 reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\Widgets.exe" /v "Debugger" /t REG_SZ /d "%%windir%%\System32\taskkill.exe" /f
 reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\WidgetService.exe" /v "Debugger" /t REG_SZ /d "%%windir%%\System32\taskkill.exe" /f
+reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\CompatTelRunner.exe" /v Debugger /t REG_SZ /d "%windir%\System32\taskkill.exe" /f
+reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\DeviceCensus.exe" /v Debugger /t REG_SZ /d "%windir%\System32\taskkill.exe" /f
 reg add "HKLM\Software\Policies\Microsoft\Windows\AdvertisingInfo" /v "DisabledByGroupPolicy" /t REG_DWORD /d "1" /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\FirewallRules" /v "{2765E0F4-2918-4A46-B9C9-43CDD8FCBA2B}" /t REG_SZ /d  "BlockCortana|Action=Block|Active=TRUE|Dir=Out|App=C:\windows\systemapps\microsoft.windows.cortana_cw5n1h2txyewy\searchui.exe|Name=Search  and Cortana  application|AppPkgId=S-1-15-2-1861897761-1695161497-2927542615-642690995-327840285-2659745135-2630312742|" /f
 powershell -NoProfile -Command "Disable-MMAgent -PC -MC -APL"
 PowerShell -NonInteractive -NoLogo -NoProfile -Command "Disable-WindowsErrorReporting"
 powershell set-ProcessMitigation -System -Disable  EmulateAtlThunks, BottomUp, ForceRelocateImages, RequireInfo, HighEntropy, DisableWin32kSystemCalls, DisableExtensionPoints, BlockDynamicCode, SuppressExports, MicrosoftSignedOnly, AllowStoreSignedBinaries, EnforceModuleDependencySigning, AuditStoreSigned, DisableNonSystemFonts, BlockRemoteImageLoads, AuditRemoteImageLoads, BlockLowLabelImageLoads, AuditLowLabelImageLoads, PreferSystem32, AuditPreferSystem32, TerminateOnError, UserShadowStack, UserShadowStackStrictMode, AuditUserShadowStack
@@ -2155,7 +2158,10 @@ reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Feeds" /v "ShellFeeds
 reg delete "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "TaskbarDa" /f
 reg delete "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\Widgets.exe" /f
 reg delete "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\WidgetService.exe" /f
+reg delete "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\CompatTelRunner.exe" /f
+reg delete "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\DeviceCensus.exe" /f
 reg delete "HKLM\Software\Policies\Microsoft\Windows\AdvertisingInfo" /f
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\FirewallRules" /v "{2765E0F4-2918-4A46-B9C9-43CDD8FCBA2B}" /f
 powershell -NoProfile -Command "Enable-MMAgent -PC -MC -APL"
 PowerShell -NonInteractive -NoLogo -NoProfile -Command "Enable-WindowsErrorReporting"
 powershell set-ProcessMitigation -System -Enable  BottomUp, HighEntropy, TerminateOnError
@@ -2400,6 +2406,8 @@ SC CONFIG "XblAuthManager" START= DISABLED
 NET STOP "XblAuthManager"
 SC CONFIG "xbgm" START= DISABLED
 NET STOP "xbgm"
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\xboxgip" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\xboxgrip" /v "Start" /t REG_DWORD /d "4" /f
 SCHTASKS /END /TN "\Microsoft\XblGameSave\XblGameSaveTask"
 SCHTASKS /CHANGE /DISABLE /TN "\Microsoft\XblGameSave\XblGameSaveTask"
 SCHTASKS /END /TN "\Microsoft\XblGameSave\XblGameSaveTaskLogon"
@@ -2425,6 +2433,8 @@ SC CONFIG "XblAuthManager" START= AUTO
 NET START "XblAuthManager"
 SC CONFIG "xbgm" START= AUTO
 NET START "xbgm"
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\xboxgip" /v "Start" /t REG_DWORD /d "3" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\xboxgrip" /v "Start" /t REG_DWORD /d "3" /f
 SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\XblGameSave\XblGameSaveTask"
 SCHTASKS /RUN /TN "\Microsoft\XblGameSave\XblGameSaveTask"
 SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\XblGameSave\XblGameSaveTaskLogon"
@@ -2634,6 +2644,8 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\PrintWorkflowUserSvc" /v "St
 reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Fax" /v "Start" /t REG_DWORD /d "4" /f
 sc stop Spooler
 sc config Spooler start= disabled
+sc config StiSvc start=disabled
+sc stop StiSvc
 cls
 SET msgboxTitle=Opline Software
 SET msgboxBody=Finished - Skonczone
@@ -2651,6 +2663,8 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\PrintWorkflowUserSvc" /v "St
 reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Fax" /v "Start" /t REG_DWORD /d "3" /f
 sc start Spooler
 sc config Spooler start= auto
+sc config StiSvc start=demand
+sc start StiSvc
 cls
 SET msgboxTitle=Opline Software
 SET msgboxBody=Finished - Skonczone
@@ -2769,6 +2783,7 @@ Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\BTHUSB" /v "St
 Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\HidBth" /v "Start" /t REG_DWORD /d "4" /f
 Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Microsoft_Bluetooth_AvrcpTransport" /v "Start" /t REG_DWORD /d "4" /f
 Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\RFCOMM" /v "Start" /t REG_DWORD /d "4" /f
+devmanview /disable "Generic Bluetooth Adapter"
 cls
 SET msgboxTitle=Opline Software
 SET msgboxBody=Finished - Skonczone
@@ -2795,6 +2810,7 @@ Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\BTHUSB" /v "St
 Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\HidBth" /v "Start" /t REG_DWORD /d "3" /f
 Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Microsoft_Bluetooth_AvrcpTransport" /v "Start" /t REG_DWORD /d "3" /f
 Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\RFCOMM" /v "Start" /t REG_DWORD /d "3" /f
+devmanview /enable "Generic Bluetooth Adapter"
 cls
 SET msgboxTitle=Opline Software
 SET msgboxBody=Finished - Skonczone
@@ -3112,6 +3128,76 @@ Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\MsSecFlt" /v "
 Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\NdisVirtualBus" /v "Start" /t REG_DWORD /d "3" /f
 Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Vid" /v "Start" /t REG_DWORD /d "1" /f
 Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\FontCache3.0.0.0" /v "Start" /t REG_DWORD /d "3" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\edgeupdatem" /v "Start" /t REG_DWORD /d "3" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\UCPD" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\3ware" /v "Start" /t REG_DWORD /d "0" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\AppIDSvc" /v "Start" /t REG_DWORD /d "3" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\arcsas" /v "Start" /t REG_DWORD /d "0" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\bowser" /v "Start" /t REG_DWORD /d "3" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\bttflt" /v "Start" /t REG_DWORD /d "0" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\buttonconverter" /v "Start" /t REG_DWORD /d "3" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\cbdhsvc" /v "Start" /t REG_DWORD /d "2" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CDPSvc" /v "Start" /t REG_DWORD /d "2" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\circlass" /v "Start" /t REG_DWORD /d "3" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CldFlt" /v "Start" /t REG_DWORD /d "2" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CompositeBus" /v "Start" /t REG_DWORD /d "3" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Dfsc" /v "Start" /t REG_DWORD /d "1" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\DisplayEnhancementService" /v "Start" /t REG_DWORD /d "3" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\DsmSvc" /v "Start" /t REG_DWORD /d "3" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\ErrDev" /v "Start" /t REG_DWORD /d "3" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\EventSystem" /v "Start" /t REG_DWORD /d "2" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\fvevol" /v "Start" /t REG_DWORD /d "0" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\gencounter" /v "Start" /t REG_DWORD /d "3" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\HvHost" /v "Start" /t REG_DWORD /d "3" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\hvservice" /v "Start" /t REG_DWORD /d "3" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\hyperkbd" /v "Start" /t REG_DWORD /d "3" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\HyperVideo" /v "Start" /t REG_DWORD /d "3" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\IKEEXT" /v "Start" /t REG_DWORD /d "3" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\IpxlatCfgSvc" /v "Start" /t REG_DWORD /d "3" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\KSecPkg" /v "Start" /t REG_DWORD /d "0" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\KtmRm" /v "Start" /t REG_DWORD /d "3" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\luafv" /v "Start" /t REG_DWORD /d "2" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\mrxsmb" /v "Start" /t REG_DWORD /d "3" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\mrxsmb20" /v "Start" /t REG_DWORD /d "3" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\MSDTC" /v "Start" /t REG_DWORD /d "3" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\NdisCap" /v "Start" /t REG_DWORD /d "1" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\QWAVEdrv" /v "Start" /t REG_DWORD /d "3" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\rdpbus" /v "Start" /t REG_DWORD /d "3" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\RDPDR" /v "Start" /t REG_DWORD /d "3" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\RdpVideoMiniport" /v "Start" /t REG_DWORD /d "3" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\rspndr" /v "Start" /t REG_DWORD /d "2" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SiSRaid2" /v "Start" /t REG_DWORD /d "0" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SiSRaid4" /v "Start" /t REG_DWORD /d "0" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\spaceport" /v "Start" /t REG_DWORD /d "0" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SstpSvc" /v "Start" /t REG_DWORD /d "3" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\storflt" /v "Start" /t REG_DWORD /d "0" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\storqosflt" /v "Start" /t REG_DWORD /d "2" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\TsUsbFlt" /v "Start" /t REG_DWORD /d "3" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\umbus" /v "Start" /t REG_DWORD /d "3" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\vdrvroot" /v "Start" /t REG_DWORD /d "0" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\vmgid" /v "Start" /t REG_DWORD /d "3" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\vpci" /v "Start" /t REG_DWORD /d "0" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\vsmraid" /v "Start" /t REG_DWORD /d "0" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\VSTXRAID" /v "Start" /t REG_DWORD /d "0" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WarpJITSvc" /v "Start" /t REG_DWORD /d "3" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WindowsTrustedRTProxy" /v "Start" /t REG_DWORD /d "0" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\afunix" /v "Start" /t REG_DWORD /d "1" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CSC" /v "Start" /t REG_DWORD /d "1" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\DispBrokerDesktopSvc" /v "Start" /t REG_DWORD /d "2" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\NPSMSvc" /v "Start" /t REG_DWORD /d "3" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\StiSvc" /v "Start" /t REG_DWORD /d "3" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\storflt" /v "Start" /t REG_DWORD /d "0" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\vmgid" /v "Start" /t REG_DWORD /d "3" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\vpci" /v "Start" /t REG_DWORD /d "0" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\dot3svc" /v "Start" /t REG_DWORD /d "3" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\npsvctrig" /v "Start" /t REG_DWORD /d "1" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\vwififlt" /v "Start" /t REG_DWORD /d "1" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\wanarp" /v "Start" /t REG_DWORD /d "2" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\wanarpv6" /v "Start" /t REG_DWORD /d "3" /f
+Reg.exe add "HKLM\System\ControlSet001\Services\DeviceAssociationService" /v "Start" /t REG_DWORD /d "3" /f
+Reg.exe add "HKLM\System\ControlSet001\Services\DevicesFlowUserSvc" /v "Start" /t REG_DWORD /d "3" /f
+Reg.exe add "HKLM\System\ControlSet001\Services\PolicyAgent" /v "Start" /t REG_DWORD /d "3" /f
+Reg.exe add "HKLM\System\ControlSet001\Services\RasMan" /v "Start" /t REG_DWORD /d "3" /f
 sc config DPS start=auto
 sc config WdiSystemHost start=auto
 sc config WdiServiceHost start=auto
@@ -3438,6 +3524,76 @@ Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\MsSecFlt" /v "
 Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\NdisVirtualBus" /v "Start" /t REG_DWORD /d "4" /f
 Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Vid" /v "Start" /t REG_DWORD /d "4" /f
 Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\FontCache3.0.0.0" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\edgeupdatem" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\UCPD" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\3ware" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\AppIDSvc" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\arcsas" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\bowser" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\bttflt" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\buttonconverter" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\cbdhsvc" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CDPSvc" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\circlass" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CldFlt" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CompositeBus" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Dfsc" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\DisplayEnhancementService" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\DsmSvc" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\ErrDev" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\EventSystem" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\fvevol" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\gencounter" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\HvHost" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\hvservice" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\hyperkbd" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\HyperVideo" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\IKEEXT" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\IpxlatCfgSvc" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\KSecPkg" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\KtmRm" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\luafv" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\mrxsmb" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\mrxsmb20" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\MSDTC" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\NdisCap" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\QWAVEdrv" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\rdpbus" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\RDPDR" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\RdpVideoMiniport" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\rspndr" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SiSRaid2" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SiSRaid4" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\spaceport" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SstpSvc" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\storflt" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\storqosflt" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\TsUsbFlt" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\umbus" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\vdrvroot" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\vmgid" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\vpci" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\vsmraid" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\VSTXRAID" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WarpJITSvc" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WindowsTrustedRTProxy" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\afunix" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CSC" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\DispBrokerDesktopSvc" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\NPSMSvc" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\StiSvc" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\storflt" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\vmgid" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\vpci" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\dot3svc" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\npsvctrig" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\vwififlt" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\wanarp" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\wanarpv6" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKLM\System\ControlSet001\Services\DeviceAssociationService" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKLM\System\ControlSet001\Services\DevicesFlowUserSvc" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKLM\System\ControlSet001\Services\PolicyAgent" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKLM\System\ControlSet001\Services\RasMan" /v "Start" /t REG_DWORD /d "4" /f
 sc config DPS start=disabled
 sc config WdiSystemHost start=disabled
 sc config WdiServiceHost start=disabled
@@ -3698,24 +3854,29 @@ if %ERRORLEVEL% == 4 goto Others
 
 :IESTR
 cls
-cd C:\
-mkdir STR
-cd C:\STR
-powershell Invoke-WebRequest "https://github.com/Smolich404/DownloadFilesToOpline/releases/download/Opline/CLOCKRES.exe" -OutFile "C:\STR\CLOCKRES.exe"
-C:\STR\CLOCKRES.exe
+IF EXIST "C:\STR\SetTimerResolutionService.exe" goto skip >nul 2>&1
+cd C:\ >nul 2>&1
+mkdir STR >nul 2>&1
+cd C:\STR >nul 2>&1
 timeout 1 >nul 2>&1
-FOR /F "tokens=*" %%g IN ('CLOCKRES.exe ^| find "Current"') do set "currenttimer=%%g"
-powershell Invoke-WebRequest "https://github.com/Smolich404/DownloadFilesToOpline/releases/download/Opline/SetTimerResolutionService.exe" -OutFile "C:\STR\SetTimerResolutionService.exe"
+powershell Invoke-WebRequest "https://github.com/Smolich404/DownloadFilesToOpline/releases/download/Opline/SetTimerResolutionService.exe" -OutFile "C:\STR\SetTimerResolutionService.exe" >nul 2>&1
 timeout 2 >nul 2>&1
+cd C:\STR >nul 2>&1
+%windir%\Microsoft.NET\Framework\v4.0.30319\InstallUtil.exe /install /quiet /norestart SetTimerResolutionService.exe >nul 2>&1
+timeout 2 >nul
+"C:\STR\SetTimerResolutionService.exe" -install /f >nul 2>&1
+timeout 2 >nul
+sc config STR start=auto /f >nul 2>&1
+timeout 2 >nul
+net start STR /f >nul 2>&1
+timeout 2 >nul
+goto skip >nul 2>&1
+:skip
 sc config "STR" start= auto >nul 2>&1
 NET START STR >nul 2>&1
 bcdedit /set useplatformtick yes >nul 2>&1
 bcdedit /set disabledynamictick yes >nul 2>&1
 bcdedit /deletevalue useplatformclock >nul 2>&1
-cd c:\STR>nul 2>&1
-%windir%\Microsoft.NET\Framework\v4.0.30319\InstallUtil.exe /i SetTimerResolutionService.exe >nul 2>&1
-sc config "STR" start= auto >nul 2>&1
-NET START STR >nul 2>&1
 cls
 SET msgboxTitle=Opline Software
 SET msgboxBody=The Service Has Been Installed And Activated Successfully - Usluga Zostala Pomyslnie Zainstalowana i Aktywowana
@@ -3743,25 +3904,26 @@ goto STR
 
 :USTR
 cls
-cd c:\STR
-if exist C:\STR\CLOCKRES.exe (goto alrinst3) else (goto installclockres)
-:installclockres
-powershell Invoke-WebRequest "https://github.com/Smolich404/DownloadFilesToOpline/releases/download/Opline/CLOCKRES.exe" -OutFile "C:\STR\CLOCKRES.exe"
+cd C:\STR >nul 2>&1
+if exist C:\STR\SetTimerResolutionService.exe (goto alrinst3) else (goto installstr) >nul 2>&1
+:installstr
+powershell Invoke-WebRequest "https://github.com/Smolich404/DownloadFilesToOpline/releases/download/Opline/SetTimerResolutionService.exe" -OutFile "C:\STR\SetTimerResolutionService.exe" >nul 2>&1
 timeout 1 >nul 2>&1
+goto alrinst3 >nul 2>&1
 :alrinst3
-FOR /F "tokens=*" %%g IN ('CLOCKRES.exe ^| find "Current"') do set "currenttimer1=%%g"
+net stop STR >nul 2>&1
+sc config STR start=disabled >nul 2>&1
 SC DELETE STR >nul 2>&1
-cd c:\STR
-del CLOCKRES.exe
-%windir%\Microsoft.NET\Framework\v4.0.30319\InstallUtil.exe /u SetTimerResolutionService.exe  >nul 2>&1
+cd C:\STR >nul 2>&1
+%windir%\Microsoft.NET\Framework\v4.0.30319\InstallUtil.exe /uninstall /quiet /norestart SetTimerResolutionService.exe >nul 2>&1
 del /Q SetTimerResolutionService.exe >nul 2>&1
 del /Q InstallUtil.InstallLog >nul 2>&1
 del /Q SetTimerResolutionService.InstallLog >nul 2>&1
 bcdedit /deletevalue useplatformclock >nul 2>&1
 bcdedit /deletevalue useplatformtick >nul 2>&1
 bcdedit /deletevalue disabledynamictick >nul 2>&1
-cd c:\
-rmdir STR
+cd C:\ >nul 2>&1
+rmdir STR >nul 2>&1
 cls
 SET msgboxTitle=Opline Software
 SET msgboxBody=The Service Has Been Uninstalled - Usluga Zostala Pomyslnie Odinstalowana
@@ -4080,6 +4242,7 @@ if %ERRORLEVEL% == 3 goto Others
 :DSF
 cls
 ::ReadyBoost
+sc stop SysMain
 reg add "HKLM\SYSTEM\ControlSet001\Control\Class\{71a27cdd-812a-11d0-bec7-08002be2092f}" /v "LowerFilters" /t REG_MULTI_SZ /d "fvevol\0iorate" /f
 reg add "HKLM\SYSTEM\ControlSet001\Services\rdyboost" /v "Start" /t REG_DWORD /d "4" /f
 reg add "HKLM\SYSTEM\ControlSet001\Services\SysMain" /v "Start" /t REG_DWORD /d "4" /f
@@ -4863,6 +5026,8 @@ del /s /f /q C:\WINDOWS\Prefetch
 del /s /f /q C:\Users\%username%\AppData\Local\Temp\*.*
 rd /s /q C:\Users\%username%\AppData\Local\Temp
 md C:\Users\%username%\AppData\Local\Temp
+del /s /f /q %windir%\*.log
+rd /s /q C:\Users\%username%\AppData\Local\Microsoft\Windows\INetCache\IE\*.*
 del /s /f /Q C:\Users\%username%\AppData\Local\Microsoft\Windows\INetCache\IE\*.*
 del /s /f /q %WinDir%\Temp\*.*
 del /s /f /q %WinDir%\Prefetch\*.*
@@ -5259,6 +5424,11 @@ Reg delete "HKLM\System\CurrentControlSet\Enum\%%i\Device Parameters" /v "D3Cold
 Reg delete "HKLM\System\CurrentControlSet\Enum\%%i\Device Parameters" /v "EnumerationRetryCount" /f
 Reg delete "HKLM\System\CurrentControlSet\Enum\%%i\Device Parameters" /v "WaitWakeEnabled" /f
 Reg delete "HKLM\System\CurrentControlSet\Enum\%%i\Device Parameters" /v "IdleInWorkingState" /f
+Reg delete "HKLM\System\CurrentControlSet\Enum\%%i\Device Parameters" /v "ExtPropDescSemaphore" /f
+Reg delete "HKLM\System\CurrentControlSet\Enum\%%i\Device Parameters" /v "WdfDirectedPowerTransitionEnable" /f
+Reg delete "HKLM\System\CurrentControlSet\Enum\%%i\Device Parameters" /v "IoLatencyCap" /f
+Reg delete "HKLM\System\CurrentControlSet\Enum\%%i\Device Parameters" /v "DmaRemappingCompatible" /f
+Reg delete "HKLM\System\CurrentControlSet\Enum\%%i\Device Parameters" /v "DmaRemappingCompatibleSelfhost" /f
 )
 cls
 SET msgboxTitle=Opline Software
@@ -5517,6 +5687,11 @@ Reg add "HKLM\System\CurrentControlSet\Enum\%%i\Device Parameters" /v "D3ColdSup
 Reg add "HKLM\System\CurrentControlSet\Enum\%%i\Device Parameters" /v "EnumerationRetryCount" /t REG_DWORD /d "0" /f
 Reg add "HKLM\System\CurrentControlSet\Enum\%%i\Device Parameters" /v "WaitWakeEnabled" /t REG_DWORD /d "0" /f
 Reg add "HKLM\System\CurrentControlSet\Enum\%%i\Device Parameters" /v "IdleInWorkingState" /t REG_DWORD /d "0" /f
+Reg add "HKLM\System\CurrentControlSet\Enum\%%i\Device Parameters" /v "ExtPropDescSemaphore" /t REG_DWORD /d "0" /f
+Reg add "HKLM\System\CurrentControlSet\Enum\%%i\Device Parameters" /v "WdfDirectedPowerTransitionEnable" /t REG_DWORD /d "0" /f
+Reg add "HKLM\System\CurrentControlSet\Enum\%%i\Device Parameters" /v "IoLatencyCap" /t REG_DWORD /d "0" /f
+Reg add "HKLM\System\CurrentControlSet\Enum\%%i\Device Parameters" /v "DmaRemappingCompatible" /t REG_DWORD /d "0" /f
+Reg add "HKLM\System\CurrentControlSet\Enum\%%i\Device Parameters" /v "DmaRemappingCompatibleSelfhost" /t REG_DWORD /d "0" /f
 )
 cls
 SET msgboxTitle=Opline Software
@@ -5952,8 +6127,20 @@ Reg delete "HKLM\SYSTEM\CurrentControlSet\Services\nvlddmkm" /v "DisablePreempti
 Reg delete "HKLM\SYSTEM\CurrentControlSet\Services\nvlddmkm" /v "ComputePreemption" /f
 Reg delete "HKLM\SYSTEM\CurrentControlSet\Services\nvlddmkm\Global\NVTweak" /v "DisplayPowerSaving" /f
 Reg delete "HKLM\SYSTEM\CurrentControlSet\Services\nvlddmkm" /v "DisableWriteCombining" /f
+Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Services\nvlddmkm" /v "EnableMidGfxPreemption" /f
+Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Services\nvlddmkm" /v "EnableMidGfxPreemptionVGPU" /f
+Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Services\nvlddmkm" /v "EnableMidBufferPreemptionForHighTdrTimeout" /f
+Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Services\nvlddmkm" /v "EnableMidBufferPreemption" /f
+Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Services\nvlddmkm" /v "EnableAsyncMidBufferPreemption" /f
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\nvlddmkm" /f
+Reg.exe delete "HKLM\SOFTWARE\NVIDIA Corporation\Global\NVTweak" /v "DisplayPowerSaving" /f
+Reg.exe add "HKLM\SOFTWARE\NVIDIA Corporation\Global\NVTweak" /f
 Reg delete "HKCU\Software\NVIDIA Corporation\Global\NVTweak\Devices\509901423-0\Color" /v "NvCplUseColorCorrection" /f
 Reg add "HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers" /v "PlatformSupportMiracast" /t Reg_DWORD /d "1" /f
+Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Services\nvlddmkm" /v "PowerSaverHsyncOn" /f
+Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Services\nvlddmkm" /v "EnableTiledDisplay" /f
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\nvlddmkm\Parameters" /v "DmaRemappingCompatible" /t REG_DWORD /d "3" /f
+Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Services\nvlddmkm\Parameters" /v "AdaptiveShadingLevel" /f
 for /f %%a in ('Reg query "HKLM\System\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}" /t REG_SZ /s /e /f "NVIDIA" ^| findstr "HKEY"') do (
 Reg delete "%%a" /v "EnableTiledDisplay" /f
 Reg delete "%%a" /v "TCCSupported" /f
@@ -5988,9 +6175,11 @@ SCHTASKS /CHANGE /ENABLE /TN "\NvTmRepOnLogon_{B2FE1952-0186-46C3-BAEC-A80AA35AC
 NET START "NvTelemetryContainer"
 SC CONFIG "NvTelemetryContainer" START= AUTO
 Reg delete "HKLM\SOFTWARE\NVIDIA Corporation\NvControlPanel2\Client" /v "OptInOrOutPreference" /f
+reg delete "HKCU\SOFTWARE\NVIDIA Corporation\NVControlPanel2\Client" /v "OptInOrOutPreference" /f
 Reg delete "HKLM\SOFTWARE\NVIDIA Corporation\Global\FTS" /v "EnableRID44231" /f
 Reg delete "HKLM\SOFTWARE\NVIDIA Corporation\Global\FTS" /v "EnableRID64640" /f
 Reg delete "HKLM\SOFTWARE\NVIDIA Corporation\Global\FTS" /v "EnableRID66610" /f
+reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Services\nvlddmkm\Global\Startup" /v "SendTelemetryData" /f
 schtasks /change /enable /tn "NvTmRep_CrashReport1_{B2FE1952-0186-46C3-BAEC-A80AA35AC5B8}"
 schtasks /change /enable /tn "NvTmRep_CrashReport2_{B2FE1952-0186-46C3-BAEC-A80AA35AC5B8}"
 schtasks /change /enable /tn "NvTmRep_CrashReport3_{B2FE1952-0186-46C3-BAEC-A80AA35AC5B8}"
@@ -6111,8 +6300,18 @@ Reg add "HKLM\SYSTEM\CurrentControlSet\Services\nvlddmkm" /v "DisablePreemptionO
 Reg add "HKLM\SYSTEM\CurrentControlSet\Services\nvlddmkm" /v "ComputePreemption" /t Reg_DWORD /d "0" /f
 Reg add "HKLM\SYSTEM\CurrentControlSet\Services\nvlddmkm\Global\NVTweak" /v "DisplayPowerSaving" /t Reg_DWORD /d "0" /f
 Reg add "HKLM\SYSTEM\CurrentControlSet\Services\nvlddmkm" /v "DisableWriteCombining" /t Reg_DWORD /d "1" /f
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\nvlddmkm" /v "EnableMidGfxPreemption" /t REG_DWORD /d "0" /f
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\nvlddmkm" /v "EnableMidGfxPreemptionVGPU" /t REG_DWORD /d "0" /f
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\nvlddmkm" /v "EnableMidBufferPreemptionForHighTdrTimeout" /t REG_DWORD /d "0" /f
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\nvlddmkm" /v "EnableMidBufferPreemption" /t REG_DWORD /d "0" /f
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\nvlddmkm" /v "EnableAsyncMidBufferPreemption" /t REG_DWORD /d "0" /f
+Reg.exe add "HKLM\SOFTWARE\NVIDIA Corporation\Global\NVTweak" /v "DisplayPowerSaving" /t REG_DWORD /d "0" /f
 Reg add "HKCU\Software\NVIDIA Corporation\Global\NVTweak\Devices\509901423-0\Color" /v "NvCplUseColorCorrection" /t Reg_DWORD /d "0" /f
 Reg add "HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers" /v "PlatformSupportMiracast" /t Reg_DWORD /d "0" /f
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\nvlddmkm" /v "PowerSaverHsyncOn" /t REG_DWORD /d "0" /f
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\nvlddmkm" /v "EnableTiledDisplay" /t REG_DWORD /d "0" /f
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\nvlddmkm\Parameters" /v "DmaRemappingCompatible" /t REG_DWORD /d "0" /f
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\nvlddmkm\Parameters" /v "AdaptiveShadingLevel" /t REG_DWORD /d "1" /f
 for /f %%a in ('Reg query "HKLM\System\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}" /t REG_SZ /s /e /f "NVIDIA" ^| findstr "HKEY"') do (
 Reg add "%%a" /v "EnableTiledDisplay" /t REG_DWORD /d "0" /f
 Reg add "%%a" /v "TCCSupported" /t REG_DWORD /d "0" /f
@@ -6148,13 +6347,13 @@ SCHTASKS /END /TN "\NvTmRepOnLogon_{B2FE1952-0186-46C3-BAEC-A80AA35AC5B8}"
 SCHTASKS /CHANGE /DISABLE /TN "\NvTmRepOnLogon_{B2FE1952-0186-46C3-BAEC-A80AA35AC5B8}" /F
 NET STOP "NvTelemetryContainer"
 SC CONFIG "NvTelemetryContainer" START= DISABLED
-NET STOP "NvTelemetryContainer"
-SC CONFIG "NvTelemetryContainer" START= DISABLED
 Reg add "HKLM\SOFTWARE\NVIDIA Corporation\NvControlPanel2\Client" /v "OptInOrOutPreference" /t REG_DWORD /d 0 /f
+reg add "HKCU\SOFTWARE\NVIDIA Corporation\NVControlPanel2\Client" /v "OptInOrOutPreference" /t REG_DWORD /d "0" /f
 Reg add "HKLM\SOFTWARE\NVIDIA Corporation\Global\FTS" /v "EnableRID44231" /t REG_DWORD /d 0 /f
 Reg add "HKLM\SOFTWARE\NVIDIA Corporation\Global\FTS" /v "EnableRID64640" /t REG_DWORD /d 0 /f
 Reg add "HKLM\SOFTWARE\NVIDIA Corporation\Global\FTS" /v "EnableRID66610" /t REG_DWORD /d 0 /f
 Reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "NvBackend" /f
+reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\nvlddmkm\Global\Startup" /v "SendTelemetryData" /t REG_DWORD /d "0" /f
 schtasks /change /disable /tn "NvTmRep_CrashReport1_{B2FE1952-0186-46C3-BAEC-A80AA35AC5B8}"
 schtasks /change /disable /tn "NvTmRep_CrashReport2_{B2FE1952-0186-46C3-BAEC-A80AA35AC5B8}"
 schtasks /change /disable /tn "NvTmRep_CrashReport3_{B2FE1952-0186-46C3-BAEC-A80AA35AC5B8}"
@@ -8551,7 +8750,7 @@ echo.
 call :ColorText 1B "###############################################################################################"
 echo.
 echo.
-cmdMenuSel f3B0 "   [+]  Enable Service" "   [+]  Disable Service" "   [+]  Enable Configuring Firewall Settings" "   [+]  Disable Configuring Firewall Settings" "   [+]  Exit"
+cmdMenuSel f3B0 "   [+]  Enable Services" "   [+]  Disable Services" "   [+]  Enable Configuring Firewall Settings" "   [+]  Disable Configuring Firewall Settings" "   [+]  Exit"
 if %ERRORLEVEL% == 1 goto EFirewall
 if %ERRORLEVEL% == 2 goto DFirewall
 if %ERRORLEVEL% == 3 goto EFirewall2
@@ -8561,6 +8760,8 @@ if %ERRORLEVEL% == 5 goto Defender
 :DFirewall
 cls
 REG ADD "HKLM\SYSTEM\CurrentControlSet\Services\MpsSvc" /V Start /T REG_DWORD /D 4 /F
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\mpsdrv" /v "Start" /t REG_DWORD /d "4" /f 
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\BFE" /v "Start" /t REG_DWORD /d "4" /f 
 cls
 SET msgboxTitle=Opline Software
 SET msgboxBody=Finished - Skonczone
@@ -8585,6 +8786,8 @@ goto Firewall
 :EFirewall
 cls
 REG ADD "HKLM\SYSTEM\CurrentControlSet\Services\MpsSvc" /V Start /T REG_DWORD /D 2 /F
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\mpsdrv" /v "Start" /t REG_DWORD /d "3" /f 
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\BFE" /v "Start" /t REG_DWORD /d "2" /f 
 cls
 SET msgboxTitle=Opline Software
 SET msgboxBody=Finished - Skonczone
