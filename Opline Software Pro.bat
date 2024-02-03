@@ -4117,6 +4117,8 @@ sc start DPS
 sc start WdiSystemHost
 sc start WdiServiceHost
 sc start TrkWks
+powershell -command "Get-PnpDevice -FriendlyName "Communications Port (COM1)" | enable-PnpDevice"
+powershell -command "Set-Service -Name "serial" -Status stopped -StartupType manual"
 cls
 SET msgboxTitle=Opline Software
 SET msgboxBody=Finished - Skonczone
@@ -4969,6 +4971,8 @@ sc stop DPS
 sc stop WdiSystemHost
 sc stop WdiServiceHost
 sc stop TrkWks
+powershell -command "Get-PnpDevice | Where-Object { $_.FriendlyName -match "Communications Port (COM1)" } | Disable-PnpDevice"
+powershell -command "Set-Service -Name "serial" -Status stopped -StartupType disabled"
 cls
 SET msgboxTitle=Opline Software
 SET msgboxBody=Finished - Skonczone
