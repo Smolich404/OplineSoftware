@@ -3012,7 +3012,6 @@ del MinSudo.exe
 del DisableGBPW.bat
 cd C:\Users\%username%\Downloads
 rmdir bin
-move C:\Windows\System32\GameBarPresenceWriterDisable.exe C:\Windows
 cls
 SET msgboxTitle=Opline Software
 SET msgboxBody=Finished - Skonczone
@@ -3024,7 +3023,6 @@ goto GameBar
 
 :EGameBar
 cls
-move C:\Windows\GameBarPresenceWriterDisable.exe C:\Windows\System32
 cd C:\Users\%username%\Downloads
 mkdir bin
 cd C:\Users\%username%\Downloads\bin
