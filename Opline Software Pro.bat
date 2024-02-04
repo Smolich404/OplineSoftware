@@ -3000,7 +3000,19 @@ if %ERRORLEVEL% == 3 goto OtherD
 
 :DGameBar
 cls
-move C:\Windows\System32\GameBarPresenceWriter.exe C:\Windows
+cd C:\Users\%username%\Downloads
+mkdir bin
+cd C:\Users\%username%\Downloads\bin
+powershell -command "& { iwr https://github.com/Smolich404/WindowsDefender/releases/download/E/MinSudo.exe -OutFile MinSudo.exe }"
+powershell -command "& { iwr https://github.com/Smolich404/DownloadFilesToOpline/releases/download/Opline/DisableGBPW.bat -OutFile DisableGBPW.bat }"
+timeout 2 >nul
+@start /b "" "C:\Users\%username%\Downloads\bin\MinSudo.exe" --NoLogo --TrustedInstaller "C:\Users\%username%\Downloads\bin\DisableGBPW.bat"
+timeout 2 >nul
+del MinSudo.exe
+del DisableGBPW.bat
+cd C:\Users\%username%\Downloads
+rmdir bin
+move C:\Windows\System32\GameBarPresenceWriterDisable.exe C:\Windows
 cls
 SET msgboxTitle=Opline Software
 SET msgboxBody=Finished - Skonczone
@@ -3012,7 +3024,19 @@ goto GameBar
 
 :EGameBar
 cls
-move C:\Windows\GameBarPresenceWriter.exe C:\Windows\System32
+move C:\Windows\GameBarPresenceWriterDisable.exe C:\Windows\System32
+cd C:\Users\%username%\Downloads
+mkdir bin
+cd C:\Users\%username%\Downloads\bin
+powershell -command "& { iwr https://github.com/Smolich404/WindowsDefender/releases/download/E/MinSudo.exe -OutFile MinSudo.exe }"
+powershell -command "& { iwr https://github.com/Smolich404/DownloadFilesToOpline/releases/download/Opline/EnableGBPW.bat -OutFile EnableGBPW.bat }"
+timeout 2 >nul
+@start /b "" "C:\Users\%username%\Downloads\bin\MinSudo.exe" --NoLogo --TrustedInstaller "C:\Users\%username%\Downloads\bin\EnableGBPW.bat"
+timeout 2 >nul
+del MinSudo.exe
+del EnableGBPW.bat
+cd C:\Users\%username%\Downloads
+rmdir bin
 cls
 SET msgboxTitle=Opline Software
 SET msgboxBody=Finished - Skonczone
