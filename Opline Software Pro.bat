@@ -3072,14 +3072,20 @@ echo.
 call :ColorText 1B "###############################################################################################"
 echo.
 echo.
-cmdMenuSel f3B0 "   [+]  Enable" "   [+]  Disable" "   [+]  Spooler" "   [+]  Capture" "   [+]  Hotspot" "   [+]  Bluetooth" "   [+]  Exit"
+cmdMenuSel f3B0 "   [+]  Enable" "   [+]  Disable" "   [+]  Spooler" "   [+]  Capture" "   [+]  Hotspot" "   [+]  Bluetooth" "   [+]  Hyper-V" "   [+]  Lanman Workstation" "   [+]  Night Light and Brightness Control" "   [+]  Remote Desktop" "   [+]  Serial Port" "   [+]  Windows Search" "   [+]  Exit"
 if %ERRORLEVEL% == 1 goto EServices
 if %ERRORLEVEL% == 2 goto DServices
 if %ERRORLEVEL% == 3 goto Spooler
 if %ERRORLEVEL% == 4 goto Capture
 if %ERRORLEVEL% == 5 goto Hotspot
 if %ERRORLEVEL% == 6 goto Bluetooth
-if %ERRORLEVEL% == 7 goto OplineMenu
+if %ERRORLEVEL% == 7 goto Hyper-V
+if %ERRORLEVEL% == 8 goto LanmanWorkstation
+if %ERRORLEVEL% == 9 goto NLaBC
+if %ERRORLEVEL% == 10 goto RemoteDesktop
+if %ERRORLEVEL% == 11 goto SerialPort
+if %ERRORLEVEL% == 12 goto WindowsSearch
+if %ERRORLEVEL% == 13 goto OplineMenu
 
 :Capture
 cls
@@ -3109,7 +3115,7 @@ echo.
 call :ColorText 1B "###############################################################################################"
 echo.
 echo.
-cmdMenuSel f3B0 "   [+]  Enable" "   [+]  Disable" "   [+]  Exit"
+cmdMenuSel f3B0 "   [+]  Enable Capture" "   [+]  Disable Capture" "   [+]  Exit"
 if %ERRORLEVEL% == 1 goto ECapture
 if %ERRORLEVEL% == 2 goto DCapture
 if %ERRORLEVEL% == 3 goto Services
@@ -3166,7 +3172,7 @@ echo.
 call :ColorText 1B "###############################################################################################"
 echo.
 echo.
-cmdMenuSel f3B0 "   [+]  Enable" "   [+]  Disable" "   [+]  Exit"
+cmdMenuSel f3B0 "   [+]  Enable Spooler" "   [+]  Disable Spooler" "   [+]  Exit"
 if %ERRORLEVEL% == 1 goto ESpooler
 if %ERRORLEVEL% == 2 goto DSpooler
 if %ERRORLEVEL% == 3 goto Services
@@ -3237,7 +3243,7 @@ echo.
 call :ColorText 1B "###############################################################################################"
 echo.
 echo.
-cmdMenuSel f3B0 "   [+]  Enable" "   [+]  Disable" "   [+]  Exit"
+cmdMenuSel f3B0 "   [+]  Enable Hotspot" "   [+]  Disable Hotspot" "   [+]  Exit"
 if %ERRORLEVEL% == 1 goto EHotspot
 if %ERRORLEVEL% == 2 goto DHotspot
 if %ERRORLEVEL% == 3 goto Services
@@ -3296,7 +3302,7 @@ echo.
 call :ColorText 1B "###############################################################################################"
 echo.
 echo.
-cmdMenuSel f3B0 "   [+]  Enable" "   [+]  Disable" "   [+]  Exit"
+cmdMenuSel f3B0 "   [+]  Enable Bluetooth" "   [+]  Disable Bluetooth" "   [+]  Exit"
 if %ERRORLEVEL% == 1 goto EBluetooth
 if %ERRORLEVEL% == 2 goto DBluetooth
 if %ERRORLEVEL% == 3 goto Services
@@ -3354,6 +3360,440 @@ IF EXIST "%tmpmsgbox%" DEL /F /Q "%tmpmsgbox%"
 ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
 WSCRIPT "%tmpmsgbox%"
 goto Bluetooth
+
+:Hyper-V
+cls
+echo.
+echo.
+call :ColorText 1B "###############################################################################################"
+echo.
+echo.
+echo                             ____  _____  _      _____ _   _ ______                      
+echo                            / __ \^|  __ \^| ^|    ^|_   _^| \ ^| ^|  ____^|                     
+echo                           ^| ^|  ^| ^| ^|__) ^| ^|      ^| ^| ^|  \^| ^| ^|__                        
+echo                           ^| ^|  ^| ^|  ___/^| ^|      ^| ^| ^|   \ ^|  __^|                       
+echo                           ^| ^|__^| ^| ^|    ^| ^|____ _^| ^|_^| ^|\  ^| ^|____                      
+echo                            \____/^|_^|    ^|______^|_____^|_^| \_^|______^|                     
+echo                   _____  ____  ______ _________          __     _____  ______ 
+echo                  / ____^|/ __ \^|  ____^|__   __\ \        / /\   ^|  __ \^|  ____^|
+echo                 ^| (___ ^| ^|  ^| ^| ^|__     ^| ^|   \ \  /\  / /  \  ^| ^|__) ^| ^|__   
+echo                  \___ \^| ^|  ^| ^|  __^|    ^| ^|    \ \/  \/ / /\ \ ^|  _  /^|  __^|  
+echo                  ____) ^| ^|__^| ^| ^|       ^| ^|     \  /\  / ____ \^| ^| \ \^| ^|____ 
+echo                 ^|_____/ \____/^|_^|       ^|_^|      \/  \/_/    \_\_^|  \_\______^|
+echo.
+echo.
+call :ColorText 0C "                                             P R O"
+echo.
+echo.
+echo.
+call :ColorText 1B "###############################################################################################"
+echo.
+echo.
+cmdMenuSel f3B0 "   [+]  Disable Hyper-V" "   [+]  Enable Hyper-V" "   [+]  Exit"
+if %ERRORLEVEL% == 1 goto DHyper-V
+if %ERRORLEVEL% == 2 goto EHyper-V
+if %ERRORLEVEL% == 3 goto Others
+
+:DHyper-V
+cls
+sc config vmickvpexchange start=disabled
+sc config vmicguestinterface start=disabled
+sc config vmicshutdown start=disabled
+sc config vmicheartbeat start=disabled
+sc config vmicvmsession start=disabled
+sc config vmicrdv start=disabled
+sc config vmictimesync start=disabled
+sc config vmicvss start=disabled
+sc config hyperkbd start=disabled
+sc config hypervideo start=disabled
+sc config gencounter start=disabled
+sc config vmgid start=disabled
+sc config storflt start=disabled
+sc config bttflt start=disabled
+sc config vpci start=disabled
+sc config hvservice start=disabled
+sc config hvcrash start=disabled
+sc config HvHost start=disabled
+devmanview /disable "Microsoft Hyper-V Virtualization Infrastructure Driver"
+bcdedit /set hypervisorlaunchtype off
+dism.exe /Online /Disable-Feature:Microsoft-Hyper-V-All /NoRestart
+goto end11
+
+:EHyper-V
+cls
+sc config vmickvpexchange start=demand
+sc config vmicguestinterface start=demand
+sc config vmicshutdown start=demand
+sc config vmicheartbeat start=demand
+sc config vmicvmsession start=demand
+sc config vmicrdv start=demand
+sc config vmictimesync start=demand
+sc config vmicvss start=demand
+sc config hyperkbd start=demand
+sc config hypervideo start=demand
+sc config gencounter start=demand
+sc config vmgid start=demand
+sc config storflt start=boot
+sc config bttflt start=boot
+sc config vpci start=boot
+sc config hvservice start=demand
+sc config hvcrash start=disabled
+sc config HvHost start=demand
+sc config rdbss start=system
+devmanview /enable "Microsoft Hyper-V Virtualization Infrastructure Driver"
+bcdedit /deletevalue hypervisorlaunchtype
+dism.exe /Online /Enable-Feature:Microsoft-Hyper-V /All /NoRestart
+goto end11
+
+:end11
+cls
+SET msgboxTitle=Opline Software
+SET msgboxBody=Finished - Skonczone
+SET tmpmsgbox=%temp%~tmpmsgbox.vbs
+IF EXIST "%tmpmsgbox%" DEL /F /Q "%tmpmsgbox%"
+ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
+WSCRIPT "%tmpmsgbox%"
+goto Hyper-V
+
+:LanmanWorkstation
+cls
+echo.
+echo.
+call :ColorText 1B "###############################################################################################"
+echo.
+echo.
+echo                             ____  _____  _      _____ _   _ ______                      
+echo                            / __ \^|  __ \^| ^|    ^|_   _^| \ ^| ^|  ____^|                     
+echo                           ^| ^|  ^| ^| ^|__) ^| ^|      ^| ^| ^|  \^| ^| ^|__                        
+echo                           ^| ^|  ^| ^|  ___/^| ^|      ^| ^| ^|   \ ^|  __^|                       
+echo                           ^| ^|__^| ^| ^|    ^| ^|____ _^| ^|_^| ^|\  ^| ^|____                      
+echo                            \____/^|_^|    ^|______^|_____^|_^| \_^|______^|                     
+echo                   _____  ____  ______ _________          __     _____  ______ 
+echo                  / ____^|/ __ \^|  ____^|__   __\ \        / /\   ^|  __ \^|  ____^|
+echo                 ^| (___ ^| ^|  ^| ^| ^|__     ^| ^|   \ \  /\  / /  \  ^| ^|__) ^| ^|__   
+echo                  \___ \^| ^|  ^| ^|  __^|    ^| ^|    \ \/  \/ / /\ \ ^|  _  /^|  __^|  
+echo                  ____) ^| ^|__^| ^| ^|       ^| ^|     \  /\  / ____ \^| ^| \ \^| ^|____ 
+echo                 ^|_____/ \____/^|_^|       ^|_^|      \/  \/_/    \_\_^|  \_\______^|
+echo.
+echo.
+call :ColorText 0C "                                             P R O"
+echo.
+echo.
+echo.
+call :ColorText 1B "###############################################################################################"
+echo.
+echo.
+cmdMenuSel f3B0 "   [+]  Disable Lanman Workstation" "   [+]  Enable Lanman Workstation" "   [+]  Exit"
+if %ERRORLEVEL% == 1 goto DLanmanWorkstation
+if %ERRORLEVEL% == 2 goto ELanmanWorkstation
+if %ERRORLEVEL% == 3 goto Others
+
+:DLanmanWorkstation
+cls
+sc config Bowser start=disabled
+sc config rdbss start=disabled
+sc config KSecPkg start=disabled
+sc config mrxsmb20 start=disabled
+sc config mrxsmb start=disabled
+sc config LanmanWorkstation start=disabled
+DISM /Online /Disable-Feature /FeatureName:SmbDirect /norestart
+goto end12
+
+:ELanmanWorkstation
+cls
+sc config Bowser start=demand
+sc config rdbss start=demand
+sc config KSecPkg start=boot
+sc config mrxsmb20 start=demand
+sc config mrxsmb start=demand
+sc config srv2 start=demand
+sc config LanmanWorkstation start=auto
+DISM /Online /Enable-Feature /FeatureName:SmbDirect /norestart
+goto end12
+
+:end12
+cls
+SET msgboxTitle=Opline Software
+SET msgboxBody=Finished - Skonczone
+SET tmpmsgbox=%temp%~tmpmsgbox.vbs
+IF EXIST "%tmpmsgbox%" DEL /F /Q "%tmpmsgbox%"
+ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
+WSCRIPT "%tmpmsgbox%"
+goto LanmanWorkstation
+
+:NLaBC
+cls
+echo.
+echo.
+call :ColorText 1B "###############################################################################################"
+echo.
+echo.
+echo                             ____  _____  _      _____ _   _ ______                      
+echo                            / __ \^|  __ \^| ^|    ^|_   _^| \ ^| ^|  ____^|                     
+echo                           ^| ^|  ^| ^| ^|__) ^| ^|      ^| ^| ^|  \^| ^| ^|__                        
+echo                           ^| ^|  ^| ^|  ___/^| ^|      ^| ^| ^|   \ ^|  __^|                       
+echo                           ^| ^|__^| ^| ^|    ^| ^|____ _^| ^|_^| ^|\  ^| ^|____                      
+echo                            \____/^|_^|    ^|______^|_____^|_^| \_^|______^|                     
+echo                   _____  ____  ______ _________          __     _____  ______ 
+echo                  / ____^|/ __ \^|  ____^|__   __\ \        / /\   ^|  __ \^|  ____^|
+echo                 ^| (___ ^| ^|  ^| ^| ^|__     ^| ^|   \ \  /\  / /  \  ^| ^|__) ^| ^|__   
+echo                  \___ \^| ^|  ^| ^|  __^|    ^| ^|    \ \/  \/ / /\ \ ^|  _  /^|  __^|  
+echo                  ____) ^| ^|__^| ^| ^|       ^| ^|     \  /\  / ____ \^| ^| \ \^| ^|____ 
+echo                 ^|_____/ \____/^|_^|       ^|_^|      \/  \/_/    \_\_^|  \_\______^|
+echo.
+echo.
+call :ColorText 0C "                                             P R O"
+echo.
+echo.
+echo.
+call :ColorText 1B "###############################################################################################"
+echo.
+echo.
+cmdMenuSel f3B0 "   [+]  Disable Night Light" "   [+]  Enable Night Light" "   [+]  Disable Brightness Control" "   [+]  Enable Brightness Control" "   [+]  Exit"
+if %ERRORLEVEL% == 1 goto DNightLight 
+if %ERRORLEVEL% == 2 goto ENightLight
+if %ERRORLEVEL% == 3 goto DBrightnessControl
+if %ERRORLEVEL% == 4 goto EBrightnessControl
+if %ERRORLEVEL% == 5 goto Others
+
+:DNightLight 
+cls
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\DispBrokerDesktopSvc" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\CDPUserSvc" /v "Start" /t REG_DWORD /d "4" /f
+goto end13
+
+:ENightLight
+cls
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\DispBrokerDesktopSvc" /v "Start" /t REG_DWORD /d "2" /f
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\CDPUserSvc" /v "Start" /t REG_DWORD /d "2" /f
+goto end13
+
+:DBrightnessControl
+cls
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\DisplayEnhancementService" /v "Start" /t REG_DWORD /d "4" /f
+goto end13
+
+:EBrightnessControl
+cls
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\DisplayEnhancementService" /v "Start" /t REG_DWORD /d "2" /f
+goto end13
+
+:end13
+cls
+SET msgboxTitle=Opline Software
+SET msgboxBody=Finished - Skonczone
+SET tmpmsgbox=%temp%~tmpmsgbox.vbs
+IF EXIST "%tmpmsgbox%" DEL /F /Q "%tmpmsgbox%"
+ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
+WSCRIPT "%tmpmsgbox%"
+goto NLaBC
+
+:RemoteDesktop
+cls
+echo.
+echo.
+call :ColorText 1B "###############################################################################################"
+echo.
+echo.
+echo                             ____  _____  _      _____ _   _ ______                      
+echo                            / __ \^|  __ \^| ^|    ^|_   _^| \ ^| ^|  ____^|                     
+echo                           ^| ^|  ^| ^| ^|__) ^| ^|      ^| ^| ^|  \^| ^| ^|__                        
+echo                           ^| ^|  ^| ^|  ___/^| ^|      ^| ^| ^|   \ ^|  __^|                       
+echo                           ^| ^|__^| ^| ^|    ^| ^|____ _^| ^|_^| ^|\  ^| ^|____                      
+echo                            \____/^|_^|    ^|______^|_____^|_^| \_^|______^|                     
+echo                   _____  ____  ______ _________          __     _____  ______ 
+echo                  / ____^|/ __ \^|  ____^|__   __\ \        / /\   ^|  __ \^|  ____^|
+echo                 ^| (___ ^| ^|  ^| ^| ^|__     ^| ^|   \ \  /\  / /  \  ^| ^|__) ^| ^|__   
+echo                  \___ \^| ^|  ^| ^|  __^|    ^| ^|    \ \/  \/ / /\ \ ^|  _  /^|  __^|  
+echo                  ____) ^| ^|__^| ^| ^|       ^| ^|     \  /\  / ____ \^| ^| \ \^| ^|____ 
+echo                 ^|_____/ \____/^|_^|       ^|_^|      \/  \/_/    \_\_^|  \_\______^|
+echo.
+echo.
+call :ColorText 0C "                                             P R O"
+echo.
+echo.
+echo.
+call :ColorText 1B "###############################################################################################"
+echo.
+echo.
+cmdMenuSel f3B0 "   [+]  Disable Remote Desktop" "   [+]  Enable Remote Desktop" "   [+]  Exit"
+if %ERRORLEVEL% == 1 goto DRemoteDesktop
+if %ERRORLEVEL% == 2 goto ERemoteDesktop
+if %ERRORLEVEL% == 3 goto Others
+
+:DRemoteDesktop
+cls
+sc config termservice start=disabled
+sc config umrdpservice start=disabled
+sc config winrm start=disabled
+sc config rdpbus start=disabled
+sc config rdpdr start=disabled
+sc config rdpvideominiport start=disabled
+sc config terminpt start=disabled
+sc config tsusbflt start=disabled
+sc config tsusbgd start=disabled
+sc config tsusbhub start=disabled
+devmanview /disable "Remote Desktop Device Redirector Bus"
+goto end14
+
+:ERemoteDesktop
+cls
+sc config termservice start=demand
+sc config umrdpservice start=demand
+sc config winrm start=demand
+sc config rdpbus start=demand
+sc config rdpdr start=demand
+sc config rdpvideominiport start=demand
+sc config terminpt start=demand
+sc config tsusbflt start=demand
+sc config tsusbgd start=demand
+sc config tsusbhub start=demand
+devmanview /enable "Remote Desktop Device Redirector Bus"
+goto end14
+
+:end14
+cls
+SET msgboxTitle=Opline Software
+SET msgboxBody=Finished - Skonczone
+SET tmpmsgbox=%temp%~tmpmsgbox.vbs
+IF EXIST "%tmpmsgbox%" DEL /F /Q "%tmpmsgbox%"
+ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
+WSCRIPT "%tmpmsgbox%"
+goto RemoteDesktop
+
+:WindowsSearch
+cls
+echo.
+echo.
+call :ColorText 1B "###############################################################################################"
+echo.
+echo.
+echo                             ____  _____  _      _____ _   _ ______                      
+echo                            / __ \^|  __ \^| ^|    ^|_   _^| \ ^| ^|  ____^|                     
+echo                           ^| ^|  ^| ^| ^|__) ^| ^|      ^| ^| ^|  \^| ^| ^|__                        
+echo                           ^| ^|  ^| ^|  ___/^| ^|      ^| ^| ^|   \ ^|  __^|                       
+echo                           ^| ^|__^| ^| ^|    ^| ^|____ _^| ^|_^| ^|\  ^| ^|____                      
+echo                            \____/^|_^|    ^|______^|_____^|_^| \_^|______^|                     
+echo                   _____  ____  ______ _________          __     _____  ______ 
+echo                  / ____^|/ __ \^|  ____^|__   __\ \        / /\   ^|  __ \^|  ____^|
+echo                 ^| (___ ^| ^|  ^| ^| ^|__     ^| ^|   \ \  /\  / /  \  ^| ^|__) ^| ^|__   
+echo                  \___ \^| ^|  ^| ^|  __^|    ^| ^|    \ \/  \/ / /\ \ ^|  _  /^|  __^|  
+echo                  ____) ^| ^|__^| ^| ^|       ^| ^|     \  /\  / ____ \^| ^| \ \^| ^|____ 
+echo                 ^|_____/ \____/^|_^|       ^|_^|      \/  \/_/    \_\_^|  \_\______^|
+echo.
+echo.
+call :ColorText 0C "                                             P R O"
+echo.
+echo.
+echo.
+call :ColorText 1B "###############################################################################################"
+echo.
+echo.
+cmdMenuSel f3B0 "   [+]  Disable Windows Search" "   [+]  Enable Windows Search" "   [+]  Exit"
+if %ERRORLEVEL% == 1 goto DWindowsSearch
+if %ERRORLEVEL% == 2 goto EWindowsSearch
+if %ERRORLEVEL% == 3 goto Others
+
+:DWindowsSearch
+cls
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\wsearch" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\Search" /v "SearchboxTaskbarMode" /t REG_DWORD /d "0" /f
+sc stop wsearch
+taskkill /f /im explorer.exe
+taskkill /f /im searchapp.exe
+taskkill /f /im SearchHost.exe
+cd C:\Windows\SystemApps\Microsoft.Windows.Search_cw5n1h2txyewy
+takeown /f "searchapp.exe"
+icacls "C:\Windows\SystemApps\Microsoft.Windows.Search_cw5n1h2txyewy\searchapp.exe" /grant Administrators:F
+ren searchapp.exe searchapp.old
+cd C:\Windows\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy
+takeown /f "SearchHost.exe"
+icacls "C:\Windows\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\SearchHost.exe" /grant Administrators:F
+ren SearchHost.exe SearchHost.old
+start explorer.exe
+goto end15
+
+:EWindowsSearch
+cls
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\wsearch" /v "Start" /t REG_DWORD /d "2" /f
+Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\Search" /v "SearchboxTaskbarMode" /t REG_DWORD /d "1" /f
+sc start wsearch
+taskkill /f /im explorer.exe
+taskkill /f /im searchapp.exe
+taskkill /f /im SearchHost.exe
+cd C:\Windows\SystemApps\Microsoft.Windows.Search_cw5n1h2txyewy
+takeown /f "searchapp.exe"
+icacls "C:\Windows\SystemApps\Microsoft.Windows.Search_cw5n1h2txyewy\searchapp.exe" /grant Administrators:F
+ren searchapp.old searchapp.exe
+cd C:\Windows\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy
+takeown /f "SearchHost.old"
+icacls "C:\Windows\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\SearchHost.old" /grant Administrators:F
+ren SearchHost.old SearchHost.exe
+start explorer.exe
+goto end15
+
+:end15
+cls
+SET msgboxTitle=Opline Software
+SET msgboxBody=Finished - Skonczone
+SET tmpmsgbox=%temp%~tmpmsgbox.vbs
+IF EXIST "%tmpmsgbox%" DEL /F /Q "%tmpmsgbox%"
+ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
+WSCRIPT "%tmpmsgbox%"
+goto WindowsSearch
+
+:SerialPort
+cls
+echo.
+echo.
+call :ColorText 1B "###############################################################################################"
+echo.
+echo.
+echo                             ____  _____  _      _____ _   _ ______                      
+echo                            / __ \^|  __ \^| ^|    ^|_   _^| \ ^| ^|  ____^|                     
+echo                           ^| ^|  ^| ^| ^|__) ^| ^|      ^| ^| ^|  \^| ^| ^|__                        
+echo                           ^| ^|  ^| ^|  ___/^| ^|      ^| ^| ^|   \ ^|  __^|                       
+echo                           ^| ^|__^| ^| ^|    ^| ^|____ _^| ^|_^| ^|\  ^| ^|____                      
+echo                            \____/^|_^|    ^|______^|_____^|_^| \_^|______^|                     
+echo                   _____  ____  ______ _________          __     _____  ______ 
+echo                  / ____^|/ __ \^|  ____^|__   __\ \        / /\   ^|  __ \^|  ____^|
+echo                 ^| (___ ^| ^|  ^| ^| ^|__     ^| ^|   \ \  /\  / /  \  ^| ^|__) ^| ^|__   
+echo                  \___ \^| ^|  ^| ^|  __^|    ^| ^|    \ \/  \/ / /\ \ ^|  _  /^|  __^|  
+echo                  ____) ^| ^|__^| ^| ^|       ^| ^|     \  /\  / ____ \^| ^| \ \^| ^|____ 
+echo                 ^|_____/ \____/^|_^|       ^|_^|      \/  \/_/    \_\_^|  \_\______^|
+echo.
+echo.
+call :ColorText 0C "                                             P R O"
+echo.
+echo.
+echo.
+call :ColorText 1B "###############################################################################################"
+echo.
+echo.
+cmdMenuSel f3B0 "   [+]  Disable Serial Port" "   [+]  Enable Serial Port" "   [+]  Exit"
+if %ERRORLEVEL% == 1 goto DSerialPort
+if %ERRORLEVEL% == 2 goto ESerialPort
+if %ERRORLEVEL% == 3 goto Others
+
+:DSerialPort
+cls
+Powershell iex ((New-Object System.Net.WebClient).DownloadString('https://bit.ly/DSerialPort'))
+goto end16
+
+:ESerialPort
+cls
+Powershell iex ((New-Object System.Net.WebClient).DownloadString('https://bit.ly/ESerialPort'))
+goto end16
+
+:end16
+cls
+SET msgboxTitle=Opline Software
+SET msgboxBody=Finished - Skonczone
+SET tmpmsgbox=%temp%~tmpmsgbox.vbs
+IF EXIST "%tmpmsgbox%" DEL /F /Q "%tmpmsgbox%"
+ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
+WSCRIPT "%tmpmsgbox%"
+goto SerialPort
 
 :EServices
 cls
@@ -5143,7 +5583,7 @@ echo.
 call :ColorText 1B "###############################################################################################"
 echo.
 echo.
-cmdMenuSel f3B0 "   [+]  Boot Settings" "   [+]  Gpedit Enabler" "   [+]  UAC" "   [+]  Edge" "   [+]  Timer Resolution Service" "   [+]  ReadyBoost and Memory Compression" "   [+]  Usage Reporting" "   [+]  Encrypting File System" "   [+]  Compression" "   [+]  MFT Zone" "   [+]  Notifications" "   [+]  Intel TSX" "   [+]  Exit"
+cmdMenuSel f3B0 "   [+]  Boot Settings" "   [+]  Gpedit Enabler" "   [+]  UAC" "   [+]  Edge" "   [+]  Timer Resolution Service" "   [+]  ReadyBoost and Memory Compression" "   [+]  Usage Reporting" "   [+]  Encrypting File System" "   [+]  Compression" "   [+]  MFT Zone" "   [+]  Notifications" "   [+]  Intel TSX" "   [+]  Alt Tab Settings" "   [+]  Write Cache Buffer Flushing" "   [+]  Exit"
 if %ERRORLEVEL% == 1 goto Boot
 if %ERRORLEVEL% == 2 goto Gpedit
 if %ERRORLEVEL% == 3 goto UAC
@@ -5156,7 +5596,9 @@ if %ERRORLEVEL% == 9 goto COM
 if %ERRORLEVEL% == 10 goto MFT
 if %ERRORLEVEL% == 11 goto Notifications
 if %ERRORLEVEL% == 12 goto TSX
-if %ERRORLEVEL% == 13 goto OplineMenu
+if %ERRORLEVEL% == 13 goto AltTab
+if %ERRORLEVEL% == 14 goto WCBF
+if %ERRORLEVEL% == 15 goto OplineMenu
 
 :STR
 cls
@@ -5979,6 +6421,118 @@ IF EXIST "%tmpmsgbox%" DEL /F /Q "%tmpmsgbox%"
 ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
 WSCRIPT "%tmpmsgbox%"
 goto MFT
+
+:AltTab
+cls
+echo.
+echo.
+call :ColorText 1B "###############################################################################################"
+echo.
+echo.
+echo                             ____  _____  _      _____ _   _ ______                      
+echo                            / __ \^|  __ \^| ^|    ^|_   _^| \ ^| ^|  ____^|                     
+echo                           ^| ^|  ^| ^| ^|__) ^| ^|      ^| ^| ^|  \^| ^| ^|__                        
+echo                           ^| ^|  ^| ^|  ___/^| ^|      ^| ^| ^|   \ ^|  __^|                       
+echo                           ^| ^|__^| ^| ^|    ^| ^|____ _^| ^|_^| ^|\  ^| ^|____                      
+echo                            \____/^|_^|    ^|______^|_____^|_^| \_^|______^|                     
+echo                   _____  ____  ______ _________          __     _____  ______ 
+echo                  / ____^|/ __ \^|  ____^|__   __\ \        / /\   ^|  __ \^|  ____^|
+echo                 ^| (___ ^| ^|  ^| ^| ^|__     ^| ^|   \ \  /\  / /  \  ^| ^|__) ^| ^|__   
+echo                  \___ \^| ^|  ^| ^|  __^|    ^| ^|    \ \/  \/ / /\ \ ^|  _  /^|  __^|  
+echo                  ____) ^| ^|__^| ^| ^|       ^| ^|     \  /\  / ____ \^| ^| \ \^| ^|____ 
+echo                 ^|_____/ \____/^|_^|       ^|_^|      \/  \/_/    \_\_^|  \_\______^|
+echo.
+echo.
+call :ColorText 0C "                                             P R O"
+echo.
+echo.
+echo.
+call :ColorText 1B "###############################################################################################"
+echo.
+echo.
+cmdMenuSel f3B0 "   [+]  Classic Alt Tab" "   [+]  Immersive Alt Tab" "   [+]  Exit"
+if %ERRORLEVEL% == 1 goto CAltTab
+if %ERRORLEVEL% == 2 goto IAltTab
+if %ERRORLEVEL% == 3 goto Others
+
+:CAltTab
+cls
+Reg.exe add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" /v "HoverSelectDesktops" /t REG_DWORD /d "0" /f
+goto end17
+
+:IAltTab
+cls
+Reg.exe add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" /v "HoverSelectDesktops" /t REG_DWORD /d "1" /f
+goto end17
+
+:end17
+cls
+SET msgboxTitle=Opline Software
+SET msgboxBody=Finished - Skonczone
+SET tmpmsgbox=%temp%~tmpmsgbox.vbs
+IF EXIST "%tmpmsgbox%" DEL /F /Q "%tmpmsgbox%"
+ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
+WSCRIPT "%tmpmsgbox%"
+goto AltTab
+
+:WCBF
+cls
+echo.
+echo.
+call :ColorText 1B "###############################################################################################"
+echo.
+echo.
+echo                             ____  _____  _      _____ _   _ ______                      
+echo                            / __ \^|  __ \^| ^|    ^|_   _^| \ ^| ^|  ____^|                     
+echo                           ^| ^|  ^| ^| ^|__) ^| ^|      ^| ^| ^|  \^| ^| ^|__                        
+echo                           ^| ^|  ^| ^|  ___/^| ^|      ^| ^| ^|   \ ^|  __^|                       
+echo                           ^| ^|__^| ^| ^|    ^| ^|____ _^| ^|_^| ^|\  ^| ^|____                      
+echo                            \____/^|_^|    ^|______^|_____^|_^| \_^|______^|                     
+echo                   _____  ____  ______ _________          __     _____  ______ 
+echo                  / ____^|/ __ \^|  ____^|__   __\ \        / /\   ^|  __ \^|  ____^|
+echo                 ^| (___ ^| ^|  ^| ^| ^|__     ^| ^|   \ \  /\  / /  \  ^| ^|__) ^| ^|__   
+echo                  \___ \^| ^|  ^| ^|  __^|    ^| ^|    \ \/  \/ / /\ \ ^|  _  /^|  __^|  
+echo                  ____) ^| ^|__^| ^| ^|       ^| ^|     \  /\  / ____ \^| ^| \ \^| ^|____ 
+echo                 ^|_____/ \____/^|_^|       ^|_^|      \/  \/_/    \_\_^|  \_\______^|
+echo.
+echo.
+call :ColorText 0C "                                             P R O"
+echo.
+echo.
+echo.
+call :ColorText 1B "###############################################################################################"
+echo.
+echo.
+cmdMenuSel f3B0 "   [+]  Disable Write Cache Buffer Flushing" "   [+]  Enable Write Cache Buffer Flushing" "   [+]  Exit"
+if %ERRORLEVEL% == 1 goto DWCBF
+if %ERRORLEVEL% == 2 goto EWCBF
+if %ERRORLEVEL% == 3 goto Others
+
+:DWCBF
+cls
+for /f "Delims=" %%k in ('Reg.exe Query hklm\SYSTEM\CurrentControlSet\Enum /f "{4d36e967-e325-11ce-bfc1-08002be10318}" /d /s^|Find "HKEY"') do (
+  Reg.exe add "%%k\Device Parameters\Disk" /v UserWriteCacheSetting /t reg_dword /d 1 /f
+  Reg.exe add "%%k\Device Parameters\Disk" /v CacheIsPowerProtected /t reg_dword /d 1 /f
+)
+goto end18
+
+:EWCBF
+cls
+for /f "Delims=" %%k in ('Reg.exe Query hklm\SYSTEM\CurrentControlSet\Enum /f "{4d36e967-e325-11ce-bfc1-08002be10318}" /d /s^|Find "HKEY"') do (
+  Reg.exe delete "%%k\Device Parameters\Disk" /v UserWriteCacheSetting /f
+  Reg.exe delete "%%k\Device Parameters\Disk" /v CacheIsPowerProtected /f
+)
+goto end18
+
+:end18
+cls
+SET msgboxTitle=Opline Software
+SET msgboxBody=Finished - Skonczone
+SET tmpmsgbox=%temp%~tmpmsgbox.vbs
+IF EXIST "%tmpmsgbox%" DEL /F /Q "%tmpmsgbox%"
+ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
+WSCRIPT "%tmpmsgbox%"
+goto WCBF
 
 :OneDrive
 cls
