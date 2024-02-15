@@ -2937,7 +2937,7 @@ echo.
 cmdMenuSel f3B0 "   [+]  Disable Hyper-V" "   [+]  Enable Hyper-V" "   [+]  Exit"
 if %ERRORLEVEL% == 1 goto DHyper-V
 if %ERRORLEVEL% == 2 goto EHyper-V
-if %ERRORLEVEL% == 3 goto Others
+if %ERRORLEVEL% == 3 goto Services
 
 :DHyper-V
 cls
@@ -3031,7 +3031,7 @@ echo.
 cmdMenuSel f3B0 "   [+]  Disable Lanman Workstation" "   [+]  Enable Lanman Workstation" "   [+]  Exit"
 if %ERRORLEVEL% == 1 goto DLanmanWorkstation
 if %ERRORLEVEL% == 2 goto ELanmanWorkstation
-if %ERRORLEVEL% == 3 goto Others
+if %ERRORLEVEL% == 3 goto Services
 
 :DLanmanWorkstation
 cls
@@ -3099,7 +3099,7 @@ if %ERRORLEVEL% == 1 goto DNightLight
 if %ERRORLEVEL% == 2 goto ENightLight
 if %ERRORLEVEL% == 3 goto DBrightnessControl
 if %ERRORLEVEL% == 4 goto EBrightnessControl
-if %ERRORLEVEL% == 5 goto Others
+if %ERRORLEVEL% == 5 goto Services
 
 :DNightLight 
 cls
@@ -3164,7 +3164,7 @@ echo.
 cmdMenuSel f3B0 "   [+]  Disable Remote Desktop" "   [+]  Enable Remote Desktop" "   [+]  Exit"
 if %ERRORLEVEL% == 1 goto DRemoteDesktop
 if %ERRORLEVEL% == 2 goto ERemoteDesktop
-if %ERRORLEVEL% == 3 goto Others
+if %ERRORLEVEL% == 3 goto Services
 
 :DRemoteDesktop
 cls
@@ -3237,7 +3237,7 @@ echo.
 cmdMenuSel f3B0 "   [+]  Disable Windows Search" "   [+]  Enable Windows Search" "   [+]  Exit"
 if %ERRORLEVEL% == 1 goto DWindowsSearch
 if %ERRORLEVEL% == 2 goto EWindowsSearch
-if %ERRORLEVEL% == 3 goto Others
+if %ERRORLEVEL% == 3 goto Services
 
 :DWindowsSearch
 cls
@@ -3318,7 +3318,7 @@ echo.
 cmdMenuSel f3B0 "   [+]  Disable Serial Port" "   [+]  Enable Serial Port" "   [+]  Exit"
 if %ERRORLEVEL% == 1 goto DSerialPort
 if %ERRORLEVEL% == 2 goto ESerialPort
-if %ERRORLEVEL% == 3 goto Others
+if %ERRORLEVEL% == 3 goto Services
 
 :DSerialPort
 cls
@@ -5029,6 +5029,10 @@ reg delete "HKCU\Software\Policies\Microsoft\Windows\CurrentVersion\PushNotifica
 reg add "HKCU\Software\Policies\Microsoft\Windows\CurrentVersion\PushNotifications" /f
 reg add "HKCU\SOFTWARE\Policies\Microsoft\Windows\Explorer" /v "IsNotificationsDisabled" /t REG_DWORD /d "0" /f
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Explorer" /v "IsNotificationsEnabled" /t REG_DWORD /d "1" /f
+sc config WpnService start=auto > nul 2>&1
+Reg.exe add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\userNotificationListener" /v "Value" /t REG_SZ /d "Allow" /f > nul
+Reg.exe add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Notifications\Settings" /v "NOC_GLOBAL_SETTING_ALLOW_NOTIFICATION_SOUND" /t REG_DWORD /d "1" /f > nul
+Reg.exe delete "HKLM\SOFTWARE\Policies\Microsoft\Windows\CurrentVersion\PushNotifications" /v "NoCloudApplicationNotification" /f > nul 2>&1
 goto end7
 
 :DNotifications
@@ -5042,6 +5046,10 @@ reg add "HKCU\Software\Policies\Microsoft\Windows\CurrentVersion\PushNotificatio
 reg add "HKCU\Software\Policies\Microsoft\Windows\CurrentVersion\PushNotifications" /v "NoTileApplicationNotification" /t REG_DWORD /d "1" /f
 reg add "HKCU\SOFTWARE\Policies\Microsoft\Windows\Explorer" /v "IsNotificationsDisabled" /t REG_DWORD /d "1" /f
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Explorer" /v "IsNotificationsEnabled" /t REG_DWORD /d "0" /f
+sc config WpnService start=disabled > nul 2>&1
+Reg.exe add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\userNotificationListener" /v "Value" /t REG_SZ /d "Deny" /f > nul
+Reg.exe add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Notifications\Settings" /v "NOC_GLOBAL_SETTING_ALLOW_NOTIFICATION_SOUND" /t REG_DWORD /d "0" /f > nul
+Reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Windows\CurrentVersion\PushNotifications" /v "NoCloudApplicationNotification" /t REG_DWORD /d "1" /f > nul
 goto end7
 
 :end7
