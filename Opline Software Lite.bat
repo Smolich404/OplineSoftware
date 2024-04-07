@@ -1411,7 +1411,7 @@ Goto Debloater
 
 :GANG3
 cls
-powershell -command "irm christitus.com/win | iex"
+powershell -command "iwr -useb https://christitus.com/win | iex"
 Goto Debloater
 
 :GANG5
