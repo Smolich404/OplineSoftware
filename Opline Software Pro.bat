@@ -6006,7 +6006,7 @@ echo.
 call :ColorText 1B "###############################################################################################"
 echo.
 echo.
-cmdMenuSel f3B0 "   [+]  Install" "   [+]  Uninstall" "   [+]  Exit"
+cmdMenuSel f3B0 "   [+]  Install Edge" "   [+]  Uninstall Edge" "   [+]  Exit"
 if %ERRORLEVEL% == 1 goto INS
 if %ERRORLEVEL% == 2 goto UNI
 if %ERRORLEVEL% == 3 goto Others
@@ -6169,7 +6169,7 @@ echo.
 call :ColorText 1B "###############################################################################################"
 echo.
 echo.
-cmdMenuSel f3B0 "   [+]  Disable" "   [+]  Enable" "   [+]  Exit"
+cmdMenuSel f3B0 "   [+]  Disable UAC" "   [+]  Enable UAC" "   [+]  Exit"
 if %ERRORLEVEL% == 1 goto DUAC
 if %ERRORLEVEL% == 2 goto EUAC
 if %ERRORLEVEL% == 3 goto Others
@@ -6287,7 +6287,7 @@ echo.
 call :ColorText 1B "###############################################################################################"
 echo.
 echo.
-cmdMenuSel f3B0 "   [+]  Disable" "   [+]  Enable" "   [+]  Exit"
+cmdMenuSel f3B0 "   [+]  Disable ReadyBoost and Memory Compression" "   [+]  Enable ReadyBoost and Memory Compression" "   [+]  Exit"
 if %ERRORLEVEL% == 1 goto DSF
 if %ERRORLEVEL% == 2 goto ESF
 if %ERRORLEVEL% == 3 goto Others
@@ -6361,7 +6361,7 @@ echo.
 call :ColorText 1B "###############################################################################################"
 echo.
 echo.
-cmdMenuSel f3B0 "   [+]  Disable" "   [+]  Enable" "   [+]  Exit"
+cmdMenuSel f3B0 "   [+]  Disable Usage Reporting" "   [+]  Enable Usage Reporting" "   [+]  Exit"
 if %ERRORLEVEL% == 1 goto DUR
 if %ERRORLEVEL% == 2 goto EUR
 if %ERRORLEVEL% == 3 goto Others
@@ -6426,7 +6426,7 @@ echo.
 call :ColorText 1B "###############################################################################################"
 echo.
 echo.
-cmdMenuSel f3B0 "   [+]  Disable" "   [+]  Enable" "   [+]  Exit"
+cmdMenuSel f3B0 "   [+]  Disable Encrypting File System" "   [+]  Enable Encrypting File System" "   [+]  Exit"
 if %ERRORLEVEL% == 1 goto DEFS
 if %ERRORLEVEL% == 2 goto EEFS
 if %ERRORLEVEL% == 3 goto Others
@@ -6483,7 +6483,7 @@ echo.
 call :ColorText 1B "###############################################################################################"
 echo.
 echo.
-cmdMenuSel f3B0 "   [+]  Disable" "   [+]  Enable" "   [+]  Exit"
+cmdMenuSel f3B0 "   [+]  Disable Compression" "   [+]  Enable Compression" "   [+]  Exit"
 if %ERRORLEVEL% == 1 goto DCOM
 if %ERRORLEVEL% == 2 goto ECOM
 if %ERRORLEVEL% == 3 goto Others
@@ -6536,7 +6536,7 @@ echo.
 call :ColorText 1B "###############################################################################################"
 echo.
 echo.
-cmdMenuSel f3B0 "   [+]  Disable" "   [+]  Enable" "   [+]  Exit"
+cmdMenuSel f3B0 "   [+]  Disable Notifications" "   [+]  Enable Notifications" "   [+]  Exit"
 if %ERRORLEVEL% == 1 goto DNotifications
 if %ERRORLEVEL% == 2 goto ENotifications
 if %ERRORLEVEL% == 3 goto Others
@@ -6622,7 +6622,7 @@ echo.
 call :ColorText 1B "###############################################################################################"
 echo.
 echo.
-cmdMenuSel f3B0 "   [+]  Disable" "   [+]  Enable" "   [+]  Exit"
+cmdMenuSel f3B0 "   [+]  Disable Intel TSX" "   [+]  Enable Intel TSX" "   [+]  Exit"
 if %ERRORLEVEL% == 1 goto DTSX
 if %ERRORLEVEL% == 2 goto ETSX
 if %ERRORLEVEL% == 3 goto Others
@@ -6675,7 +6675,7 @@ echo.
 call :ColorText 1B "###############################################################################################"
 echo.
 echo.
-cmdMenuSel f3B0 "   [+]  Optimize" "   [+]  Reset" "   [+]  Exit"
+cmdMenuSel f3B0 "   [+]  Optimize MFT Zone" "   [+]  Reset MFT Zone" "   [+]  Exit"
 if %ERRORLEVEL% == 1 goto OMFT
 if %ERRORLEVEL% == 2 goto RMFT
 if %ERRORLEVEL% == 3 goto Others
@@ -7119,12 +7119,13 @@ echo.
 call :ColorText 1B "###############################################################################################"
 echo.
 echo.
-cmdMenuSel f3B0 "   [+]  Gallery" "   [+]  Compact View" "   [+]  Automatic Folder Discovery" "   [+]  Context Menu" "   [+]  Exit"
+cmdMenuSel f3B0 "   [+]  Gallery" "   [+]  Compact View" "   [+]  Automatic Folder Discovery" "   [+]  Context Menu" "   [+]  Removable Drives in Sidebar" "   [+]  Exit"
 if %ERRORLEVEL% == 1 goto Gallery
 if %ERRORLEVEL% == 2 goto CompactView
 if %ERRORLEVEL% == 3 goto AutomaticFolderDiscovery
 if %ERRORLEVEL% == 4 goto ContextMenu
-if %ERRORLEVEL% == 5 goto Others
+if %ERRORLEVEL% == 5 goto RemovableDrives
+if %ERRORLEVEL% == 6 goto Others
 
 :Gallery
 cls
@@ -7354,6 +7355,65 @@ IF EXIST "%tmpmsgbox%" DEL /F /Q "%tmpmsgbox%"
 ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
 WSCRIPT "%tmpmsgbox%"
 goto AutomaticFolderDiscovery
+
+:RemovableDrives
+cls
+echo.
+echo.
+call :ColorText 1B "###############################################################################################"
+echo.
+echo.
+echo                             ____  _____  _      _____ _   _ ______                      
+echo                            / __ \^|  __ \^| ^|    ^|_   _^| \ ^| ^|  ____^|                     
+echo                           ^| ^|  ^| ^| ^|__) ^| ^|      ^| ^| ^|  \^| ^| ^|__                        
+echo                           ^| ^|  ^| ^|  ___/^| ^|      ^| ^| ^|   \ ^|  __^|                       
+echo                           ^| ^|__^| ^| ^|    ^| ^|____ _^| ^|_^| ^|\  ^| ^|____                      
+echo                            \____/^|_^|    ^|______^|_____^|_^| \_^|______^|                     
+echo                   _____  ____  ______ _________          __     _____  ______ 
+echo                  / ____^|/ __ \^|  ____^|__   __\ \        / /\   ^|  __ \^|  ____^|
+echo                 ^| (___ ^| ^|  ^| ^| ^|__     ^| ^|   \ \  /\  / /  \  ^| ^|__) ^| ^|__   
+echo                  \___ \^| ^|  ^| ^|  __^|    ^| ^|    \ \/  \/ / /\ \ ^|  _  /^|  __^|  
+echo                  ____) ^| ^|__^| ^| ^|       ^| ^|     \  /\  / ____ \^| ^| \ \^| ^|____ 
+echo                 ^|_____/ \____/^|_^|       ^|_^|      \/  \/_/    \_\_^|  \_\______^|
+echo.
+echo.
+call :ColorText 0C "                                             P R O"
+echo.
+echo.
+echo.
+call :ColorText 1B "###############################################################################################"
+echo.
+echo.
+cmdMenuSel f3B0 "   [+]  Enable Removable Drives in Sidebar" "   [+]  Disable Removable Drives in Sidebar" "   [+]  Exit"
+if %ERRORLEVEL% == 1 goto ERemovableDrives
+if %ERRORLEVEL% == 2 goto DRemovableDrives
+if %ERRORLEVEL% == 3 goto Explorer
+
+:DRemovableDrives
+cls
+Reg.exe delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace\DelegateFolders\{F5FB2C77-0E2F-4A16-A381-3E560C68BC83}" /f
+Reg.exe delete "HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace\DelegateFolders\{F5FB2C77-0E2F-4A16-A381-3E560C68BC83}\{F5FB2C77-0E2F-4A16-A381-3E560C68BC83}" /f
+cls
+SET msgboxTitle=Opline Software
+SET msgboxBody=Finished - Skonczone
+SET tmpmsgbox=%temp%~tmpmsgbox.vbs
+IF EXIST "%tmpmsgbox%" DEL /F /Q "%tmpmsgbox%"
+ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
+WSCRIPT "%tmpmsgbox%"
+goto RemovableDrives
+
+:ERemovableDrives
+cls
+Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace\DelegateFolders\{F5FB2C77-0E2F-4A16-A381-3E560C68BC83}" /ve /t REG_SZ /d "Removable Drives" /f
+Reg.exe add "HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace\DelegateFolders\{F5FB2C77-0E2F-4A16-A381-3E560C68BC83}\{F5FB2C77-0E2F-4A16-A381-3E560C68BC83}" /ve /t REG_SZ /d "Removable Drives" /f
+cls
+SET msgboxTitle=Opline Software
+SET msgboxBody=Finished - Skonczone
+SET tmpmsgbox=%temp%~tmpmsgbox.vbs
+IF EXIST "%tmpmsgbox%" DEL /F /Q "%tmpmsgbox%"
+ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
+WSCRIPT "%tmpmsgbox%"
+goto RemovableDrives
 
 :Mitigations
 cls
