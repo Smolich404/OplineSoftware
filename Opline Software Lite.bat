@@ -83,6 +83,7 @@ echo.
 call :ColorText 1B "############################################################################################################################"
 echo.
 C:\Windows\System32\SystemPropertiesProtection.exe>nul
+if /i "%SAFEBOOT_OPTION%"=="MINIMAL" goto safemode
 Goto OplineMenu
 
 :OplineMenu
@@ -10902,11 +10903,12 @@ echo.
 call :ColorText 1B "###############################################################################################"
 echo.
 echo.
-cmdMenuSel f3B0 "   [+]  Enable" "   [+]  Disable" "   [+]  Firewall" "   [+]  Exit"
+cmdMenuSel f3B0 "   [+]  Enable" "   [+]  Disable" "   [+]  Firewall" "   [+]  Allow Scripts" "   [+]  Exit"
 if %ERRORLEVEL% == 1 goto EDefender
 if %ERRORLEVEL% == 2 goto DDefender
 if %ERRORLEVEL% == 3 goto Firewall
-if %ERRORLEVEL% == 4 goto OplineMenu
+if %ERRORLEVEL% == 4 goto AllowScripts
+if %ERRORLEVEL% == 5 goto OplineMenu
 
 :EDefender
 cls
@@ -10988,15 +10990,67 @@ sc config WinDefend start= auto
 cd C:\Users\%username%\Downloads
 mkdir bin
 cd C:\Users\%username%\Downloads\bin
-powershell -command "& { iwr https://github.com/Smolich404/WindowsDefender/releases/download/E/MinSudo.exe -OutFile MinSudo.exe }"
-powershell -command "& { iwr https://github.com/Smolich404/WindowsDefender/releases/download/E/Enable_Windows_Defender.bat -OutFile Enable_Windows_Defender.bat }"
+powershell -command "& { iwr https://github.com/Smolich404/DownloadFilesToOpline/releases/download/Opline/Security.ps1 -OutFile Security.ps1 }"
 timeout 2 >nul
-@start /b "" "C:\Users\%username%\Downloads\bin\MinSudo.exe" --NoLogo --TrustedInstaller "C:\Users\%username%\Downloads\bin\Enable_Windows_Defender.bat"
-timeout 7 >nul
-del MinSudo.exe
-del Enable_Windows_Defender.bat
-cd C:\Users\%username%\Downloads
-rmdir bin
+Security.ps1
+timeout 2 >nul
+cls
+set "services=HKLM\SYSTEM\ControlSet001\Services"
+::Windows Defender
+reg add "%services%\MsSecCore" /v "Start" /t REG_DWORD /d "0" /f >NUL 2>nul
+reg add "%services%\MsSecFlt" /v "Start" /t REG_DWORD /d "0" /f >NUL 2>nul
+reg add "%services%\MsSecWfp" /v "Start" /t REG_DWORD /d "3" /f >NUL 2>nul
+reg add "%services%\SecurityHealthService" /v "Start" /t REG_DWORD /d "3" /f >NUL 2>nul
+reg add "%services%\Sense" /v "Start" /t REG_DWORD /d "3" /f >NUL 2>nul
+reg add "%services%\WdBoot" /v "Start" /t REG_DWORD /d "0" /f >NUL 2>nul
+reg add "%services%\WdFilter" /v "Start" /t REG_DWORD /d "0" /f >NUL 2>nul
+reg add "%services%\WdNisDrv" /v "Start" /t REG_DWORD /d "3" /f >NUL 2>nul
+reg add "%services%\WdNisSvc" /v "Start" /t REG_DWORD /d "3" /f >NUL 2>nul
+reg add "%services%\WinDefend" /v "Start" /t REG_DWORD /d "2" /f >NUL 2>nul
+reg add "%services%\wscsvc" /v "Start" /t REG_DWORD /d "2" /f >NUL 2>nul
+reg add "%services%\MDCoreSvc" /v "Start" /t REG_DWORD /d "2" /f >NUL 2>nul
+::WindowsSystemTray
+reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "SecurityHealth" /t REG_EXPAND_SZ /d "%systemroot%\system32\SecurityHealthSystray.exe" /f >NUL 2>nul
+::SystemGuard
+reg add "%services%\SgrmAgent" /v "Start" /t REG_DWORD /d "0" /f >NUL 2>nul
+reg add "%services%\SgrmBroker" /v "Start" /t REG_DWORD /d "2" /f >NUL 2>nul
+::WebThreatDefSvc
+reg add "%services%\webthreatdefsvc" /v "Start" /t REG_DWORD /d "3" /f >NUL 2>nul
+reg add "%services%\webthreatdefusersvc" /v "Start" /t REG_DWORD /d "2" /f >NUL 2>nul
+for /f %%i in ('reg query "%services%" /s /k "webthreatdefusersvc" /f 2^>nul ^| find /i "webthreatdefusersvc" ') do (
+  reg add "%%i" /v "Start" /t REG_DWORD /d "2" /f >NUL 2>nul
+)
+
+
+::SmartScreen
+reg delete "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\smartscreen.exe" /f >NUL 2>nul
+for %%j in (
+	"%systemroot%\system32\smartscreen.exe"
+) do (
+	if not exist %%j if exist "%%j.revi" ren "%%j.revi" "smartscreen.exe" >NUL 2>nul
+)
+reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Associations" /f >NUL 2>nul
+reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" /v "SmartScreenEnabled" /t REG_SZ /d "On" /f >NUL 2>nul
+reg delete "HKLM\Software\Policies\Microsoft\System" /v "EnableSmartScreen" /f >NUL 2>nul
+
+reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\AppHost" /v "EnableWebContentEvaluation" /f >NUL 2>nul
+reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\AppHost" /v "PreventOverride" /f >NUL 2>nul
+reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\AppHost" /v "EnableWebContentEvaluation" /f >NUL 2>nul
+
+::Smart App Control
+reg delete "HKLM\SYSTEM\ControlSet001\Control\CI\Policy" /v "VerifiedAndReputablePolicyState" /f >NUL 2>nul
+
+:: Remove Defender policies
+reg delete "HKLM\Software\Policies\Microsoft\Windows Defender" /f >NUL 2>nul
+reg delete "HKLM\Software\Policies\Microsoft\Windows Advanced Threat Protection" /f >NUL 2>nul
+reg delete "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender Security Center" /f >NUL 2>nul
+
+::Configure detection for potentially unwanted applications
+reg add "HKLM\Software\Microsoft\Windows Defender" /v "PUAProtection" /t REG_DWORD /d "1" /f >NUL 2>nul
+
+::Device Security
+reg delete "HKLM\SYSTEM\ControlSet001\Control\CI\Config" /v "VulnerableDriverBlocklistEnable" /f >NUL 2>nul
+reg delete "HKLM\SYSTEM\ControlSet001\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity" /v "Enabled" /f >NUL 2>nul
 cls
 SET msgboxTitle=Opline Software
 SET msgboxBody=Finished - Skonczone
@@ -11004,7 +11058,7 @@ SET tmpmsgbox=%temp%~tmpmsgbox.vbs
 IF EXIST "%tmpmsgbox%" DEL /F /Q "%tmpmsgbox%"
 ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
 WSCRIPT "%tmpmsgbox%"
-Goto Defender
+EXIT
 
 :DDefender
 cls
@@ -11084,15 +11138,75 @@ sc config WinDefend start= disabled
 cd C:\Users\%username%\Downloads
 mkdir bin
 cd C:\Users\%username%\Downloads\bin
-powershell -command "& { iwr https://github.com/Smolich404/WindowsDefender/releases/download/E/MinSudo.exe -OutFile MinSudo.exe }"
-powershell -command "& { iwr https://github.com/Smolich404/WindowsDefender/releases/download/E/Disable_Windows_Defender.bat -OutFile Disable_Windows_Defender.bat }"
+powershell -command "& { iwr https://github.com/Smolich404/DownloadFilesToOpline/releases/download/Opline/Security.ps1 -OutFile Security.ps1 }"
 timeout 2 >nul
-@start /b "" "C:\Users\%username%\Downloads\bin\MinSudo.exe" --NoLogo --TrustedInstaller "C:\Users\%username%\Downloads\bin\Disable_Windows_Defender.bat"
-timeout 7 >nul
-del MinSudo.exe
-del Disable_Windows_Defender.bat
-cd C:\Users\%username%\Downloads
-rmdir bin
+Security.ps1
+timeout 2 >nul
+cls
+set "services=HKLM\SYSTEM\ControlSet001\Services"
+PowerShell -NonInteractive -NoLogo -NoProfile -C "Set-MpPreference -DisableRealtimeMonitoring 1" >NUL 2>nul
+::Windows Defender
+reg add "%services%\MsSecCore" /v "Start" /t REG_DWORD /d "4" /f >NUL 2>nul
+reg add "%services%\MsSecFlt" /v "Start" /t REG_DWORD /d "4" /f >NUL 2>nul
+reg add "%services%\MsSecWfp" /v "Start" /t REG_DWORD /d "4" /f >NUL 2>nul
+reg add "%services%\SecurityHealthService" /v "Start" /t REG_DWORD /d "4" /f >NUL 2>nul
+reg add "%services%\Sense" /v "Start" /t REG_DWORD /d "4" /f >NUL 2>nul
+reg add "%services%\WdBoot" /v "Start" /t REG_DWORD /d "4" /f >NUL 2>nul
+reg add "%services%\WdFilter" /v "Start" /t REG_DWORD /d "4" /f >NUL 2>nul
+reg add "%services%\WdNisDrv" /v "Start" /t REG_DWORD /d "4" /f >NUL 2>nul
+reg add "%services%\WdNisSvc" /v "Start" /t REG_DWORD /d "4" /f >NUL 2>nul
+reg add "%services%\WinDefend" /v "Start" /t REG_DWORD /d "4" /f >NUL 2>nul
+reg add "%services%\wscsvc" /v "Start" /t REG_DWORD /d "4" /f >NUL 2>nul
+reg add "%services%\MDCoreSvc" /v "Start" /t REG_DWORD /d "4" /f >NUL 2>nul
+::WindowsSystemTray
+reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "SecurityHealth" /f >NUL 2>nul
+::System Guard
+reg add "%services%\SgrmAgent" /v "Start" /t REG_DWORD /d "4" /f >NUL 2>nul
+reg add "%services%\SgrmBroker" /v "Start" /t REG_DWORD /d "4" /f >NUL 2>nul
+::WebThreatDefSvc
+reg add "%services%\webthreatdefsvc" /v "Start" /t REG_DWORD /d "4" /f >NUL 2>nul
+reg add "%services%\webthreatdefusersvc" /v "Start" /t REG_DWORD /d "4" /f >NUL 2>nul
+for /f %%i in ('reg query "%services%" /s /k "webthreatdefusersvc" /f 2^>nul ^| find /i "webthreatdefusersvc" ') do (
+  reg add "%%i" /v "Start" /t REG_DWORD /d "4" /f >NUL 2>nul
+)
+::
+::reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\smartscreen.exe" /v "Debugger" /t REG_SZ /d "%%windir%%\System32\taskkill.exe" /f >NUL 2>nul
+taskkill /f /im smartscreen.exe >NUL 2>nul
+for %%j in (
+	"%systemroot%\system32\smartscreen.exe"
+) do (
+	if not exist "%%j.revi" if exist %%j (
+		takeown /F %%j /A >NUL 2>nul
+		icacls %%j /grant Administrators:F >NUL 2>nul
+		copy "%%j" "%%j.revi" /v >NUL 2>nul
+		del "%%j" >NUL 2>nul
+	)
+)
+:: reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Associations" /v "DefaultFileTypeRisk" /t REG_DWORD /d "6152" /f >NUL 2>nul
+:: reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Attachments" /v "SaveZoneInformation" /t REG_DWORD /d "1" /f >NUL 2>nul
+:: reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Associations" /v "LowRiskFileTypes" /t REG_SZ /d ".avi;.bat;.com;.cmd;.exe;.htm;.html;.lnk;.mpg;.mpeg;.mov;.mp3;.msi;.m3u;.rar;.reg;.txt;.vbs;.wav;.zip;" /f >NUL 2>nul
+:: reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Associations" /v "ModRiskFileTypes" /t REG_SZ /d ".bat;.exe;.reg;.vbs;.chm;.msi;.js;.cmd" /f >NUL 2>nul
+
+::SmartScreen
+reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" /v "SmartScreenEnabled" /t REG_SZ /d "Off" /f >NUL 2>nul
+reg add "HKLM\Software\Policies\Microsoft\System" /v "EnableSmartScreen" /t REG_DWORD /d "0" /f >NUL 2>nul
+reg add "HKLM\Software\Policies\Microsoft\Windows Defender\SmartScreen" /v "ConfigureAppInstallControlEnabled" /t REG_DWORD /d "0" /f >NUL 2>nul
+reg add "HKLM\Software\Policies\Microsoft\Windows Defender\SmartScreen" /v "ConfigureAppInstallControl" /t REG_DWORD /d "0" /f >NUL 2>nul
+reg add "HKLM\Software\Policies\Microsoft\Windows Defender\SmartScreen" /v "EnableSmartScreen" /t REG_DWORD /d "0" /f >NUL 2>nul
+reg add "HKCU\Software\Policies\Microsoft\MicrosoftEdge\PhishingFilter" /v "EnabledV9" /t REG_DWORD /d "0" /f >NUL 2>nul
+reg add "HKLM\Software\Policies\Microsoft\MicrosoftEdge\PhishingFilter" /v "EnabledV9" /t REG_DWORD /d "0" /f >NUL 2>nul
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\AppHost" /v "EnableWebContentEvaluation" /t REG_DWORD /d "0" /f >NUL 2>nul
+reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\AppHost" /v "EnableWebContentEvaluation" /t REG_DWORD /d "0" /f >NUL 2>nul
+
+::Smart App Control - Disabling it fixes slow app loading issues on 11+
+reg add "HKLM\SYSTEM\ControlSet001\Control\CI\Policy" /v "VerifiedAndReputablePolicyState" /t REG_DWORD /d "0" /f >NUL 2>nul
+
+::Configure detection for potentially unwanted applications - Disabled
+reg add "HKLM\Software\Microsoft\Windows Defender" /v "PUAProtection" /t REG_DWORD /d "0" /f >NUL 2>nul
+
+::Device Security
+reg add "HKLM\SYSTEM\ControlSet001\Control\CI\Config" /v "VulnerableDriverBlocklistEnable" /t REG_DWORD /d "0" /f >NUL 2>nul
+reg add "HKLM\SYSTEM\ControlSet001\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity" /v "Enabled" /t REG_DWORD /d "0" /f >NUL 2>nul
 cls
 SET msgboxTitle=Opline Software
 SET msgboxBody=Finished - Skonczone
@@ -11100,7 +11214,7 @@ SET tmpmsgbox=%temp%~tmpmsgbox.vbs
 IF EXIST "%tmpmsgbox%" DEL /F /Q "%tmpmsgbox%"
 ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
 WSCRIPT "%tmpmsgbox%"
-Goto Defender
+EXIT
 
 :Firewall
 cls
@@ -11189,6 +11303,28 @@ ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
 WSCRIPT "%tmpmsgbox%"
 goto Firewall
 
+:AllowScripts
+cls
+cd C:\Users\%username%\Downloads
+mkdir allow
+cd C:\Users\%username%\Downloads\allow
+powershell -command "& { iwr https://github.com/Smolich404/DownloadFilesToOpline/releases/download/Opline/AllowScripts.cmd -OutFile AllowScripts.cmd }"
+timeout 2 >nul
+cmd /k "AllowScripts.cmd"
+timeout 2 >nul
+del AllowScripts.cmd
+cd C:\Users\%username%\Downloads
+rmdir allow
+title Opline Software [LITE]
+cls
+SET msgboxTitle=Opline Software
+SET msgboxBody=Finished - Skonczone
+SET tmpmsgbox=%temp%~tmpmsgbox.vbs
+IF EXIST "%tmpmsgbox%" DEL /F /Q "%tmpmsgbox%"
+ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
+WSCRIPT "%tmpmsgbox%"
+goto Defender
+
 :Gpedit
 cls
 pushd "%~dp0" 
@@ -11210,6 +11346,177 @@ goto Others
 cls
 C:\Windows\System32\SystemPropertiesProtection.exe>nul
 Goto OplineMenu
+
+:safemode
+cls
+echo.
+echo   [D] Windows Defender: Off
+echo   [E] Windows Defender: On
+echo.
+set /p choice=:
+if "%choice%"=="D" goto DWD
+if "%choice%"=="d" goto DWD
+if "%choice%"=="E" goto EWD
+if "%choice%"=="e" goto EWD
+goto safemode
+
+:DWD
+cls
+cd C:\Users\%username%\Downloads\bin
+timeout 2 >nul
+Security.ps1
+timeout 2 >nul
+del Security.ps1
+cd C:\Users\%username%\Downloads
+rmdir bin
+cls
+set "services=HKLM\SYSTEM\ControlSet001\Services"
+PowerShell -NonInteractive -NoLogo -NoProfile -C "Set-MpPreference -DisableRealtimeMonitoring 1" >NUL 2>nul
+::Windows Defender
+reg add "%services%\MsSecCore" /v "Start" /t REG_DWORD /d "4" /f >NUL 2>nul
+reg add "%services%\MsSecFlt" /v "Start" /t REG_DWORD /d "4" /f >NUL 2>nul
+reg add "%services%\MsSecWfp" /v "Start" /t REG_DWORD /d "4" /f >NUL 2>nul
+reg add "%services%\SecurityHealthService" /v "Start" /t REG_DWORD /d "4" /f >NUL 2>nul
+reg add "%services%\Sense" /v "Start" /t REG_DWORD /d "4" /f >NUL 2>nul
+reg add "%services%\WdBoot" /v "Start" /t REG_DWORD /d "4" /f >NUL 2>nul
+reg add "%services%\WdFilter" /v "Start" /t REG_DWORD /d "4" /f >NUL 2>nul
+reg add "%services%\WdNisDrv" /v "Start" /t REG_DWORD /d "4" /f >NUL 2>nul
+reg add "%services%\WdNisSvc" /v "Start" /t REG_DWORD /d "4" /f >NUL 2>nul
+reg add "%services%\WinDefend" /v "Start" /t REG_DWORD /d "4" /f >NUL 2>nul
+reg add "%services%\wscsvc" /v "Start" /t REG_DWORD /d "4" /f >NUL 2>nul
+reg add "%services%\MDCoreSvc" /v "Start" /t REG_DWORD /d "4" /f >NUL 2>nul
+::WindowsSystemTray
+reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "SecurityHealth" /f >NUL 2>nul
+::System Guard
+reg add "%services%\SgrmAgent" /v "Start" /t REG_DWORD /d "4" /f >NUL 2>nul
+reg add "%services%\SgrmBroker" /v "Start" /t REG_DWORD /d "4" /f >NUL 2>nul
+::WebThreatDefSvc
+reg add "%services%\webthreatdefsvc" /v "Start" /t REG_DWORD /d "4" /f >NUL 2>nul
+reg add "%services%\webthreatdefusersvc" /v "Start" /t REG_DWORD /d "4" /f >NUL 2>nul
+for /f %%i in ('reg query "%services%" /s /k "webthreatdefusersvc" /f 2^>nul ^| find /i "webthreatdefusersvc" ') do (
+  reg add "%%i" /v "Start" /t REG_DWORD /d "4" /f >NUL 2>nul
+)
+::
+::reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\smartscreen.exe" /v "Debugger" /t REG_SZ /d "%%windir%%\System32\taskkill.exe" /f >NUL 2>nul
+taskkill /f /im smartscreen.exe >NUL 2>nul
+for %%j in (
+	"%systemroot%\system32\smartscreen.exe"
+) do (
+	if not exist "%%j.revi" if exist %%j (
+		takeown /F %%j /A >NUL 2>nul
+		icacls %%j /grant Administrators:F >NUL 2>nul
+		copy "%%j" "%%j.revi" /v >NUL 2>nul
+		del "%%j" >NUL 2>nul
+	)
+)
+:: reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Associations" /v "DefaultFileTypeRisk" /t REG_DWORD /d "6152" /f >NUL 2>nul
+:: reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Attachments" /v "SaveZoneInformation" /t REG_DWORD /d "1" /f >NUL 2>nul
+:: reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Associations" /v "LowRiskFileTypes" /t REG_SZ /d ".avi;.bat;.com;.cmd;.exe;.htm;.html;.lnk;.mpg;.mpeg;.mov;.mp3;.msi;.m3u;.rar;.reg;.txt;.vbs;.wav;.zip;" /f >NUL 2>nul
+:: reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Associations" /v "ModRiskFileTypes" /t REG_SZ /d ".bat;.exe;.reg;.vbs;.chm;.msi;.js;.cmd" /f >NUL 2>nul
+
+::SmartScreen
+reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" /v "SmartScreenEnabled" /t REG_SZ /d "Off" /f >NUL 2>nul
+reg add "HKLM\Software\Policies\Microsoft\System" /v "EnableSmartScreen" /t REG_DWORD /d "0" /f >NUL 2>nul
+reg add "HKLM\Software\Policies\Microsoft\Windows Defender\SmartScreen" /v "ConfigureAppInstallControlEnabled" /t REG_DWORD /d "0" /f >NUL 2>nul
+reg add "HKLM\Software\Policies\Microsoft\Windows Defender\SmartScreen" /v "ConfigureAppInstallControl" /t REG_DWORD /d "0" /f >NUL 2>nul
+reg add "HKLM\Software\Policies\Microsoft\Windows Defender\SmartScreen" /v "EnableSmartScreen" /t REG_DWORD /d "0" /f >NUL 2>nul
+reg add "HKCU\Software\Policies\Microsoft\MicrosoftEdge\PhishingFilter" /v "EnabledV9" /t REG_DWORD /d "0" /f >NUL 2>nul
+reg add "HKLM\Software\Policies\Microsoft\MicrosoftEdge\PhishingFilter" /v "EnabledV9" /t REG_DWORD /d "0" /f >NUL 2>nul
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\AppHost" /v "EnableWebContentEvaluation" /t REG_DWORD /d "0" /f >NUL 2>nul
+reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\AppHost" /v "EnableWebContentEvaluation" /t REG_DWORD /d "0" /f >NUL 2>nul
+
+::Smart App Control - Disabling it fixes slow app loading issues on 11+
+reg add "HKLM\SYSTEM\ControlSet001\Control\CI\Policy" /v "VerifiedAndReputablePolicyState" /t REG_DWORD /d "0" /f >NUL 2>nul
+
+::Configure detection for potentially unwanted applications - Disabled
+reg add "HKLM\Software\Microsoft\Windows Defender" /v "PUAProtection" /t REG_DWORD /d "0" /f >NUL 2>nul
+
+::Device Security
+reg add "HKLM\SYSTEM\ControlSet001\Control\CI\Config" /v "VulnerableDriverBlocklistEnable" /t REG_DWORD /d "0" /f >NUL 2>nul
+reg add "HKLM\SYSTEM\ControlSet001\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity" /v "Enabled" /t REG_DWORD /d "0" /f >NUL 2>nul
+cls
+SET msgboxTitle=Opline Software
+SET msgboxBody=Finished - Skonczone
+SET tmpmsgbox=%temp%~tmpmsgbox.vbs
+IF EXIST "%tmpmsgbox%" DEL /F /Q "%tmpmsgbox%"
+ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
+WSCRIPT "%tmpmsgbox%"
+EXIT
+
+:EWD
+cls
+cd C:\Users\%username%\Downloads\bin
+timeout 2 >nul
+Security.ps1
+timeout 2 >nul
+del Security.ps1
+cd C:\Users\%username%\Downloads
+rmdir bin
+cls
+set "services=HKLM\SYSTEM\ControlSet001\Services"
+::Windows Defender
+reg add "%services%\MsSecCore" /v "Start" /t REG_DWORD /d "0" /f >NUL 2>nul
+reg add "%services%\MsSecFlt" /v "Start" /t REG_DWORD /d "0" /f >NUL 2>nul
+reg add "%services%\MsSecWfp" /v "Start" /t REG_DWORD /d "3" /f >NUL 2>nul
+reg add "%services%\SecurityHealthService" /v "Start" /t REG_DWORD /d "3" /f >NUL 2>nul
+reg add "%services%\Sense" /v "Start" /t REG_DWORD /d "3" /f >NUL 2>nul
+reg add "%services%\WdBoot" /v "Start" /t REG_DWORD /d "0" /f >NUL 2>nul
+reg add "%services%\WdFilter" /v "Start" /t REG_DWORD /d "0" /f >NUL 2>nul
+reg add "%services%\WdNisDrv" /v "Start" /t REG_DWORD /d "3" /f >NUL 2>nul
+reg add "%services%\WdNisSvc" /v "Start" /t REG_DWORD /d "3" /f >NUL 2>nul
+reg add "%services%\WinDefend" /v "Start" /t REG_DWORD /d "2" /f >NUL 2>nul
+reg add "%services%\wscsvc" /v "Start" /t REG_DWORD /d "2" /f >NUL 2>nul
+reg add "%services%\MDCoreSvc" /v "Start" /t REG_DWORD /d "2" /f >NUL 2>nul
+::WindowsSystemTray
+reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "SecurityHealth" /t REG_EXPAND_SZ /d "%systemroot%\system32\SecurityHealthSystray.exe" /f >NUL 2>nul
+::SystemGuard
+reg add "%services%\SgrmAgent" /v "Start" /t REG_DWORD /d "0" /f >NUL 2>nul
+reg add "%services%\SgrmBroker" /v "Start" /t REG_DWORD /d "2" /f >NUL 2>nul
+::WebThreatDefSvc
+reg add "%services%\webthreatdefsvc" /v "Start" /t REG_DWORD /d "3" /f >NUL 2>nul
+reg add "%services%\webthreatdefusersvc" /v "Start" /t REG_DWORD /d "2" /f >NUL 2>nul
+for /f %%i in ('reg query "%services%" /s /k "webthreatdefusersvc" /f 2^>nul ^| find /i "webthreatdefusersvc" ') do (
+  reg add "%%i" /v "Start" /t REG_DWORD /d "2" /f >NUL 2>nul
+)
+
+
+::SmartScreen
+reg delete "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\smartscreen.exe" /f >NUL 2>nul
+for %%j in (
+	"%systemroot%\system32\smartscreen.exe"
+) do (
+	if not exist %%j if exist "%%j.revi" ren "%%j.revi" "smartscreen.exe" >NUL 2>nul
+)
+reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Associations" /f >NUL 2>nul
+reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" /v "SmartScreenEnabled" /t REG_SZ /d "On" /f >NUL 2>nul
+reg delete "HKLM\Software\Policies\Microsoft\System" /v "EnableSmartScreen" /f >NUL 2>nul
+
+reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\AppHost" /v "EnableWebContentEvaluation" /f >NUL 2>nul
+reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\AppHost" /v "PreventOverride" /f >NUL 2>nul
+reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\AppHost" /v "EnableWebContentEvaluation" /f >NUL 2>nul
+
+::Smart App Control
+reg delete "HKLM\SYSTEM\ControlSet001\Control\CI\Policy" /v "VerifiedAndReputablePolicyState" /f >NUL 2>nul
+
+:: Remove Defender policies
+reg delete "HKLM\Software\Policies\Microsoft\Windows Defender" /f >NUL 2>nul
+reg delete "HKLM\Software\Policies\Microsoft\Windows Advanced Threat Protection" /f >NUL 2>nul
+reg delete "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender Security Center" /f >NUL 2>nul
+
+::Configure detection for potentially unwanted applications
+reg add "HKLM\Software\Microsoft\Windows Defender" /v "PUAProtection" /t REG_DWORD /d "1" /f >NUL 2>nul
+
+::Device Security
+reg delete "HKLM\SYSTEM\ControlSet001\Control\CI\Config" /v "VulnerableDriverBlocklistEnable" /f >NUL 2>nul
+reg delete "HKLM\SYSTEM\ControlSet001\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity" /v "Enabled" /f >NUL 2>nul
+cls
+SET msgboxTitle=Opline Software
+SET msgboxBody=Finished - Skonczone
+SET tmpmsgbox=%temp%~tmpmsgbox.vbs
+IF EXIST "%tmpmsgbox%" DEL /F /Q "%tmpmsgbox%"
+ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
+WSCRIPT "%tmpmsgbox%"
+EXIT
 
 :EXIT
 cls
