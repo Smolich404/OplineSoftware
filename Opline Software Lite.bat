@@ -87,7 +87,7 @@ if /i "%SAFEBOOT_OPTION%"=="MINIMAL" goto safemode
 Goto OplineMenu
 
 :OplineMenu
-MODE 95,46
+MODE 95,47
 title Opline Software [LITE]
 color F
 cls
@@ -117,7 +117,7 @@ echo.
 call :ColorText 1B "###############################################################################################"
 echo.
 echo.
-cmdMenuSel f3B0 "   [+]  Debloater" "   [+]  Regedit"  "   [+]  Cleaner" "   [+]  Booster | Optimization" "   [+]  Services" "   [+]  OneDrive" "   [+]  Other Windows Add-ons" "   [+]  Game Settings" "   [+]  GPU Tweaks" "   [+]  CPU Tweak" "   [+]  RAM Tweak" "   [+]  Internet Tweaks" "   [+]  Mouse and Keyboard Fix" "   [+]  Windows Apps" "   [+]  Windows Defender" "   [+]  Windows Update" "   [+]  System Restore Properties" "   [+]  Contact | Help" "   [+]  Exit"
+cmdMenuSel f3B0 "   [+]  Debloater" "   [+]  Regedit"  "   [+]  Cleaner" "   [+]  Booster | Optimization" "   [+]  Services" "   [+]  OneDrive" "   [+]  Other Windows Add-ons" "   [+]  Game Settings" "   [+]  GPU Tweaks" "   [+]  CPU Tweak" "   [+]  RAM Tweak" "   [+]  Internet Tweaks" "   [+]  Mouse and Keyboard Fix" "   [+]  Windows Apps" "   [+]  Windows Defender" "   [+]  Windows Update" "   [+]  Allow Scripts" "   [+]  System Restore Properties" "   [+]  Contact | Help" "   [+]  Exit"
 if %ERRORLEVEL% == 1 goto Debloater
 if %ERRORLEVEL% == 2 goto Regedit
 if %ERRORLEVEL% == 3 goto Cleaner
@@ -134,9 +134,10 @@ if %ERRORLEVEL% == 13 goto Fixer
 if %ERRORLEVEL% == 14 goto Apps
 if %ERRORLEVEL% == 15 goto Defender
 if %ERRORLEVEL% == 16 goto Update
-if %ERRORLEVEL% == 17 goto PointRestore
-if %ERRORLEVEL% == 18 goto Help
-if %ERRORLEVEL% == 19 goto EXIT
+if %ERRORLEVEL% == 17 goto AllowScripts
+if %ERRORLEVEL% == 18 goto PointRestore
+if %ERRORLEVEL% == 19 goto Help
+if %ERRORLEVEL% == 20 goto EXIT
 
 :ERROR
 MODE 104,17
@@ -1413,11 +1414,12 @@ Goto Debloater
 :GANG3
 cls
 powershell -command "iwr -useb https://christitus.com/win | iex"
+title Opline Software [LITE]
 Goto Debloater
 
 :GANG5
 cls
-powershell -command "irm app.sophi.app -useb | iex"
+powershell -command "& ([scriptblock]::Create((irm "https://raw.githubusercontent.com/Raphire/Win11Debloat/master/Get.ps1")))"
 Goto Debloater
 
 :GANG4
@@ -3601,7 +3603,7 @@ goto SerialPort
 
 :EServices
 cls
-Powershell iex ((New-Object System.Net.WebClient).DownloadString('https://bit.ly/EServices1'))
+Powershell iex ((New-Object System.Net.WebClient).DownloadString('https://bit.ly/EServices2'))
 SC CONFIG "TabletInputService" START= AUTO
 NET START "TabletInputService"
 SC CONFIG "dmwappushservice" START= AUTO 
@@ -3756,7 +3758,6 @@ sc start "CertPropSvc"
 sc config "CertPropSvc" start= auto
 sc start "PeerDistSvc"
 sc config "PeerDistSvc" start= auto
-Powershell iex ((New-Object System.Net.WebClient).DownloadString('https://bit.ly/EServices2'))
 Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\icssvc" /v "Start" /d "3" /t REG_DWORD /f
 Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\FrameServer" /v "Start" /d "3" /t REG_DWORD /f
 Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\FrameServerMonitor" /v "Start" /d "3" /t REG_DWORD /f
@@ -3994,7 +3995,7 @@ goto Services
 
 :DServices
 cls
-Powershell iex ((New-Object System.Net.WebClient).DownloadString('https://bit.ly/DServices1'))
+Powershell iex ((New-Object System.Net.WebClient).DownloadString('https://bit.ly/DServices2'))
 NET STOP "TabletInputService"
 SC CONFIG "TabletInputService" START= DISABLED
 NET STOP "dmwappushservice"
@@ -4150,7 +4151,6 @@ sc stop "CertPropSvc"
 sc config "CertPropSvc" start= disabled
 sc stop "PeerDistSvc"
 sc config "PeerDistSvc" start= disabled
-Powershell iex ((New-Object System.Net.WebClient).DownloadString('https://bit.ly/DServices2'))
 Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\icssvc" /v "Start" /d "4" /t REG_DWORD /f
 Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\FrameServer" /v "Start" /d "4" /t REG_DWORD /f
 Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\FrameServerMonitor" /v "Start" /d "4" /t REG_DWORD /f
@@ -10903,12 +10903,11 @@ echo.
 call :ColorText 1B "###############################################################################################"
 echo.
 echo.
-cmdMenuSel f3B0 "   [+]  Enable" "   [+]  Disable" "   [+]  Firewall" "   [+]  Allow Scripts" "   [+]  Exit"
+cmdMenuSel f3B0 "   [+]  Enable" "   [+]  Disable" "   [+]  Firewall" "   [+]  Exit"
 if %ERRORLEVEL% == 1 goto EDefender
 if %ERRORLEVEL% == 2 goto DDefender
 if %ERRORLEVEL% == 3 goto Firewall
-if %ERRORLEVEL% == 4 goto AllowScripts
-if %ERRORLEVEL% == 5 goto OplineMenu
+if %ERRORLEVEL% == 4 goto OplineMenu
 
 :EDefender
 cls
@@ -11323,7 +11322,7 @@ SET tmpmsgbox=%temp%~tmpmsgbox.vbs
 IF EXIST "%tmpmsgbox%" DEL /F /Q "%tmpmsgbox%"
 ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
 WSCRIPT "%tmpmsgbox%"
-goto Defender
+goto OplineMenu
 
 :Gpedit
 cls
