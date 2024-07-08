@@ -8718,7 +8718,7 @@ echo.
 call :ColorText 1B "###############################################################################################"
 echo.
 echo.
-cmdMenuSel f3B0 "   [+]  Radeon Registry Optimization" "   [+]  Radeon Registry Optimization 2" "   [+]  Radeon Registry Optimization 3" "   [+]  Radeon Disable Services" "   [+]  GPU Thread Priority" "   [+]  Install MSI Afterburner and Import Skin" "   [+]  Nvidia Unhide Silk Smoothness" "   [+]  Disable Nvidia Notification Tray Icon" "   [+]  Disable Nvidia Image Sharpening" "   [+]  Nvidia Registry Optimization" "   [+]  Disable Nvidia Telemetry" "   [+]  Disable Nvidia Geforce Experience Telemetry" "   [+]  Disable Nvidia HDCP" "   [+]  Disable Nvidia PowerMizer" "   [+]  Disable Nvidia Display Container" "   [+]  Import Nvidia Settings" "   [+]  Reset" "   [+]  Exit"
+cmdMenuSel f3B0 "   [+]  Radeon Registry Optimization" "   [+]  Radeon Registry Optimization 2" "   [+]  Radeon Registry Optimization 3" "   [+]  Radeon Disable Services" "   [+]  GPU Thread Priority" "   [+]  Install MSI Afterburner and Import Skin" "   [+]  Nvidia Unhide Silk Smoothness" "   [+]  Disable Nvidia Notification Tray Icon" "   [+]  Disable Nvidia Image Sharpening" "   [+]  Nvidia Registry Optimization" "   [+]  Disable Nvidia Telemetry" "   [+]  Disable Nvidia Geforce Experience Telemetry" "   [+]  Disable Nvidia HDCP" "   [+]  Disable Nvidia PowerMizer" "   [+]  Disable Nvidia Display Container" "   [+]  Nvidia Settings" "   [+]  Reset" "   [+]  Exit"
 if %ERRORLEVEL% == 1 goto RGPU
 if %ERRORLEVEL% == 2 goto RGPU2
 if %ERRORLEVEL% == 3 goto RGPU3
@@ -8734,7 +8734,7 @@ if %ERRORLEVEL% == 12 goto GFTelemetry
 if %ERRORLEVEL% == 13 goto DNHDCP
 if %ERRORLEVEL% == 14 goto DNPM
 if %ERRORLEVEL% == 15 goto DNDC
-if %ERRORLEVEL% == 16 goto INVS
+if %ERRORLEVEL% == 16 goto NvidiaSettings
 if %ERRORLEVEL% == 17 goto RGPU4
 if %ERRORLEVEL% == 18 goto OplineMenu
 
@@ -8766,7 +8766,7 @@ echo.
 call :ColorText 1B "###############################################################################################"
 echo.
 echo.
-cmdMenuSel f3B0 "   [+]  Reset Radeon Registry Optimization" "   [+]  Reset Radeon Registry Optimization 2" "   [+]  Reset Radeon Registry Optimization 3" "   [+]  Reset Radeon Disable Services" "   [+]  Reset Nvidia Registry Optimization" "   [+]  Reset Thread Priority" "   [+]  Reset Nvidia Unhide Silk Smoothness" "   [+]  Reset Disable Nvidia Notification Tray Icon" "   [+]  Reset Disable Nvidia Image Sharpening" "   [+]  Reset Disable Nvidia Telemetry" "   [+]  Reset Disable Nvidia Geforce Experience Telemetry" "   [+]  Reset Disable Nvidia HDCP" "   [+]  Reset Disable Nvidia PowerMizer" "   [+]  Reset Disable Nvidia Display Container" "   [+]  Exit"
+cmdMenuSel f3B0 "   [+]  Reset Radeon Registry Optimization" "   [+]  Reset Radeon Registry Optimization 2" "   [+]  Reset Radeon Registry Optimization 3" "   [+]  Reset Radeon Disable Services" "   [+]  Reset Nvidia Registry Optimization" "   [+]  Reset Thread Priority" "   [+]  Reset Nvidia Unhide Silk Smoothness" "   [+]  Reset Disable Nvidia Notification Tray Icon" "   [+]  Reset Disable Nvidia Image Sharpening" "   [+]  Reset Disable Nvidia Telemetry" "   [+]  Reset Disable Nvidia Geforce Experience Telemetry" "   [+]  Reset Disable Nvidia HDCP" "   [+]  Reset Disable Nvidia PowerMizer" "   [+]  Reset Disable Nvidia Display Container" "   [+]  Reset Nvidia Settings" "   [+]  Exit"
 if %ERRORLEVEL% == 1 goto RGRO
 if %ERRORLEVEL% == 2 goto RGRO2
 if %ERRORLEVEL% == 3 goto RGRO3
@@ -8781,7 +8781,8 @@ if %ERRORLEVEL% == 11 goto RGFTelemetry
 if %ERRORLEVEL% == 12 goto ENHDCP
 if %ERRORLEVEL% == 13 goto RDNPM
 if %ERRORLEVEL% == 14 goto RDNDC
-if %ERRORLEVEL% == 15 goto GPU
+if %ERRORLEVEL% == 15 goto ResetNvidiaSettings
+if %ERRORLEVEL% == 16 goto GPU
 
 :RGRO
 cls
@@ -9530,12 +9531,22 @@ ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
 WSCRIPT "%tmpmsgbox%"
 goto RGPU2
 
-:INVS
+:ResetNvidiaSettings
 cls
+reg delete `"HKCU\SOFTWARE\NVIDIA Corporation\Global\NVTweak`" /v `"Gestalt`" /f >nul 2>&1
 powershell Invoke-WebRequest "https://github.com/Smolich404/DownloadFilesToOpline/releases/download/Opline/nvidiaProfileInspector.exe" -OutFile "%temp%\nvidiaProfileInspector.exe"
-goto nimport
+cls
+powershell Invoke-WebRequest "https://github.com/Smolich404/DownloadFilesToOpline/releases/download/Opline/Revert.nip" -OutFile "%temp%\Revert.nip"
+cd %temp%
+nvidiaProfileInspector.exe "Revert.nip"
+del nvidiaProfileInspector.exe
+del Revert.nip
+goto ENDGPU
 
-:nimport
+:NvidiaSettings
+cls
+reg add "HKCU\SOFTWARE\NVIDIA Corporation\Global\NVTweak" /v "Gestalt" /t REG_DWORD /d "1" /f
+powershell Invoke-WebRequest "https://github.com/Smolich404/DownloadFilesToOpline/releases/download/Opline/nvidiaProfileInspector.exe" -OutFile "%temp%\nvidiaProfileInspector.exe"
 cls
 powershell Invoke-WebRequest "https://github.com/Smolich404/DownloadFilesToOpline/releases/download/Opline/Opline.nip" -OutFile "%temp%\Opline.nip"
 cd %temp%
