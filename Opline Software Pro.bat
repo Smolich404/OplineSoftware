@@ -682,8 +682,15 @@ Reg.exe add "HKU\.DEFAULT\Control Panel\Accessibility\MouseKeys" /v "Flags" /t R
 Reg.exe add "HKCU\Control Panel\Accessibility\MouseKeys" /v "Flags" /t REG_SZ /d "62" /f
 Reg.exe delete "HKCU\Control Panel\Desktop" /v "LogPixels" /f
 Reg.exe add "HKCU\Control Panel\Desktop" /v "Win8DpiScaling" /t REG_DWORD /d "0" /f
-Reg.exe add "HKCU\Control Panel\Accessibility\Keyboard Response" /v "AutoRepeatRate" /t REG_SZ /d "500" /f
 Reg.exe add "HKCU\Control Panel\Accessibility\Keyboard Response" /v "AutoRepeatDelay" /t REG_SZ /d "1000" /f
+Reg.exe add "HKCU\Control Panel\Accessibility\Keyboard Response" /v "AutoRepeatRate" /t REG_SZ /d "500" /f
+Reg.exe add "HKCU\Control Panel\Accessibility\Keyboard Response" /v "BounceTime" /t REG_SZ /d "0" /f
+Reg.exe add "HKCU\Control Panel\Accessibility\Keyboard Response" /v "DelayBeforeAcceptance" /t REG_SZ /d "1000" /f
+Reg.exe add "HKCU\Control Panel\Accessibility\Keyboard Response" /v "Flags" /t REG_SZ /d "126" /f
+Reg.exe add "HKCU\Control Panel\Accessibility\Keyboard Response" /v "Last BounceKey Setting" /t REG_DWORD /d "0" /f
+Reg.exe add "HKCU\Control Panel\Accessibility\Keyboard Response" /v "Last Valid Delay" /t REG_DWORD /d "0" /f
+Reg.exe add "HKCU\Control Panel\Accessibility\Keyboard Response" /v "Last Valid Repeat" /t REG_DWORD /d "0" /f
+Reg.exe add "HKCU\Control Panel\Accessibility\Keyboard Response" /v "Last Valid Wait" /t REG_DWORD /d "1000" /f
 Reg.exe add "HKCU\Control Panel\Accessibility\MouseKeys" /v "MaximumSpeed" /t REG_SZ /d "80" /f
 Reg.exe add "HKCU\Control Panel\Accessibility\MouseKeys" /v "TimeToMaximumSpeed" /t REG_SZ /d "3000" /f
 cls
@@ -862,8 +869,15 @@ Reg.exe add "HKU\.DEFAULT\Control Panel\Keyboard" /v "KeyboardDelay" /t REG_SZ /
 Reg.exe add "HKU\.DEFAULT\Control Panel\Keyboard" /v "KeyboardSpeed" /t REG_SZ /d "31" /f
 Reg.exe add "HKCU\Control Panel\Desktop" /v "LogPixels" /t REG_DWORD /d "96" /f
 Reg.exe add "HKCU\Control Panel\Desktop" /v "Win8DpiScaling" /t REG_DWORD /d "1" /f
-Reg.exe add "HKCU\Control Panel\Accessibility\Keyboard Response" /v "AutoRepeatRate" /t REG_SZ /d "0" /f
-Reg.exe add "HKCU\Control Panel\Accessibility\Keyboard Response" /v "AutoRepeatDelay" /t REG_SZ /d "0" /f
+Reg.exe delete "HKCU\Control Panel\Accessibility\Keyboard Response" /v "AutoRepeatDelay" /f
+Reg.exe delete "HKCU\Control Panel\Accessibility\Keyboard Response" /v "AutoRepeatRate" /f
+Reg.exe delete "HKCU\Control Panel\Accessibility\Keyboard Response" /v "BounceTime" /f
+Reg.exe delete "HKCU\Control Panel\Accessibility\Keyboard Response" /v "DelayBeforeAcceptance" /f
+Reg.exe add "HKCU\Control Panel\Accessibility\Keyboard Response" /v "Flags" /t REG_SZ /d "0" /f
+Reg.exe delete "HKCU\Control Panel\Accessibility\Keyboard Response" /v "Last BounceKey Setting" /f
+Reg.exe delete "HKCU\Control Panel\Accessibility\Keyboard Response" /v "Last Valid Delay" /f
+Reg.exe delete "HKCU\Control Panel\Accessibility\Keyboard Response" /v "Last Valid Repeat" /f
+Reg.exe delete "HKCU\Control Panel\Accessibility\Keyboard Response" /v "Last Valid Wait" /f
 Reg.exe delete "HKCU\Control Panel\Accessibility\MouseKeys" /v "MaximumSpeed" /f
 Reg.exe delete "HKCU\Control Panel\Accessibility\MouseKeys" /v "TimeToMaximumSpeed" /f
 cls
@@ -933,8 +947,15 @@ goto Fixer
 
 :KFix5
 cls
-Reg.exe add "HKCU\Control Panel\Accessibility\Keyboard Response" /v "AutoRepeatRate" /t REG_SZ /d "0" /f
-Reg.exe add "HKCU\Control Panel\Accessibility\Keyboard Response" /v "AutoRepeatDelay" /t REG_SZ /d "0" /f
+Reg.exe delete "HKCU\Control Panel\Accessibility\Keyboard Response" /v "AutoRepeatDelay" /f
+Reg.exe delete "HKCU\Control Panel\Accessibility\Keyboard Response" /v "AutoRepeatRate" /f
+Reg.exe delete "HKCU\Control Panel\Accessibility\Keyboard Response" /v "BounceTime" /f
+Reg.exe delete "HKCU\Control Panel\Accessibility\Keyboard Response" /v "DelayBeforeAcceptance" /f
+Reg.exe add "HKCU\Control Panel\Accessibility\Keyboard Response" /v "Flags" /t REG_SZ /d "0" /f
+Reg.exe delete "HKCU\Control Panel\Accessibility\Keyboard Response" /v "Last BounceKey Setting" /f
+Reg.exe delete "HKCU\Control Panel\Accessibility\Keyboard Response" /v "Last Valid Delay" /f
+Reg.exe delete "HKCU\Control Panel\Accessibility\Keyboard Response" /v "Last Valid Repeat" /f
+Reg.exe delete "HKCU\Control Panel\Accessibility\Keyboard Response" /v "Last Valid Wait" /f
 cls
 SET msgboxTitle=Opline Software
 SET msgboxBody=Finished - Skonczone
@@ -1287,8 +1308,15 @@ goto GO
 
 :5K
 cls
-Reg.exe add "HKCU\Control Panel\Accessibility\Keyboard Response" /v "AutoRepeatRate" /t REG_SZ /d "0" /f
-Reg.exe add "HKCU\Control Panel\Accessibility\Keyboard Response" /v "AutoRepeatDelay" /t REG_SZ /d "0" /f
+Reg.exe delete "HKCU\Control Panel\Accessibility\Keyboard Response" /v "AutoRepeatDelay" /f
+Reg.exe delete "HKCU\Control Panel\Accessibility\Keyboard Response" /v "AutoRepeatRate" /f
+Reg.exe delete "HKCU\Control Panel\Accessibility\Keyboard Response" /v "BounceTime" /f
+Reg.exe delete "HKCU\Control Panel\Accessibility\Keyboard Response" /v "DelayBeforeAcceptance" /f
+Reg.exe add "HKCU\Control Panel\Accessibility\Keyboard Response" /v "Flags" /t REG_SZ /d "0" /f
+Reg.exe delete "HKCU\Control Panel\Accessibility\Keyboard Response" /v "Last BounceKey Setting" /f
+Reg.exe delete "HKCU\Control Panel\Accessibility\Keyboard Response" /v "Last Valid Delay" /f
+Reg.exe delete "HKCU\Control Panel\Accessibility\Keyboard Response" /v "Last Valid Repeat" /f
+Reg.exe delete "HKCU\Control Panel\Accessibility\Keyboard Response" /v "Last Valid Wait" /f
 cls
 SET msgboxTitle=OOTMAKS V2 by Smolich
 SET msgboxBody=Finished - Skonczone
@@ -1338,8 +1366,15 @@ Reg.exe add "HKU\.DEFAULT\Control Panel\Accessibility\MouseKeys" /v "Flags" /t R
 Reg.exe add "HKCU\Control Panel\Accessibility\MouseKeys" /v "Flags" /t REG_SZ /d "62" /f
 Reg.exe delete "HKCU\Control Panel\Desktop" /v "LogPixels" /f
 Reg.exe add "HKCU\Control Panel\Desktop" /v "Win8DpiScaling" /t REG_DWORD /d "0" /f
-Reg.exe add "HKCU\Control Panel\Accessibility\Keyboard Response" /v "AutoRepeatRate" /t REG_SZ /d "500" /f
 Reg.exe add "HKCU\Control Panel\Accessibility\Keyboard Response" /v "AutoRepeatDelay" /t REG_SZ /d "1000" /f
+Reg.exe add "HKCU\Control Panel\Accessibility\Keyboard Response" /v "AutoRepeatRate" /t REG_SZ /d "500" /f
+Reg.exe add "HKCU\Control Panel\Accessibility\Keyboard Response" /v "BounceTime" /t REG_SZ /d "0" /f
+Reg.exe add "HKCU\Control Panel\Accessibility\Keyboard Response" /v "DelayBeforeAcceptance" /t REG_SZ /d "1000" /f
+Reg.exe add "HKCU\Control Panel\Accessibility\Keyboard Response" /v "Flags" /t REG_SZ /d "126" /f
+Reg.exe add "HKCU\Control Panel\Accessibility\Keyboard Response" /v "Last BounceKey Setting" /t REG_DWORD /d "0" /f
+Reg.exe add "HKCU\Control Panel\Accessibility\Keyboard Response" /v "Last Valid Delay" /t REG_DWORD /d "0" /f
+Reg.exe add "HKCU\Control Panel\Accessibility\Keyboard Response" /v "Last Valid Repeat" /t REG_DWORD /d "0" /f
+Reg.exe add "HKCU\Control Panel\Accessibility\Keyboard Response" /v "Last Valid Wait" /t REG_DWORD /d "1000" /f
 Reg.exe add "HKCU\Control Panel\Accessibility\MouseKeys" /v "MaximumSpeed" /t REG_SZ /d "80" /f
 Reg.exe add "HKCU\Control Panel\Accessibility\MouseKeys" /v "TimeToMaximumSpeed" /t REG_SZ /d "3000" /f
 cls
@@ -1393,8 +1428,15 @@ Reg.exe delete "HKCU\Control Panel\Accessibility\MouseKeys" /v "MaximumSpeed" /f
 Reg.exe delete "HKCU\Control Panel\Accessibility\MouseKeys" /v "TimeToMaximumSpeed" /f
 Reg.exe add "HKCU\Control Panel\Desktop" /v "LogPixels" /t REG_DWORD /d "96" /f
 Reg.exe add "HKCU\Control Panel\Desktop" /v "Win8DpiScaling" /t REG_DWORD /d "1" /f
-Reg.exe add "HKCU\Control Panel\Accessibility\Keyboard Response" /v "AutoRepeatRate" /t REG_SZ /d "0" /f
-Reg.exe add "HKCU\Control Panel\Accessibility\Keyboard Response" /v "AutoRepeatDelay" /t REG_SZ /d "0" /f
+Reg.exe delete "HKCU\Control Panel\Accessibility\Keyboard Response" /v "AutoRepeatDelay" /f
+Reg.exe delete "HKCU\Control Panel\Accessibility\Keyboard Response" /v "AutoRepeatRate" /f
+Reg.exe delete "HKCU\Control Panel\Accessibility\Keyboard Response" /v "BounceTime" /f
+Reg.exe delete "HKCU\Control Panel\Accessibility\Keyboard Response" /v "DelayBeforeAcceptance" /f
+Reg.exe add "HKCU\Control Panel\Accessibility\Keyboard Response" /v "Flags" /t REG_SZ /d "0" /f
+Reg.exe delete "HKCU\Control Panel\Accessibility\Keyboard Response" /v "Last BounceKey Setting" /f
+Reg.exe delete "HKCU\Control Panel\Accessibility\Keyboard Response" /v "Last Valid Delay" /f
+Reg.exe delete "HKCU\Control Panel\Accessibility\Keyboard Response" /v "Last Valid Repeat" /f
+Reg.exe delete "HKCU\Control Panel\Accessibility\Keyboard Response" /v "Last Valid Wait" /f
 cls
 SET msgboxTitle=OOTMAKS V2 by Smolich
 SET msgboxBody=Finished - Skonczone
