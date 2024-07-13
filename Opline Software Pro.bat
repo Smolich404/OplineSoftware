@@ -693,6 +693,15 @@ Reg.exe add "HKCU\Control Panel\Accessibility\Keyboard Response" /v "Last Valid 
 Reg.exe add "HKCU\Control Panel\Accessibility\Keyboard Response" /v "Last Valid Wait" /t REG_DWORD /d "1000" /f
 Reg.exe add "HKCU\Control Panel\Accessibility\MouseKeys" /v "MaximumSpeed" /t REG_SZ /d "80" /f
 Reg.exe add "HKCU\Control Panel\Accessibility\MouseKeys" /v "TimeToMaximumSpeed" /t REG_SZ /d "3000" /f
+Reg.exe add "HKU\.DEFAULT\Control Panel\Accessibility\Keyboard Response" /v "AutoRepeatDelay" /t REG_SZ /d "1000" /f
+Reg.exe add "HKU\.DEFAULT\Control Panel\Accessibility\Keyboard Response" /v "AutoRepeatRate" /t REG_SZ /d "500" /f
+Reg.exe add "HKU\.DEFAULT\Control Panel\Accessibility\Keyboard Response" /v "BounceTime" /t REG_SZ /d "0" /f
+Reg.exe add "HKU\.DEFAULT\Control Panel\Accessibility\Keyboard Response" /v "DelayBeforeAcceptance" /t REG_SZ /d "1000" /f
+Reg.exe add "HKU\.DEFAULT\Control Panel\Accessibility\Keyboard Response" /v "Flags" /t REG_SZ /d "126" /f
+Reg.exe add "HKU\.DEFAULT\Control Panel\Accessibility\Keyboard Response" /v "Last BounceKey Setting" /t REG_DWORD /d "0" /f
+Reg.exe add "HKU\.DEFAULT\Control Panel\Accessibility\Keyboard Response" /v "Last Valid Delay" /t REG_DWORD /d "0" /f
+Reg.exe add "HKU\.DEFAULT\Control Panel\Accessibility\Keyboard Response" /v "Last Valid Repeat" /t REG_DWORD /d "0" /f
+Reg.exe add "HKU\.DEFAULT\Control Panel\Accessibility\Keyboard Response" /v "Last Valid Wait" /t REG_DWORD /d "1000" /f
 cls
 SET msgboxTitle=Opline Software
 SET msgboxBody=Finished - Skonczone
@@ -880,6 +889,15 @@ Reg.exe delete "HKCU\Control Panel\Accessibility\Keyboard Response" /v "Last Val
 Reg.exe delete "HKCU\Control Panel\Accessibility\Keyboard Response" /v "Last Valid Wait" /f
 Reg.exe delete "HKCU\Control Panel\Accessibility\MouseKeys" /v "MaximumSpeed" /f
 Reg.exe delete "HKCU\Control Panel\Accessibility\MouseKeys" /v "TimeToMaximumSpeed" /f
+Reg.exe delete "HKU\.DEFAULT\Control Panel\Accessibility\Keyboard Response" /v "AutoRepeatDelay" /f
+Reg.exe delete "HKU\.DEFAULT\Control Panel\Accessibility\Keyboard Response" /v "AutoRepeatRate" /f
+Reg.exe delete "HKU\.DEFAULT\Control Panel\Accessibility\Keyboard Response" /v "BounceTime" /f
+Reg.exe delete "HKU\.DEFAULT\Control Panel\Accessibility\Keyboard Response" /v "DelayBeforeAcceptance" /f
+Reg.exe add "HKU\.DEFAULT\Control Panel\Accessibility\Keyboard Response" /v "Flags" /t REG_SZ /d "0" /f
+Reg.exe delete "HKU\.DEFAULT\Control Panel\Accessibility\Keyboard Response" /v "Last BounceKey Setting" /f
+Reg.exe delete "HKU\.DEFAULT\Control Panel\Accessibility\Keyboard Response" /v "Last Valid Delay" /f
+Reg.exe delete "HKU\.DEFAULT\Control Panel\Accessibility\Keyboard Response" /v "Last Valid Repeat" /f
+Reg.exe delete "HKU\.DEFAULT\Control Panel\Accessibility\Keyboard Response" /v "Last Valid Wait" /f
 cls
 SET msgboxTitle=Opline Software
 SET msgboxBody=Finished - Skonczone
@@ -956,6 +974,15 @@ Reg.exe delete "HKCU\Control Panel\Accessibility\Keyboard Response" /v "Last Bou
 Reg.exe delete "HKCU\Control Panel\Accessibility\Keyboard Response" /v "Last Valid Delay" /f
 Reg.exe delete "HKCU\Control Panel\Accessibility\Keyboard Response" /v "Last Valid Repeat" /f
 Reg.exe delete "HKCU\Control Panel\Accessibility\Keyboard Response" /v "Last Valid Wait" /f
+Reg.exe delete "HKU\.DEFAULT\Control Panel\Accessibility\Keyboard Response" /v "AutoRepeatDelay" /f
+Reg.exe delete "HKU\.DEFAULT\Control Panel\Accessibility\Keyboard Response" /v "AutoRepeatRate" /f
+Reg.exe delete "HKU\.DEFAULT\Control Panel\Accessibility\Keyboard Response" /v "BounceTime" /f
+Reg.exe delete "HKU\.DEFAULT\Control Panel\Accessibility\Keyboard Response" /v "DelayBeforeAcceptance" /f
+Reg.exe add "HKU\.DEFAULT\Control Panel\Accessibility\Keyboard Response" /v "Flags" /t REG_SZ /d "0" /f
+Reg.exe delete "HKU\.DEFAULT\Control Panel\Accessibility\Keyboard Response" /v "Last BounceKey Setting" /f
+Reg.exe delete "HKU\.DEFAULT\Control Panel\Accessibility\Keyboard Response" /v "Last Valid Delay" /f
+Reg.exe delete "HKU\.DEFAULT\Control Panel\Accessibility\Keyboard Response" /v "Last Valid Repeat" /f
+Reg.exe delete "HKU\.DEFAULT\Control Panel\Accessibility\Keyboard Response" /v "Last Valid Wait" /f
 cls
 SET msgboxTitle=Opline Software
 SET msgboxBody=Finished - Skonczone
@@ -966,7 +993,7 @@ WSCRIPT "%tmpmsgbox%"
 goto Fixer
 
 :MenuOMAndK2
-MODE 60,56
+MODE 60,57
 color F
 cls
 echo.
@@ -1019,6 +1046,8 @@ echo     (D) - Speed V2
 echo.
 echo     (E) - Delay
 echo.
+echo     (F) - Delay V2
+echo.
 echo.
 call :ColorText 09 "    (M) - Full Optimization
 echo.
@@ -1050,6 +1079,7 @@ if %EZ%==B (Goto :2K)
 if %EZ%==C (Goto :3K)
 if %EZ%==D (Goto :4K)
 if %EZ%==E (Goto :5K)
+if %EZ%==F (Goto :6K)
 if %EZ%==R (Goto :ResetFix)
 if %EZ%==M (Goto :Full)
 if %EZ%==X (Goto :ExitFix)
@@ -1326,6 +1356,26 @@ ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
 WSCRIPT "%tmpmsgbox%"
 goto GO
 
+:6K
+cls
+Reg.exe delete "HKU\.DEFAULT\Control Panel\Accessibility\Keyboard Response" /v "AutoRepeatDelay" /f
+Reg.exe delete "HKU\.DEFAULT\Control Panel\Accessibility\Keyboard Response" /v "AutoRepeatRate" /f
+Reg.exe delete "HKU\.DEFAULT\Control Panel\Accessibility\Keyboard Response" /v "BounceTime" /f
+Reg.exe delete "HKU\.DEFAULT\Control Panel\Accessibility\Keyboard Response" /v "DelayBeforeAcceptance" /f
+Reg.exe add "HKU\.DEFAULT\Control Panel\Accessibility\Keyboard Response" /v "Flags" /t REG_SZ /d "0" /f
+Reg.exe delete "HKU\.DEFAULT\Control Panel\Accessibility\Keyboard Response" /v "Last BounceKey Setting" /f
+Reg.exe delete "HKU\.DEFAULT\Control Panel\Accessibility\Keyboard Response" /v "Last Valid Delay" /f
+Reg.exe delete "HKU\.DEFAULT\Control Panel\Accessibility\Keyboard Response" /v "Last Valid Repeat" /f
+Reg.exe delete "HKU\.DEFAULT\Control Panel\Accessibility\Keyboard Response" /v "Last Valid Wait" /f
+cls
+SET msgboxTitle=OOTMAKS V2 by Smolich
+SET msgboxBody=Finished - Skonczone
+SET tmpmsgbox=%temp%~tmpmsgbox.vbs
+IF EXIST "%tmpmsgbox%" DEL /F /Q "%tmpmsgbox%"
+ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
+WSCRIPT "%tmpmsgbox%"
+goto GO
+
 :ResetFix
 cls
 Reg.exe add "HKCU\Control Panel\Accessibility\StickyKeys" /v "Flags" /t REG_SZ /d "510" /f
@@ -1377,6 +1427,15 @@ Reg.exe add "HKCU\Control Panel\Accessibility\Keyboard Response" /v "Last Valid 
 Reg.exe add "HKCU\Control Panel\Accessibility\Keyboard Response" /v "Last Valid Wait" /t REG_DWORD /d "1000" /f
 Reg.exe add "HKCU\Control Panel\Accessibility\MouseKeys" /v "MaximumSpeed" /t REG_SZ /d "80" /f
 Reg.exe add "HKCU\Control Panel\Accessibility\MouseKeys" /v "TimeToMaximumSpeed" /t REG_SZ /d "3000" /f
+Reg.exe add "HKU\.DEFAULT\Control Panel\Accessibility\Keyboard Response" /v "AutoRepeatDelay" /t REG_SZ /d "1000" /f
+Reg.exe add "HKU\.DEFAULT\Control Panel\Accessibility\Keyboard Response" /v "AutoRepeatRate" /t REG_SZ /d "500" /f
+Reg.exe add "HKU\.DEFAULT\Control Panel\Accessibility\Keyboard Response" /v "BounceTime" /t REG_SZ /d "0" /f
+Reg.exe add "HKU\.DEFAULT\Control Panel\Accessibility\Keyboard Response" /v "DelayBeforeAcceptance" /t REG_SZ /d "1000" /f
+Reg.exe add "HKU\.DEFAULT\Control Panel\Accessibility\Keyboard Response" /v "Flags" /t REG_SZ /d "126" /f
+Reg.exe add "HKU\.DEFAULT\Control Panel\Accessibility\Keyboard Response" /v "Last BounceKey Setting" /t REG_DWORD /d "0" /f
+Reg.exe add "HKU\.DEFAULT\Control Panel\Accessibility\Keyboard Response" /v "Last Valid Delay" /t REG_DWORD /d "0" /f
+Reg.exe add "HKU\.DEFAULT\Control Panel\Accessibility\Keyboard Response" /v "Last Valid Repeat" /t REG_DWORD /d "0" /f
+Reg.exe add "HKU\.DEFAULT\Control Panel\Accessibility\Keyboard Response" /v "Last Valid Wait" /t REG_DWORD /d "1000" /f
 cls
 SET msgboxTitle=OOTMAKS V2 by Smolich
 SET msgboxBody=Finished - Skonczone
@@ -1437,6 +1496,15 @@ Reg.exe delete "HKCU\Control Panel\Accessibility\Keyboard Response" /v "Last Bou
 Reg.exe delete "HKCU\Control Panel\Accessibility\Keyboard Response" /v "Last Valid Delay" /f
 Reg.exe delete "HKCU\Control Panel\Accessibility\Keyboard Response" /v "Last Valid Repeat" /f
 Reg.exe delete "HKCU\Control Panel\Accessibility\Keyboard Response" /v "Last Valid Wait" /f
+Reg.exe delete "HKU\.DEFAULT\Control Panel\Accessibility\Keyboard Response" /v "AutoRepeatDelay" /f
+Reg.exe delete "HKU\.DEFAULT\Control Panel\Accessibility\Keyboard Response" /v "AutoRepeatRate" /f
+Reg.exe delete "HKU\.DEFAULT\Control Panel\Accessibility\Keyboard Response" /v "BounceTime" /f
+Reg.exe delete "HKU\.DEFAULT\Control Panel\Accessibility\Keyboard Response" /v "DelayBeforeAcceptance" /f
+Reg.exe add "HKU\.DEFAULT\Control Panel\Accessibility\Keyboard Response" /v "Flags" /t REG_SZ /d "0" /f
+Reg.exe delete "HKU\.DEFAULT\Control Panel\Accessibility\Keyboard Response" /v "Last BounceKey Setting" /f
+Reg.exe delete "HKU\.DEFAULT\Control Panel\Accessibility\Keyboard Response" /v "Last Valid Delay" /f
+Reg.exe delete "HKU\.DEFAULT\Control Panel\Accessibility\Keyboard Response" /v "Last Valid Repeat" /f
+Reg.exe delete "HKU\.DEFAULT\Control Panel\Accessibility\Keyboard Response" /v "Last Valid Wait" /f
 cls
 SET msgboxTitle=OOTMAKS V2 by Smolich
 SET msgboxBody=Finished - Skonczone
