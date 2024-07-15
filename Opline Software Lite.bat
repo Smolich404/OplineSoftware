@@ -7566,7 +7566,7 @@ echo.
 call :ColorText 1B "###############################################################################################"
 echo.
 echo.
-cmdMenuSel f3B0 "   [+]  Radeon Registry Optimization" "   [+]  Radeon Registry Optimization 2" "   [+]  Radeon Registry Optimization 3" "   [+]  Radeon Disable Services" "   [+]  GPU Thread Priority" "   [+]  Install MSI Afterburner and Import Skin" "   [+]  Nvidia Unhide Silk Smoothness" "   [+]  Disable Nvidia Notification Tray Icon" "   [+]  Disable Nvidia Image Sharpening" "   [+]  Nvidia Registry Optimization" "   [+]  Disable Nvidia Telemetry" "   [+]  Disable Nvidia Geforce Experience Telemetry" "   [+]  Disable Nvidia HDCP" "   [+]  Disable Nvidia PowerMizer" "   [+]  Disable Nvidia Display Container" "   [+]  Nvidia Settings" "   [+]  Reset" "   [+]  Exit"
+cmdMenuSel f3B0 "   [+]  Radeon Registry Optimization" "   [+]  Radeon Registry Optimization 2" "   [+]  Radeon Registry Optimization 3" "   [+]  Radeon Disable Services" "   [+]  GPU Thread Priority" "   [+]  Install MSI Afterburner and Import Skin" "   [+]  Nvidia Unhide Silk Smoothness" "   [+]  Disable Nvidia Notification Tray Icon" "   [+]  Disable Nvidia Image Sharpening" "   [+]  Nvidia Registry Optimization" "   [+]  Disable Nvidia Telemetry" "   [+]  Disable Nvidia Geforce Experience Telemetry" "   [+]  Disable Nvidia HDCP" "   [+]  Disable Nvidia PowerMizer" "   [+]  Disable Nvidia Display Container" "   [+]  Nvidia Settings" "   [+]  MSI Mode" "   [+]  Reset" "   [+]  Exit"
 if %ERRORLEVEL% == 1 goto RGPU
 if %ERRORLEVEL% == 2 goto RGPU2
 if %ERRORLEVEL% == 3 goto RGPU3
@@ -7583,8 +7583,9 @@ if %ERRORLEVEL% == 13 goto DNHDCP
 if %ERRORLEVEL% == 14 goto DNPM
 if %ERRORLEVEL% == 15 goto DNDC
 if %ERRORLEVEL% == 16 goto NvidiaSettings
-if %ERRORLEVEL% == 17 goto RGPU4
-if %ERRORLEVEL% == 18 goto OplineMenu
+if %ERRORLEVEL% == 17 goto MSIMode
+if %ERRORLEVEL% == 18 goto RGPU4
+if %ERRORLEVEL% == 19 goto OplineMenu
 
 :RGPU4
 cls
@@ -7614,7 +7615,7 @@ echo.
 call :ColorText 1B "###############################################################################################"
 echo.
 echo.
-cmdMenuSel f3B0 "   [+]  Reset Radeon Registry Optimization" "   [+]  Reset Radeon Registry Optimization 2" "   [+]  Reset Radeon Registry Optimization 3" "   [+]  Reset Radeon Disable Services" "   [+]  Reset Nvidia Registry Optimization" "   [+]  Reset Thread Priority" "   [+]  Reset Nvidia Unhide Silk Smoothness" "   [+]  Reset Disable Nvidia Notification Tray Icon" "   [+]  Reset Disable Nvidia Image Sharpening" "   [+]  Reset Disable Nvidia Telemetry" "   [+]  Reset Disable Nvidia Geforce Experience Telemetry" "   [+]  Reset Disable Nvidia HDCP" "   [+]  Reset Disable Nvidia PowerMizer" "   [+]  Reset Disable Nvidia Display Container" "   [+]  Reset Nvidia Settings" "   [+]  Exit"
+cmdMenuSel f3B0 "   [+]  Reset Radeon Registry Optimization" "   [+]  Reset Radeon Registry Optimization 2" "   [+]  Reset Radeon Registry Optimization 3" "   [+]  Reset Radeon Disable Services" "   [+]  Reset Nvidia Registry Optimization" "   [+]  Reset Thread Priority" "   [+]  Reset Nvidia Unhide Silk Smoothness" "   [+]  Reset Disable Nvidia Notification Tray Icon" "   [+]  Reset Disable Nvidia Image Sharpening" "   [+]  Reset Disable Nvidia Telemetry" "   [+]  Reset Disable Nvidia Geforce Experience Telemetry" "   [+]  Reset Disable Nvidia HDCP" "   [+]  Reset Disable Nvidia PowerMizer" "   [+]  Reset Disable Nvidia Display Container" "   [+]  Reset Nvidia Settings" "   [+]  Reset MSI Mode" "   [+]  Exit"
 if %ERRORLEVEL% == 1 goto RGRO
 if %ERRORLEVEL% == 2 goto RGRO2
 if %ERRORLEVEL% == 3 goto RGRO3
@@ -7630,7 +7631,8 @@ if %ERRORLEVEL% == 12 goto ENHDCP
 if %ERRORLEVEL% == 13 goto RDNPM
 if %ERRORLEVEL% == 14 goto RDNDC
 if %ERRORLEVEL% == 15 goto ResetNvidiaSettings
-if %ERRORLEVEL% == 16 goto GPU
+if %ERRORLEVEL% == 16 goto ResetMSIMode
+if %ERRORLEVEL% == 17 goto GPU
 
 :RGRO
 cls
@@ -8391,6 +8393,13 @@ del nvidiaProfileInspector.exe
 del Revert.nip
 goto ENDGPU
 
+:ResetMSIMode
+cls
+powershell -command "$instanceID = (Get-PnpDevice -Class Display).InstanceId"
+powershell -command "reg add "HKLM\SYSTEM\ControlSet001\Enum\$instanceID\Device Parameters\Interrupt Management\MessageSignaledInterruptProperties" /v "MSISupported" /t REG_DWORD /d "0" /f | Out-Null"
+powershell -command "Get-ItemProperty -Path "Registry::HKLM\SYSTEM\ControlSet001\Enum\$instanceID\Device Parameters\Interrupt Management\MessageSignaledInterruptProperties" -Name MSISupported"
+goto ENDRGPU
+
 :NvidiaSettings
 cls
 reg add "HKCU\SOFTWARE\NVIDIA Corporation\Global\NVTweak" /v "Gestalt" /t REG_DWORD /d "1" /f
@@ -8401,6 +8410,13 @@ cd %temp%
 nvidiaProfileInspector.exe "Opline.nip"
 del nvidiaProfileInspector.exe
 del Opline.nip
+goto ENDGPU
+
+:MSIMode
+cls
+powershell -command "$instanceID = (Get-PnpDevice -Class Display).InstanceId"
+powershell -command "reg add "HKLM\SYSTEM\ControlSet001\Enum\$instanceID\Device Parameters\Interrupt Management\MessageSignaledInterruptProperties" /v "MSISupported" /t REG_DWORD /d "1" /f | Out-Null"
+powershell -command "Get-ItemProperty -Path "Registry::HKLM\SYSTEM\ControlSet001\Enum\$instanceID\Device Parameters\Interrupt Management\MessageSignaledInterruptProperties" -Name MSISupported"
 goto ENDGPU
 
 :NGPU
