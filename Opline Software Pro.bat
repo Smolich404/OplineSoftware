@@ -6546,6 +6546,7 @@ if %ERRORLEVEL% == 3 goto Others
 cls
 Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\BDESVC" /v "Start" /t REG_DWORD /d "4" /f
 Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\EFS" /v "Start" /t REG_DWORD /d "4" /f
+fsutil behavior set disableencryption 1
 Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\FileSystem" /v "NtfsDisableEncryption" /t REG_DWORD /d "1" /f
 goto end5
 
@@ -6553,6 +6554,7 @@ goto end5
 cls
 Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\BDESVC" /v "Start" /t REG_DWORD /d "3" /f
 Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\EFS" /v "Start" /t REG_DWORD /d "3" /f
+fsutil behavior set disableencryption 0
 Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\FileSystem" /v "NtfsDisableEncryption" /t REG_DWORD /d "0" /f
 goto end5
 
@@ -11603,7 +11605,7 @@ netsh int tcp set global ecncapability=disabled
 netsh int tcp set heuristics disabled
 netsh int tcp set global rss=enabled
 netsh int tcp set global fastopen=enabled
-netsh int tcp set global timestamps=disabled
+netsh int tcp set global timestamps=allowed
 netsh int tcp set global nonsackrttresiliency=disabled
 netsh int tcp set global rsc=enabled
 netsh int tcp set global maxsynretransmissions=4
@@ -11691,7 +11693,7 @@ netsh winsock reset
 netsh int tcp set global autotuninglevel=normal
 netsh interface 6to4 set state default
 netsh int isatap set state default
-netsh int tcp set global timestamps=disabled
+netsh int tcp set global timestamps=allowed
 netsh int tcp set heuristics disabled
 netsh int tcp set global chimney=disabled
 netsh int tcp set global ecncapability=disabled
