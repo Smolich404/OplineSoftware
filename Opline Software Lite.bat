@@ -2406,10 +2406,12 @@ echo.
 call :ColorText 1B "###############################################################################################"
 echo.
 echo.
-cmdMenuSel f3B0 "   [+]  Unblock" "   [+]  Block" "   [+]  Exit"
+cmdMenuSel f3B0 "   [+]  Unblock" "   [+]  Block" "   [+]  Uninstall" "   [+]  Install" "   [+]  Exit"
 if %ERRORLEVEL% == 1 goto UBStore
 if %ERRORLEVEL% == 2 goto BStore
-if %ERRORLEVEL% == 3 goto OtherD
+if %ERRORLEVEL% == 3 goto UStore
+if %ERRORLEVEL% == 4 goto IStore
+if %ERRORLEVEL% == 5 goto OtherD
 
 :BStore
 cls
@@ -2473,6 +2475,32 @@ ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
 WSCRIPT "%tmpmsgbox%"
 goto Store
 
+:UStore
+cls
+Get-AppxPackage -allusers *Microsoft.WindowsStore* | Remove-AppxPackage
+Get-AppxPackage -allusers *Microsoft.Microsoft.StorePurchaseApp* | Remove-AppxPackage
+cls
+SET msgboxTitle=Opline Software
+SET msgboxBody=Finished - Skonczone
+SET tmpmsgbox=%temp%~tmpmsgbox.vbs
+IF EXIST "%tmpmsgbox%" DEL /F /Q "%tmpmsgbox%"
+ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
+WSCRIPT "%tmpmsgbox%"
+goto Store
+
+:IStore
+cls
+Get-AppXPackage -AllUsers *Microsoft.WindowsStore* | Foreach {Add-AppxPackage -DisableDevelopmentMode -Register -ErrorAction SilentlyContinue "$($_.InstallLocation)\AppXManifest.xml"}
+Get-AppXPackage -AllUsers *Microsoft.Microsoft.StorePurchaseApp* | Foreach {Add-AppxPackage -DisableDevelopmentMode -Register -ErrorAction SilentlyContinue "$($_.InstallLocation)\AppXManifest.xml"}
+cls
+SET msgboxTitle=Opline Software
+SET msgboxBody=Finished - Skonczone
+SET tmpmsgbox=%temp%~tmpmsgbox.vbs
+IF EXIST "%tmpmsgbox%" DEL /F /Q "%tmpmsgbox%"
+ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
+WSCRIPT "%tmpmsgbox%"
+goto Store
+
 :Xbox
 cls
 echo.
@@ -2501,12 +2529,13 @@ echo.
 call :ColorText 1B "###############################################################################################"
 echo.
 echo.
-cmdMenuSel f3B0 "   [+]  Enable" "   [+]  Disable" "   [+]  XboxGameDVR" "   [+]  GameBarPresenceWriter" "   [+]  Exit"
+cmdMenuSel f3B0 "   [+]  Enable" "   [+]  Disable" "   [+]  Xbox Gamebar" "   [+]  GameBarPresenceWriter" "   [+]  Apps" "   [+]  Exit"
 if %ERRORLEVEL% == 1 goto EXbox
 if %ERRORLEVEL% == 2 goto DXbox
-if %ERRORLEVEL% == 3 goto XboxGameDVR
+if %ERRORLEVEL% == 3 goto XboxGamebar
 if %ERRORLEVEL% == 4 goto GameBar
-if %ERRORLEVEL% == 5 goto OtherD
+if %ERRORLEVEL% == 5 goto XboxApps
+if %ERRORLEVEL% == 6 goto OtherD
 
 :DXbox
 cls
@@ -2522,6 +2551,12 @@ SC CONFIG "xbgm" START= DISABLED
 NET STOP "xbgm"
 Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\xboxgip" /v "Start" /t REG_DWORD /d "4" /f
 Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\xboxgrip" /v "Start" /t REG_DWORD /d "4" /f
+reg add "HKLM\SYSTEM\ControlSet001\Services\GameInputSvc" /v "Start" /t REG_DWORD /d "4" /f
+reg add "HKLM\SYSTEM\ControlSet001\Services\BcastDVRUserService" /v "Start" /t REG_DWORD /d "4" /f
+reg add "HKLM\SYSTEM\ControlSet001\Services\XboxGipSvc" /v "Start" /t REG_DWORD /d "4" /f
+reg add "HKLM\SYSTEM\ControlSet001\Services\XblAuthManager" /v "Start" /t REG_DWORD /d "4" /f
+reg add "HKLM\SYSTEM\ControlSet001\Services\XblGameSave" /v "Start" /t REG_DWORD /d "4" /f
+reg add "HKLM\SYSTEM\ControlSet001\Services\XboxNetApiSvc" /v "Start" /t REG_DWORD /d "4" /f
 SCHTASKS /END /TN "\Microsoft\XblGameSave\XblGameSaveTask"
 SCHTASKS /CHANGE /DISABLE /TN "\Microsoft\XblGameSave\XblGameSaveTask"
 SCHTASKS /END /TN "\Microsoft\XblGameSave\XblGameSaveTaskLogon"
@@ -2549,6 +2584,12 @@ SC CONFIG "xbgm" START= AUTO
 NET START "xbgm"
 Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\xboxgip" /v "Start" /t REG_DWORD /d "3" /f
 Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\xboxgrip" /v "Start" /t REG_DWORD /d "3" /f
+reg add "HKLM\SYSTEM\ControlSet001\Services\GameInputSvc" /v "Start" /t REG_DWORD /d "3" /f
+reg add "HKLM\SYSTEM\ControlSet001\Services\BcastDVRUserService" /v "Start" /t REG_DWORD /d "3" /f
+reg add "HKLM\SYSTEM\ControlSet001\Services\XboxGipSvc" /v "Start" /t REG_DWORD /d "3" /f
+reg add "HKLM\SYSTEM\ControlSet001\Services\XblAuthManager" /v "Start" /t REG_DWORD /d "3" /f
+reg add "HKLM\SYSTEM\ControlSet001\Services\XblGameSave" /v "Start" /t REG_DWORD /d "3" /f
+reg add "HKLM\SYSTEM\ControlSet001\Services\XboxNetApiSvc" /v "Start" /t REG_DWORD /d "3" /f
 SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\XblGameSave\XblGameSaveTask"
 SCHTASKS /RUN /TN "\Microsoft\XblGameSave\XblGameSaveTask"
 SCHTASKS /CHANGE /ENABLE /TN "\Microsoft\XblGameSave\XblGameSaveTaskLogon"
@@ -2562,7 +2603,7 @@ ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
 WSCRIPT "%tmpmsgbox%"
 goto Xbox
 
-:XboxGameDVR
+:XboxGamebar
 cls
 echo.
 echo.
@@ -2591,15 +2632,22 @@ call :ColorText 1B "############################################################
 echo.
 echo.
 cmdMenuSel f3B0 "   [+]  Enable" "   [+]  Disable" "   [+]  Exit"
-if %ERRORLEVEL% == 1 goto EXboxGameDVR
-if %ERRORLEVEL% == 2 goto DXboxGameDVR
-if %ERRORLEVEL% == 3 goto OtherD
+if %ERRORLEVEL% == 1 goto EXboxGamebar
+if %ERRORLEVEL% == 2 goto DXboxGamebar
+if %ERRORLEVEL% == 3 goto Xbox
 
-:DXboxGameDVR
+:DXboxGamebar
 cls
 REG ADD "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\GameDVR" /V AppCaptureEnabled /T REG_DWORD /D 0 /F
 REG ADD "HKCU\System\GameConfigStore" /V GameDVR_Enabled /T REG_DWORD /D 0 /F
 REG ADD "HKLM\SOFTWARE\Microsoft\PolicyManager\default\ApplicationManagement\AllowGameDVR" /V value /T REG_DWORD /D 0 /F
+reg add "HKCU\Software\Microsoft\GameBar" /v "UseNexusForGameBarEnabled" /t REG_DWORD /d "0" /f
+Reg.exe add "HKCU\SOFTWARE\Microsoft\GameBar" /v "AllowAutoGameMode" /t REG_DWORD /d "0" /f
+Reg.exe add "HKCU\SOFTWARE\Microsoft\GameBar" /v "AutoGameModeEnabled" /t REG_DWORD /d "0" /f
+Reg.exe add "HKCU\SOFTWARE\Microsoft\GameBar" /v "GamePanelStartupTipIndex" /t REG_DWORD /d "3" /f
+Reg.exe add "HKCU\SOFTWARE\Microsoft\GameBar" /v "ShowStartupPanel" /t REG_DWORD /d "0" /f
+Reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Windows\GameDVR" /v "AllowGameDVR" /t REG_DWORD /d "0" /f
+powershell.exe -command "Stop-Process -Force -Name GameBar -ErrorAction SilentlyContinue"
 cls
 SET msgboxTitle=Opline Software
 SET msgboxBody=Finished - Skonczone
@@ -2607,13 +2655,21 @@ SET tmpmsgbox=%temp%~tmpmsgbox.vbs
 IF EXIST "%tmpmsgbox%" DEL /F /Q "%tmpmsgbox%"
 ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
 WSCRIPT "%tmpmsgbox%"
-goto XboxGameDVR
+goto XboxGamebar
 
-:EXboxGameDVR
+:EXboxGamebar
 cls
 REG ADD "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\GameDVR" /V AppCaptureEnabled /T REG_DWORD /D 1 /F
 REG ADD "HKCU\System\GameConfigStore" /V GameDVR_Enabled /T REG_DWORD /D 1 /F
 REG ADD "HKLM\SOFTWARE\Microsoft\PolicyManager\default\ApplicationManagement\AllowGameDVR" /V value /T REG_DWORD /D 1 /F
+reg delete "HKCU\Software\Microsoft\GameBar" /v "UseNexusForGameBarEnabled" /f
+Reg.exe delete "HKCU\SOFTWARE\Microsoft\GameBar" /v "AllowAutoGameMode" /f
+Reg.exe delete "HKCU\SOFTWARE\Microsoft\GameBar" /v "AutoGameModeEnabled" /f
+Reg.exe delete "HKCU\SOFTWARE\Microsoft\GameBar" /v "GamePanelStartupTipIndex" /f
+Reg.exe delete "HKCU\SOFTWARE\Microsoft\GameBar" /v "ShowStartupPanel" /f
+Reg.exe add "HKCU\SOFTWARE\Microsoft\GameBar" /f
+Reg.exe delete "HKLM\SOFTWARE\Policies\Microsoft\Windows\GameDVR" /v "AllowGameDVR" /f
+powershell.exe -command "Start-Process -Force -Name GameBar -ErrorAction SilentlyContinue"
 cls
 SET msgboxTitle=Opline Software
 SET msgboxBody=Finished - Skonczone
@@ -2621,7 +2677,7 @@ SET tmpmsgbox=%temp%~tmpmsgbox.vbs
 IF EXIST "%tmpmsgbox%" DEL /F /Q "%tmpmsgbox%"
 ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
 WSCRIPT "%tmpmsgbox%"
-goto XboxGameDVR
+goto XboxGamebar
 
 :GameBar
 cls
@@ -2654,7 +2710,7 @@ echo.
 cmdMenuSel f3B0 "   [+]  Enable" "   [+]  Disable" "   [+]  Exit"
 if %ERRORLEVEL% == 1 goto EGameBar
 if %ERRORLEVEL% == 2 goto DGameBar
-if %ERRORLEVEL% == 3 goto OtherD
+if %ERRORLEVEL% == 3 goto Xbox
 
 :DGameBar
 cls
@@ -2701,6 +2757,75 @@ IF EXIST "%tmpmsgbox%" DEL /F /Q "%tmpmsgbox%"
 ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
 WSCRIPT "%tmpmsgbox%"
 goto GameBar
+
+:XboxApps
+cls
+echo.
+echo.
+call :ColorText 1B "###############################################################################################"
+echo.
+echo.
+echo                             ____  _____  _      _____ _   _ ______                      
+echo                            / __ \^|  __ \^| ^|    ^|_   _^| \ ^| ^|  ____^|                     
+echo                           ^| ^|  ^| ^| ^|__) ^| ^|      ^| ^| ^|  \^| ^| ^|__                        
+echo                           ^| ^|  ^| ^|  ___/^| ^|      ^| ^| ^|   \ ^|  __^|                       
+echo                           ^| ^|__^| ^| ^|    ^| ^|____ _^| ^|_^| ^|\  ^| ^|____                      
+echo                            \____/^|_^|    ^|______^|_____^|_^| \_^|______^|                     
+echo                   _____  ____  ______ _________          __     _____  ______ 
+echo                  / ____^|/ __ \^|  ____^|__   __\ \        / /\   ^|  __ \^|  ____^|
+echo                 ^| (___ ^| ^|  ^| ^| ^|__     ^| ^|   \ \  /\  / /  \  ^| ^|__) ^| ^|__   
+echo                  \___ \^| ^|  ^| ^|  __^|    ^| ^|    \ \/  \/ / /\ \ ^|  _  /^|  __^|  
+echo                  ____) ^| ^|__^| ^| ^|       ^| ^|     \  /\  / ____ \^| ^| \ \^| ^|____ 
+echo                 ^|_____/ \____/^|_^|       ^|_^|      \/  \/_/    \_\_^|  \_\______^|
+echo.
+echo.
+call :ColorText 0A "                                            L I T E"
+echo.
+echo.
+echo.
+call :ColorText 1B "###############################################################################################"
+echo.
+echo.
+cmdMenuSel f3B0 "   [+]  Uninstall" "   [+]  Install" "   [+]  Exit"
+if %ERRORLEVEL% == 1 goto UXboxApps
+if %ERRORLEVEL% == 2 goto IXboxApps
+if %ERRORLEVEL% == 3 goto Xbox
+
+:UXboxApps
+cls
+Get-AppxPackage -allusers *Microsoft.GamingApp* | Remove-AppxPackage
+Get-AppxPackage -allusers *Microsoft.Xbox.TCUI* | Remove-AppxPackage
+Get-AppxPackage -allusers *Microsoft.XboxApp* | Remove-AppxPackage
+Get-AppxPackage -allusers *Microsoft.XboxGameOverlay* | Remove-AppxPackage
+Get-AppxPackage -allusers *Microsoft.XboxGamingOverlay* | Remove-AppxPackage
+Get-AppxPackage -allusers *Microsoft.XboxIdentityProvider* | Remove-AppxPackage
+Get-AppxPackage -allusers *Microsoft.XboxSpeechToTextOverlay* | Remove-AppxPackage
+cls
+SET msgboxTitle=Opline Software
+SET msgboxBody=Finished - Skonczone
+SET tmpmsgbox=%temp%~tmpmsgbox.vbs
+IF EXIST "%tmpmsgbox%" DEL /F /Q "%tmpmsgbox%"
+ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
+WSCRIPT "%tmpmsgbox%"
+goto XboxApps
+
+:IXboxApps
+cls
+Get-AppXPackage -AllUsers *Microsoft.GamingApp* | Foreach {Add-AppxPackage -DisableDevelopmentMode -Register -ErrorAction SilentlyContinue "$($_.InstallLocation)\AppXManifest.xml"}
+Get-AppXPackage -AllUsers *Microsoft.Xbox.TCUI* | Foreach {Add-AppxPackage -DisableDevelopmentMode -Register -ErrorAction SilentlyContinue "$($_.InstallLocation)\AppXManifest.xml"}
+Get-AppXPackage -AllUsers *Microsoft.XboxApp* | Foreach {Add-AppxPackage -DisableDevelopmentMode -Register -ErrorAction SilentlyContinue "$($_.InstallLocation)\AppXManifest.xml"}
+Get-AppXPackage -AllUsers *Microsoft.XboxGameOverlay* | Foreach {Add-AppxPackage -DisableDevelopmentMode -Register -ErrorAction SilentlyContinue "$($_.InstallLocation)\AppXManifest.xml"}
+Get-AppXPackage -AllUsers *Microsoft.XboxGamingOverlay* | Foreach {Add-AppxPackage -DisableDevelopmentMode -Register -ErrorAction SilentlyContinue "$($_.InstallLocation)\AppXManifest.xml"}
+Get-AppXPackage -AllUsers *Microsoft.XboxIdentityProvider* | Foreach {Add-AppxPackage -DisableDevelopmentMode -Register -ErrorAction SilentlyContinue "$($_.InstallLocation)\AppXManifest.xml"}
+Get-AppXPackage -AllUsers *Microsoft.XboxSpeechToTextOverlay* | Foreach {Add-AppxPackage -DisableDevelopmentMode -Register -ErrorAction SilentlyContinue "$($_.InstallLocation)\AppXManifest.xml"}
+cls
+SET msgboxTitle=Opline Software
+SET msgboxBody=Finished - Skonczone
+SET tmpmsgbox=%temp%~tmpmsgbox.vbs
+IF EXIST "%tmpmsgbox%" DEL /F /Q "%tmpmsgbox%"
+ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
+WSCRIPT "%tmpmsgbox%"
+goto XboxApps
 
 :Services
 cls
@@ -3042,6 +3167,7 @@ Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Microsoft_Blue
 Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\RFCOMM" /v "Start" /t REG_DWORD /d "4" /f
 reg add "HKLM\SOFTWARE\Microsoft\PolicyManager\default\Connectivity\AllowBluetooth" /v "value" /t REG_DWORD /d "0" /f > nul
 devmanview /disable "Generic Bluetooth Adapter"
+powerrun "schtasks.exe" /change /disable /TN "\Microsoft\Windows\Bluetooth\UninstallDeviceTask" >nul 2>&1
 cls
 SET msgboxTitle=Opline Software
 SET msgboxBody=Finished - Skonczone
@@ -3070,6 +3196,7 @@ Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Microsoft_Blue
 Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\RFCOMM" /v "Start" /t REG_DWORD /d "3" /f
 reg add "HKLM\SOFTWARE\Microsoft\PolicyManager\default\Connectivity\AllowBluetooth" /v "value" /t REG_DWORD /d "2" /f > nul
 devmanview /enable "Generic Bluetooth Adapter"
+powerrun "schtasks.exe" /change /enable /TN "\Microsoft\Windows\Bluetooth\UninstallDeviceTask" >nul 2>&1
 cls
 SET msgboxTitle=Opline Software
 SET msgboxBody=Finished - Skonczone
