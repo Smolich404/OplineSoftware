@@ -3341,8 +3341,6 @@ sc config KSecPkg start=disabled
 sc config mrxsmb20 start=disabled
 sc config mrxsmb start=disabled
 sc config LanmanWorkstation start=disabled
-sc config LanmanServer start=disabled
-sc config srv2 start=disabled
 DISM /Online /Disable-Feature /FeatureName:SmbDirect /norestart
 goto end12
 
@@ -3355,7 +3353,6 @@ sc config mrxsmb20 start=demand
 sc config mrxsmb start=demand
 sc config srv2 start=demand
 sc config LanmanWorkstation start=auto
-sc config LanmanServer start=auto
 DISM /Online /Enable-Feature /FeatureName:SmbDirect /norestart
 goto end12
 
