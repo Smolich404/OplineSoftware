@@ -1523,7 +1523,7 @@ Goto Debloater
 
 :GANG3
 cls
-powershell -command "iwr -useb https://christitus.com/win | iex"
+powershell -command "irm "https://christitus.com/win" | iex"
 title Opline Software [LITE]
 Goto Debloater
 
@@ -2529,13 +2529,14 @@ echo.
 call :ColorText 1B "###############################################################################################"
 echo.
 echo.
-cmdMenuSel f3B0 "   [+]  Enable" "   [+]  Disable" "   [+]  Xbox Gamebar" "   [+]  GameBarPresenceWriter" "   [+]  Apps" "   [+]  Exit"
+cmdMenuSel f3B0 "   [+]  Enable" "   [+]  Disable" "   [+]  Xbox Gamebar" "   [+]  GameBarPresenceWriter" "   [+]  FSE" "   [+]  Apps" "   [+]  Exit"
 if %ERRORLEVEL% == 1 goto EXbox
 if %ERRORLEVEL% == 2 goto DXbox
 if %ERRORLEVEL% == 3 goto XboxGamebar
 if %ERRORLEVEL% == 4 goto GameBar
-if %ERRORLEVEL% == 5 goto XboxApps
-if %ERRORLEVEL% == 6 goto OtherD
+if %ERRORLEVEL% == 5 goto FSE
+if %ERRORLEVEL% == 6 goto XboxApps
+if %ERRORLEVEL% == 7 goto OtherD
 
 :DXbox
 cls
@@ -2758,6 +2759,98 @@ ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
 WSCRIPT "%tmpmsgbox%"
 goto GameBar
 
+:FSE
+cls
+echo.
+echo.
+call :ColorText 1B "###############################################################################################"
+echo.
+echo.
+echo                             ____  _____  _      _____ _   _ ______                      
+echo                            / __ \^|  __ \^| ^|    ^|_   _^| \ ^| ^|  ____^|                     
+echo                           ^| ^|  ^| ^| ^|__) ^| ^|      ^| ^| ^|  \^| ^| ^|__                        
+echo                           ^| ^|  ^| ^|  ___/^| ^|      ^| ^| ^|   \ ^|  __^|                       
+echo                           ^| ^|__^| ^| ^|    ^| ^|____ _^| ^|_^| ^|\  ^| ^|____                      
+echo                            \____/^|_^|    ^|______^|_____^|_^| \_^|______^|                     
+echo                   _____  ____  ______ _________          __     _____  ______ 
+echo                  / ____^|/ __ \^|  ____^|__   __\ \        / /\   ^|  __ \^|  ____^|
+echo                 ^| (___ ^| ^|  ^| ^| ^|__     ^| ^|   \ \  /\  / /  \  ^| ^|__) ^| ^|__   
+echo                  \___ \^| ^|  ^| ^|  __^|    ^| ^|    \ \/  \/ / /\ \ ^|  _  /^|  __^|  
+echo                  ____) ^| ^|__^| ^| ^|       ^| ^|     \  /\  / ____ \^| ^| \ \^| ^|____ 
+echo                 ^|_____/ \____/^|_^|       ^|_^|      \/  \/_/    \_\_^|  \_\______^|
+echo.
+echo.
+call :ColorText 0A "                                            L I T E"
+echo.
+echo.
+echo.
+call :ColorText 1B "###############################################################################################"
+echo.
+echo.
+cmdMenuSel f3B0 "   [+]  Enable FSE" "   [+]  Disable FSE" "   [+]  Exit"
+if %ERRORLEVEL% == 1 goto EFSE
+if %ERRORLEVEL% == 2 goto DFSE
+if %ERRORLEVEL% == 3 goto Xbox
+
+:DFSE
+cls
+Reg.exe add "HKCU\System\GameConfigStore" /v "GameDVR_Enabled" /t REG_DWORD /d "0" /f
+Reg.exe add "HKCU\System\GameConfigStore" /v "GameDVR_FSEBehaviorMode" /t REG_DWORD /d "2" /f
+Reg.exe add "HKCU\System\GameConfigStore" /v "Win32_AutoGameModeDefaultProfile" /t REG_BINARY /d "01000100000000000000000000000000000000000000000000000000000000000000000000000000" /f
+Reg.exe add "HKCU\System\GameConfigStore" /v "Win32_GameModeRelatedProcesses" /t REG_BINARY /d "010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" /f
+Reg.exe add "HKCU\System\GameConfigStore" /v "GameDVR_HonorUserFSEBehaviorMode" /t REG_DWORD /d "1" /f
+Reg.exe add "HKCU\System\GameConfigStore" /v "GameDVR_DXGIHonorFSEWindowsCompatible" /t REG_DWORD /d "1" /f
+Reg.exe add "HKCU\System\GameConfigStore" /v "GameDVR_EFSEFeatureFlags" /t REG_DWORD /d "0" /f
+Reg.exe add "HKCU\System\GameConfigStore" /v "GameDVR_FSEBehavior" /t REG_DWORD /d "2" /f
+Reg.exe add "HKCU\System\GameConfigStore" /v "GameDVR_DSEBehavior" /t REG_DWORD /d "2" /f
+Reg.exe add "HKU\.DEFAULT\System\GameConfigStore" /v "GameDVR_Enabled" /t REG_DWORD /d "0" /f
+Reg.exe add "HKU\.DEFAULT\System\GameConfigStore" /v "GameDVR_FSEBehaviorMode" /t REG_DWORD /d "2" /f
+Reg.exe add "HKU\.DEFAULT\System\GameConfigStore" /v "Win32_AutoGameModeDefaultProfile" /t REG_BINARY /d "01000100000000000000000000000000000000000000000000000000000000000000000000000000" /f
+Reg.exe add "HKU\.DEFAULT\System\GameConfigStore" /v "Win32_GameModeRelatedProcesses" /t REG_BINARY /d "010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" /f
+Reg.exe add "HKU\.DEFAULT\System\GameConfigStore" /v "GameDVR_HonorUserFSEBehaviorMode" /t REG_DWORD /d "1" /f
+Reg.exe add "HKU\.DEFAULT\System\GameConfigStore" /v "GameDVR_DXGIHonorFSEWindowsCompatible" /t REG_DWORD /d "1" /f
+Reg.exe add "HKU\.DEFAULT\System\GameConfigStore" /v "GameDVR_EFSEFeatureFlags" /t REG_DWORD /d "0" /f
+Reg.exe add "HKU\.DEFAULT\System\GameConfigStore" /v "GameDVR_FSEBehavior" /t REG_DWORD /d "2" /f
+Reg.exe add "HKU\.DEFAULT\System\GameConfigStore" /v "GameDVR_DSEBehavior" /t REG_DWORD /d "2" /f
+cls
+SET msgboxTitle=Opline Software
+SET msgboxBody=Finished - Skonczone
+SET tmpmsgbox=%temp%~tmpmsgbox.vbs
+IF EXIST "%tmpmsgbox%" DEL /F /Q "%tmpmsgbox%"
+ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
+WSCRIPT "%tmpmsgbox%"
+goto FSE
+
+:EFSE
+cls
+Reg.exe add "HKCU\System\GameConfigStore" /v "GameDVR_Enabled" /t REG_DWORD /d "1" /f
+Reg.exe add "HKCU\System\GameConfigStore" /v "GameDVR_FSEBehaviorMode" /t REG_DWORD /d "0" /f
+Reg.exe add "HKCU\System\GameConfigStore" /v "Win32_AutoGameModeDefaultProfile" /t REG_BINARY /d "01000100000000000000000000000000000000000000000000000000000000000000000000000000" /f
+Reg.exe add "HKCU\System\GameConfigStore" /v "Win32_GameModeRelatedProcesses" /t REG_BINARY /d "010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" /f
+Reg.exe add "HKCU\System\GameConfigStore" /v "GameDVR_HonorUserFSEBehaviorMode" /t REG_DWORD /d "0" /f
+Reg.exe add "HKCU\System\GameConfigStore" /v "GameDVR_DXGIHonorFSEWindowsCompatible" /t REG_DWORD /d "0" /f
+Reg.exe add "HKCU\System\GameConfigStore" /v "GameDVR_EFSEFeatureFlags" /t REG_DWORD /d "0" /f
+Reg.exe delete "HKCU\System\GameConfigStore" /v "GameDVR_FSEBehavior" /f
+Reg.exe delete "HKCU\System\GameConfigStore" /v "GameDVR_DSEBehavior" /f
+Reg.exe delete "HKU\.DEFAULT\System\GameConfigStore" /v "GameDVR_Enabled" /f
+Reg.exe delete "HKU\.DEFAULT\System\GameConfigStore" /v "GameDVR_FSEBehaviorMode" /f
+Reg.exe delete "HKU\.DEFAULT\System\GameConfigStore" /v "Win32_AutoGameModeDefaultProfile" /f
+Reg.exe delete "HKU\.DEFAULT\System\GameConfigStore" /v "Win32_GameModeRelatedProcesses" /f
+Reg.exe delete "HKU\.DEFAULT\System\GameConfigStore" /v "GameDVR_HonorUserFSEBehaviorMode" /f
+Reg.exe delete "HKU\.DEFAULT\System\GameConfigStore" /v "GameDVR_DXGIHonorFSEWindowsCompatible" /f
+Reg.exe delete "HKU\.DEFAULT\System\GameConfigStore" /v "GameDVR_EFSEFeatureFlags" /f
+Reg.exe delete "HKU\.DEFAULT\System\GameConfigStore" /v "GameDVR_FSEBehavior" /f
+Reg.exe delete "HKU\.DEFAULT\System\GameConfigStore" /v "GameDVR_DSEBehavior" /f
+Reg.exe add "HKU\.DEFAULT\System\GameConfigStore" /f
+cls
+SET msgboxTitle=Opline Software
+SET msgboxBody=Finished - Skonczone
+SET tmpmsgbox=%temp%~tmpmsgbox.vbs
+IF EXIST "%tmpmsgbox%" DEL /F /Q "%tmpmsgbox%"
+ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
+WSCRIPT "%tmpmsgbox%"
+goto FSE
+
 :XboxApps
 cls
 echo.
@@ -2855,22 +2948,25 @@ echo.
 call :ColorText 1B "###############################################################################################"
 echo.
 echo.
-cmdMenuSel f3B0 "   [+]  Enable" "   [+]  Disable" "   [+]  Spooler" "   [+]  Capture" "   [+]  Hotspot" "   [+]  Bluetooth" "   [+]  Hyper-V" "   [+]  Lanman Workstation" "   [+]  Night Light and Brightness Control" "   [+]  Remote Desktop" "   [+]  Serial Port" "   [+]  Windows Search" "   [+]  VPN" "   [+]  Network Discovery" "   [+]  Exit"
+cmdMenuSel f3B0 "   [+]  Enable" "   [+]  Disable" "   [+]  Spooler" "   [+]  Clipboard" "   [+]  Capture" "   [+]  CD-ROM" "   [+]  Hotspot" "   [+]  Bluetooth" "   [+]  Hyper-V" "   [+]  Lanman Workstation" "   [+]  Night Light and Brightness Control" "   [+]  Remote Desktop" "   [+]  Serial Port" "   [+]  Windows Search" "   [+]  Wi-Fi" "   [+]  VPN" "   [+]  Network Discovery" "   [+]  Exit"
 if %ERRORLEVEL% == 1 goto EServices
 if %ERRORLEVEL% == 2 goto DServices
 if %ERRORLEVEL% == 3 goto Spooler
-if %ERRORLEVEL% == 4 goto Capture
-if %ERRORLEVEL% == 5 goto Hotspot
-if %ERRORLEVEL% == 6 goto Bluetooth
-if %ERRORLEVEL% == 7 goto Hyper-V
-if %ERRORLEVEL% == 8 goto LanmanWorkstation
-if %ERRORLEVEL% == 9 goto NLaBC
-if %ERRORLEVEL% == 10 goto RemoteDesktop
-if %ERRORLEVEL% == 11 goto SerialPort
-if %ERRORLEVEL% == 12 goto WindowsSearch
-if %ERRORLEVEL% == 13 goto VPN
-if %ERRORLEVEL% == 14 goto NetworkDiscovery
-if %ERRORLEVEL% == 15 goto OplineMenu
+if %ERRORLEVEL% == 4 goto Clipboard
+if %ERRORLEVEL% == 5 goto Capture
+if %ERRORLEVEL% == 6 goto CDROM
+if %ERRORLEVEL% == 7 goto Hotspot
+if %ERRORLEVEL% == 8 goto Bluetooth
+if %ERRORLEVEL% == 9 goto Hyper-V
+if %ERRORLEVEL% == 10 goto LanmanWorkstation
+if %ERRORLEVEL% == 11 goto NLaBC
+if %ERRORLEVEL% == 12 goto RemoteDesktop
+if %ERRORLEVEL% == 13 goto SerialPort
+if %ERRORLEVEL% == 14 goto WindowsSearch
+if %ERRORLEVEL% == 15 goto WiFi
+if %ERRORLEVEL% == 16 goto VPN
+if %ERRORLEVEL% == 17 goto NetworkDiscovery
+if %ERRORLEVEL% == 18 goto OplineMenu
 
 :Capture
 cls
@@ -3055,6 +3151,198 @@ IF EXIST "%tmpmsgbox%" DEL /F /Q "%tmpmsgbox%"
 ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
 WSCRIPT "%tmpmsgbox%"
 goto Spooler
+
+:Clipboard
+cls
+echo.
+echo.
+call :ColorText 1B "###############################################################################################"
+echo.
+echo.
+echo                             ____  _____  _      _____ _   _ ______                      
+echo                            / __ \^|  __ \^| ^|    ^|_   _^| \ ^| ^|  ____^|                     
+echo                           ^| ^|  ^| ^| ^|__) ^| ^|      ^| ^| ^|  \^| ^| ^|__                        
+echo                           ^| ^|  ^| ^|  ___/^| ^|      ^| ^| ^|   \ ^|  __^|                       
+echo                           ^| ^|__^| ^| ^|    ^| ^|____ _^| ^|_^| ^|\  ^| ^|____                      
+echo                            \____/^|_^|    ^|______^|_____^|_^| \_^|______^|                     
+echo                   _____  ____  ______ _________          __     _____  ______ 
+echo                  / ____^|/ __ \^|  ____^|__   __\ \        / /\   ^|  __ \^|  ____^|
+echo                 ^| (___ ^| ^|  ^| ^| ^|__     ^| ^|   \ \  /\  / /  \  ^| ^|__) ^| ^|__   
+echo                  \___ \^| ^|  ^| ^|  __^|    ^| ^|    \ \/  \/ / /\ \ ^|  _  /^|  __^|  
+echo                  ____) ^| ^|__^| ^| ^|       ^| ^|     \  /\  / ____ \^| ^| \ \^| ^|____ 
+echo                 ^|_____/ \____/^|_^|       ^|_^|      \/  \/_/    \_\_^|  \_\______^|
+echo.
+echo.
+call :ColorText 0A "                                            L I T E"
+echo.
+echo.
+echo.
+call :ColorText 1B "###############################################################################################"
+echo.
+echo.
+cmdMenuSel f3B0 "   [+]  Enable Clipboard" "   [+]  Disable Clipboard" "   [+]  Exit"
+if %ERRORLEVEL% == 1 goto EClipboard
+if %ERRORLEVEL% == 2 goto DClipboard
+if %ERRORLEVEL% == 3 goto Services
+
+:DClipboard
+cls
+sc config cbdhsvc start=disabled > nul 2>&1
+sc stop cbdhsvc > nul 2>&1
+cls
+SET msgboxTitle=Opline Software
+SET msgboxBody=Finished - Skonczone
+SET tmpmsgbox=%temp%~tmpmsgbox.vbs
+IF EXIST "%tmpmsgbox%" DEL /F /Q "%tmpmsgbox%"
+ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
+WSCRIPT "%tmpmsgbox%"
+goto Clipboard
+
+:EClipboard
+cls
+sc config cbdhsvc start=auto > nul 2>&1
+sc start cbdhsvc > nul 2>&1
+cls
+SET msgboxTitle=Opline Software
+SET msgboxBody=Finished - Skonczone
+SET tmpmsgbox=%temp%~tmpmsgbox.vbs
+IF EXIST "%tmpmsgbox%" DEL /F /Q "%tmpmsgbox%"
+ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
+WSCRIPT "%tmpmsgbox%"
+goto Clipboard
+
+:CDROM
+cls
+echo.
+echo.
+call :ColorText 1B "###############################################################################################"
+echo.
+echo.
+echo                             ____  _____  _      _____ _   _ ______                      
+echo                            / __ \^|  __ \^| ^|    ^|_   _^| \ ^| ^|  ____^|                     
+echo                           ^| ^|  ^| ^| ^|__) ^| ^|      ^| ^| ^|  \^| ^| ^|__                        
+echo                           ^| ^|  ^| ^|  ___/^| ^|      ^| ^| ^|   \ ^|  __^|                       
+echo                           ^| ^|__^| ^| ^|    ^| ^|____ _^| ^|_^| ^|\  ^| ^|____                      
+echo                            \____/^|_^|    ^|______^|_____^|_^| \_^|______^|                     
+echo                   _____  ____  ______ _________          __     _____  ______ 
+echo                  / ____^|/ __ \^|  ____^|__   __\ \        / /\   ^|  __ \^|  ____^|
+echo                 ^| (___ ^| ^|  ^| ^| ^|__     ^| ^|   \ \  /\  / /  \  ^| ^|__) ^| ^|__   
+echo                  \___ \^| ^|  ^| ^|  __^|    ^| ^|    \ \/  \/ / /\ \ ^|  _  /^|  __^|  
+echo                  ____) ^| ^|__^| ^| ^|       ^| ^|     \  /\  / ____ \^| ^| \ \^| ^|____ 
+echo                 ^|_____/ \____/^|_^|       ^|_^|      \/  \/_/    \_\_^|  \_\______^|
+echo.
+echo.
+call :ColorText 0A "                                            L I T E"
+echo.
+echo.
+echo.
+call :ColorText 1B "###############################################################################################"
+echo.
+echo.
+cmdMenuSel f3B0 "   [+]  Enable CD-ROM" "   [+]  Disable CD-ROM" "   [+]  Exit"
+if %ERRORLEVEL% == 1 goto ECDROM
+if %ERRORLEVEL% == 2 goto DCDROM
+if %ERRORLEVEL% == 3 goto Services
+
+:DCDROM
+cls
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\cdrom" /v "Start" /t REG_DWORD /d "4" /f
+cls
+SET msgboxTitle=Opline Software
+SET msgboxBody=Finished - Skonczone
+SET tmpmsgbox=%temp%~tmpmsgbox.vbs
+IF EXIST "%tmpmsgbox%" DEL /F /Q "%tmpmsgbox%"
+ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
+WSCRIPT "%tmpmsgbox%"
+goto CDROM
+
+:ECDROM
+cls
+Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\cdrom" /v "Start" /t REG_DWORD /d "1" /f
+cls
+SET msgboxTitle=Opline Software
+SET msgboxBody=Finished - Skonczone
+SET tmpmsgbox=%temp%~tmpmsgbox.vbs
+IF EXIST "%tmpmsgbox%" DEL /F /Q "%tmpmsgbox%"
+ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
+WSCRIPT "%tmpmsgbox%"
+goto CDROM
+
+:WiFi
+cls
+echo.
+echo.
+call :ColorText 1B "###############################################################################################"
+echo.
+echo.
+echo                             ____  _____  _      _____ _   _ ______                      
+echo                            / __ \^|  __ \^| ^|    ^|_   _^| \ ^| ^|  ____^|                     
+echo                           ^| ^|  ^| ^| ^|__) ^| ^|      ^| ^| ^|  \^| ^| ^|__                        
+echo                           ^| ^|  ^| ^|  ___/^| ^|      ^| ^| ^|   \ ^|  __^|                       
+echo                           ^| ^|__^| ^| ^|    ^| ^|____ _^| ^|_^| ^|\  ^| ^|____                      
+echo                            \____/^|_^|    ^|______^|_____^|_^| \_^|______^|                     
+echo                   _____  ____  ______ _________          __     _____  ______ 
+echo                  / ____^|/ __ \^|  ____^|__   __\ \        / /\   ^|  __ \^|  ____^|
+echo                 ^| (___ ^| ^|  ^| ^| ^|__     ^| ^|   \ \  /\  / /  \  ^| ^|__) ^| ^|__   
+echo                  \___ \^| ^|  ^| ^|  __^|    ^| ^|    \ \/  \/ / /\ \ ^|  _  /^|  __^|  
+echo                  ____) ^| ^|__^| ^| ^|       ^| ^|     \  /\  / ____ \^| ^| \ \^| ^|____ 
+echo                 ^|_____/ \____/^|_^|       ^|_^|      \/  \/_/    \_\_^|  \_\______^|
+echo.
+echo.
+call :ColorText 0A "                                            L I T E"
+echo.
+echo.
+echo.
+call :ColorText 1B "###############################################################################################"
+echo.
+echo.
+cmdMenuSel f3B0 "   [+]  Enable Wi-Fi" "   [+]  Disable Wi-Fi" "   [+]  Exit"
+if %ERRORLEVEL% == 1 goto EWiFi
+if %ERRORLEVEL% == 2 goto DWiFi
+if %ERRORLEVEL% == 3 goto Services
+
+:DWiFi
+cls
+sc config WlanSvc start=disabled
+sc config vwififlt start=disabled
+sc config netprofm start=disabled
+sc config NlaSvc start=disabled
+sc config eventlog start=disabled
+sc stop WlanSvc
+sc stop vwififlt
+sc stop netprofm
+sc stop NlaSvc
+sc stop eventlog
+cls
+SET msgboxTitle=Opline Software
+SET msgboxBody=Finished - Skonczone
+SET tmpmsgbox=%temp%~tmpmsgbox.vbs
+IF EXIST "%tmpmsgbox%" DEL /F /Q "%tmpmsgbox%"
+ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
+WSCRIPT "%tmpmsgbox%"
+goto WiFi
+
+:EWiFi
+cls
+sc config netprofm start=demand
+sc config NlaSvc start=auto
+sc config WlanSvc start=demand
+sc config vwififlt start=system
+sc config WlanSvc start=auto
+sc config eventlog start=auto
+sc start WlanSvc
+sc start vwififlt
+sc start netprofm
+sc start NlaSvc
+sc start eventlog
+cls
+SET msgboxTitle=Opline Software
+SET msgboxBody=Finished - Skonczone
+SET tmpmsgbox=%temp%~tmpmsgbox.vbs
+IF EXIST "%tmpmsgbox%" DEL /F /Q "%tmpmsgbox%"
+ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
+WSCRIPT "%tmpmsgbox%"
+goto WiFi
 
 :Hotspot
 cls
