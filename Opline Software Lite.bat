@@ -6535,7 +6535,7 @@ echo.
 call :ColorText 1B "###############################################################################################"
 echo.
 echo.
-cmdMenuSel f3B0 "   [+]  Delete Other Plans" "   [+]  Install Opline Plan" "   [+]  Install Opline Plan V2" "   [+]  Enable TRIM for SSD drives" "   [+]  Optimization Bcdedit" "   [+]  Optimization Powercfg" "   [+]  SSD Tune" "   [+]  Ram Reduce" "   [+]  MPO" "   [+]  Disable USB Power Savings" "   [+]  Reset" "   [+]  Exit" 
+cmdMenuSel f3B0 "   [+]  Delete Other Plans" "   [+]  Install Opline Plan" "   [+]  Install Opline Plan V2" "   [+]  Enable TRIM for SSD drives" "   [+]  Optimization Bcdedit" "   [+]  Optimization Powercfg" "   [+]  SSD Tune" "   [+]  Ram Reduce" "   [+]  MPO & Optimizations For Windowed Games" "   [+]  Disable USB Power Savings" "   [+]  Reset" "   [+]  Exit" 
 if %ERRORLEVEL% == 1 goto DelOPlans
 if %ERRORLEVEL% == 2 goto OPlan
 if %ERRORLEVEL% == 3 goto OPlan2
@@ -6577,7 +6577,7 @@ echo.
 call :ColorText 1B "###############################################################################################"
 echo.
 echo.
-cmdMenuSel f3B0 "   [+]  Reset Delete Other Plans" "   [+]  Reset Install Opline Plan" "   [+]  Reset Install Opline Plan V2" "   [+]  Reset Enable TRIM for SSD drives" "   [+]  Reset Optimization Bcdedit" "   [+]  Reset Optimization Powercfg" "   [+]  Reset SSD Tune" "   [+]  Reset Ram Reduce" "   [+]  Reset MPO" "   [+]  Reset Disable USB Power Savings" "   [+]  Exit" 
+cmdMenuSel f3B0 "   [+]  Reset Delete Other Plans" "   [+]  Reset Install Opline Plan" "   [+]  Reset Install Opline Plan V2" "   [+]  Reset Enable TRIM for SSD drives" "   [+]  Reset Optimization Bcdedit" "   [+]  Reset Optimization Powercfg" "   [+]  Reset SSD Tune" "   [+]  Reset Ram Reduce" "   [+]  Reset MPO & Optimizations For Windowed Games" "   [+]  Reset Disable USB Power Savings" "   [+]  Exit" 
 if %ERRORLEVEL% == 1 goto RDelOPlans
 if %ERRORLEVEL% == 2 goto ROPlan
 if %ERRORLEVEL% == 3 goto ROPlan2
@@ -6852,6 +6852,7 @@ goto RBoostOS
 :RMPO
 cls
 Reg.exe delete "HKLM\SOFTWARE\Microsoft\Windows\Dwm" /v "OverlayTestMode" /f
+Reg.exe add "HKCU\Software\Microsoft\DirectX\UserGpuPreferences" /v "DirectXUserGlobalSettings" /t REG_SZ /d "VRROptimizeEnable=0;SwapEffectUpgradeEnable=0;" /f
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\Dwm" /f
 cls
 SET msgboxTitle=Opline Software
@@ -7128,6 +7129,7 @@ goto BoostOS
 :MPO
 cls
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\Dwm" /v "OverlayTestMode" /t REG_DWORD /d "5" /f
+reg add "HKCU\Software\Microsoft\DirectX\UserGpuPreferences" /v "DirectXUserGlobalSettings" /t REG_SZ /d "VRROptimizeEnable=0;SwapEffectUpgradeEnable=0;" /f
 cls
 SET msgboxTitle=Opline Software
 SET msgboxBody=Finished - Skonczone
@@ -7897,6 +7899,7 @@ Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Services\nvlddmkm\Parameters" /v "
 for /f %%a in ('Reg query "HKLM\System\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}" /t REG_SZ /s /e /f "NVIDIA" ^| findstr "HKEY"') do (
 Reg delete "%%a" /v "EnableTiledDisplay" /f
 Reg delete "%%a" /v "TCCSupported" /f
+Reg delete "%%a" /v "DisableDynamicPstate" /f >nul 2>&1
 )
 for /f %%i in ('Reg query "HKLM\System\ControlSet001\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}" /t REG_SZ /s /e /f "NVIDIA" ^| findstr "HKEY"') do (
 Reg delete "%%i" /v "DisableDynamicPstate" /f >nul 2>&1
@@ -8103,6 +8106,7 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\nvlddmkm\Parameters" /v "Ada
 for /f %%a in ('Reg query "HKLM\System\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}" /t REG_SZ /s /e /f "NVIDIA" ^| findstr "HKEY"') do (
 Reg add "%%a" /v "EnableTiledDisplay" /t REG_DWORD /d "0" /f
 Reg add "%%a" /v "TCCSupported" /t REG_DWORD /d "0" /f
+Reg add "%%a" /v "DisableDynamicPstate" /t REG_DWORD /d "1" /f >nul 2>&1
 )
 for /f %%i in ('Reg query "HKLM\System\ControlSet001\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}" /t REG_SZ /s /e /f "NVIDIA" ^| findstr "HKEY"') do (
 Reg add "%%i" /v "DisableDynamicPstate" /t REG_DWORD /d "1" /f >nul 2>&1
@@ -9771,14 +9775,15 @@ echo.
 call :ColorText 1B "###############################################################################################"
 echo.
 echo.
-cmdMenuSel f3B0 "   [+]  Network Optimization through the Registry" "   [+]  Optimize System Mci" "   [+]  Disable Nagling" "   [+]  Netsh Settings" "   [+]  Repair Ping" "   [+]  Reset" "   [+]  Exit"
+cmdMenuSel f3B0 "   [+]  Network Optimization through the Registry" "   [+]  Optimize System Mci" "   [+]  Disable Nagling" "   [+]  Netsh Settings" "   [+]  Network Adapter" "   [+]  Repair Ping" "   [+]  Reset" "   [+]  Exit"
 if %ERRORLEVEL% == 1 goto NREG
 if %ERRORLEVEL% == 2 goto OSMCI
 if %ERRORLEVEL% == 3 goto DNagling
 if %ERRORLEVEL% == 4 goto Netsh
-if %ERRORLEVEL% == 5 goto Ping
-if %ERRORLEVEL% == 6 goto RInternet
-if %ERRORLEVEL% == 7 goto OplineMenu
+if %ERRORLEVEL% == 5 goto NetworkAdapter
+if %ERRORLEVEL% == 6 goto Ping
+if %ERRORLEVEL% == 7 goto RInternet
+if %ERRORLEVEL% == 8 goto OplineMenu
 
 :RInternet
 cls
@@ -9808,13 +9813,14 @@ echo.
 call :ColorText 1B "###############################################################################################"
 echo.
 echo.
-cmdMenuSel f3B0 "   [+]  Reset Network Optimization through the Registry" "   [+]  Reset Optimize System Mci" "   [+]  Reset Disable Nagling" "   [+]  Reset Netsh Settings" "   [+]  Reset Repair Ping" "   [+]  Exit"
+cmdMenuSel f3B0 "   [+]  Reset Network Optimization through the Registry" "   [+]  Reset Optimize System Mci" "   [+]  Reset Disable Nagling" "   [+]  Reset Netsh Settings" "   [+]  Reset Network Adapter" "   [+]  Reset Repair Ping" "   [+]  Exit"
 if %ERRORLEVEL% == 1 goto RNREG
 if %ERRORLEVEL% == 2 goto ROSMCI
 if %ERRORLEVEL% == 3 goto RDNagling
 if %ERRORLEVEL% == 4 goto RNetsh
-if %ERRORLEVEL% == 5 goto RPing
-if %ERRORLEVEL% == 6 goto Internet
+if %ERRORLEVEL% == 5 goto RNetworkAdapter
+if %ERRORLEVEL% == 6 goto RPing
+if %ERRORLEVEL% == 7 goto Internet
 
 :RNREG
 cls
@@ -10043,6 +10049,29 @@ netsh winsock reset
 ipconfig /release
 ipconfig /renew
 ipconfig /flushdns
+goto endrinternet
+
+:RNetworkAdapter
+cls
+powershell -command "$progresspreference = 'silentlycontinue'"
+powershell -command "Enable-NetAdapterBinding -Name "*" -ComponentID ms_lldp -ErrorAction SilentlyContinue"
+powershell -command "Enable-NetAdapterBinding -Name "*" -ComponentID ms_lltdio -ErrorAction SilentlyContinue"
+powershell -command "Enable-NetAdapterBinding -Name "*" -ComponentID ms_implat -ErrorAction SilentlyContinue"
+powershell -command "Enable-NetAdapterBinding -Name "*" -ComponentID ms_tcpip -ErrorAction SilentlyContinue"
+powershell -command "Enable-NetAdapterBinding -Name "*" -ComponentID ms_rspndr -ErrorAction SilentlyContinue"
+powershell -command "Enable-NetAdapterBinding -Name "*" -ComponentID ms_tcpip6 -ErrorAction SilentlyContinue"
+powershell -command "Enable-NetAdapterBinding -Name "*" -ComponentID ms_server -ErrorAction SilentlyContinue"
+powershell -command "Enable-NetAdapterBinding -Name "*" -ComponentID ms_msclient -ErrorAction SilentlyContinue"
+powershell -command "Enable-NetAdapterBinding -Name "*" -ComponentID ms_pacer -ErrorAction SilentlyContinue"
+powershell -command "Enable-NetAdapterBinding -Name "*" -ComponentID ms_lldp -ErrorAction SilentlyContinue"
+powershell -command "Enable-NetAdapterBinding -Name "*" -ComponentID ms_lltdio -ErrorAction SilentlyContinue"
+powershell -command "Enable-NetAdapterBinding -Name "*" -ComponentID ms_implat -ErrorAction SilentlyContinue"
+powershell -command "Enable-NetAdapterBinding -Name "*" -ComponentID ms_tcpip -ErrorAction SilentlyContinue"
+powershell -command "Enable-NetAdapterBinding -Name "*" -ComponentID ms_rspndr -ErrorAction SilentlyContinue"
+powershell -command "Enable-NetAdapterBinding -Name "*" -ComponentID ms_tcpip6 -ErrorAction SilentlyContinue"
+powershell -command "Enable-NetAdapterBinding -Name "*" -ComponentID ms_server -ErrorAction SilentlyContinue"
+powershell -command "Enable-NetAdapterBinding -Name "*" -ComponentID ms_msclient -ErrorAction SilentlyContinue"
+powershell -command "Enable-NetAdapterBinding -Name "*" -ComponentID ms_pacer -ErrorAction SilentlyContinue"
 goto endrinternet
 
 :endrinternet
@@ -10311,6 +10340,29 @@ netsh int tcp set global rsc=disabled
 ipconfig /release
 ipconfig /renew
 ipconfig /flushdns
+goto endinternet
+
+:NetworkAdapter
+cls
+powershell -command "$progresspreference = 'silentlycontinue'"
+powershell -command "Disable-NetAdapterBinding -Name "*" -ComponentID ms_lldp -ErrorAction SilentlyContinue"
+powershell -command "Disable-NetAdapterBinding -Name "*" -ComponentID ms_lltdio -ErrorAction SilentlyContinue"
+powershell -command "Disable-NetAdapterBinding -Name "*" -ComponentID ms_implat -ErrorAction SilentlyContinue"
+powershell -command "Enable-NetAdapterBinding -Name "*" -ComponentID ms_tcpip -ErrorAction SilentlyContinue"
+powershell -command "Disable-NetAdapterBinding -Name "*" -ComponentID ms_rspndr -ErrorAction SilentlyContinue"
+powershell -command "Disable-NetAdapterBinding -Name "*" -ComponentID ms_tcpip6 -ErrorAction SilentlyContinue"
+powershell -command "Disable-NetAdapterBinding -Name "*" -ComponentID ms_server -ErrorAction SilentlyContinue"
+powershell -command "Disable-NetAdapterBinding -Name "*" -ComponentID ms_msclient -ErrorAction SilentlyContinue"
+powershell -command "Disable-NetAdapterBinding -Name "*" -ComponentID ms_pacer -ErrorAction SilentlyContinue"
+powershell -command "Disable-NetAdapterBinding -Name "*" -ComponentID ms_lldp -ErrorAction SilentlyContinue"
+powershell -command "Disable-NetAdapterBinding -Name "*" -ComponentID ms_lltdio -ErrorAction SilentlyContinue"
+powershell -command "Disable-NetAdapterBinding -Name "*" -ComponentID ms_implat -ErrorAction SilentlyContinue"
+powershell -command "Enable-NetAdapterBinding -Name "*" -ComponentID ms_tcpip -ErrorAction SilentlyContinue"
+powershell -command "Disable-NetAdapterBinding -Name "*" -ComponentID ms_rspndr -ErrorAction SilentlyContinue"
+powershell -command "Disable-NetAdapterBinding -Name "*" -ComponentID ms_tcpip6 -ErrorAction SilentlyContinue"
+powershell -command "Disable-NetAdapterBinding -Name "*" -ComponentID ms_server -ErrorAction SilentlyContinue"
+powershell -command "Disable-NetAdapterBinding -Name "*" -ComponentID ms_msclient -ErrorAction SilentlyContinue"
+powershell -command "Disable-NetAdapterBinding -Name "*" -ComponentID ms_pacer -ErrorAction SilentlyContinue"
 goto endinternet
 
 :endinternet
