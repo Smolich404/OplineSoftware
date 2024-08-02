@@ -7223,26 +7223,27 @@ echo.
 call :ColorText 1B "###############################################################################################"
 echo.
 echo.
-cmdMenuSel f3B0 "   [+]  Radeon Registry Optimization" "   [+]  Radeon Registry Optimization 2" "   [+]  Radeon Registry Optimization 3" "   [+]  Radeon Disable Services" "   [+]  GPU Thread Priority" "   [+]  Install MSI Afterburner and Import Skin" "   [+]  Nvidia Unhide Silk Smoothness" "   [+]  Disable Nvidia Notification Tray Icon" "   [+]  Disable Nvidia Image Sharpening" "   [+]  Nvidia Registry Optimization" "   [+]  Disable Nvidia Telemetry" "   [+]  Disable Nvidia Geforce Experience Telemetry" "   [+]  Disable Nvidia HDCP" "   [+]  Disable Nvidia PowerMizer" "   [+]  Disable Nvidia Display Container" "   [+]  Nvidia Settings" "   [+]  MSI Mode" "   [+]  Reset" "   [+]  Exit"
+cmdMenuSel f3B0 "   [+]  Radeon Registry Optimization" "   [+]  Radeon Registry Optimization 2" "   [+]  Radeon Registry Optimization 3" "   [+]  Radeon Power Saving" "   [+]  Radeon Disable Services" "   [+]  GPU Thread Priority" "   [+]  Install MSI Afterburner and Import Skin" "   [+]  Nvidia Unhide Silk Smoothness" "   [+]  Disable Nvidia Notification Tray Icon" "   [+]  Disable Nvidia Image Sharpening" "   [+]  Nvidia Registry Optimization" "   [+]  Disable Nvidia Telemetry" "   [+]  Disable Nvidia Geforce Experience Telemetry" "   [+]  Disable Nvidia HDCP" "   [+]  Disable Nvidia PowerMizer" "   [+]  Disable Nvidia Display Container" "   [+]  Nvidia Settings" "   [+]  MSI Mode" "   [+]  Reset" "   [+]  Exit"
 if %ERRORLEVEL% == 1 goto RGPU
 if %ERRORLEVEL% == 2 goto RGPU2
 if %ERRORLEVEL% == 3 goto RGPU3
-if %ERRORLEVEL% == 4 goto RDS
-if %ERRORLEVEL% == 5 goto OGPU
-if %ERRORLEVEL% == 6 goto IMSI
-if %ERRORLEVEL% == 7 goto NUSS
-if %ERRORLEVEL% == 8 goto NNTI
-if %ERRORLEVEL% == 9 goto NIS
-if %ERRORLEVEL% == 10 goto NGPU
-if %ERRORLEVEL% == 11 goto NVTelemetry
-if %ERRORLEVEL% == 12 goto GFTelemetry
-if %ERRORLEVEL% == 13 goto DNHDCP
-if %ERRORLEVEL% == 14 goto DNPM
-if %ERRORLEVEL% == 15 goto DNDC
-if %ERRORLEVEL% == 16 goto NvidiaSettings
-if %ERRORLEVEL% == 17 goto MSIMode
-if %ERRORLEVEL% == 18 goto RGPU4
-if %ERRORLEVEL% == 19 goto OplineMenu
+if %ERRORLEVEL% == 4 goto RadeonPowerSaving
+if %ERRORLEVEL% == 5 goto RDS
+if %ERRORLEVEL% == 6 goto OGPU
+if %ERRORLEVEL% == 7 goto IMSI
+if %ERRORLEVEL% == 8 goto NUSS
+if %ERRORLEVEL% == 9 goto NNTI
+if %ERRORLEVEL% == 10 goto NIS
+if %ERRORLEVEL% == 11 goto NGPU
+if %ERRORLEVEL% == 12 goto NVTelemetry
+if %ERRORLEVEL% == 13 goto GFTelemetry
+if %ERRORLEVEL% == 14 goto DNHDCP
+if %ERRORLEVEL% == 15 goto DNPM
+if %ERRORLEVEL% == 16 goto DNDC
+if %ERRORLEVEL% == 17 goto NvidiaSettings
+if %ERRORLEVEL% == 18 goto MSIMode
+if %ERRORLEVEL% == 19 goto RGPU4
+if %ERRORLEVEL% == 20 goto OplineMenu
 
 :RGPU4
 cls
@@ -7272,24 +7273,25 @@ echo.
 call :ColorText 1B "###############################################################################################"
 echo.
 echo.
-cmdMenuSel f3B0 "   [+]  Reset Radeon Registry Optimization" "   [+]  Reset Radeon Registry Optimization 2" "   [+]  Reset Radeon Registry Optimization 3" "   [+]  Reset Radeon Disable Services" "   [+]  Reset Nvidia Registry Optimization" "   [+]  Reset Thread Priority" "   [+]  Reset Nvidia Unhide Silk Smoothness" "   [+]  Reset Disable Nvidia Notification Tray Icon" "   [+]  Reset Disable Nvidia Image Sharpening" "   [+]  Reset Disable Nvidia Telemetry" "   [+]  Reset Disable Nvidia Geforce Experience Telemetry" "   [+]  Reset Disable Nvidia HDCP" "   [+]  Reset Disable Nvidia PowerMizer" "   [+]  Reset Disable Nvidia Display Container" "   [+]  Reset Nvidia Settings" "   [+]  Reset MSI Mode" "   [+]  Exit"
+cmdMenuSel f3B0 "   [+]  Reset Radeon Registry Optimization" "   [+]  Reset Radeon Registry Optimization 2" "   [+]  Reset Radeon Registry Optimization 3" "   [+]  Reset Radeon Power Saving" "   [+]  Reset Radeon Disable Services" "   [+]  Reset Nvidia Registry Optimization" "   [+]  Reset Thread Priority" "   [+]  Reset Nvidia Unhide Silk Smoothness" "   [+]  Reset Disable Nvidia Notification Tray Icon" "   [+]  Reset Disable Nvidia Image Sharpening" "   [+]  Reset Disable Nvidia Telemetry" "   [+]  Reset Disable Nvidia Geforce Experience Telemetry" "   [+]  Reset Disable Nvidia HDCP" "   [+]  Reset Disable Nvidia PowerMizer" "   [+]  Reset Disable Nvidia Display Container" "   [+]  Reset Nvidia Settings" "   [+]  Reset MSI Mode" "   [+]  Exit"
 if %ERRORLEVEL% == 1 goto RGRO
 if %ERRORLEVEL% == 2 goto RGRO2
 if %ERRORLEVEL% == 3 goto RGRO3
-if %ERRORLEVEL% == 4 goto RRDS
-if %ERRORLEVEL% == 5 goto RNRO
-if %ERRORLEVEL% == 6 goto RTPSS
-if %ERRORLEVEL% == 7 goto RNUSS
-if %ERRORLEVEL% == 8 goto RNNTI
-if %ERRORLEVEL% == 9 goto RNIS
-if %ERRORLEVEL% == 10 goto RNVTelemetry
-if %ERRORLEVEL% == 11 goto RGFTelemetry
-if %ERRORLEVEL% == 12 goto ENHDCP
-if %ERRORLEVEL% == 13 goto RDNPM
-if %ERRORLEVEL% == 14 goto RDNDC
-if %ERRORLEVEL% == 15 goto ResetNvidiaSettings
-if %ERRORLEVEL% == 16 goto ResetMSIMode
-if %ERRORLEVEL% == 17 goto GPU
+if %ERRORLEVEL% == 4 goto RRadeonPowerSaving
+if %ERRORLEVEL% == 5 goto RRDS
+if %ERRORLEVEL% == 6 goto RNRO
+if %ERRORLEVEL% == 7 goto RTPSS
+if %ERRORLEVEL% == 8 goto RNUSS
+if %ERRORLEVEL% == 9 goto RNNTI
+if %ERRORLEVEL% == 10 goto RNIS
+if %ERRORLEVEL% == 11 goto RNVTelemetry
+if %ERRORLEVEL% == 12 goto RGFTelemetry
+if %ERRORLEVEL% == 13 goto ENHDCP
+if %ERRORLEVEL% == 14 goto RDNPM
+if %ERRORLEVEL% == 15 goto RDNDC
+if %ERRORLEVEL% == 16 goto ResetNvidiaSettings
+if %ERRORLEVEL% == 17 goto ResetMSIMode
+if %ERRORLEVEL% == 18 goto GPU
 
 :RGRO
 cls
@@ -7852,6 +7854,25 @@ Reg.exe add "HKLM\SYSTEM\ControlSet001\services\amdkmdap" /f
 Reg.exe delete "HKLM\SYSTEM\ControlSet001\Control\CLASS\{4D36E968-E325-11CE-BFC1-08002BE10318}\0000" /v "KMD_EnableCrossGpuDisplaySupport" /f
 Reg.exe add "HKLM\SYSTEM\ControlSet001\Control\CLASS\{4D36E968-E325-11CE-BFC1-08002BE10318}\0000" /f
 goto ENDRGPU
+
+:RRadeonPowerSaving
+cls
+Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000" /v "PP_ThermalAutoThrottlingEnable" /f > nul 2>&1
+Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000" /v "EnableUlps" /f > nul 2>&1
+Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000" /v "PP_SclkDeepSleepDisable" /f > nul 2>&1
+Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000" /v "DisableDMACopy" /f > nul 2>&1
+Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000" /v "DisableBlockWrite" /f > nul 2>&1
+Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000" /v "DisableDrmdmaPowerGating" /f > nul 2>&1
+Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000" /v "PP_GPUPowerDownEnabled" /f > nul 2>&1
+Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000" /v "DisableVCEPowerGating" /f > nul 2>&1
+Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000" /v "DisableUVDPowerGatingDynamic" /f > nul 2>&1
+Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000" /v "DisableSAMUPowerGating" /f > nul 2>&1
+Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000" /v "GCOOPTION_DisableGPIOPowerSaveMode" /f > nul 2>&1
+Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000" /v "EnableAspmL0s" /f > nul 2>&1
+Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000" /v "EnableAspmL1" /f > nul 2>&1
+Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000" /v "EnableUvdClockGating" /f > nul 2>&1
+Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000" /v "EnableVceSwClockGating" /f > nul 2>&1
+Goto ENDRGPU
 
 :RRDS
 cls
@@ -8786,6 +8807,25 @@ Reg.exe add "HKLM\SYSTEM\ControlSet001\services\amdkmdap" /v "KMD_APlusISharedMi
 Reg.exe add "HKLM\SYSTEM\ControlSet001\services\amdkmdap" /v "KMD_PXForceVideoPlaybackToIntegrated" /t REG_DWORD /d "0" /f
 Reg.exe add "HKLM\SYSTEM\ControlSet001\Control\CLASS\{4D36E968-E325-11CE-BFC1-08002BE10318}\0000" /v "KMD_EnableCrossGpuDisplaySupport" /t REG_DWORD /d "1" /f
 Goto ENDGPU
+
+:RadeonPowerSaving
+cls
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000" /v "PP_ThermalAutoThrottlingEnable" /t REG_DWORD /d "0" /f > nul 2>&1
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000" /v "EnableUlps" /t REG_DWORD /d "0" /f > nul 2>&1
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000" /v "PP_SclkDeepSleepDisable" /t REG_DWORD /d "1" /f > nul 2>&1
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000" /v "DisableDMACopy" /t REG_DWORD /d "1" /f > nul 2>&1
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000" /v "DisableBlockWrite" /t REG_DWORD /d "0" /f > nul 2>&1
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000" /v "DisableDrmdmaPowerGating" /t REG_DWORD /d "1" /f > nul 2>&1
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000" /v "PP_GPUPowerDownEnabled" /t REG_DWORD /d "0" /f > nul 2>&1
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000" /v "DisableVCEPowerGating" /t REG_DWORD /d "1" /f > nul 2>&1
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000" /v "DisableUVDPowerGatingDynamic" /t REG_DWORD /d "1" /f > nul 2>&1
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000" /v "DisableSAMUPowerGating" /t REG_DWORD /d "1" /f > nul 2>&1
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000" /v "GCOOPTION_DisableGPIOPowerSaveMode" /t REG_DWORD /d "1" /f > nul 2>&1
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000" /v "EnableAspmL0s" /t REG_DWORD /d "0" /f > nul 2>&1
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000" /v "EnableAspmL1" /t REG_DWORD /d "0" /f > nul 2>&1
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000" /v "EnableUvdClockGating" /t REG_DWORD /d "0" /f > nul 2>&1
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000" /v "EnableVceSwClockGating" /t REG_DWORD /d "0" /f > nul 2>&1
+goto ENDGPU
 
 :RDS
 cls
