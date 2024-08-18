@@ -9818,15 +9818,16 @@ echo.
 call :ColorText 1B "###############################################################################################"
 echo.
 echo.
-cmdMenuSel f3B0 "   [+]  Network Optimization through the Registry" "   [+]  Optimize System Mci" "   [+]  Disable Nagling" "   [+]  Netsh Settings" "   [+]  Network Adapter" "   [+]  Repair Ping" "   [+]  Reset" "   [+]  Exit"
+cmdMenuSel f3B0 "   [+]  Network Optimization through the Registry" "   [+]  Optimize System Mci" "   [+]  Disable Nagling" "   [+]  Netsh Settings" "   [+]  Network Adapter" "   [+]  Repair Ping" "   [+]  Optimize Auto Tuning Level" "   [+]  Reset" "   [+]  Exit"
 if %ERRORLEVEL% == 1 goto NREG
 if %ERRORLEVEL% == 2 goto OSMCI
 if %ERRORLEVEL% == 3 goto DNagling
 if %ERRORLEVEL% == 4 goto Netsh
 if %ERRORLEVEL% == 5 goto NetworkAdapter
 if %ERRORLEVEL% == 6 goto Ping
-if %ERRORLEVEL% == 7 goto RInternet
-if %ERRORLEVEL% == 8 goto OplineMenu
+if %ERRORLEVEL% == 7 goto AutoTuning
+if %ERRORLEVEL% == 8 goto RInternet
+if %ERRORLEVEL% == 9 goto OplineMenu
 
 :RInternet
 cls
@@ -9856,14 +9857,15 @@ echo.
 call :ColorText 1B "###############################################################################################"
 echo.
 echo.
-cmdMenuSel f3B0 "   [+]  Reset Network Optimization through the Registry" "   [+]  Reset Optimize System Mci" "   [+]  Reset Disable Nagling" "   [+]  Reset Netsh Settings" "   [+]  Reset Network Adapter" "   [+]  Reset Repair Ping" "   [+]  Exit"
+cmdMenuSel f3B0 "   [+]  Reset Network Optimization through the Registry" "   [+]  Reset Optimize System Mci" "   [+]  Reset Disable Nagling" "   [+]  Reset Netsh Settings" "   [+]  Reset Network Adapter" "   [+]  Reset Repair Ping" "   [+]  Reset Optimize Auto Tuning Level" "   [+]  Exit"
 if %ERRORLEVEL% == 1 goto RNREG
 if %ERRORLEVEL% == 2 goto ROSMCI
 if %ERRORLEVEL% == 3 goto RDNagling
 if %ERRORLEVEL% == 4 goto RNetsh
 if %ERRORLEVEL% == 5 goto RNetworkAdapter
 if %ERRORLEVEL% == 6 goto RPing
-if %ERRORLEVEL% == 7 goto Internet
+if %ERRORLEVEL% == 7 goto RAutoTuning
+if %ERRORLEVEL% == 8 goto Internet
 
 :RNREG
 cls
@@ -9958,6 +9960,11 @@ Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e972-e325-11ce-
 Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e972-e325-11ce-bfc1-08002be10318}\0005" /v "ScanWhenAssociated" /f
 Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e972-e325-11ce-bfc1-08002be10318}\0006" /v "ScanWhenAssociated" /f
 Reg.exe delete "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e972-e325-11ce-bfc1-08002be10318}\0007" /v "ScanWhenAssociated" /f
+goto endrinternet
+
+:RAutoTuning
+cls
+netsh int tcp set global autotuninglevel=normal
 goto endrinternet
 
 :RDNagling
@@ -10223,6 +10230,11 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e972-e325-11ce-bfc
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e972-e325-11ce-bfc1-08002be10318}\0005" /v "ScanWhenAssociated" /t REG_DWORD /d "0" /f
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e972-e325-11ce-bfc1-08002be10318}\0006" /v "ScanWhenAssociated" /t REG_DWORD /d "0" /f
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e972-e325-11ce-bfc1-08002be10318}\0007" /v "ScanWhenAssociated" /t REG_DWORD /d "0" /f
+goto endinternet
+
+:AutoTuning
+cls
+netsh int tcp set global autotuninglevel=disable
 goto endinternet
 
 :DNagling
