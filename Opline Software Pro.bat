@@ -3984,24 +3984,26 @@ if %ERRORLEVEL% == 3 goto Services
 
 :DHyper-V
 cls
-sc config vmickvpexchange start=disabled
-sc config vmicguestinterface start=disabled
-sc config vmicshutdown start=disabled
-sc config vmicheartbeat start=disabled
-sc config vmicvmsession start=disabled
-sc config vmicrdv start=disabled
-sc config vmictimesync start=disabled
-sc config vmicvss start=disabled
-sc config hyperkbd start=disabled
-sc config hypervideo start=disabled
-sc config gencounter start=disabled
-sc config vmgid start=disabled
-sc config storflt start=disabled
-sc config bttflt start=disabled
-sc config vpci start=disabled
-sc config hvservice start=disabled
-sc config hvcrash start=disabled
-sc config HvHost start=disabled
+Reg.exe add "HKLM\System\ControlSet001\Services\bttflt" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKLM\System\ControlSet001\Services\gencounter" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKLM\System\ControlSet001\Services\HvHost" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKLM\System\ControlSet001\Services\hvservice" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKLM\System\ControlSet001\Services\hyperkbd" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKLM\System\ControlSet001\Services\HyperVideo" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKLM\System\ControlSet001\Services\storflt" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKLM\System\ControlSet001\Services\Vid" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKLM\System\ControlSet001\Services\vmbus" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKLM\System\ControlSet001\Services\vmgid" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKLM\System\ControlSet001\Services\vmicguestinterface" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKLM\System\ControlSet001\Services\vmicheartbeat" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKLM\System\ControlSet001\Services\vmickvpexchange" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKLM\System\ControlSet001\Services\vmicrdv" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKLM\System\ControlSet001\Services\vmicshutdown" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKLM\System\ControlSet001\Services\vmictimesync" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKLM\System\ControlSet001\Services\vmicvmsession" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKLM\System\ControlSet001\Services\vmicvss" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKLM\System\ControlSet001\Services\vpci" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKLM\System\ControlSet001\Services\hvcrash" /v "Start" /t REG_DWORD /d "4" /f
 devmanview /disable "Microsoft Hyper-V Virtualization Infrastructure Driver"
 bcdedit /set hypervisorlaunchtype off
 dism.exe /Online /Disable-Feature:Microsoft-Hyper-V-All /NoRestart
@@ -4009,25 +4011,26 @@ goto end11
 
 :EHyper-V
 cls
-sc config vmickvpexchange start=demand
-sc config vmicguestinterface start=demand
-sc config vmicshutdown start=demand
-sc config vmicheartbeat start=demand
-sc config vmicvmsession start=demand
-sc config vmicrdv start=demand
-sc config vmictimesync start=demand
-sc config vmicvss start=demand
-sc config hyperkbd start=demand
-sc config hypervideo start=demand
-sc config gencounter start=demand
-sc config vmgid start=demand
-sc config storflt start=boot
-sc config bttflt start=boot
-sc config vpci start=boot
-sc config hvservice start=demand
-sc config hvcrash start=disabled
-sc config HvHost start=demand
-sc config rdbss start=system
+Reg.exe add "HKLM\System\ControlSet001\Services\bttflt" /v "Start" /t REG_DWORD /d "0" /f
+Reg.exe add "HKLM\System\ControlSet001\Services\gencounter" /v "Start" /t REG_DWORD /d "3" /f
+Reg.exe add "HKLM\System\ControlSet001\Services\HvHost" /v "Start" /t REG_DWORD /d "3" /f
+Reg.exe add "HKLM\System\ControlSet001\Services\hvservice" /v "Start" /t REG_DWORD /d "3" /f
+Reg.exe add "HKLM\System\ControlSet001\Services\hyperkbd" /v "Start" /t REG_DWORD /d "3" /f
+Reg.exe add "HKLM\System\ControlSet001\Services\HyperVideo" /v "Start" /t REG_DWORD /d "3" /f
+Reg.exe add "HKLM\System\ControlSet001\Services\storflt" /v "Start" /t REG_DWORD /d "0" /f
+Reg.exe add "HKLM\System\ControlSet001\Services\Vid" /v "Start" /t REG_DWORD /d "1" /f
+Reg.exe add "HKLM\System\ControlSet001\Services\vmbus" /v "Start" /t REG_DWORD /d "0" /f
+Reg.exe add "HKLM\System\ControlSet001\Services\vmgid" /v "Start" /t REG_DWORD /d "3" /f
+Reg.exe add "HKLM\System\ControlSet001\Services\vmicguestinterface" /v "Start" /t REG_DWORD /d "3" /f
+Reg.exe add "HKLM\System\ControlSet001\Services\vmicheartbeat" /v "Start" /t REG_DWORD /d "3" /f
+Reg.exe add "HKLM\System\ControlSet001\Services\vmickvpexchange" /v "Start" /t REG_DWORD /d "3" /f
+Reg.exe add "HKLM\System\ControlSet001\Services\vmicrdv" /v "Start" /t REG_DWORD /d "3" /f
+Reg.exe add "HKLM\System\ControlSet001\Services\vmicshutdown" /v "Start" /t REG_DWORD /d "3" /f
+Reg.exe add "HKLM\System\ControlSet001\Services\vmictimesync" /v "Start" /t REG_DWORD /d "3" /f
+Reg.exe add "HKLM\System\ControlSet001\Services\vmicvmsession" /v "Start" /t REG_DWORD /d "3" /f
+Reg.exe add "HKLM\System\ControlSet001\Services\vmicvss" /v "Start" /t REG_DWORD /d "3" /f
+Reg.exe add "HKLM\System\ControlSet001\Services\vpci" /v "Start" /t REG_DWORD /d "0" /f
+Reg.exe add "HKLM\System\ControlSet001\Services\hvcrash" /v "Start" /t REG_DWORD /d "4" /f
 devmanview /enable "Microsoft Hyper-V Virtualization Infrastructure Driver"
 bcdedit /deletevalue hypervisorlaunchtype
 dism.exe /Online /Enable-Feature:Microsoft-Hyper-V /All /NoRestart
