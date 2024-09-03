@@ -622,7 +622,7 @@ echo.
 call :ColorText 1B "###############################################################################################"
 echo.
 echo.
-cmdMenuSel f3B0 "   [+]  Mouse Fix V1" "   [+]  Mouse Fix V2" "   [+]  Mouse Fix V3" "   [+]  Mouse Fix V4" "   [+]  Mouse Fix V5" "   [+]  Mouse Fix V6" "   [+]  Mouse Fix V7" "   [+]  Mouse Fix V8" "   [+]  Mouse Fix V9" "   [+]  Mouse Fix V10" "   [+]  Mouse and Keyboard Fix MAX" "   [+]  Keyboard Fix V1" "   [+]  Keyboard Fix V2" "   [+]  Keyboard Fix V3" "   [+]  Keyboard Fix V4" "   [+]  Keyboard Fix V5" "   [+]  Reset ALL" "   [+]  Menu V2" "   [+]  Exit"
+cmdMenuSel f3B0 "   [+]  Mouse Fix V1" "   [+]  Mouse Fix V2" "   [+]  Mouse Fix V3" "   [+]  Mouse Fix V4" "   [+]  Mouse Fix V5" "   [+]  Mouse Fix V6" "   [+]  Mouse Fix V7" "   [+]  Mouse Fix V8" "   [+]  Mouse Fix V9" "   [+]  Mouse and Keyboard Fix MAX" "   [+]  Keyboard Fix V1" "   [+]  Keyboard Fix V2" "   [+]  Keyboard Fix V3" "   [+]  Keyboard Fix V4" "   [+]  Keyboard Fix V5" "   [+]  Reset ALL" "   [+]  Menu V2" "   [+]  Exit"
 if %ERRORLEVEL% == 1 goto MFix1
 if %ERRORLEVEL% == 2 goto MFix2
 if %ERRORLEVEL% == 3 goto MFix3
