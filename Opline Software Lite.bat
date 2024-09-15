@@ -3096,6 +3096,9 @@ sc stop Spooler
 sc config Spooler start= disabled
 sc config StiSvc start=disabled
 sc stop StiSvc
+powerrun "schtasks.exe" /change /disable /TN "\Microsoft\Windows\Printing\PrintJobCleanupTask" >nul 2>&1
+powerrun "schtasks.exe" /change /disable /TN "\Microsoft\Windows\Printing\PrinterCleanupTask" >nul 2>&1
+powerrun "schtasks.exe" /change /disable /TN "\Microsoft\Windows\Printing\EduPrintProv" >nul 2>&1
 cls
 SET msgboxTitle=Opline Software
 SET msgboxBody=Finished - Skonczone
@@ -3143,6 +3146,9 @@ sc start Spooler
 sc config Spooler start= auto
 sc config StiSvc start=demand
 sc start StiSvc
+powerrun "schtasks.exe" /change /enable /TN "\Microsoft\Windows\Printing\PrintJobCleanupTask" >nul 2>&1
+powerrun "schtasks.exe" /change /enable /TN "\Microsoft\Windows\Printing\PrinterCleanupTask" >nul 2>&1
+powerrun "schtasks.exe" /change /enable /TN "\Microsoft\Windows\Printing\EduPrintProv" >nul 2>&1
 cls
 SET msgboxTitle=Opline Software
 SET msgboxBody=Finished - Skonczone
@@ -3313,6 +3319,11 @@ sc stop vwififlt
 sc stop netprofm
 sc stop NlaSvc
 sc stop eventlog
+powerrun "schtasks.exe" /change /disable /TN "\Microsoft\Windows\WCM\WiFiTask" >nul 2>&1
+powerrun "schtasks.exe" /change /disable /TN "\Microsoft\Windows\WlanSvc\CDSSync" >nul 2>&1
+powerrun "schtasks.exe" /change /disable /TN "\Microsoft\Windows\WlanSvc\MoProfileManagement" >nul 2>&1
+powerrun "schtasks.exe" /change /disable /TN "\Microsoft\Windows\WwanSvc\NotificationTask" >nul 2>&1
+powerrun "schtasks.exe" /change /disable /TN "\Microsoft\Windows\WwanSvc\OobeDiscovery" >nul 2>&1
 cls
 SET msgboxTitle=Opline Software
 SET msgboxBody=Finished - Skonczone
@@ -3335,6 +3346,11 @@ sc start vwififlt
 sc start netprofm
 sc start NlaSvc
 sc start eventlog
+powerrun "schtasks.exe" /change /enable /TN "\Microsoft\Windows\WCM\WiFiTask" >nul 2>&1
+powerrun "schtasks.exe" /change /enable /TN "\Microsoft\Windows\WlanSvc\CDSSync" >nul 2>&1
+powerrun "schtasks.exe" /change /enable /TN "\Microsoft\Windows\WlanSvc\MoProfileManagement" >nul 2>&1
+powerrun "schtasks.exe" /change /enable /TN "\Microsoft\Windows\WwanSvc\NotificationTask" >nul 2>&1
+powerrun "schtasks.exe" /change /enable /TN "\Microsoft\Windows\WwanSvc\OobeDiscovery" >nul 2>&1
 cls
 SET msgboxTitle=Opline Software
 SET msgboxBody=Finished - Skonczone
@@ -4813,6 +4829,8 @@ reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\EMDMgmt" /v "GroupPol
 reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\EMDMgmt" /v "AllowNewCachesByDefault" /t REG_DWORD /d "0" /f
 PowerShell -NonInteractive -NoLogo -NoProfile -Command "Disable-MMAgent -mc"
 reg add "HKLM\SYSTEM\ControlSet001\Control\Session Manager\Memory Management\PrefetchParameters" /v "isMemoryCompressionEnabled" /t REG_DWORD /d "0" /f
+powerrun "schtasks.exe" /change /disable /TN "\Microsoft\Windows\Sysmain\ResPriStaticDbSync" >nul 2>&1
+powerrun "schtasks.exe" /change /disable /TN "\Microsoft\Windows\Sysmain\WsSwapAssessmentTask" >nul 2>&1
 ::Disable-MMAgent -mc
 goto end4
 
@@ -4828,6 +4846,8 @@ reg delete "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\EMDMgmt" /v "Group
 reg delete "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\EMDMgmt" /v "AllowNewCachesByDefault" /f
 PowerShell -NonInteractive -NoLogo -NoProfile -Command "Enable-MMAgent -mc"
 reg delete "HKLM\SYSTEM\ControlSet001\Control\Session Manager\Memory Management\PrefetchParameters" /v "isMemoryCompressionEnabled" /f
+powerrun "schtasks.exe" /change /enable /TN "\Microsoft\Windows\Sysmain\ResPriStaticDbSync" >nul 2>&1
+powerrun "schtasks.exe" /change /enable /TN "\Microsoft\Windows\Sysmain\WsSwapAssessmentTask" >nul 2>&1
 ::Enable-MMAgent -mc
 goto end4
 
@@ -6541,19 +6561,20 @@ echo.
 call :ColorText 1B "###############################################################################################"
 echo.
 echo.
-cmdMenuSel f3B0 "   [+]  Delete Other Plans" "   [+]  Install Opline Plan" "   [+]  Install Opline Plan V2" "   [+]  Enable TRIM for SSD drives" "   [+]  Optimization Bcdedit" "   [+]  Optimization Powercfg" "   [+]  SSD Tune" "   [+]  Ram Reduce" "   [+]  MPO & Optimizations For Windowed Games" "   [+]  Disable USB Power Savings" "   [+]  Reset" "   [+]  Exit" 
+cmdMenuSel f3B0 "   [+]  Delete Other Plans" "   [+]  Install Opline Plan" "   [+]  Install Opline Plan V2" "   [+]  Install Opline Plan V3" "   [+]  Enable TRIM for SSD drives" "   [+]  Optimization Bcdedit" "   [+]  Optimization Powercfg" "   [+]  SSD Tune" "   [+]  Ram Reduce" "   [+]  MPO & Optimizations For Windowed Games" "   [+]  Disable USB Power Savings" "   [+]  Reset" "   [+]  Exit" 
 if %ERRORLEVEL% == 1 goto DelOPlans
 if %ERRORLEVEL% == 2 goto OPlan
 if %ERRORLEVEL% == 3 goto OPlan2
-if %ERRORLEVEL% == 4 goto TRIM
-if %ERRORLEVEL% == 5 goto Bcdedit
-if %ERRORLEVEL% == 6 goto Powercfg
-if %ERRORLEVEL% == 7 goto SSDT
-if %ERRORLEVEL% == 8 goto RAMR
-if %ERRORLEVEL% == 9 goto MPO
-if %ERRORLEVEL% == 10 goto DUSBPS
-if %ERRORLEVEL% == 11 goto RBoostOS
-if %ERRORLEVEL% == 12 goto OplineMenu
+if %ERRORLEVEL% == 4 goto OPlan3
+if %ERRORLEVEL% == 5 goto TRIM
+if %ERRORLEVEL% == 6 goto Bcdedit
+if %ERRORLEVEL% == 7 goto Powercfg
+if %ERRORLEVEL% == 8 goto SSDT
+if %ERRORLEVEL% == 9 goto RAMR
+if %ERRORLEVEL% == 10 goto MPO
+if %ERRORLEVEL% == 11 goto DUSBPS
+if %ERRORLEVEL% == 12 goto RBoostOS
+if %ERRORLEVEL% == 13 goto OplineMenu
 
 :RBoostOS
 cls
@@ -6583,18 +6604,19 @@ echo.
 call :ColorText 1B "###############################################################################################"
 echo.
 echo.
-cmdMenuSel f3B0 "   [+]  Reset Delete Other Plans" "   [+]  Reset Install Opline Plan" "   [+]  Reset Install Opline Plan V2" "   [+]  Reset Enable TRIM for SSD drives" "   [+]  Reset Optimization Bcdedit" "   [+]  Reset Optimization Powercfg" "   [+]  Reset SSD Tune" "   [+]  Reset Ram Reduce" "   [+]  Reset MPO & Optimizations For Windowed Games" "   [+]  Reset Disable USB Power Savings" "   [+]  Exit" 
+cmdMenuSel f3B0 "   [+]  Reset Delete Other Plans" "   [+]  Reset Install Opline Plan" "   [+]  Reset Install Opline Plan V2" "   [+]  Reset Install Opline Plan V3" "   [+]  Reset Enable TRIM for SSD drives" "   [+]  Reset Optimization Bcdedit" "   [+]  Reset Optimization Powercfg" "   [+]  Reset SSD Tune" "   [+]  Reset Ram Reduce" "   [+]  Reset MPO & Optimizations For Windowed Games" "   [+]  Reset Disable USB Power Savings" "   [+]  Exit" 
 if %ERRORLEVEL% == 1 goto RDelOPlans
 if %ERRORLEVEL% == 2 goto ROPlan
 if %ERRORLEVEL% == 3 goto ROPlan2
-if %ERRORLEVEL% == 4 goto RTRIM
-if %ERRORLEVEL% == 5 goto RBcdedit
-if %ERRORLEVEL% == 6 goto RPowercfg
-if %ERRORLEVEL% == 7 goto RSSDT
-if %ERRORLEVEL% == 8 goto RRAMR
-if %ERRORLEVEL% == 9 goto RMPO
-if %ERRORLEVEL% == 10 goto EUSBPS
-if %ERRORLEVEL% == 11 goto BoostOS
+if %ERRORLEVEL% == 4 goto ROPlan3
+if %ERRORLEVEL% == 5 goto RTRIM
+if %ERRORLEVEL% == 6 goto RBcdedit
+if %ERRORLEVEL% == 7 goto RPowercfg
+if %ERRORLEVEL% == 8 goto RSSDT
+if %ERRORLEVEL% == 9 goto RRAMR
+if %ERRORLEVEL% == 10 goto RMPO
+if %ERRORLEVEL% == 11 goto EUSBPS
+if %ERRORLEVEL% == 12 goto BoostOS
 
 :RRAMR
 cls
@@ -6636,6 +6658,18 @@ Goto RBoostOS
 :ROPlan2
 cls
 powercfg -delete 44444444-4444-4444-4444-444444444337
+cls
+SET msgboxTitle=Opline Software
+SET msgboxBody=Finished - Skonczone
+SET tmpmsgbox=%temp%~tmpmsgbox.vbs
+IF EXIST "%tmpmsgbox%" DEL /F /Q "%tmpmsgbox%"
+ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
+WSCRIPT "%tmpmsgbox%"
+Goto RBoostOS
+
+:ROPlan3
+cls
+powercfg -delete 77777777-7777-7777-7777-777777777777
 cls
 SET msgboxTitle=Opline Software
 SET msgboxBody=Finished - Skonczone
@@ -6892,6 +6926,22 @@ powercfg -import "%temp%\Opline2.pow" 44444444-4444-4444-4444-444444444337
 powercfg -SETACTIVE "44444444-4444-4444-4444-444444444337"
 powercfg /changename 44444444-4444-4444-4444-444444444337 "Opline Power Plan V2" "The Ultimate Power Plan V2 to reduce latency and boost FPS."
 del "%temp%\Opline2.pow"
+cls
+SET msgboxTitle=Opline Software
+SET msgboxBody=Finished - Skonczone
+SET tmpmsgbox=%temp%~tmpmsgbox.vbs
+IF EXIST "%tmpmsgbox%" DEL /F /Q "%tmpmsgbox%"
+ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
+WSCRIPT "%tmpmsgbox%"
+Goto BoostOS
+
+:OPlan3
+cls
+powershell Invoke-WebRequest "https://github.com/Smolich404/DownloadFilesToOpline/releases/download/Opline/Opline3.pow" -OutFile "%temp%\Opline3.pow"
+powercfg -import "%temp%\Opline3.pow" 77777777-7777-7777-7777-777777777777
+powercfg -SETACTIVE "77777777-7777-7777-7777-777777777777"
+powercfg /changename 77777777-7777-7777-7777-777777777777 "Opline Power Plan V3" "The Ultimate Power Plan V3 to reduce latency and boost FPS."
+del "%temp%\Opline3.pow"
 cls
 SET msgboxTitle=Opline Software
 SET msgboxBody=Finished - Skonczone
