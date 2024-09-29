@@ -7057,10 +7057,11 @@ echo.
 call :ColorText 1B "###############################################################################################"
 echo.
 echo.
-cmdMenuSel f3B0 "   [+]  Reset Core Parking" "   [+]  Reset Disable Hibernate" "   [+]  Exit" 
+cmdMenuSel f3B0 "   [+]  Reset Core Parking" "   [+]  Reset Disable Hibernate" "   [+]  Enable Idle" "   [+]  Exit" 
 if %ERRORLEVEL% == 1 goto RCP
 if %ERRORLEVEL% == 2 goto RDH
-if %ERRORLEVEL% == 3 goto RBoostOS
+if %ERRORLEVEL% == 3 goto EIDLE
+if %ERRORLEVEL% == 4 goto RBoostOS
 
 :RCP
 cls
@@ -7123,6 +7124,19 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Power" /f
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Power" /v "HiberbootEnabled" /t REG_DWORD /d "1" /f
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Power" /v "HibernateEnabledDefault" /t REG_DWORD /d "1" /f
 powercfg.exe -h on
+cls
+SET msgboxTitle=Opline Software
+SET msgboxBody=Finished - Skonczone
+SET tmpmsgbox=%temp%~tmpmsgbox.vbs
+IF EXIST "%tmpmsgbox%" DEL /F /Q "%tmpmsgbox%"
+ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
+WSCRIPT "%tmpmsgbox%"
+Goto RPowercfg
+
+:EIDLE
+cls
+powercfg -setacvalueindex scheme_current sub_processor 5d76a2ca-e8c0-402f-a133-2158492d58ad 0
+powercfg -setactive scheme_current
 cls
 SET msgboxTitle=Opline Software
 SET msgboxBody=Finished - Skonczone
@@ -7329,10 +7343,11 @@ echo.
 call :ColorText 1B "###############################################################################################"
 echo.
 echo.
-cmdMenuSel f3B0 "   [+]  Core Parking" "   [+]  Disable Hibernate" "   [+]  Exit" 
+cmdMenuSel f3B0 "   [+]  Core Parking" "   [+]  Disable Hibernate" "   [+]  Disable Idle" "   [+]  Exit" 
 if %ERRORLEVEL% == 1 goto CP
 if %ERRORLEVEL% == 2 goto DH
-if %ERRORLEVEL% == 3 goto BoostOS
+if %ERRORLEVEL% == 3 goto DIDLE
+if %ERRORLEVEL% == 4 goto BoostOS
 
 :CP
 cls
@@ -7387,6 +7402,19 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Power" /v "HibernateEnabled" 
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Power" /v "HiberbootEnabled" /t REG_DWORD /d "0" /f
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Power" /v "HibernateEnabledDefault" /t REG_DWORD /d "0" /f
 powercfg.exe -h off
+cls
+SET msgboxTitle=Opline Software
+SET msgboxBody=Finished - Skonczone
+SET tmpmsgbox=%temp%~tmpmsgbox.vbs
+IF EXIST "%tmpmsgbox%" DEL /F /Q "%tmpmsgbox%"
+ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
+WSCRIPT "%tmpmsgbox%"
+Goto Powercfg
+
+:DIDLE
+cls
+powercfg -setacvalueindex scheme_current sub_processor 5d76a2ca-e8c0-402f-a133-2158492d58ad 1
+powercfg -setactive scheme_current
 cls
 SET msgboxTitle=Opline Software
 SET msgboxBody=Finished - Skonczone
