@@ -4368,7 +4368,7 @@ echo.
 call :ColorText 1B "###############################################################################################"
 echo.
 echo.
-cmdMenuSel f3B0 "   [+]  Boot Settings" "   [+]  Gpedit Enabler" "   [+]  UAC" "   [+]  Edge" "   [+]  Timer Resolution Service" "   [+]  ReadyBoost and Memory Compression" "   [+]  Usage Reporting" "   [+]  Encrypting File System" "   [+]  Compression" "   [+]  MFT Zone" "   [+]  Notifications" "   [+]  Intel TSX" "   [+]  Alt Tab Settings" "   [+]  Write Cache Buffer Flushing" "   [+]  Widgets" "   [+]  Windows Spotlight" "   [+]  Microsoft Copilot" "   [+]  Mitigations" "   [+]  Explorer" "   [+]  Exit"
+cmdMenuSel f3B0 "   [+]  Boot Settings" "   [+]  Gpedit Enabler" "   [+]  UAC" "   [+]  Edge" "   [+]  Timer Resolution Service" "   [+]  ReadyBoost and Memory Compression" "   [+]  Usage Reporting" "   [+]  Encrypting File System" "   [+]  Compression" "   [+]  MFT Zone" "   [+]  Notifications" "   [+]  Intel TSX" "   [+]  Alt Tab Settings" "   [+]  Write Cache Buffer Flushing" "   [+]  Widgets" "   [+]  Windows Spotlight" "   [+]  Microsoft Copilot" "   [+]  Mitigations" "   [+]  Explorer" "   [+]  Photo Viewer" "   [+]  Exit"
 if %ERRORLEVEL% == 1 goto Boot
 if %ERRORLEVEL% == 2 goto Gpedit
 if %ERRORLEVEL% == 3 goto UAC
@@ -4388,7 +4388,8 @@ if %ERRORLEVEL% == 16 goto WindowsSpotlight
 if %ERRORLEVEL% == 17 goto Copilot
 if %ERRORLEVEL% == 18 goto Mitigations
 if %ERRORLEVEL% == 19 goto Explorer
-if %ERRORLEVEL% == 20 goto OplineMenu
+if %ERRORLEVEL% == 20 goto PhotoViewer
+if %ERRORLEVEL% == 21 goto OplineMenu
 
 :STR
 cls
@@ -5944,6 +5945,173 @@ IF EXIST "%tmpmsgbox%" DEL /F /Q "%tmpmsgbox%"
 ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
 WSCRIPT "%tmpmsgbox%"
 goto RemovableDrives
+
+:PhotoViewer
+cls
+echo.
+echo.
+call :ColorText 1B "###############################################################################################"
+echo.
+echo.
+echo                             ____  _____  _      _____ _   _ ______                      
+echo                            / __ \^|  __ \^| ^|    ^|_   _^| \ ^| ^|  ____^|                     
+echo                           ^| ^|  ^| ^| ^|__) ^| ^|      ^| ^| ^|  \^| ^| ^|__                        
+echo                           ^| ^|  ^| ^|  ___/^| ^|      ^| ^| ^|   \ ^|  __^|                       
+echo                           ^| ^|__^| ^| ^|    ^| ^|____ _^| ^|_^| ^|\  ^| ^|____                      
+echo                            \____/^|_^|    ^|______^|_____^|_^| \_^|______^|                     
+echo                   _____  ____  ______ _________          __     _____  ______ 
+echo                  / ____^|/ __ \^|  ____^|__   __\ \        / /\   ^|  __ \^|  ____^|
+echo                 ^| (___ ^| ^|  ^| ^| ^|__     ^| ^|   \ \  /\  / /  \  ^| ^|__) ^| ^|__   
+echo                  \___ \^| ^|  ^| ^|  __^|    ^| ^|    \ \/  \/ / /\ \ ^|  _  /^|  __^|  
+echo                  ____) ^| ^|__^| ^| ^|       ^| ^|     \  /\  / ____ \^| ^| \ \^| ^|____ 
+echo                 ^|_____/ \____/^|_^|       ^|_^|      \/  \/_/    \_\_^|  \_\______^|
+echo.
+echo.
+call :ColorText 0A "                                            L I T E"
+echo.
+echo.
+echo.
+call :ColorText 1B "###############################################################################################"
+echo.
+echo.
+cmdMenuSel f3B0 "   [+]  Enable Photo Viewer" "   [+]  Disable Photo Viewer" "   [+]  Exit"
+if %ERRORLEVEL% == 1 goto EPhotoViewer
+if %ERRORLEVEL% == 2 goto DPhotoViewer
+if %ERRORLEVEL% == 3 goto Others
+
+:DPhotoViewer
+cls
+Reg.exe delete "HKCR\Applications\photoviewer.dll\shell\open" /f
+Reg.exe delete "HKCR\Applications\photoviewer.dll\shell\open\command" /f
+Reg.exe delete "HKCR\Applications\photoviewer.dll\shell\open\DropTarget" /f
+Reg.exe delete "HKCR\PhotoViewer.FileAssoc.Bitmap" /f
+Reg.exe delete "HKCR\PhotoViewer.FileAssoc.Bitmap\DefaultIcon" /f
+Reg.exe delete "HKCR\PhotoViewer.FileAssoc.Bitmap\shell\open\command" /f
+Reg.exe delete "HKCR\PhotoViewer.FileAssoc.Bitmap\shell\open\DropTarget" /f
+Reg.exe delete "HKCR\PhotoViewer.FileAssoc.JFIF" /f
+Reg.exe delete "HKCR\PhotoViewer.FileAssoc.JFIF\DefaultIcon" /f
+Reg.exe delete "HKCR\PhotoViewer.FileAssoc.JFIF\shell\open" /f
+Reg.exe delete "HKCR\PhotoViewer.FileAssoc.JFIF\shell\open\command" /f
+Reg.exe delete "HKCR\PhotoViewer.FileAssoc.JFIF\shell\open\DropTarget" /f
+Reg.exe delete "HKCR\PhotoViewer.FileAssoc.Jpeg" /f
+Reg.exe delete "HKCR\PhotoViewer.FileAssoc.Jpeg\DefaultIcon" /f
+Reg.exe delete "HKCR\PhotoViewer.FileAssoc.Jpeg\shell\open" /f
+Reg.exe delete "HKCR\PhotoViewer.FileAssoc.Jpeg\shell\open\command" /f
+Reg.exe delete "HKCR\PhotoViewer.FileAssoc.Jpeg\shell\open\DropTarget" /f
+Reg.exe delete "HKCR\PhotoViewer.FileAssoc.Gif" /f
+Reg.exe delete "HKCR\PhotoViewer.FileAssoc.Gif\DefaultIcon" /f
+Reg.exe delete "HKCR\PhotoViewer.FileAssoc.Gif\shell\open\command" /f
+Reg.exe delete "HKCR\PhotoViewer.FileAssoc.Gif\shell\open\DropTarget" /f
+Reg.exe delete "HKCR\PhotoViewer.FileAssoc.Png" /f
+Reg.exe delete "HKCR\PhotoViewer.FileAssoc.Png\DefaultIcon" /f
+Reg.exe delete "HKCR\PhotoViewer.FileAssoc.Png\shell\open\command" /f
+Reg.exe delete "HKCR\PhotoViewer.FileAssoc.Png\shell\open\DropTarget" /f
+Reg.exe delete "HKCR\PhotoViewer.FileAssoc.Wdp" /f
+Reg.exe delete "HKCR\PhotoViewer.FileAssoc.Wdp\DefaultIcon" /f
+Reg.exe delete "HKCR\PhotoViewer.FileAssoc.Wdp\shell\open" /f
+Reg.exe delete "HKCR\PhotoViewer.FileAssoc.Wdp\shell\open\command" /f
+Reg.exe delete "HKCR\PhotoViewer.FileAssoc.Wdp\shell\open\DropTarget" /f
+Reg.exe delete "HKLM\SOFTWARE\Microsoft\Windows Photo Viewer\Capabilities" /f
+Reg.exe delete "HKLM\SOFTWARE\Microsoft\Windows Photo Viewer\Capabilities\FileAssociations" /f
+REM ; Change Extension's File Type
+Reg.exe add "HKCU\Software\Classes\.jpg" /ve /t REG_SZ /d "" /f
+REM ; Change Extension's File Type
+Reg.exe add "HKCU\Software\Classes\.jpeg" /ve /t REG_SZ /d "" /f
+REM ; Change Extension's File Type
+Reg.exe add "HKCU\Software\Classes\.gif" /ve /t REG_SZ /d "" /f
+REM ; Change Extension's File Type
+Reg.exe add "HKCU\Software\Classes\.png" /ve /t REG_SZ /d "" /f
+REM ; Change Extension's File Type
+Reg.exe add "HKCU\Software\Classes\.bmp" /ve /t REG_SZ /d "" /f
+REM ; Change Extension's File Type
+Reg.exe add "HKCU\Software\Classes\.tiff" /ve /t REG_SZ /d "" /f
+REM ; Change Extension's File Type
+Reg.exe add "HKCU\Software\Classes\.ico" /ve /t REG_SZ /d "" /f
+cls
+SET msgboxTitle=Opline Software
+SET msgboxBody=Finished - Skonczone
+SET tmpmsgbox=%temp%~tmpmsgbox.vbs
+IF EXIST "%tmpmsgbox%" DEL /F /Q "%tmpmsgbox%"
+ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
+WSCRIPT "%tmpmsgbox%"
+goto PhotoViewer
+
+:EPhotoViewer
+cls
+Reg.exe add "HKCR\Applications\photoviewer.dll\shell\open" /v "MuiVerb" /t REG_SZ /d "@photoviewer.dll,-3043" /f
+Reg.exe add "HKCR\Applications\photoviewer.dll\shell\open\command" /ve /t REG_EXPAND_SZ /d "%%SystemRoot%%\System32\rundll32.exe \"%%ProgramFiles%%\Windows Photo Viewer\PhotoViewer.dll\", ImageView_Fullscreen %%1" /f
+Reg.exe add "HKCR\Applications\photoviewer.dll\shell\open\DropTarget" /v "Clsid" /t REG_SZ /d "{FFE2A43C-56B9-4bf5-9A79-CC6D4285608A}" /f
+Reg.exe add "HKCR\PhotoViewer.FileAssoc.Bitmap" /v "ImageOptionFlags" /t REG_DWORD /d "1" /f
+Reg.exe add "HKCR\PhotoViewer.FileAssoc.Bitmap" /v "FriendlyTypeName" /t REG_EXPAND_SZ /d "@%%ProgramFiles%%\Windows Photo Viewer\PhotoViewer.dll,-3056" /f
+Reg.exe add "HKCR\PhotoViewer.FileAssoc.Bitmap\DefaultIcon" /ve /t REG_SZ /d "%%SystemRoot%%\System32\imageres.dll,-70" /f
+Reg.exe add "HKCR\PhotoViewer.FileAssoc.Bitmap\shell\open\command" /ve /t REG_EXPAND_SZ /d "%%SystemRoot%%\System32\rundll32.exe \"%%ProgramFiles%%\Windows Photo Viewer\PhotoViewer.dll\", ImageView_Fullscreen %%1" /f
+Reg.exe add "HKCR\PhotoViewer.FileAssoc.Bitmap\shell\open\DropTarget" /v "Clsid" /t REG_SZ /d "{FFE2A43C-56B9-4bf5-9A79-CC6D4285608A}" /f
+Reg.exe add "HKCR\PhotoViewer.FileAssoc.JFIF" /v "EditFlags" /t REG_DWORD /d "65536" /f
+Reg.exe add "HKCR\PhotoViewer.FileAssoc.JFIF" /v "ImageOptionFlags" /t REG_DWORD /d "1" /f
+Reg.exe add "HKCR\PhotoViewer.FileAssoc.JFIF" /v "FriendlyTypeName" /t REG_EXPAND_SZ /d "@%%ProgramFiles%%\Windows Photo Viewer\PhotoViewer.dll,-3055" /f
+Reg.exe add "HKCR\PhotoViewer.FileAssoc.JFIF\DefaultIcon" /ve /t REG_SZ /d "%%SystemRoot%%\System32\imageres.dll,-72" /f
+Reg.exe add "HKCR\PhotoViewer.FileAssoc.JFIF\shell\open" /v "MuiVerb" /t REG_EXPAND_SZ /d "@%%ProgramFiles%%\Windows Photo Viewer\photoviewer.dll,-3043" /f
+Reg.exe add "HKCR\PhotoViewer.FileAssoc.JFIF\shell\open\command" /ve /t REG_EXPAND_SZ /d "%%SystemRoot%%\System32\rundll32.exe \"%%ProgramFiles%%\Windows Photo Viewer\PhotoViewer.dll\", ImageView_Fullscreen %%1" /f
+Reg.exe add "HKCR\PhotoViewer.FileAssoc.JFIF\shell\open\DropTarget" /v "Clsid" /t REG_SZ /d "{FFE2A43C-56B9-4bf5-9A79-CC6D4285608A}" /f
+Reg.exe add "HKCR\PhotoViewer.FileAssoc.Jpeg" /v "EditFlags" /t REG_DWORD /d "65536" /f
+Reg.exe add "HKCR\PhotoViewer.FileAssoc.Jpeg" /v "ImageOptionFlags" /t REG_DWORD /d "1" /f
+Reg.exe add "HKCR\PhotoViewer.FileAssoc.Jpeg" /v "FriendlyTypeName" /t REG_EXPAND_SZ /d "@%%ProgramFiles%%\Windows Photo Viewer\PhotoViewer.dll,-3055" /f
+Reg.exe add "HKCR\PhotoViewer.FileAssoc.Jpeg\DefaultIcon" /ve /t REG_SZ /d "%%SystemRoot%%\System32\imageres.dll,-72" /f
+Reg.exe add "HKCR\PhotoViewer.FileAssoc.Jpeg\shell\open" /v "MuiVerb" /t REG_EXPAND_SZ /d "@%%ProgramFiles%%\Windows Photo Viewer\photoviewer.dll,-3043" /f
+Reg.exe add "HKCR\PhotoViewer.FileAssoc.Jpeg\shell\open\command" /ve /t REG_EXPAND_SZ /d "%%SystemRoot%%\System32\rundll32.exe \"%%ProgramFiles%%\Windows Photo Viewer\PhotoViewer.dll\", ImageView_Fullscreen %%1" /f
+Reg.exe add "HKCR\PhotoViewer.FileAssoc.Jpeg\shell\open\DropTarget" /v "Clsid" /t REG_SZ /d "{FFE2A43C-56B9-4bf5-9A79-CC6D4285608A}" /f
+Reg.exe add "HKCR\PhotoViewer.FileAssoc.Gif" /v "ImageOptionFlags" /t REG_DWORD /d "1" /f
+Reg.exe add "HKCR\PhotoViewer.FileAssoc.Gif" /v "FriendlyTypeName" /t REG_EXPAND_SZ /d "@%%ProgramFiles%%\Windows Photo Viewer\PhotoViewer.dll,-3057" /f
+Reg.exe add "HKCR\PhotoViewer.FileAssoc.Gif\DefaultIcon" /ve /t REG_SZ /d "%%SystemRoot%%\System32\imageres.dll,-83" /f
+Reg.exe add "HKCR\PhotoViewer.FileAssoc.Gif\shell\open\command" /ve /t REG_EXPAND_SZ /d "%%SystemRoot%%\System32\rundll32.exe \"%%ProgramFiles%%\Windows Photo Viewer\PhotoViewer.dll\", ImageView_Fullscreen %%1" /f
+Reg.exe add "HKCR\PhotoViewer.FileAssoc.Gif\shell\open\DropTarget" /v "Clsid" /t REG_SZ /d "{FFE2A43C-56B9-4bf5-9A79-CC6D4285608A}" /f
+Reg.exe add "HKCR\PhotoViewer.FileAssoc.Png" /v "ImageOptionFlags" /t REG_DWORD /d "1" /f
+Reg.exe add "HKCR\PhotoViewer.FileAssoc.Png" /v "FriendlyTypeName" /t REG_EXPAND_SZ /d "@%%ProgramFiles%%\Windows Photo Viewer\PhotoViewer.dll,-3057" /f
+Reg.exe add "HKCR\PhotoViewer.FileAssoc.Png\DefaultIcon" /ve /t REG_SZ /d "%%SystemRoot%%\System32\imageres.dll,-71" /f
+Reg.exe add "HKCR\PhotoViewer.FileAssoc.Png\shell\open\command" /ve /t REG_EXPAND_SZ /d "%%SystemRoot%%\System32\rundll32.exe \"%%ProgramFiles%%\Windows Photo Viewer\PhotoViewer.dll\", ImageView_Fullscreen %%1" /f
+Reg.exe add "HKCR\PhotoViewer.FileAssoc.Png\shell\open\DropTarget" /v "Clsid" /t REG_SZ /d "{FFE2A43C-56B9-4bf5-9A79-CC6D4285608A}" /f
+Reg.exe add "HKCR\PhotoViewer.FileAssoc.Wdp" /v "EditFlags" /t REG_DWORD /d "65536" /f
+Reg.exe add "HKCR\PhotoViewer.FileAssoc.Wdp" /v "ImageOptionFlags" /t REG_DWORD /d "1" /f
+Reg.exe add "HKCR\PhotoViewer.FileAssoc.Wdp\DefaultIcon" /ve /t REG_SZ /d "%%SystemRoot%%\System32\wmphoto.dll,-400" /f
+Reg.exe add "HKCR\PhotoViewer.FileAssoc.Wdp\shell\open" /v "MuiVerb" /t REG_EXPAND_SZ /d "@%%ProgramFiles%%\Windows Photo Viewer\photoviewer.dll,-3043" /f
+Reg.exe add "HKCR\PhotoViewer.FileAssoc.Wdp\shell\open\command" /ve /t REG_EXPAND_SZ /d "%%SystemRoot%%\System32\rundll32.exe \"%%ProgramFiles%%\Windows Photo Viewer\PhotoViewer.dll\", ImageView_Fullscreen %%1" /f
+Reg.exe add "HKCR\PhotoViewer.FileAssoc.Wdp\shell\open\DropTarget" /v "Clsid" /t REG_SZ /d "{FFE2A43C-56B9-4bf5-9A79-CC6D4285608A}" /f
+Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows Photo Viewer\Capabilities" /v "ApplicationDescription" /t REG_SZ /d "@%%ProgramFiles%%\Windows Photo Viewer\photoviewer.dll,-3069" /f
+Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows Photo Viewer\Capabilities" /v "ApplicationName" /t REG_SZ /d "@%%ProgramFiles%%\Windows Photo Viewer\photoviewer.dll,-3009" /f
+Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows Photo Viewer\Capabilities\FileAssociations" /v ".jpg" /t REG_SZ /d "PhotoViewer.FileAssoc.Jpeg" /f
+Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows Photo Viewer\Capabilities\FileAssociations" /v ".wdp" /t REG_SZ /d "PhotoViewer.FileAssoc.Wdp" /f
+Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows Photo Viewer\Capabilities\FileAssociations" /v ".jfif" /t REG_SZ /d "PhotoViewer.FileAssoc.JFIF" /f
+Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows Photo Viewer\Capabilities\FileAssociations" /v ".dib" /t REG_SZ /d "PhotoViewer.FileAssoc.Bitmap" /f
+Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows Photo Viewer\Capabilities\FileAssociations" /v ".png" /t REG_SZ /d "PhotoViewer.FileAssoc.Png" /f
+Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows Photo Viewer\Capabilities\FileAssociations" /v ".jxr" /t REG_SZ /d "PhotoViewer.FileAssoc.Wdp" /f
+Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows Photo Viewer\Capabilities\FileAssociations" /v ".bmp" /t REG_SZ /d "PhotoViewer.FileAssoc.Bitmap" /f
+Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows Photo Viewer\Capabilities\FileAssociations" /v ".jpe" /t REG_SZ /d "PhotoViewer.FileAssoc.Jpeg" /f
+Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows Photo Viewer\Capabilities\FileAssociations" /v ".jpeg" /t REG_SZ /d "PhotoViewer.FileAssoc.Jpeg" /f
+Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows Photo Viewer\Capabilities\FileAssociations" /v ".gif" /t REG_SZ /d "PhotoViewer.FileAssoc.Gif" /f
+Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows Photo Viewer\Capabilities\FileAssociations" /v ".tif" /t REG_SZ /d "PhotoViewer.FileAssoc.Tiff" /f
+Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows Photo Viewer\Capabilities\FileAssociations" /v ".tiff" /t REG_SZ /d "PhotoViewer.FileAssoc.Tiff" /f
+REM ; Change Extension's File Type
+Reg.exe add "HKCU\Software\Classes\.jpg" /ve /t REG_SZ /d "PhotoViewer.FileAssoc.Tiff" /f
+REM ; Change Extension's File Type
+Reg.exe add "HKCU\Software\Classes\.jpeg" /ve /t REG_SZ /d "PhotoViewer.FileAssoc.Tiff" /f
+REM ; Change Extension's File Type
+Reg.exe add "HKCU\Software\Classes\.gif" /ve /t REG_SZ /d "PhotoViewer.FileAssoc.Tiff" /f
+REM ; Change Extension's File Type
+Reg.exe add "HKCU\Software\Classes\.png" /ve /t REG_SZ /d "PhotoViewer.FileAssoc.Tiff" /f
+REM ; Change Extension's File Type
+Reg.exe add "HKCU\Software\Classes\.bmp" /ve /t REG_SZ /d "PhotoViewer.FileAssoc.Tiff" /f
+REM ; Change Extension's File Type
+Reg.exe add "HKCU\Software\Classes\.tiff" /ve /t REG_SZ /d "PhotoViewer.FileAssoc.Tiff" /f
+REM ; Change Extension's File Type
+Reg.exe add "HKCU\Software\Classes\.ico" /ve /t REG_SZ /d "PhotoViewer.FileAssoc.Tiff" /f
+cls
+SET msgboxTitle=Opline Software
+SET msgboxBody=Finished - Skonczone
+SET tmpmsgbox=%temp%~tmpmsgbox.vbs
+IF EXIST "%tmpmsgbox%" DEL /F /Q "%tmpmsgbox%"
+ECHO msgbox "%msgboxBody%",0,"%msgboxTitle%">"%tmpmsgbox%"
+WSCRIPT "%tmpmsgbox%"
+goto PhotoViewer
 
 :Mitigations
 cls
